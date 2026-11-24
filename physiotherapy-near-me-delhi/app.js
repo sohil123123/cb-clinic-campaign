@@ -122,17 +122,23 @@ document.querySelectorAll('[data-show-clinic]').forEach(b=>{if(b.closest('#locat
 document.getElementById('show-all-clinics').addEventListener('click',()=>{highlightClinic('');initMap().then(()=>{if(clinicMap){clinicMap.closePopup();fitClinics();}});});
 if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){initMap();observer.disconnect();}},{rootMargin:'400px'});observer.observe(document.getElementById('clinic-map'));}else initMap();
 
+// Google Ads location ids -> clinic (generated from geo-clinics.json; keep both in step)
+const GEO_CLINIC={"9182620":"saket","9061645":"saket","9198016":"saket","9183503":"saket","9061644":"saket","9300870":"saket","9061722":"saket","9198262":"gk","9061657":"gk","9181926":"gk","9061658":"gk","9185112":"gk","9198107":"gk","9061656":"gk","9061655":"gk","9061643":"gk","9061647":"safdarjung","9181894":"safdarjung","9250881":"safdarjung","9061721":"safdarjung","9061646":"safdarjung","9197871":"safdarjung","9061718":"safdarjung","9181766":"safdarjung","9061716":"safdarjung","9061717":"safdarjung","9300305":"safdarjung","9061720":"safdarjung","9197996":"vasant","9061723":"vasant","9198348":"vasant","9184591":"vasant","9061719":"vasant","9240746":"vasant","9061713":"vasant","9261983":"vasant","9061725":"vasant","9234981":"vasant","9182825":"dwarka","9061709":"dwarka","9061710":"dwarka","9061708":"dwarka","9183333":"dwarka","9061704":"dwarka","9061712":"dwarka","9061699":"dwarka","9212818":"dwarka","9061705":"dwarka","9061706":"dwarka"};
 // ---- Clinic landing mode ----
 // A generated folder (see areas.json) carries <meta name="cb-area" content="saket">; ?area=saket or a nearby
 // locality (?area=malviya-nagar) also works. The page then leads with that clinic and says each fact once:
 // landing screen (who, where, book, call) -> care -> advanced care -> fees -> getting here (map, address, other clinics).
 (function applyArea(){
- const slug=((document.querySelector('meta[name="cb-area"]')||{}).content||new URLSearchParams(location.search).get('area')||'').toLowerCase().trim();
+ const q=new URLSearchParams(location.search);
+ let slug=((document.querySelector('meta[name="cb-area"]')||{}).content||q.get('area')||'').toLowerCase().trim(),geoGuess=false;
+ // Central page: when Google Ads says where the searcher is (loc={loc_physical_ms}) and we know that place, lead with the nearest clinic.
+ let geoOff=false;try{geoOff=sessionStorage.getItem('cb_geo_off')==='1';}catch(_){}
+ if(!slug&&!geoOff){const loc=q.get('loc')||'';if(GEO_CLINIC[loc]){slug=GEO_CLINIC[loc];geoGuess=true;}}
  if(!slug)return;
  const norm=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-');
  const c=clinics.find(x=>x.id===slug)||clinics.find(x=>norm(x.name)===slug||norm(x.short)===slug||x.near.some(n=>norm(n)===slug));
  if(!c)return;
- document.body.classList.add('area-mode','area-single');document.body.dataset.area=c.id;
+ document.body.classList.add('area-mode','area-single');document.body.dataset.area=c.id;document.body.dataset.areaSource=geoGuess?'geo':'page';
  const P='/physiotherapy-near-me-delhi/assets/',tel='tel:+91'+c.phone;
  const r=clinicReviews[c.id],rating=hasReview(r)?r.rating.toFixed(1)+' / 5 · '+r.count.toLocaleString('en-IN')+' Google reviews':'Read Google reviews';
  const phoneText=c.phone.replace(/^(\d{5})(\d{5})$/,'$1 $2');
@@ -236,7 +242,9 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(ent
  const waIntro=document.querySelector('.wa-intro');if(waIntro)waIntro.textContent='Choose a topic and we will prepare your message to the '+c.short+' clinic. You can add details if you wish.';
  const waSummary=document.querySelector('.wa-optional>summary');if(waSummary)waSummary.innerHTML='Add more details <span>Optional</span>';
  document.querySelectorAll('a.header-call, a.qa-call').forEach(x=>{x.href=tel;x.dataset.call=c.id;x.setAttribute('aria-label','Call CB Physiotherapy '+c.short+' on '+c.phone);});
- const form=document.getElementById('booking-form');if(form)form.dataset.source='google-ads-'+c.id+'-landing';
+ const form=document.getElementById('booking-form');if(form)form.dataset.source=geoGuess?'google-ads-delhi-geo-'+c.id:'google-ads-'+c.id+'-landing';
+ if(geoGuess&&hero){const note=document.createElement('div');note.className='geo-note wrap';note.innerHTML='<p>Showing our <strong>'+c.short+'</strong> clinic, the nearest to you. <button type="button" id="geo-all">Not right? See all five centres</button></p>';hero.insertAdjacentElement('beforebegin',note);
+  note.querySelector('#geo-all').addEventListener('click',()=>{try{sessionStorage.setItem('cb_geo_off','1');}catch(_){}track('geo_guess_dismissed',{clinic_id:c.id});const u=new URL(location.href);u.searchParams.delete('loc');location.replace(u.toString());});}
  const cta=document.querySelector('.final-cta h2');if(cta)cta.innerHTML='Find the right care.<br>At our '+c.short+' clinic.';
  document.title=document.title.replace('in Delhi','in '+c.short);
  document.documentElement.classList.add('area-ready');

@@ -11,7 +11,7 @@
  const visitor=remember(localStorage,'cb_vid'),session=remember(sessionStorage,'cb_sid');
  const params=new URLSearchParams(location.search);
  let referrer='';try{referrer=document.referrer?new URL(document.referrer).hostname:'';}catch(_){}
- const ctx={page:location.pathname.replace(/index\.html$/,''),area:document.body.dataset.area||'delhi',device:innerWidth<=700?'mobile':'desktop',referrer,
+ const ctx={page:location.pathname.replace(/index\.html$/,''),area:document.body.dataset.area||'delhi',area_source:document.body.dataset.areaSource||'',device:innerWidth<=700?'mobile':'desktop',referrer,
   utm_source:params.get('utm_source')||'',utm_medium:params.get('utm_medium')||'',utm_campaign:params.get('utm_campaign')||'',utm_term:params.get('utm_term')||'',utm_content:params.get('utm_content')||'',gclid:params.has('gclid')?1:0};
 
  // ---- transport: batch, then beacon ----
