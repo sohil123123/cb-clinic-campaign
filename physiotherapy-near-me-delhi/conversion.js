@@ -25,13 +25,13 @@
   document.getElementById('wa-service-field').hidden=!picked.includes('service');document.getElementById('wa-question-field').hidden=!picked.includes('other');
   if(picked.includes('appointment'))lines.push('• Booking a physiotherapy assessment. Please share available appointment times.');
   if(picked.includes('pricing'))lines.push('• Clinic fees: ₹999 assessment, ₹999 standard session or ₹1,499 advanced session. Please help me understand the suitable option.');
-  if(picked.includes('service'))lines.push('• '+(service.value?'Information about '+service.value+'.':'Understanding which treatment options may be suitable for me.'));
+  if(picked.includes('service'))lines.push('• '+(service.value?'Help with '+service.selectedOptions[0].text.toLowerCase()+'.':'Understanding which treatment options may be suitable for me.'));
   if(picked.includes('other'))lines.push('• '+(question.value.trim()||'I have another question and would like to speak with your team.'));
   lines.push(waClinic.value?'Preferred option: '+waClinic.selectedOptions[0].text+'.':'Please help me choose a convenient Delhi centre.');
-  const concern=document.getElementById('concern');if(concern.value)lines.push('My concern: '+concern.selectedOptions[0].text+'.');
+  const concern=document.getElementById('concern');if(concern.value&&!(picked.includes('service')&&service.value))lines.push('My concern: '+concern.selectedOptions[0].text+'.');
   message.value=picked.length?lines.join('\n'):'';updateLink();
  }
- document.querySelectorAll('[data-open-whatsapp]').forEach(b=>b.addEventListener('click',()=>{waClinic.value=[...waClinic.options].some(o=>o.value===clinic.value)?clinic.value:'';compose();openDialog(wa);}));
+ document.querySelectorAll('[data-open-whatsapp]').forEach(b=>b.addEventListener('click',()=>{waClinic.value=[...waClinic.options].some(o=>o.value===clinic.value)?clinic.value:'';const chosen=document.getElementById('concern').value;service.value=[...service.options].some(o=>o.value===chosen)?chosen:'';compose();openDialog(wa);}));
  document.getElementById('close-whatsapp').addEventListener('click',()=>wa.close());
  document.querySelectorAll('input[name="wa-intent"]').forEach(c=>c.addEventListener('change',compose));
  waClinic.addEventListener('change',compose);service.addEventListener('change',compose);question.addEventListener('input',compose);message.addEventListener('input',updateLink);
