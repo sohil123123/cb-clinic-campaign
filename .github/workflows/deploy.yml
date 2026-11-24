@@ -1,0 +1,63 @@
+# Deploys this repository to the VPS every time a change lands on main.
+# The repository is the single source of truth: whatever is on main is
+# exactly what is served at https://book.cbphysiotherapy.in/
+#
+# Required repository secrets (Settings > Secrets and variables > Actions):
+#   VPS_HOST     IP address or hostname of the VPS
+#   VPS_USER     CloudPanel site user for book.cbphysiotherapy.in
+#   VPS_SSH_KEY  private key whose public half is in that user's authorized_keys
+#   VPS_PATH     document root, e.g. /home/<siteuser>/htdocs/book.cbphysiotherapy.in
+#   VPS_PORT     optional, SSH port (defaults to 22)
+
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Sync site to book.cbphysiotherapy.in
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+
+      - name: Prepare SSH
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          HOST: ${{ secrets.VPS_HOST }}
+          PORT: ${{ secrets.VPS_PORT || 22 }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "$PORT" -H "$HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Upload files
+        env:
+          HOST: ${{ secrets.VPS_HOST }}
+          USER: ${{ secrets.VPS_USER }}
+          DEST: ${{ secrets.VPS_PATH }}
+          PORT: ${{ secrets.VPS_PORT || 22 }}
+        run: |
+          rsync -az --delete \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '*.md' \
+            --filter 'P .well-known/' \
+            -e "ssh -i ~/.ssh/deploy_key -p $PORT -o StrictHostKeyChecking=yes" \
+            ./ "$USER@$HOST:$DEST/"
+
+      - name: Confirm the live page responds
+        run: |
+          url="https://book.cbphysiotherapy.in/physiotherapy-near-me-delhi/"
+          body="$(curl -fsSL --retry 3 --retry-delay 5 "$url")"
+          echo "$body" | grep -q 'name="robots" content="noindex' \
+            && echo "OK: $url is live and still noindex"
