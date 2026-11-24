@@ -5,11 +5,11 @@ const clinics=[
 {id:'vasant',latlng:[28.524433,77.154562],name:'Vasant Kunj',area:'South West Delhi',address:'C-31, First Floor – C, Nathu Singh Market, near KL 27 Gym, Masoodpur, New Delhi 110070',phone:'9773664030'},
 {id:'dwarka',latlng:[28.594018681288997,77.02574329563622],name:'Dwarka, Sector 17',area:'West Delhi',address:'Plot 7, Basement, near Sarvodya Vidyalya School, Sector 17, Dwarka, New Delhi 110078',phone:'9217683886'}];
 const clinicDetails={
-gk:{near:['Greater Kailash I','CR Park','Kalkaji','Nehru Place'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-greater-kailash',head:'Dr. Monika Bhardwaj',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/monika-bhardwaj',landmark:'S-210, Lower Ground Floor · GK II'},
-safdarjung:{near:['Green Park','Hauz Khas','R.K. Puram','Moti Bagh','Chanakyapuri'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-safdarjung-enclave',head:'Dr. Hardika Sood',profile:'https://cbphysiotherapy.in/delhi/sports-physiotherapist/hardik-sood',landmark:'A-1/295, Basement · Near AIIMS Trauma Centre'},
-saket:{near:['Malviya Nagar','Pushp Vihar','Sainik Farms','Mehrauli'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-saket',head:'Dr. Nitish Kumar Srivastava',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/nitish-kumar-srivastava',landmark:'J-25, Basement · Near Hotel Saket 27'},
-vasant:{near:['Vasant Vihar','Mahipalpur','Kishangarh','Ghitorni'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-vasant-kunj',head:'Dr. Rahul Dogra',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/rahul-dogra',landmark:'C-31, First Floor · Nathu Singh Market'},
-dwarka:{near:['Palam','Dwarka Mor','Uttam Nagar','Najafgarh'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-dwarka',head:'Dr. Amit',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/amit-2',landmark:'Plot 7, Basement · Sector 17'}
+gk:{short:'Greater Kailash',near:['Greater Kailash I','CR Park','Kalkaji','Nehru Place'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-greater-kailash',head:'Dr. Monika Bhardwaj',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/monika-bhardwaj',landmark:'S-210, Lower Ground Floor · GK II'},
+safdarjung:{short:'Safdarjung Enclave',near:['Green Park','Hauz Khas','R.K. Puram','Moti Bagh','Chanakyapuri'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-safdarjung-enclave',head:'Dr. Hardika Sood',profile:'https://cbphysiotherapy.in/delhi/sports-physiotherapist/hardik-sood',landmark:'A-1/295, Basement · Near AIIMS Trauma Centre'},
+saket:{short:'Saket',near:['Malviya Nagar','Pushp Vihar','Sainik Farms','Mehrauli'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-saket',head:'Dr. Nitish Kumar Srivastava',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/nitish-kumar-srivastava',landmark:'J-25, Basement · Near Hotel Saket 27'},
+vasant:{short:'Vasant Kunj',near:['Vasant Vihar','Mahipalpur','Kishangarh','Ghitorni'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-vasant-kunj',head:'Dr. Rahul Dogra',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/rahul-dogra',landmark:'C-31, First Floor · Nathu Singh Market'},
+dwarka:{short:'Dwarka',near:['Palam','Dwarka Mor','Uttam Nagar','Najafgarh'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-dwarka',head:'Dr. Amit',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/amit-2',landmark:'Plot 7, Basement · Sector 17'}
 };
 clinics.forEach(c=>Object.assign(c,clinicDetails[c.id]));
 const select=document.getElementById('clinic');
@@ -118,3 +118,47 @@ document.getElementById('map-legend').innerHTML=clinics.map((c,i)=>`<button type
 document.querySelectorAll('[data-show-clinic]').forEach(b=>{if(b.closest('#location-links'))return;b.addEventListener('click',()=>showClinic(b.dataset.showClinic));});
 document.getElementById('show-all-clinics').addEventListener('click',()=>{highlightClinic('');initMap().then(()=>{if(clinicMap){clinicMap.closePopup();fitClinics();}});});
 if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){initMap();observer.disconnect();}},{rootMargin:'400px'});observer.observe(document.getElementById('clinic-map'));}else initMap();
+
+// ---- Clinic landing mode ----
+// A generated folder (see areas.json) carries <meta name="cb-area" content="saket">; ?area=saket or a
+// nearby locality (?area=malviya-nagar) also works. The page then leads with that clinic.
+(function applyArea(){
+ const slug=((document.querySelector('meta[name="cb-area"]')||{}).content||new URLSearchParams(location.search).get('area')||'').toLowerCase().trim();
+ if(!slug)return;
+ const norm=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+ const c=clinics.find(x=>x.id===slug)||clinics.find(x=>norm(x.name)===slug||norm(x.short)===slug||x.near.some(n=>norm(n)===slug));
+ if(!c)return;
+ document.body.classList.add('area-mode');document.body.dataset.area=c.id;
+ const tel='tel:+91'+c.phone,smooth=()=>matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+ // Hero + strip
+ const h1=document.querySelector('h1');if(h1)h1.innerHTML='Best Physiotherapy<br>Near You in '+c.short+'.';
+ const count=document.getElementById('location-count');if(count)count.textContent='Other Physio Clinics in Delhi';
+ document.querySelectorAll('#location-links a[data-show-clinic="'+c.id+'"]').forEach(x=>x.remove());
+ // Clinic section: this clinic first, others behind a link
+ const heading=document.querySelector('#clinics .section-heading');
+ if(heading){heading.querySelector('.eyebrow').textContent='YOUR NEAREST CB CENTRE';heading.querySelector('h2').innerHTML='CB Physiotherapy '+c.short+'.<br>Minutes from '+c.near.slice(0,2).join(' and ')+'.';heading.querySelector('p').textContent='Led by '+c.head+' (PT). Also serving '+c.near.join(', ')+'. Open 8am–8pm.';}
+ const card=document.getElementById('clinic-'+c.id);if(card){grid.prepend(card);card.classList.add('selected');}
+ const others=[...grid.children].filter(el=>el!==card);others.forEach(el=>el.hidden=true);
+ const nav=document.querySelector('[data-rail="clinic-grid"]'),toolbar=document.querySelector('.clinic-rail-wrap .rail-toolbar');
+ if(nav)nav.hidden=true;if(toolbar)toolbar.hidden=true;
+ const mapTitle=document.querySelector('.map-heading h3');if(mapTitle)mapTitle.textContent='Find us in '+c.short+'.';
+ const showAll=document.getElementById('show-all-clinics');if(showAll)showAll.textContent='Show all five';
+ document.querySelectorAll('#map-legend button').forEach(b=>{if(b.dataset.showClinic!==c.id)b.hidden=true;});
+ const reveal=document.createElement('p');reveal.className='area-others';
+ reveal.innerHTML='<button type="button" id="show-other-clinics">Not near '+c.short+'? See our other '+others.length+' Delhi centres <span aria-hidden="true">→</span></button>';
+ grid.parentElement.insertBefore(reveal,nav||null);
+ function expand(){others.forEach(el=>el.hidden=false);if(nav)nav.hidden=false;if(toolbar)toolbar.hidden=false;document.querySelectorAll('#map-legend button').forEach(b=>b.hidden=false);reveal.remove();document.body.classList.remove('area-single');if(clinicMap){clinicMap.closePopup();fitClinics();}track('area_other_clinics_shown',{clinic_id:c.id});}
+ document.body.classList.add('area-single');
+ reveal.querySelector('button').addEventListener('click',()=>{expand();grid.scrollIntoView({behavior:smooth(),block:'start'});});
+ if(showAll)showAll.addEventListener('click',expand);
+ const strip=document.getElementById('location-links');if(strip)strip.addEventListener('click',e=>{if(e.target.closest('a[data-show-clinic]')&&document.body.classList.contains('area-single'))expand();},true);
+ // Map: zoom to this clinic until the visitor asks for all
+ const originalFit=fitClinics;
+ fitClinics=function(){if(document.body.classList.contains('area-single')&&clinicMap){clinicMap.setView(c.latlng,14);if(markers[c.id]&&innerWidth>700)markers[c.id].openPopup();}else originalFit();};
+ // Booking, calls, WhatsApp, lead source
+ select.value=c.id;updateClinic();
+ document.querySelectorAll('a.header-call, a.qa-call').forEach(x=>{x.href=tel;x.dataset.call=c.id;x.setAttribute('aria-label','Call CB Physiotherapy '+c.short+' on '+c.phone);});
+ const form=document.getElementById('booking-form');if(form)form.dataset.source='google-ads-'+c.id+'-landing';
+ const cta=document.querySelector('.final-cta h2');if(cta)cta.innerHTML='Find the right care.<br>At our '+c.short+' clinic.';
+ document.title=document.title.replace('in Delhi','in '+c.short);
+})();

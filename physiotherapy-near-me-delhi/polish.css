@@ -79,3 +79,10 @@ label,.consent,.consent span,.form-note{font-size:14px}
 .care-slider figcaption p,.slider-stage figcaption p{font-size:12px}
 .first-visit-compact .visit-small{font-size:13px}
 .slider-controls span,.slider-controls #slide-count{font-size:12px}
+
+/* ---------- Clinic landing mode (generated area pages) ---------- */
+.area-others{margin:14px 0 0}
+.area-others button{background:none;border:0;padding:0;font:600 14px/1.5 Arial,Helvetica,sans-serif;color:var(--teal);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.area-others button:hover{color:var(--green)}
+body.area-single #clinic-grid{overflow:visible}
+@media(min-width:701px){body.area-single #clinic-grid{grid-template-columns:none;display:flex}body.area-single #clinic-grid .clinic-card{max-width:520px;flex:0 1 520px}}

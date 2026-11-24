@@ -72,6 +72,24 @@ Nginx needs no custom rules. It serves each folder's `index.html` and keeps
 query parameters on the trailing-slash redirect. Use the trailing-slash URL as
 the Google Ads final URL.
 
+## Clinic landing pages (one per clinic, same content)
+
+`areas.json` lists clinic pages such as `physiotherapy-near-me-saket`. At
+deploy time `scripts/build-areas.py` copies the Delhi page into each folder
+with that clinic's title and description and a `cb-area` tag. In the browser
+the page then leads with that clinic: headline "Near You in Saket", the Saket
+card first with the other four behind a link, Saket pre-selected in the form,
+calls routed to the Saket number, and leads tagged `google-ads-saket-landing`.
+
+- To add a clinic page, add an entry to `areas.json` and push. The folder
+  appears at `https://book.cbphysiotherapy.in/physiotherapy-near-me-<slug>/`.
+- Content edits are made once, in `physiotherapy-near-me-delhi/`; every clinic
+  page picks them up on the next deploy.
+- `?area=saket` or `?area=malviya-nagar` on the Delhi URL does the same thing
+  without a separate folder, handy for testing.
+- To preview locally run `python3 scripts/build-areas.py` from the repository
+  root; the generated folders are not committed.
+
 ## Images and speed
 
 Large photos have `-800.webp` and `-1200.webp` variants next to the original

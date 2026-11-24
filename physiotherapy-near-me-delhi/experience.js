@@ -36,7 +36,7 @@
   error.hidden=true;status.hidden=true;
   if(!/^[6-9]\d{9}$/.test(normalized)){showError('Please enter a valid 10-digit Indian mobile number.');return;}
   const params=new URLSearchParams(location.search);
-  const payload={name,phone:normalized,clinic:clinic.value,website:document.getElementById('website').value,source:'google-ads-delhi-landing',landing_url:location.href.slice(0,2000)};
+  const payload={name,phone:normalized,clinic:clinic.value,website:document.getElementById('website').value,source:form.dataset.source||'google-ads-delhi-landing',landing_url:location.href.slice(0,2000)};
   if(care.value)payload.concern=care.value;
   if(clinic.value==='home')payload.homeArea=home.value.trim();
   utmKeys.forEach(k=>{const v=params.get(k);if(v)payload[k]=v.slice(0,200);});
