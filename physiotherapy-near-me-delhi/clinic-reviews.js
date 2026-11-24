@@ -7,6 +7,6 @@ window.cbClinicReviews = {
   vasant:     { rating: 4.9, count: 707 },
   dwarka:     { rating: 4.9, count: 119 }
 };
-// Delhi-wide figure shown in the hero badge. Update it with the clinic rows.
-// Remove this block to fall back to the sum of the clinic rows above.
-window.cbReviewSummary = { rating: 4.9, count: 2970 };
+// The hero badge shows the sum of the counts above and their count-weighted
+// average rating. To override it with a Delhi-wide figure instead, uncomment:
+// window.cbReviewSummary = { rating: 4.9, count: 2970 };
