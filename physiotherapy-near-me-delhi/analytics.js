@@ -33,7 +33,11 @@
  const activeSeconds=()=>Math.round((active+(since?Date.now()-since:0))/1000);
  document.addEventListener('visibilitychange',()=>{if(document.hidden){if(since){active+=Date.now()-since;since=null;}flush(true);}else since=Date.now();});
  addEventListener('scroll',()=>{const h=document.documentElement,pct=Math.round((scrollY+innerHeight)/h.scrollHeight*100);if(pct>maxScroll)maxScroll=Math.min(100,pct);if(!sent50&&maxScroll>=50){sent50=true;track('scroll_50');}if(!sent90&&maxScroll>=90){sent90=true;track('scroll_90');}},{passive:true});
- addEventListener('pagehide',()=>{track('page_leave',{seconds:activeSeconds(),max_scroll:maxScroll});flush(true);});
+ // ---- which sections are actually seen (layout input) ----
+ const SECTIONS=['care','advanced-care','pricing','clinics','precision-recovery','faq','final-cta'];let lastSection='hero';
+ if('IntersectionObserver' in window){const seen=new Set();const io=new IntersectionObserver(entries=>{entries.forEach(en=>{if(!en.isIntersecting)return;const id=en.target.id||en.target.className.split(' ')[0];lastSection=id;if(seen.has(id))return;seen.add(id);track('section_seen',{section:id});});},{threshold:0.25});
+  SECTIONS.forEach(id=>{const el=document.getElementById(id)||document.querySelector('.'+id);if(el)io.observe(el);});}
+ addEventListener('pagehide',()=>{track('page_leave',{seconds:activeSeconds(),max_scroll:maxScroll,last_section:lastSection});flush(true);});
 
  // ---- events the page already announces (booking sent/failed, clinic selected, other clinics shown) ----
  const loadedAt=performance.now();

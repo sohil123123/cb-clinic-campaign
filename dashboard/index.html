@@ -9,32 +9,29 @@
 <meta name="cb-analytics-api" content="https://cbphysiotherapy.in/api/landing/events">
 <style>
 :root{color-scheme:light;
- --bg:#f6f7f3;--surface:#ffffff;--line:#e2e6df;--ink:#17201d;--ink-2:#4f5a55;--ink-3:#7c867f;--brand:#143e37;--brand-soft:#e7efe3;
- --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--seq-250:#86b6ef;--seq-350:#5598e7;--seq-450:#2a78d6;--seq-550:#1c5cab;
+ --bg:#f6f7f3;--surface:#ffffff;--line:#e2e6df;--ink:#17201d;--ink-2:#4f5a55;--ink-3:#7c867f;--brand:#143e37;--brand-soft:#e7efe3;--on-brand:#ffffff;
+ --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--s6:#008300;--seq-250:#86b6ef;--seq-350:#5598e7;--seq-450:#2a78d6;--seq-550:#1c5cab;
  --good:#0ca30c;--critical:#d03b3b;--focus:#2a78d6}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#141615;--surface:#1c1f1d;--line:#2d322f;--ink:#eef1ec;--ink-2:#c0c7c1;--ink-3:#8d968f;--brand:#c9e98e;--brand-soft:#223129;
- --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--seq-250:#184f95;--seq-350:#256abf;--seq-450:#3987e5;--seq-550:#6da7ec;--good:#0ca30c;--critical:#e66767}}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#141615;--surface:#1c1f1d;--line:#2d322f;--ink:#eef1ec;--ink-2:#c0c7c1;--ink-3:#8d968f;--brand:#c9e98e;--brand-soft:#223129;
- --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--seq-250:#184f95;--seq-350:#256abf;--seq-450:#3987e5;--seq-550:#6da7ec;--good:#0ca30c;--critical:#e66767}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#141615;--surface:#1c1f1d;--line:#2d322f;--ink:#eef1ec;--ink-2:#c0c7c1;--ink-3:#8d968f;--brand:#c9e98e;--brand-soft:#223129;--on-brand:#141615;
+ --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#0ca30c;--seq-250:#184f95;--seq-350:#256abf;--seq-450:#3987e5;--seq-550:#6da7ec;--good:#0ca30c;--critical:#e66767}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#141615;--surface:#1c1f1d;--line:#2d322f;--ink:#eef1ec;--ink-2:#c0c7c1;--ink-3:#8d968f;--brand:#c9e98e;--brand-soft:#223129;--on-brand:#141615;
+ --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#0ca30c;--seq-250:#184f95;--seq-350:#256abf;--seq-450:#3987e5;--seq-550:#6da7ec;--good:#0ca30c;--critical:#e66767}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 a{color:inherit}
 button,input,select{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+[hidden]{display:none!important}
 .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
 header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.2px}
 .brand span{color:var(--ink-3);font-weight:400}
-.top-actions{display:flex;gap:8px;align-items:center}
+.top-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 12px;cursor:pointer;font-size:14px}
-.btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
-:root[data-theme="dark"] .btn.primary,:root:not([data-theme="light"]) .btn.primary{color:var(--bg)}
-@media(prefers-color-scheme:light){:root:not([data-theme="dark"]) .btn.primary{color:#fff}}
+.btn.primary{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
 .btn:hover{border-color:var(--ink-3)}
-/* gate */
 #gate{min-height:100vh;display:grid;place-items:center;padding:24px}
-#gate[hidden],#app[hidden],[hidden]{display:none!important}
 .gate-card{width:min(400px,100%);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:28px}
 .gate-card h1{font-size:20px;margin:0 0 6px}
 .gate-card p{margin:0 0 18px;color:var(--ink-2);font-size:14px}
@@ -43,13 +40,26 @@ header.top .wrap{display:flex;align-items:center;justify-content:space-between;g
 .gate-card .btn{width:100%;padding:11px}
 .gate-error{color:var(--critical);font-size:13px;margin:8px 0 0;min-height:18px}
 /* filters */
-.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:14px 0}
-.filters .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
-.filters .seg button{border:0;background:none;padding:8px 12px;cursor:pointer;font-size:14px;color:var(--ink-2)}
-.filters .seg button[aria-pressed="true"]{background:var(--brand-soft);color:var(--ink);font-weight:600}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:14px 0 10px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:none;padding:8px 12px;cursor:pointer;font-size:14px;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--brand-soft);color:var(--ink);font-weight:600}
 .filters select,.filters input[type=date]{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 10px;font-size:14px}
 .filters .spacer{flex:1}
 .status{font-size:13px;color:var(--ink-3)}
+.multi{position:relative}
+.multi>summary{list-style:none;cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 10px;font-size:14px;white-space:nowrap}
+.multi>summary::-webkit-details-marker{display:none}
+.multi>summary::after{content:" ▾";color:var(--ink-3)}
+.multi .menu{position:absolute;z-index:6;top:calc(100% + 6px);left:0;min-width:240px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+.multi label{display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:6px;font-size:14px;cursor:pointer}
+.multi label:hover{background:var(--brand-soft)}
+.multi .menu .row{display:flex;gap:6px;justify-content:space-between;padding:6px 8px 2px;border-top:1px solid var(--line);margin-top:6px}
+.multi .menu .row button{border:0;background:none;color:var(--s1);cursor:pointer;font-size:13px;padding:2px 4px}
+/* tabs */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:14px;overflow:auto}
+.tabs button{border:0;background:none;padding:10px 14px;cursor:pointer;font-size:14px;color:var(--ink-2);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);font-weight:600;border-bottom-color:var(--brand)}
 /* grid */
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;padding-bottom:40px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;min-width:0}
@@ -58,7 +68,6 @@ header.top .wrap{display:flex;align-items:center;justify-content:space-between;g
 .span-12{grid-column:span 12}.span-8{grid-column:span 8}.span-6{grid-column:span 6}.span-4{grid-column:span 4}.span-3{grid-column:span 3}
 @media(max-width:900px){.span-8,.span-6,.span-4{grid-column:span 12}.span-3{grid-column:span 6}}
 @media(max-width:520px){.span-3{grid-column:span 12}}
-/* stat tiles */
 .tiles{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:14px}
 @media(max-width:1000px){.tiles{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:520px){.tiles{grid-template-columns:repeat(2,1fr)}}
@@ -67,25 +76,20 @@ header.top .wrap{display:flex;align-items:center;justify-content:space-between;g
 .tile .value{font-size:30px;line-height:1.1;font-weight:600;letter-spacing:-.6px;margin-top:4px}
 .tile .delta{font-size:12px;color:var(--ink-3);margin-top:4px}
 .tile .delta.up{color:var(--good)}.tile .delta.down{color:var(--critical)}
-/* charts */
 .chart{position:relative;width:100%}
 .chart svg{display:block;width:100%;height:auto;overflow:visible}
-.axis text{fill:var(--ink-3);font-size:11px}
 .grid-line{stroke:var(--line);stroke-width:1}
 .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--ink-2);margin:0 0 8px}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 .tooltip{position:fixed;z-index:20;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;padding:6px 9px;border-radius:6px;white-space:nowrap;transform:translate(-50%,calc(-100% - 10px));opacity:0;transition:opacity .1s}
 .tooltip.show{opacity:1}
-/* bars (horizontal lists) */
 .hbars{display:grid;gap:8px;margin:0;padding:0;list-style:none}
-.hbars li{display:grid;grid-template-columns:minmax(90px,1.1fr) 3fr auto;gap:10px;align-items:center;font-size:13px}
+.hbars li{display:grid;grid-template-columns:minmax(110px,1.3fr) 3fr auto;gap:10px;align-items:center;font-size:13px}
 .hbars .name{color:var(--ink-2);line-height:1.3}
-#c-funnel .hbars li{grid-template-columns:minmax(118px,1.5fr) 2fr auto}
 .hbars .track{height:10px;background:var(--brand-soft);border-radius:4px;overflow:hidden}
 .hbars .fill{height:100%;border-radius:0 4px 4px 0;background:var(--s1)}
-.hbars .num{font-variant-numeric:tabular-nums;color:var(--ink);min-width:3ch;text-align:right}
+.hbars .num{font-variant-numeric:tabular-nums;color:var(--ink);min-width:3ch;text-align:right;white-space:nowrap}
 .hbars .pct{color:var(--ink-3);font-size:12px;margin-left:6px}
-/* tables */
 table{width:100%;border-collapse:collapse;font-size:13px}
 th,td{text-align:left;padding:8px 8px;border-bottom:1px solid var(--line);vertical-align:top}
 th{color:var(--ink-3);font-weight:600;font-size:12px}
@@ -95,10 +99,17 @@ tbody tr:last-child td{border-bottom:0}
 details.tv{margin-top:10px;font-size:13px}
 details.tv summary{cursor:pointer;color:var(--ink-3)}
 .empty{color:var(--ink-3);font-size:13px;padding:18px 0;text-align:center}
-.pill{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--brand-soft);font-size:12px}
 .mono{font-variant-numeric:tabular-nums}
-.sr-only{position:absolute;left:-9999px}
-.demo-note{background:var(--brand-soft);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;margin:12px 0 0}
+.demo-note{background:var(--brand-soft);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;margin:0 0 14px}
+.kv{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.kv span{color:var(--ink-2)}
+.kv:last-child{border-bottom:0}
+.notes{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.notes li{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:14px;line-height:1.5}
+.notes li b{color:var(--brand)}
+.cmp-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.cmp-best{background:var(--brand-soft);border-radius:4px;padding:0 4px}
+.sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:8px;vertical-align:-1px}
 </style>
 </head>
 <body>
@@ -127,29 +138,76 @@ details.tv summary{cursor:pointer;color:var(--ink-3)}
     <button type="button" data-days="90">90 days</button>
    </div>
    <input type="date" id="from" aria-label="From date"><input type="date" id="to" aria-label="To date">
-   <select id="f-page" aria-label="Page"><option value="">All pages</option></select>
+   <details class="multi" id="f-pages"><summary>All pages</summary><div class="menu"><div id="page-options"></div><div class="row"><button type="button" data-act="all">Select all</button><button type="button" data-act="none">Clear</button></div></div></details>
    <select id="f-device" aria-label="Device"><option value="">All devices</option><option value="mobile">Mobile</option><option value="desktop">Desktop</option></select>
    <select id="f-source" aria-label="Source"><option value="">All sources</option></select>
    <span class="spacer"></span>
    <span class="status" id="count"></span>
   </div>
-  <div id="demo-note" class="demo-note" hidden>Demo data. Real numbers appear here once the events endpoint is live.</div>
-  <div class="tiles" id="tiles" style="margin-top:14px"></div>
-  <div class="grid">
-   <section class="card span-8"><h2>Visits per day</h2><p class="sub">Sessions that opened a page, in Indian time</p><div class="chart" id="c-visits"></div><details class="tv"><summary>Table</summary><div class="table-wrap" id="t-visits"></div></details></section>
-   <section class="card span-4"><h2>From visit to booking</h2><p class="sub">Share of visits reaching each step</p><div id="c-funnel"></div></section>
-   <section class="card span-8"><h2>Leads per day</h2><p class="sub">Bookings, calls and WhatsApp messages</p><div class="legend" id="l-leads"></div><div class="chart" id="c-leads"></div><details class="tv"><summary>Table</summary><div class="table-wrap" id="t-leads"></div></details></section>
-   <section class="card span-4"><h2>Devices</h2><p class="sub">Visits and lead rate</p><div id="c-device"></div></section>
-   <section class="card span-12"><h2>By page</h2><p class="sub">Compare the Delhi page with each clinic page</p><div class="table-wrap" id="t-pages"></div></section>
-   <section class="card span-6"><h2>By campaign</h2><p class="sub">UTM source, medium and campaign from the ad URL</p><div class="table-wrap" id="t-sources"></div></section>
-   <section class="card span-6"><h2>Concerns chosen</h2><p class="sub">Taps on the concern buttons and care cards</p><ul class="hbars" id="c-concerns"></ul></section>
-   <section class="card span-6"><h2>Leads by hour</h2><p class="sub">Bookings, calls and WhatsApp by hour of day, Indian time</p><div class="chart" id="c-hours"></div></section>
-   <section class="card span-3"><h2>Where people call from</h2><p class="sub">Placement of the call button tapped</p><ul class="hbars" id="c-callplace"></ul></section>
-   <section class="card span-3"><h2>WhatsApp topics</h2><p class="sub">Topic chosen before sending</p><ul class="hbars" id="c-waintent"></ul></section>
-   <section class="card span-6"><h2>Engagement</h2><p class="sub">How far people read and how long they stay</p><div id="c-engage"></div></section>
-   <section class="card span-6"><h2>Booking problems</h2><p class="sub">Failed submissions by reason</p><ul class="hbars" id="c-failures"></ul></section>
-   <section class="card span-12"><h2>Latest actions</h2><p class="sub">Most recent 60 events in the selected range</p><div class="table-wrap" id="t-recent"></div></section>
+  <div class="tabs" role="tablist">
+   <button role="tab" aria-selected="true" data-tab="overview">Overview</button>
+   <button role="tab" aria-selected="false" data-tab="compare">Compare</button>
+   <button role="tab" aria-selected="false" data-tab="layout">Layout insights</button>
   </div>
+  <div id="demo-note" class="demo-note" hidden>Demo data. Real numbers appear here once the events endpoint is live.</div>
+
+  <section id="tab-overview" role="tabpanel">
+   <div class="tiles" id="tiles"></div>
+   <div class="grid">
+    <div class="card span-8"><h2>Visits per day</h2><p class="sub">Sessions that opened a page, in Indian time</p><div class="chart" id="c-visits"></div><details class="tv"><summary>Table</summary><div class="table-wrap" id="t-visits"></div></details></div>
+    <div class="card span-4"><h2>From visit to booking</h2><p class="sub">Share of visits reaching each step</p><div id="c-funnel"></div></div>
+    <div class="card span-8"><h2>Leads per day</h2><p class="sub">Bookings, calls and WhatsApp messages</p><div class="legend" id="l-leads"></div><div class="chart" id="c-leads"></div><details class="tv"><summary>Table</summary><div class="table-wrap" id="t-leads"></div></details></div>
+    <div class="card span-4"><h2>Devices</h2><p class="sub">Visits and lead rate</p><div id="c-device"></div></div>
+    <div class="card span-12"><h2>By page</h2><p class="sub">Compare the Delhi page with each clinic page</p><div class="table-wrap" id="t-pages"></div></div>
+    <div class="card span-6"><h2>By campaign</h2><p class="sub">UTM source, medium and campaign from the ad URL</p><div class="table-wrap" id="t-sources"></div></div>
+    <div class="card span-6"><h2>Concerns chosen</h2><p class="sub">Taps on the concern buttons and care cards</p><ul class="hbars" id="c-concerns"></ul></div>
+    <div class="card span-6"><h2>Leads by hour</h2><p class="sub">Bookings, calls and WhatsApp by hour of day, Indian time</p><div class="chart" id="c-hours"></div></div>
+    <div class="card span-3"><h2>Where people call from</h2><p class="sub">Placement of the call button tapped</p><ul class="hbars" id="c-callplace"></ul></div>
+    <div class="card span-3"><h2>WhatsApp topics</h2><p class="sub">Topic chosen before sending</p><ul class="hbars" id="c-waintent"></ul></div>
+    <div class="card span-6"><h2>Engagement</h2><p class="sub">How far people read and how long they stay</p><div id="c-engage"></div></div>
+    <div class="card span-6"><h2>Booking problems</h2><p class="sub">Failed submissions by reason</p><ul class="hbars" id="c-failures"></ul></div>
+    <div class="card span-12"><h2>Latest actions</h2><p class="sub">Most recent 60 events in the selected range</p><div class="table-wrap" id="t-recent"></div></div>
+   </div>
+  </section>
+
+  <section id="tab-compare" role="tabpanel" hidden>
+   <div class="cmp-controls">
+    <span class="status">Compare</span>
+    <div class="seg" id="cmp-dim">
+     <button type="button" data-dim="page" aria-pressed="true">Pages</button>
+     <button type="button" data-dim="device" aria-pressed="false">Devices</button>
+     <button type="button" data-dim="source" aria-pressed="false">Sources</button>
+     <button type="button" data-dim="campaign" aria-pressed="false">Campaigns</button>
+     <button type="button" data-dim="period" aria-pressed="false">This vs previous period</button>
+    </div>
+    <span class="status" id="cmp-hint"></span>
+   </div>
+   <div class="grid">
+    <div class="card span-12"><h2 id="cmp-title">Side by side</h2><p class="sub">Best value in each row is highlighted. Rates are per visit unless stated.</p><div class="table-wrap" id="cmp-table"></div></div>
+    <div class="card span-6"><h2>Visits</h2><p class="sub">Sessions in the range</p><ul class="hbars" id="cmp-visits"></ul></div>
+    <div class="card span-6"><h2>Lead rate</h2><p class="sub">Visits that booked, called or messaged</p><ul class="hbars" id="cmp-leadrate"></ul></div>
+    <div class="card span-6"><h2>Booking completion</h2><p class="sub">Of those who opened the form, how many sent it</p><ul class="hbars" id="cmp-complete"></ul></div>
+    <div class="card span-6"><h2>Reached the end of the page</h2><p class="sub">Visits that scrolled past 90%</p><ul class="hbars" id="cmp-scroll"></ul></div>
+    <div class="card span-12"><h2>Leads per day</h2><p class="sub">One line per group</p><div class="legend" id="cmp-legend"></div><div class="chart" id="cmp-trend"></div></div>
+   </div>
+  </section>
+
+  <section id="tab-layout" role="tabpanel" hidden>
+   <div class="grid">
+    <div class="card span-12"><h2>What the numbers suggest</h2><p class="sub">Automatic observations from the selected range. Treat them as prompts to look closer, not verdicts.</p><ul class="notes" id="ly-notes"></ul></div>
+    <div class="card span-6"><h2>How far down the page people get</h2><p class="sub">Share of visits that saw each section, in page order</p><ul class="hbars" id="ly-sections"></ul></div>
+    <div class="card span-6"><h2>Where the visit ends</h2><p class="sub">Last section on screen when people left</p><ul class="hbars" id="ly-exit"></ul></div>
+    <div class="card span-4"><h2>Which Book button works</h2><p class="sub">Booking form opened, by placement</p><ul class="hbars" id="ly-bookplace"></ul></div>
+    <div class="card span-4"><h2>Which Call button works</h2><p class="sub">Call taps, by placement</p><ul class="hbars" id="ly-callplace"></ul></div>
+    <div class="card span-4"><h2>Which WhatsApp button works</h2><p class="sub">WhatsApp opened, by placement</p><ul class="hbars" id="ly-waplace"></ul></div>
+    <div class="card span-6"><h2>Concern buttons: hero vs care cards</h2><p class="sub">Taps by concern and where the tap happened</p><div class="table-wrap" id="ly-concerns"></div></div>
+    <div class="card span-6"><h2>Time to first action</h2><p class="sub">From page open to the first tap, per visit</p><ul class="hbars" id="ly-ttfa"></ul><div id="ly-ttfa-med" class="status" style="margin-top:8px"></div></div>
+    <div class="card span-6"><h2>Booking form</h2><p class="sub">Opened, sent, abandoned, failed</p><div id="ly-form"></div></div>
+    <div class="card span-6"><h2>What people want to know</h2><p class="sub">FAQ questions opened, reviews, profiles, directions</p><ul class="hbars" id="ly-faq"></ul><div id="ly-interest" style="margin-top:12px"></div></div>
+    <div class="card span-6"><h2>Clinic navigation</h2><p class="sub">Use of the clinic strip, map pins and "other centres"</p><div id="ly-nav"></div></div>
+    <div class="card span-6"><h2>Mobile vs desktop behaviour</h2><p class="sub">Where the two differ most</p><div class="table-wrap" id="ly-device"></div></div>
+   </div>
+  </section>
  </main>
 </div>
 <div class="tooltip" id="tip" role="status" aria-live="polite"></div>
@@ -159,25 +217,33 @@ details.tv summary{cursor:pointer;color:var(--ink-3)}
 const API=document.querySelector('meta[name="cb-analytics-api"]').content;
 const TZ='Asia/Kolkata';
 const PAGES={'/physiotherapy-near-me-delhi/':'Delhi (central)','/physiotherapy-near-me-saket/':'Saket','/physiotherapy-near-me-greater-kailash/':'Greater Kailash','/physiotherapy-near-me-safdarjung-enclave/':'Safdarjung Enclave','/physiotherapy-near-me-vasant-kunj/':'Vasant Kunj','/physiotherapy-near-me-dwarka/':'Dwarka'};
+const SECTIONS=[['hero','Landing screen'],['care','Your concern (care cards)'],['advanced-care','Advanced care'],['pricing','Fees'],['clinics','Clinics / getting here'],['precision-recovery','AI precision section'],['faq','FAQ'],['final-cta','Final call to action']];
 const CONCERNS={spine:'Back / Neck',joint:'Knee / Joint',rehab:'Injury / Surgery',other:'Other issues',knee:'Knee',shoulder:'Shoulder',injury:'Injury',surgery:'Surgery'};
+const PLACE={floating:'Floating bar / buttons',header:'Header',landing_card:'Landing photo card',getting_here:'Getting here block',clinic_card:'Clinic card',map:'Map pin popup',booking_form:'Booking form',whatsapp_dialog:'WhatsApp dialog',final_cta:'Final call to action',pricing:'Fees card',hero:'Hero',faq:'FAQ',page:'Elsewhere',care_card:'Care card'};
+const INTENT={appointment:'Book an appointment',pricing:'Pricing & packages',service:'Treatment for my concern',other:'Another question',after_booking:'After booking',none:'No topic'};
+const FAIL={network:'No connection',422:'Invalid details',429:'Too many attempts',502:'Server could not save',403:'Blocked origin'};
 const LEAD_EVENTS=['booking_request_sent','call_click','whatsapp_send'];
+const COLORS=['var(--s1)','var(--s2)','var(--s3)','var(--s4)','var(--s5)','var(--s6)'];
 const $=s=>document.querySelector(s);
 const fmt=n=>Number(n||0).toLocaleString('en-IN');
 const pct=(a,b)=>b?Math.round(a/b*1000)/10+'%':'–';
+const rate=(a,b)=>b?a/b:0;
 const dayKey=d=>new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit'}).format(d);
 const hourKey=d=>+new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour:'2-digit',hour12:false}).format(d);
 const timeLabel=d=>new Intl.DateTimeFormat('en-IN',{timeZone:TZ,day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}).format(d);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pageName=p=>PAGES[p]||p||'(unknown)';
+const placeName=p=>PLACE[p]||String(p||'?').replace(/_/g,' ');
 
 // ---------- state ----------
-const state={pw:sessionStorage.getItem('cb_dash_pw')||'',from:null,to:null,events:[],demo:new URLSearchParams(location.search).get('demo')==='1',filters:{page:'',device:'',source:''}};
-function setRange(days){const now=new Date();const to=dayKey(now);const d=new Date(now.getTime()-(days-1)*864e5);state.from=dayKey(d);state.to=to;$('#from').value=state.from;$('#to').value=state.to;document.querySelectorAll('#range button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.days===days)));}
+const state={pw:sessionStorage.getItem('cb_dash_pw')||'',from:null,to:null,events:[],demo:new URLSearchParams(location.search).get('demo')==='1',filters:{pages:new Set(),device:'',source:''},tab:'overview',dim:'page'};
+function setRange(days){const now=new Date();const d=new Date(now.getTime()-(days-1)*864e5);state.from=dayKey(d);state.to=dayKey(now);$('#from').value=state.from;$('#to').value=state.to;document.querySelectorAll('#range button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.days===days)));}
 setRange(7);
 
 // ---------- gate ----------
-$('#gate-form').addEventListener('submit',async e=>{e.preventDefault();const pw=$('#pw').value.trim();if(!pw)return;state.pw=pw;$('#gate-error').textContent='';const ok=await load();if(ok){sessionStorage.setItem('cb_dash_pw',pw);open();}});
+$('#gate-form').addEventListener('submit',async e=>{e.preventDefault();const pw=$('#pw').value.trim();if(!pw)return;state.pw=pw;$('#gate-error').textContent='';const ok=await load();if(ok){sessionStorage.setItem('cb_dash_pw',pw);openApp();}});
 $('#logout').addEventListener('click',()=>{sessionStorage.removeItem('cb_dash_pw');state.pw='';location.reload();});
-function open(){$('#gate').hidden=true;$('#app').hidden=false;}
+function openApp(){$('#gate').hidden=true;$('#app').hidden=false;}
 
 // ---------- data ----------
 async function load(){
@@ -185,12 +251,14 @@ async function load(){
  try{
   if(state.demo){state.events=demoData();$('#demo-note').hidden=false;}
   else{
-   const r=await fetch(`${API}?from=${state.from}&to=${state.to}`,{headers:{Authorization:'Bearer '+state.pw,Accept:'application/json'},credentials:'omit'});
+   // also fetch the previous period (for deltas and the period comparison) when the combined span fits the API's 90-day cap
+   const span=daysBetween(state.from,state.to).length;const fetchFrom=span<=45?dayKey(new Date(new Date(state.from+'T00:00:00Z').getTime()-span*864e5)):state.from;
+   const r=await fetch(`${API}?from=${fetchFrom}&to=${state.to}`,{headers:{Authorization:'Bearer '+state.pw,Accept:'application/json'},credentials:'omit'});
    if(r.status===401||r.status===403){$('#gate-error').textContent='That password was not accepted.';$('#status').textContent='';return false;}
    if(!r.ok)throw new Error('HTTP '+r.status);
    const data=await r.json();state.events=normalise(data.events||data);
   }
-  render();$('#status').textContent='Updated '+new Intl.DateTimeFormat('en-IN',{timeZone:TZ,hour:'2-digit',minute:'2-digit'}).format(new Date());return true;
+  buildPageFilter();render();$('#status').textContent='Updated '+new Intl.DateTimeFormat('en-IN',{timeZone:TZ,hour:'2-digit',minute:'2-digit'}).format(new Date());return true;
  }catch(err){$('#gate-error').textContent='Could not load data: '+err.message;$('#status').textContent='Load failed';return false;}
 }
 function normalise(rows){return rows.map(r=>{let props=r.props||{};if(typeof props==='string'){try{props=JSON.parse(props);}catch(_){props={};}}return {ts:new Date(r.ts||r.created_at),event:r.event,page:r.page||'',area:r.area||'',device:r.device||'',visitor:r.visitor||r.visitor_id||'',session:r.session||r.session_id||'',utm_source:r.utm_source||'',utm_medium:r.utm_medium||'',utm_campaign:r.utm_campaign||'',referrer:r.referrer||'',props};}).filter(e=>!isNaN(e.ts));}
@@ -199,120 +267,214 @@ function normalise(rows){return rows.map(r=>{let props=r.props||{};if(typeof pro
 document.querySelectorAll('#range button').forEach(b=>b.addEventListener('click',()=>{setRange(+b.dataset.days);load();}));
 $('#from').addEventListener('change',()=>{state.from=$('#from').value;document.querySelectorAll('#range button').forEach(b=>b.setAttribute('aria-pressed','false'));load();});
 $('#to').addEventListener('change',()=>{state.to=$('#to').value;document.querySelectorAll('#range button').forEach(b=>b.setAttribute('aria-pressed','false'));load();});
-['page','device','source'].forEach(k=>$('#f-'+k).addEventListener('change',e=>{state.filters[k]=e.target.value;render();}));
+['device','source'].forEach(k=>$('#f-'+k).addEventListener('change',e=>{state.filters[k]=e.target.value;render();}));
 $('#refresh').addEventListener('click',load);
+function buildPageFilter(){
+ const pages=[...new Set(state.events.map(e=>e.page))].filter(Boolean).sort((a,b)=>pageName(a).localeCompare(pageName(b)));
+ $('#page-options').innerHTML=pages.map(p=>`<label><input type="checkbox" value="${esc(p)}"${state.filters.pages.has(p)?' checked':''}> ${esc(pageName(p))}</label>`).join('')||'<div class="empty">No pages yet</div>';
+ fillSelect('#f-source',[...new Set(state.events.map(e=>e.utm_source||'direct'))].sort(),state.filters.source);
+ updatePageSummary();
+}
+$('#page-options').addEventListener('change',e=>{const v=e.target.value;if(e.target.checked)state.filters.pages.add(v);else state.filters.pages.delete(v);updatePageSummary();render();});
+document.querySelectorAll('#f-pages .row button').forEach(b=>b.addEventListener('click',()=>{const boxes=[...document.querySelectorAll('#page-options input')];if(b.dataset.act==='all'){boxes.forEach(x=>{x.checked=true;state.filters.pages.add(x.value);});}else{boxes.forEach(x=>x.checked=false);state.filters.pages.clear();}updatePageSummary();render();}));
+document.addEventListener('click',e=>{const d=$('#f-pages');if(d.open&&!d.contains(e.target))d.open=false;});
+function updatePageSummary(){const n=state.filters.pages.size,all=document.querySelectorAll('#page-options input').length;$('#f-pages>summary').textContent=n===0||n===all?'All pages':n===1?pageName([...state.filters.pages][0]):n+' pages';}
+function fillSelect(id,values,current){const s=$(id);const first=s.firstElementChild.outerHTML;s.innerHTML=first+values.map(v=>`<option value="${esc(v)}"${v===current?' selected':''}>${esc(v)}</option>`).join('');}
+function passes(e,f){return (!f.pages.size||f.pages.has(e.page))&&(!f.device||e.device===f.device)&&(!f.source||(e.utm_source||'direct')===f.source);}
+function inRange(e){const k=dayKey(e.ts);return k>=state.from&&k<=state.to;}
+function filtered(){return state.events.filter(e=>inRange(e)&&passes(e,state.filters));}
 $('#export').addEventListener('click',()=>{const rows=filtered();const head=['time','event','page','device','visitor','session','utm_source','utm_medium','utm_campaign','referrer','props'];const csv=[head.join(',')].concat(rows.map(e=>[e.ts.toISOString(),e.event,e.page,e.device,e.visitor,e.session,e.utm_source,e.utm_medium,e.utm_campaign,e.referrer,JSON.stringify(e.props)].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(','))).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=`landing-events-${state.from}-to-${state.to}.csv`;a.click();});
-function filtered(){const f=state.filters;return state.events.filter(e=>(!f.page||e.page===f.page)&&(!f.device||e.device===f.device)&&(!f.source||(e.utm_source||'direct')===f.source));}
-function fillSelect(id,values,current,labelFn){const s=$(id);const first=s.firstElementChild.outerHTML;s.innerHTML=first+values.map(v=>`<option value="${esc(v)}"${v===current?' selected':''}>${esc(labelFn?labelFn(v):v)}</option>`).join('');}
+
+// ---------- tabs ----------
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{state.tab=b.dataset.tab;document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',String(x===b)));['overview','compare','layout'].forEach(t=>$('#tab-'+t).hidden=t!==state.tab);render();}));
+document.querySelectorAll('#cmp-dim button').forEach(b=>b.addEventListener('click',()=>{state.dim=b.dataset.dim;document.querySelectorAll('#cmp-dim button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));render();}));
 
 // ---------- aggregation ----------
-function agg(ev){
- const by=(arr,fn)=>{const m=new Map();arr.forEach(e=>{const k=fn(e);m.set(k,(m.get(k)||0)+1);});return m;};
- const sessions=new Set(ev.filter(e=>e.event==='page_view').map(e=>e.session));
- const visitors=new Set(ev.filter(e=>e.event==='page_view').map(e=>e.visitor));
- const count=name=>ev.filter(e=>e.event===name).length;
- const sess=name=>new Set(ev.filter(e=>e.event===name).map(e=>e.session)).size;
- const leaves=ev.filter(e=>e.event==='page_leave'&&e.props.seconds>0).map(e=>e.props.seconds).sort((a,b)=>a-b);
- return {sessions:sessions.size,visitors:visitors.size,bookings:count('booking_request_sent'),calls:count('call_click'),wa:count('whatsapp_send'),waOpen:count('whatsapp_open'),directions:count('directions_click'),
-  leadSessions:new Set(ev.filter(e=>LEAD_EVENTS.includes(e.event)).map(e=>e.session)).size,
-  funnel:[['Visited',sessions.size],['Chose a concern',sess('concern_selected')],['Opened booking',sess('booking_opened')],['Sent a booking',sess('booking_request_sent')]],
-  medianSeconds:leaves.length?leaves[Math.floor(leaves.length/2)]:0,scroll50:sess('scroll_50'),scroll90:sess('scroll_90'),faq:count('faq_opened'),reviews:count('reviews_opened'),
-  byDay:by(ev.filter(e=>e.event==='page_view'),e=>dayKey(e.ts)),
-  leadsByDay:{bookings:by(ev.filter(e=>e.event==='booking_request_sent'),e=>dayKey(e.ts)),calls:by(ev.filter(e=>e.event==='call_click'),e=>dayKey(e.ts)),wa:by(ev.filter(e=>e.event==='whatsapp_send'),e=>dayKey(e.ts))},
-  byHour:by(ev.filter(e=>LEAD_EVENTS.includes(e.event)),e=>hourKey(e.ts)),
-  concerns:by(ev.filter(e=>e.event==='concern_selected'),e=>e.props.concern||'?'),
-  callPlace:by(ev.filter(e=>e.event==='call_click'),e=>e.props.placement||'?'),
-  waIntent:by(ev.filter(e=>e.event==='whatsapp_send'),e=>e.props.intent||'?'),
-  failures:by(ev.filter(e=>e.event==='booking_request_failed'),e=>e.props.reason||'?')};
+function by(arr,fn){const m=new Map();arr.forEach(e=>{const k=fn(e);if(k==null||k==='')return;m.set(k,(m.get(k)||0)+1);});return m;}
+function sessionsWith(ev,name){return new Set(ev.filter(e=>e.event===name).map(e=>e.session));}
+function median(arr){if(!arr.length)return 0;const s=[...arr].sort((a,b)=>a-b);return s[Math.floor(s.length/2)];}
+function metrics(ev){
+ const views=ev.filter(e=>e.event==='page_view');const sessions=new Set(views.map(e=>e.session));const n=sessions.size;
+ const count=name=>ev.filter(e=>e.event===name).length;const sess=name=>sessionsWith(ev,name).size;
+ const leaves=ev.filter(e=>e.event==='page_leave');
+ const firstView=new Map();views.forEach(v=>{const t=firstView.get(v.session);if(!t||v.ts<t)firstView.set(v.session,v.ts);});
+ const firstAct=new Map();ev.forEach(e=>{if(['page_view','page_leave','scroll_50','scroll_90','section_seen','clinic_selected'].includes(e.event))return;const t=firstAct.get(e.session);if(!t||e.ts<t)firstAct.set(e.session,e.ts);});
+ const ttfa=[];firstAct.forEach((t,s)=>{const v=firstView.get(s);if(v)ttfa.push(Math.max(0,(t-v)/1000));});
+ const opened=sess('booking_opened'),sent=sess('booking_request_sent');
+ return {n,visitors:new Set(views.map(e=>e.visitor)).size,bookings:count('booking_request_sent'),calls:count('call_click'),wa:count('whatsapp_send'),waOpen:count('whatsapp_open'),directions:count('directions_click'),
+  leadSessions:new Set(ev.filter(e=>LEAD_EVENTS.includes(e.event)).map(e=>e.session)).size,concernSess:sess('concern_selected'),opened,sent,failed:count('booking_request_failed'),
+  medianSeconds:median(leaves.map(e=>+e.props.seconds||0).filter(x=>x>0)),scroll50:sess('scroll_50'),scroll90:sess('scroll_90'),faq:count('faq_opened'),reviews:count('reviews_opened'),profile:count('google_profile_click'),
+  ttfaMedian:median(ttfa),ttfa,
+  sections:by(ev.filter(e=>e.event==='section_seen'),e=>e.props.section),exits:by(leaves,e=>e.props.last_section||'hero'),
+  byDay:by(views,e=>dayKey(e.ts)),leadsByDay:{bookings:by(ev.filter(e=>e.event==='booking_request_sent'),e=>dayKey(e.ts)),calls:by(ev.filter(e=>e.event==='call_click'),e=>dayKey(e.ts)),wa:by(ev.filter(e=>e.event==='whatsapp_send'),e=>dayKey(e.ts))},
+  leadsByDayTotal:by(ev.filter(e=>LEAD_EVENTS.includes(e.event)),e=>dayKey(e.ts)),byHour:by(ev.filter(e=>LEAD_EVENTS.includes(e.event)),e=>hourKey(e.ts)),
+  concerns:by(ev.filter(e=>e.event==='concern_selected'),e=>e.props.concern||'?'),concernByPlace:by(ev.filter(e=>e.event==='concern_selected'),e=>(e.props.concern||'?')+'|'+(e.props.placement||'?')),
+  bookPlace:by(ev.filter(e=>e.event==='booking_opened'),e=>e.props.placement||'?'),callPlace:by(ev.filter(e=>e.event==='call_click'),e=>e.props.placement||'?'),waPlace:by(ev.filter(e=>e.event==='whatsapp_open'),e=>e.props.placement||'?'),
+  waIntent:by(ev.filter(e=>e.event==='whatsapp_send'),e=>e.props.intent||'?'),failures:by(ev.filter(e=>e.event==='booking_request_failed'),e=>e.props.reason||'?'),faqQ:by(ev.filter(e=>e.event==='faq_opened'),e=>e.props.question||'?'),
+  pills:count('clinic_pill_click'),pins:count('map_pin_click'),others:count('other_clinics_opened')+count('area_other_clinics_shown'),outbound:count('outbound_click')};
 }
 function daysBetween(from,to){const out=[];const d=new Date(from+'T00:00:00Z');const end=new Date(to+'T00:00:00Z');while(d<=end){out.push(d.toISOString().slice(0,10));d.setUTCDate(d.getUTCDate()+1);}return out;}
+function previousPeriodEvents(){const span=daysBetween(state.from,state.to).length;const prevFrom=dayKey(new Date(new Date(state.from+'T00:00:00Z').getTime()-span*864e5));return {span,events:state.events.filter(e=>{const k=dayKey(e.ts);return k<state.from&&k>=prevFrom;}).filter(e=>passes(e,state.filters))};}
 
 // ---------- render ----------
-function render(){
- const all=state.events,ev=filtered();
- fillSelect('#f-page',[...new Set(all.map(e=>e.page))].filter(Boolean).sort(),state.filters.page,p=>PAGES[p]||p);
- fillSelect('#f-source',[...new Set(all.map(e=>e.utm_source||'direct'))].sort(),state.filters.source);
- $('#count').textContent=fmt(ev.length)+' events';
- const a=agg(ev);
- // previous period for deltas
- const span=daysBetween(state.from,state.to).length;const prevFrom=new Date(new Date(state.from+'T00:00:00Z').getTime()-span*864e5);
- const prevEvents=all.filter(e=>{const k=dayKey(e.ts);return k<state.from&&k>=dayKey(prevFrom);});
- const p=agg(prevEvents.filter(e=>{const f=state.filters;return (!f.page||e.page===f.page)&&(!f.device||e.device===f.device)&&(!f.source||(e.utm_source||'direct')===f.source);}));
+function render(){const ev=filtered();$('#count').textContent=fmt(ev.length)+' events';if(state.tab==='overview')renderOverview(ev);else if(state.tab==='compare')renderCompare(ev);else renderLayout(ev);}
+
+function renderOverview(ev){
+ const a=metrics(ev),{span,events:prevEv}=previousPeriodEvents(),p=metrics(prevEv);
  const delta=(cur,prev)=>!prev?'':`<div class="delta ${cur>=prev?'up':'down'}">${cur>=prev?'▲':'▼'} ${pct(Math.abs(cur-prev),prev)} vs previous ${span}d</div>`;
- const leads=a.bookings+a.calls+a.wa;
- $('#tiles').innerHTML=[
-  ['Visits',fmt(a.sessions),delta(a.sessions,p.sessions)],['Visitors',fmt(a.visitors),delta(a.visitors,p.visitors)],
-  ['Bookings',fmt(a.bookings),delta(a.bookings,p.bookings)],['Calls',fmt(a.calls),delta(a.calls,p.calls)],['WhatsApp sent',fmt(a.wa),delta(a.wa,p.wa)],
-  ['Lead rate',pct(a.leadSessions,a.sessions),`<div class="delta">${fmt(a.leadSessions)} of ${fmt(a.sessions)} visits took an action</div>`]
- ].map(([l,v,d])=>`<div class="tile"><div class="label">${l}</div><div class="value">${v}</div>${d||''}</div>`).join('');
- if(!ev.length){document.querySelectorAll('.grid .card > div, .grid .card > ul').forEach(el=>el.innerHTML='<p class="empty">No events in this range.</p>');return;}
- const days=daysBetween(state.from,state.to);
- barChart('#c-visits',days,[{name:'Visits',color:'var(--s1)',values:days.map(d=>a.byDay.get(d)||0)}],{labelEvery:Math.ceil(days.length/8)});
+ $('#tiles').innerHTML=[['Visits',fmt(a.n),delta(a.n,p.n)],['Visitors',fmt(a.visitors),delta(a.visitors,p.visitors)],['Bookings',fmt(a.bookings),delta(a.bookings,p.bookings)],['Calls',fmt(a.calls),delta(a.calls,p.calls)],['WhatsApp sent',fmt(a.wa),delta(a.wa,p.wa)],['Lead rate',pct(a.leadSessions,a.n),`<div class="delta">${fmt(a.leadSessions)} of ${fmt(a.n)} visits took an action</div>`]].map(([l,v,d])=>`<div class="tile"><div class="label">${l}</div><div class="value">${v}</div>${d||''}</div>`).join('');
+ if(!ev.length){document.querySelectorAll('#tab-overview .card > div, #tab-overview .card > ul').forEach(el=>el.innerHTML='<p class="empty">No events in this range.</p>');return;}
+ const days=daysBetween(state.from,state.to),every=Math.ceil(days.length/8);
+ barChart('#c-visits',days,[{name:'Visits',color:'var(--s1)',values:days.map(d=>a.byDay.get(d)||0)}],{labelEvery:every});
  table('#t-visits',['Day','Visits'],days.map(d=>[d,a.byDay.get(d)||0]));
  const series=[{name:'Bookings',color:'var(--s2)',values:days.map(d=>a.leadsByDay.bookings.get(d)||0)},{name:'Calls',color:'var(--s1)',values:days.map(d=>a.leadsByDay.calls.get(d)||0)},{name:'WhatsApp',color:'var(--s3)',values:days.map(d=>a.leadsByDay.wa.get(d)||0)}];
  $('#l-leads').innerHTML=series.map(s=>`<span><i style="background:${s.color}"></i>${s.name}</span>`).join('');
- barChart('#c-leads',days,series,{stacked:true,labelEvery:Math.ceil(days.length/8)});
+ barChart('#c-leads',days,series,{stacked:true,labelEvery:every});
  table('#t-leads',['Day','Bookings','Calls','WhatsApp'],days.map((d,i)=>[d,series[0].values[i],series[1].values[i],series[2].values[i]]));
- funnel('#c-funnel',a.funnel);
- const dev=['mobile','desktop'].map(d=>{const sub=agg(ev.filter(e=>e.device===d));return {d,sub};});
- $('#c-device').innerHTML=dev.map(({d,sub})=>`<div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line)"><div><div style="font-weight:600;text-transform:capitalize">${d}</div><div class="status">${pct(sub.sessions,a.sessions)} of visits</div></div><div style="text-align:right"><div class="mono" style="font-size:22px;font-weight:600">${fmt(sub.sessions)}</div><div class="status">lead rate ${pct(sub.leadSessions,sub.sessions)}</div></div></div>`).join('');
- const pages=[...new Set(ev.map(e=>e.page))].filter(Boolean).map(pg=>{const s=agg(ev.filter(e=>e.page===pg));return [PAGES[pg]||pg,s.sessions,s.bookings,s.calls,s.wa,pct(s.leadSessions,s.sessions),s.medianSeconds?s.medianSeconds+'s':'–'];}).sort((x,y)=>y[1]-x[1]);
+ funnel('#c-funnel',[['Visited',a.n],['Chose a concern',a.concernSess],['Opened booking',a.opened],['Sent a booking',a.sent]]);
+ $('#c-device').innerHTML=['mobile','desktop'].map(d=>{const s=metrics(ev.filter(e=>e.device===d));return `<div class="kv"><div><div style="font-weight:600;text-transform:capitalize;color:var(--ink)">${d}</div><div class="status">${pct(s.n,a.n)} of visits</div></div><div style="text-align:right"><div class="mono" style="font-size:22px;font-weight:600;color:var(--ink)">${fmt(s.n)}</div><div class="status">lead rate ${pct(s.leadSessions,s.n)}</div></div></div>`;}).join('');
+ const pages=[...new Set(ev.map(e=>e.page))].filter(Boolean).map(pg=>{const s=metrics(ev.filter(e=>e.page===pg));return [pageName(pg),s.n,s.bookings,s.calls,s.wa,pct(s.leadSessions,s.n),s.medianSeconds?s.medianSeconds+' s':'–'];}).sort((x,y)=>y[1]-x[1]);
  table('#t-pages',['Page','Visits','Bookings','Calls','WhatsApp','Lead rate','Median time'],pages,{bar:1});
  const srcKey=e=>[(e.utm_source||'direct'),e.utm_medium||'',e.utm_campaign||''].join(' / ').replace(/( \/ )+$/,'');
- const srcs=[...new Set(ev.map(srcKey))].map(k=>{const s=agg(ev.filter(e=>srcKey(e)===k));return [k,s.sessions,s.bookings+s.calls+s.wa,pct(s.leadSessions,s.sessions)];}).sort((x,y)=>y[1]-x[1]).slice(0,15);
+ const srcs=[...new Set(ev.map(srcKey))].map(k=>{const s=metrics(ev.filter(e=>srcKey(e)===k));return [k,s.n,s.bookings+s.calls+s.wa,pct(s.leadSessions,s.n)];}).sort((x,y)=>y[1]-x[1]).slice(0,15);
  table('#t-sources',['Source / medium / campaign','Visits','Leads','Lead rate'],srcs,{bar:1});
  hbars('#c-concerns',a.concerns,k=>CONCERNS[k]||k);
  barChart('#c-hours',Array.from({length:24},(_,i)=>i),[{name:'Leads',color:'var(--s2)',values:Array.from({length:24},(_,i)=>a.byHour.get(i)||0)}],{labelEvery:3,labelFn:h=>String(h).padStart(2,'0')});
- hbars('#c-callplace',a.callPlace,k=>k.replace(/_/g,' '));
- hbars('#c-waintent',a.waIntent,k=>({appointment:'Book an appointment',pricing:'Pricing & packages',service:'Treatment for my concern',other:'Another question',after_booking:'After booking',none:'No topic'}[k]||k));
- $('#c-engage').innerHTML=[['Median time on page',a.medianSeconds?a.medianSeconds+' s':'–'],['Scrolled past half',pct(a.scroll50,a.sessions)],['Reached the end',pct(a.scroll90,a.sessions)],['FAQ opened',fmt(a.faq)],['Reviews opened',fmt(a.reviews)],['Directions tapped',fmt(a.directions)]].map(([l,v])=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px"><span style="color:var(--ink-2)">${l}</span><strong class="mono">${v}</strong></div>`).join('');
- hbars('#c-failures',a.failures,k=>({network:'No connection',422:'Invalid details',429:'Too many attempts',502:'Server could not save',403:'Blocked origin'}[k]||'HTTP '+k),true);
- const recent=[...ev].sort((x,y)=>y.ts-x.ts).slice(0,60).map(e=>[timeLabel(e.ts),PAGES[e.page]||e.page,e.event.replace(/_/g,' '),e.device,describe(e)]);
- table('#t-recent',['Time','Page','Action','Device','Details'],recent);
+ hbars('#c-callplace',a.callPlace,placeName);hbars('#c-waintent',a.waIntent,k=>INTENT[k]||k);
+ $('#c-engage').innerHTML=[['Median time on page',a.medianSeconds?a.medianSeconds+' s':'–'],['Scrolled past half',pct(a.scroll50,a.n)],['Reached the end',pct(a.scroll90,a.n)],['FAQ opened',fmt(a.faq)],['Reviews opened',fmt(a.reviews)],['Directions tapped',fmt(a.directions)]].map(([l,v])=>`<div class="kv"><span>${l}</span><strong class="mono">${v}</strong></div>`).join('');
+ hbars('#c-failures',a.failures,k=>FAIL[k]||'HTTP '+k,'var(--s2)');
+ const recent=[...ev].filter(e=>e.event!=='section_seen').sort((x,y)=>y.ts-x.ts).slice(0,60).map(e=>[timeLabel(e.ts),pageName(e.page),e.event.replace(/_/g,' '),e.device,describe(e)]);
+ table('#t-recent',['Time','Page','Action','Device','Details'],recent,{html:4});
 }
-function describe(e){const p=e.props||{};const parts=[];if(p.concern)parts.push(CONCERNS[p.concern]||p.concern);if(p.clinic)parts.push('clinic: '+p.clinic);if(p.placement)parts.push('from '+String(p.placement).replace(/_/g,' '));if(p.intent)parts.push('topic: '+p.intent);if(p.number)parts.push(p.number);if(p.seconds!=null)parts.push(p.seconds+' s, '+(p.max_scroll||0)+'% scrolled');if(p.reason)parts.push('reason: '+p.reason);if(p.question)parts.push('"'+p.question+'"');if(e.utm_campaign)parts.push(e.utm_source+' / '+e.utm_campaign);return esc(parts.join(' · '));}
+function describe(e){const p=e.props||{};const parts=[];if(p.concern)parts.push(CONCERNS[p.concern]||p.concern);if(p.clinic)parts.push('clinic: '+p.clinic);if(p.clinic_id)parts.push('clinic: '+p.clinic_id);if(p.placement)parts.push('from '+placeName(p.placement).toLowerCase());if(p.intent)parts.push('topic: '+(INTENT[p.intent]||p.intent));if(p.number)parts.push(p.number);if(p.seconds!=null)parts.push(p.seconds+' s, '+(p.max_scroll||0)+'% scrolled');if(p.reason)parts.push('reason: '+(FAIL[p.reason]||p.reason));if(p.question)parts.push('"'+p.question+'"');if(e.utm_campaign)parts.push(e.utm_source+' / '+e.utm_campaign);return esc(parts.join(' · '));}
+
+// ---------- compare ----------
+function groups(ev){
+ const dim=state.dim;
+ if(dim==='period'){const prev=previousPeriodEvents();return [{label:`This period (${state.from} to ${state.to})`,ev},{label:`Previous ${prev.span} days`,ev:prev.events}];}
+ if(dim==='device')return ['mobile','desktop'].map(d=>({label:d[0].toUpperCase()+d.slice(1),ev:ev.filter(e=>e.device===d)}));
+ if(dim==='source'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>e.utm_source||'direct').entries()].sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);return keys.map(k=>({label:k,ev:ev.filter(e=>(e.utm_source||'direct')===k)}));}
+ if(dim==='campaign'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>e.utm_campaign||'(none)').entries()].sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);return keys.map(k=>({label:k,ev:ev.filter(e=>(e.utm_campaign||'(none)')===k)}));}
+ const pages=[...new Set(ev.map(e=>e.page))].filter(Boolean);return pages.map(p=>({label:pageName(p),ev:ev.filter(e=>e.page===p)})).sort((a,b)=>b.ev.length-a.ev.length).slice(0,6);
+}
+function renderCompare(ev){
+ const gs=groups(ev).map(g=>({...g,m:metrics(g.ev)}));
+ $('#cmp-hint').textContent=state.dim==='page'?(state.filters.pages.size>=2?'Comparing the pages selected in the filter':'Tip: tick two or more pages in the page filter to compare just those'):state.dim==='period'?'Other filters apply to both periods':'Top groups by visits';
+ $('#cmp-title').textContent={page:'Pages side by side',device:'Mobile vs desktop',source:'Traffic sources side by side',campaign:'Campaigns side by side',period:'This period vs the previous one'}[state.dim];
+ if(gs.length<2){$('#cmp-table').innerHTML='<p class="empty">Need at least two groups to compare. Widen the date range or the filters.</p>';['#cmp-visits','#cmp-leadrate','#cmp-complete','#cmp-scroll','#cmp-trend','#cmp-legend'].forEach(s=>$(s).innerHTML='');return;}
+ const rows=[
+  ['Visits',g=>g.m.n,v=>fmt(v),'high'],['Visitors',g=>g.m.visitors,v=>fmt(v),'high'],
+  ['Lead rate',g=>rate(g.m.leadSessions,g.m.n),v=>pct(v*1000,1000),'high'],
+  ['Bookings',g=>g.m.bookings,v=>fmt(v),'high'],['Booking rate',g=>rate(g.m.sent,g.m.n),v=>pct(v*1000,1000),'high'],
+  ['Calls',g=>g.m.calls,v=>fmt(v),'high'],['Call rate',g=>rate(g.m.calls,g.m.n),v=>pct(v*1000,1000),'high'],
+  ['WhatsApp sent',g=>g.m.wa,v=>fmt(v),'high'],
+  ['Chose a concern',g=>rate(g.m.concernSess,g.m.n),v=>pct(v*1000,1000),'high'],
+  ['Opened booking form',g=>rate(g.m.opened,g.m.n),v=>pct(v*1000,1000),'high'],
+  ['Completed the form once opened',g=>rate(g.m.sent,g.m.opened),v=>pct(v*1000,1000),'high'],
+  ['Booking failures',g=>g.m.failed,v=>fmt(v),'low'],
+  ['Median time on page',g=>g.m.medianSeconds,v=>v?v+' s':'–','high'],
+  ['Time to first action (median)',g=>g.m.ttfaMedian,v=>v?Math.round(v)+' s':'–','low'],
+  ['Scrolled past half',g=>rate(g.m.scroll50,g.m.n),v=>pct(v*1000,1000),'high'],
+  ['Reached the end',g=>rate(g.m.scroll90,g.m.n),v=>pct(v*1000,1000),'high'],
+  ['Directions tapped',g=>g.m.directions,v=>fmt(v),'high'],['FAQ opened',g=>g.m.faq,v=>fmt(v),'high']];
+ $('#cmp-table').innerHTML=`<table><thead><tr><th>Metric</th>${gs.map((g,i)=>`<th class="num"><span class="sw" style="background:${COLORS[i]}"></span>${esc(g.label)}</th>`).join('')}</tr></thead><tbody>${rows.map(([name,fn,fmtFn,best])=>{const vals=gs.map(fn);const target=best==='high'?Math.max(...vals):Math.min(...vals);const distinct=new Set(vals).size>1;return `<tr><td>${name}</td>${vals.map(v=>`<td class="num">${distinct&&v===target&&v>0?`<span class="cmp-best">${fmtFn(v)}</span>`:fmtFn(v)}</td>`).join('')}</tr>`;}).join('')}</tbody></table>`;
+ const list=(sel,fn,fmtFn)=>{const vals=gs.map(fn);const max=Math.max(1e-9,...vals);$(sel).innerHTML=gs.map((g,i)=>`<li><span class="name">${esc(g.label)}</span><span class="track"><span class="fill" style="width:${vals[i]/max*100}%;background:${COLORS[i]}"></span></span><span class="num">${fmtFn(vals[i])}</span></li>`).join('');};
+ list('#cmp-visits',g=>g.m.n,fmt);list('#cmp-leadrate',g=>rate(g.m.leadSessions,g.m.n),v=>pct(v*1000,1000));list('#cmp-complete',g=>rate(g.m.sent,g.m.opened),v=>pct(v*1000,1000));list('#cmp-scroll',g=>rate(g.m.scroll90,g.m.n),v=>pct(v*1000,1000));
+ const days=daysBetween(state.from,state.to);
+ if(state.dim==='period'){const prevDays=daysBetween(dayKey(new Date(new Date(state.from+'T00:00:00Z').getTime()-days.length*864e5)),dayKey(new Date(new Date(state.from+'T00:00:00Z').getTime()-864e5)));$('#cmp-legend').innerHTML=gs.map((g,i)=>`<span><i style="background:${COLORS[i]}"></i>${esc(g.label)}</span>`).join('');lineChart('#cmp-trend',days.map((d,i)=>'Day '+(i+1)),[{name:gs[0].label,color:COLORS[0],values:days.map(d=>gs[0].m.leadsByDayTotal.get(d)||0)},{name:gs[1].label,color:COLORS[1],values:prevDays.map(d=>gs[1].m.leadsByDayTotal.get(d)||0)}],{labelEvery:Math.ceil(days.length/8)});}
+ else{$('#cmp-legend').innerHTML=gs.map((g,i)=>`<span><i style="background:${COLORS[i]}"></i>${esc(g.label)}</span>`).join('');lineChart('#cmp-trend',days,gs.map((g,i)=>({name:g.label,color:COLORS[i],values:days.map(d=>g.m.leadsByDayTotal.get(d)||0)})),{labelEvery:Math.ceil(days.length/8)});}
+}
+
+// ---------- layout insights ----------
+function renderLayout(ev){
+ const a=metrics(ev);
+ if(!a.n){document.querySelectorAll('#tab-layout .card > div, #tab-layout .card > ul').forEach(el=>el.innerHTML='<p class="empty">No events in this range.</p>');return;}
+ const seen=id=>id==='hero'?a.n:(a.sections.get(id)||0);
+ $('#ly-sections').innerHTML=SECTIONS.map(([id,label],i)=>`<li><span class="name">${label}</span><span class="track"><span class="fill" style="width:${rate(seen(id),a.n)*100}%;background:${i<4?'var(--seq-550)':'var(--seq-350)'}"></span></span><span class="num">${pct(seen(id),a.n)}</span></li>`).join('');
+ hbars('#ly-exit',a.exits,k=>(SECTIONS.find(s=>s[0]===k)||[k,k])[1]);
+ hbars('#ly-bookplace',a.bookPlace,placeName);hbars('#ly-callplace',a.callPlace,placeName);hbars('#ly-waplace',a.waPlace,placeName);
+ const cIds=['spine','joint','rehab','other'];const cRows=cIds.map(c=>[CONCERNS[c],a.concernByPlace.get(c+'|hero')||0,a.concernByPlace.get(c+'|care_card')||0,(a.concernByPlace.get(c+'|hero')||0)+(a.concernByPlace.get(c+'|care_card')||0)]);
+ table('#ly-concerns',['Concern','Hero button','Care card button','Total'],cRows);
+ const buckets=[['Under 10 s',0,10],['10 to 30 s',10,30],['30 to 60 s',30,60],['1 to 3 min',60,180],['Over 3 min',180,1e9]];const bm=new Map();buckets.forEach(([l,lo,hi])=>bm.set(l,a.ttfa.filter(t=>t>=lo&&t<hi).length));
+ $('#ly-ttfa').innerHTML=buckets.map(([l])=>{const v=bm.get(l);return `<li><span class="name">${l}</span><span class="track"><span class="fill" style="width:${rate(v,Math.max(1,...bm.values()))*100}%"></span></span><span class="num">${fmt(v)}<span class="pct">${pct(v,a.ttfa.length)}</span></span></li>`;}).join('');
+ $('#ly-ttfa-med').textContent=a.ttfa.length?`Median ${Math.round(a.ttfaMedian)} s · ${pct(a.ttfa.length,a.n)} of visits took any action`:'No actions in this range';
+ $('#ly-form').innerHTML=[['Opened the form',fmt(a.opened)+' visits'],['Sent a request',fmt(a.sent)+' · '+pct(a.sent,a.opened)+' of openers'],['Opened but did not send',fmt(Math.max(0,a.opened-a.sent))+' · '+pct(Math.max(0,a.opened-a.sent),a.opened)],['Failed submissions',fmt(a.failed)+(a.failures.size?' · '+[...a.failures.entries()].map(([k,v])=>(FAIL[k]||k)+' '+v).join(', '):'')],['Continued on WhatsApp after booking',fmt(a.waIntent.get('after_booking')||0)]].map(([l,v])=>`<div class="kv"><span>${l}</span><strong class="mono">${v}</strong></div>`).join('');
+ hbars('#ly-faq',a.faqQ,k=>k);
+ $('#ly-interest').innerHTML=[['Reviews badge opened',fmt(a.reviews)],['Google profile opened',fmt(a.profile)],['Directions tapped',fmt(a.directions)],['Clinic page / physio profile opened',fmt(a.outbound)]].map(([l,v])=>`<div class="kv"><span>${l}</span><strong class="mono">${v}</strong></div>`).join('');
+ $('#ly-nav').innerHTML=[['Clinic strip pill tapped',fmt(a.pills)],['Map pin tapped',fmt(a.pins)],['"Other centres" opened',fmt(a.others)],['Share of visits that touched clinic navigation',pct(new Set(ev.filter(e=>['clinic_pill_click','map_pin_click','other_clinics_opened','area_other_clinics_shown'].includes(e.event)).map(e=>e.session)).size,a.n)]].map(([l,v])=>`<div class="kv"><span>${l}</span><strong class="mono">${v}</strong></div>`).join('');
+ const dm=['mobile','desktop'].map(d=>metrics(ev.filter(e=>e.device===d)));
+ const dRows=[['Visits',m=>fmt(m.n)],['Lead rate',m=>pct(m.leadSessions,m.n)],['Booking rate',m=>pct(m.sent,m.n)],['Call rate',m=>pct(m.calls,m.n)],['Form completion',m=>pct(m.sent,m.opened)],['Reached the end',m=>pct(m.scroll90,m.n)],['Median time',m=>m.medianSeconds?m.medianSeconds+' s':'–'],['Time to first action',m=>m.ttfaMedian?Math.round(m.ttfaMedian)+' s':'–']];
+ table('#ly-device',['Metric','Mobile','Desktop'],dRows.map(([l,f])=>[l,f(dm[0]),f(dm[1])]));
+ // observations
+ const notes=[];const r=(x,y)=>rate(x,y);
+ const pricingSeen=r(seen('pricing'),a.n),clinicsSeen=r(seen('clinics'),a.n),faqSeen=r(seen('faq'),a.n);
+ if(a.n>=30){
+  if(pricingSeen<0.4)notes.push(['Fees are rarely seen',`Only ${pct(seen('pricing'),a.n)} of visits reach the fees section. If price is a deciding factor, surface the ₹499 offer earlier, for example under the hero.`]);
+  if(r(a.concernSess,a.n)<0.3)notes.push(['Concern buttons underused',`${pct(a.concernSess,a.n)} of visits tap a concern. The buttons may read as information rather than a step; a more directive label or a single primary action above them could help.`]);
+  if(a.opened&&r(a.sent,a.opened)<0.5)notes.push(['Form abandonment',`${pct(a.opened-a.sent,a.opened)} open the booking form and leave without sending. Check which field stalls people; consider removing the concern dropdown or moving consent copy below the button.`]);
+  const topBook=[...a.bookPlace.entries()].sort((x,y)=>y[1]-x[1])[0];if(topBook&&a.opened)notes.push(['Where bookings start',`${placeName(topBook[0])} starts ${pct(topBook[1],[...a.bookPlace.values()].reduce((s,v)=>s+v,0))} of form opens. Buttons that start almost none could be removed to simplify the page.`]);
+  const topCall=[...a.callPlace.entries()].sort((x,y)=>y[1]-x[1])[0];if(topCall&&a.calls)notes.push(['Where calls start',`${placeName(topCall[0])} drives ${pct(topCall[1],a.calls)} of calls.`]);
+  if(r(a.scroll90,a.n)<0.15&&faqSeen<0.2)notes.push(['Lower sections barely seen',`Only ${pct(a.scroll90,a.n)} reach the end and ${pct(seen('faq'),a.n)} see the FAQ. Content below the fees could be shortened or the most-asked question moved up.`]);
+  if(dm[0].n>=20&&dm[1].n>=20){const gap=r(dm[0].leadSessions,dm[0].n)-r(dm[1].leadSessions,dm[1].n);if(Math.abs(gap)>0.05)notes.push(['Device gap',`${gap>0?'Mobile':'Desktop'} converts better (${pct(dm[0].leadSessions,dm[0].n)} vs ${pct(dm[1].leadSessions,dm[1].n)}). Review the weaker layout's first screen and button placement.`]);}
+  if(a.ttfa.length&&a.ttfaMedian>45)notes.push(['Slow to act',`Median time to first action is ${Math.round(a.ttfaMedian)} s. The first screen may not make the next step obvious enough.`]);
+  const topFaq=[...a.faqQ.entries()].sort((x,y)=>y[1]-x[1])[0];if(topFaq&&a.faq>=5)notes.push(['Most-asked question',`"${topFaq[0]}" is opened most. Answer it earlier on the page.`]);
+  if(clinicsSeen>0.5&&a.directions/a.n<0.03&&state.filters.pages.size!==1)notes.push(['Map seen, rarely used',`${pct(seen('clinics'),a.n)} see the clinic section but ${pct(a.directions,a.n)} tap directions. The map could be smaller on the first view.`]);
+ }else notes.push(['Not enough data yet',`Observations appear once a range has at least 30 visits. This range has ${fmt(a.n)}.`]);
+ if(!notes.length)notes.push(['Nothing stands out',`Engagement, conversion and form completion are all in a healthy range for this selection.`]);
+ $('#ly-notes').innerHTML=notes.map(([h,t])=>`<li><b>${esc(h)}</b><span>${esc(t)}</span></li>`).join('');
+}
 
 // ---------- chart primitives ----------
 const tip=$('#tip');
 function showTip(x,y,html){tip.innerHTML=html;tip.style.left=x+'px';tip.style.top=y+'px';tip.classList.add('show');}
 function hideTip(){tip.classList.remove('show');}
+function niceMax(m){const p=Math.pow(10,Math.floor(Math.log10(Math.max(1,m))));const r=m/p;const s=r<=1?1:r<=2?2:r<=4?4:r<=5?5:r<=8?8:10;return s*p;}
+function frame(W,H,padL,padR,padT,padB,nice){let g='';const innerH=H-padT-padB;for(let t=0;t<=4;t++){const v=nice/4*t,y=padT+innerH-v/nice*innerH;g+=`<line class="grid-line" x1="${padL}" x2="${W-padR}" y1="${y}" y2="${y}"/><text x="${padL-6}" y="${y+4}" text-anchor="end" font-size="11" fill="var(--ink-3)">${fmt(Math.round(v))}</text>`;}return g;}
 function barChart(sel,cats,series,opt={}){
  const W=720,H=220,padL=36,padR=8,padT=10,padB=28,n=cats.length,innerW=W-padL-padR,innerH=H-padT-padB;
  const totals=cats.map((_,i)=>series.reduce((s,se)=>s+se.values[i],0));const max=Math.max(1,...(opt.stacked?totals:series.flatMap(s=>s.values)));
  const nice=niceMax(max),slot=innerW/n,bw=Math.max(2,Math.min(28,slot*0.62));
- let g='';for(let t=0;t<=4;t++){const v=nice/4*t,y=padT+innerH-v/nice*innerH;g+=`<line class="grid-line" x1="${padL}" x2="${W-padR}" y1="${y}" y2="${y}"/><text class="axis" x="${padL-6}" y="${y+4}" text-anchor="end" font-size="11" fill="var(--ink-3)">${fmt(Math.round(v))}</text>`;}
- let bars='';cats.forEach((c,i)=>{const x=padL+slot*i+(slot-bw)/2;let acc=0;series.forEach((s,si)=>{const v=s.values[i];if(!v)return;const h=v/nice*innerH;const y=padT+innerH-acc/nice*innerH-h;const gap=opt.stacked&&acc>0?2:0;bars+=`<rect x="${x}" y="${y+gap}" width="${bw}" height="${Math.max(0,h-gap)}" rx="${si===series.length-1||!opt.stacked?3:0}" fill="${s.color}" data-i="${i}"/>`;acc+=v;});bars+=`<rect class="hit" x="${padL+slot*i}" y="${padT}" width="${slot}" height="${innerH}" fill="transparent" data-i="${i}"/>`;const every=opt.labelEvery||1;if(i%every===0)bars+=`<text x="${x+bw/2}" y="${H-8}" text-anchor="middle" font-size="11" fill="var(--ink-3)">${opt.labelFn?opt.labelFn(c):String(c).slice(5)}</text>`;});
- const el=$(sel);el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${series.map(s=>s.name).join(', ')} by ${cats.length} periods">${g}<line class="grid-line" x1="${padL}" x2="${W-padR}" y1="${padT+innerH}" y2="${padT+innerH}" stroke="var(--ink-3)"/>${bars}</svg>`;
- el.querySelectorAll('.hit').forEach(r=>{const i=+r.dataset.i;const html=`<strong>${opt.labelFn?opt.labelFn(cats[i]):cats[i]}</strong><br>`+series.map(s=>`${s.name}: ${fmt(s.values[i])}`).join('<br>');r.addEventListener('mousemove',e=>showTip(e.clientX,e.clientY,html));r.addEventListener('mouseleave',hideTip);r.addEventListener('touchstart',e=>{const t=e.touches[0];showTip(t.clientX,t.clientY,html);},{passive:true});});
+ let bars='';cats.forEach((c,i)=>{const x=padL+slot*i+(slot-bw)/2;let acc=0;series.forEach((s,si)=>{const v=s.values[i];if(!v)return;const h=v/nice*innerH;const y=padT+innerH-acc/nice*innerH-h;const gap=opt.stacked&&acc>0?2:0;bars+=`<rect x="${x}" y="${y+gap}" width="${bw}" height="${Math.max(0,h-gap)}" rx="${si===series.length-1||!opt.stacked?3:0}" fill="${s.color}"/>`;acc+=v;});bars+=`<rect class="hit" x="${padL+slot*i}" y="${padT}" width="${slot}" height="${innerH}" fill="transparent" data-i="${i}"/>`;if(i%(opt.labelEvery||1)===0)bars+=`<text x="${x+bw/2}" y="${H-8}" text-anchor="middle" font-size="11" fill="var(--ink-3)">${opt.labelFn?opt.labelFn(c):String(c).slice(5)}</text>`;});
+ const el=$(sel);el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${series.map(s=>s.name).join(', ')}">${frame(W,H,padL,padR,padT,padB,nice)}<line class="grid-line" x1="${padL}" x2="${W-padR}" y1="${padT+innerH}" y2="${padT+innerH}" stroke="var(--ink-3)"/>${bars}</svg>`;
+ hover(el,cats,series,opt);
 }
-function niceMax(m){const p=Math.pow(10,Math.floor(Math.log10(m)));const r=m/p;const s=r<=1?1:r<=2?2:r<=4?4:r<=5?5:r<=8?8:10;return s*p;}
-function funnel(sel,steps){const max=steps[0][1]||1;const ramp=['var(--seq-550)','var(--seq-450)','var(--seq-350)','var(--seq-250)'];$(sel).innerHTML=`<ul class="hbars">${steps.map(([n,v],i)=>`<li><span class="name">${n}</span><span class="track"><span class="fill" style="width:${Math.max(v?2:0,v/max*100)}%;background:${ramp[i]}"></span></span><span class="num">${fmt(v)}<span class="pct">${pct(v,max)}</span></span></li>`).join('')}</ul>`;}
-function hbars(sel,map,labelFn,alt){const rows=[...map.entries()].sort((a,b)=>b[1]-a[1]).slice(0,8);const total=rows.reduce((s,r)=>s+r[1],0);const max=rows[0]?rows[0][1]:1;$(sel).innerHTML=rows.length?rows.map(([k,v])=>`<li><span class="name" title="${esc(labelFn(k))}">${esc(labelFn(k))}</span><span class="track"><span class="fill" style="width:${v/max*100}%${alt?';background:var(--s2)':''}"></span></span><span class="num">${fmt(v)}<span class="pct">${pct(v,total)}</span></span></li>`).join(''):'<li class="empty" style="display:block">None in this range.</li>';}
-function table(sel,head,rows,opt={}){const max=opt.bar?Math.max(1,...rows.map(r=>+r[1]||0)):0;$(sel).innerHTML=rows.length?`<table><thead><tr>${head.map((h,i)=>`<th class="${i&&typeof rows[0][i]!=='string'||/rate|time/i.test(h)?'num':''}">${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((c,i)=>{const num=i&&(typeof c==='number'||/%|s$/.test(String(c)));const bar=opt.bar&&i===1?`<span class="track" style="display:inline-block;width:70px;height:6px;vertical-align:middle;margin-left:8px;background:var(--brand-soft);border-radius:3px;overflow:hidden"><span style="display:block;height:100%;width:${(+c||0)/max*100}%;background:var(--s1)"></span></span>`:'';return `<td class="${num?'num':''}">${typeof c==='number'?fmt(c):(i===4&&sel==='#t-recent'?c:esc(c))}${bar}</td>`;}).join('')}</tr>`).join('')}</tbody></table>`:'<p class="empty">Nothing in this range.</p>';}
+function lineChart(sel,cats,series,opt={}){
+ const W=720,H=220,padL=36,padR=8,padT=10,padB=28,n=cats.length,innerW=W-padL-padR,innerH=H-padT-padB;
+ const max=Math.max(1,...series.flatMap(s=>s.values));const nice=niceMax(max);const x=i=>padL+(n===1?innerW/2:i*innerW/(n-1));const y=v=>padT+innerH-v/nice*innerH;
+ let lines='';series.forEach(s=>{const d=s.values.map((v,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)).join(' ');lines+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;s.values.forEach((v,i)=>{if(v)lines+=`<circle cx="${x(i)}" cy="${y(v)}" r="3" fill="${s.color}" stroke="var(--surface)" stroke-width="2"/>`;});});
+ let labels='',hits='';cats.forEach((c,i)=>{const slot=innerW/Math.max(1,n);hits+=`<rect class="hit" x="${x(i)-slot/2}" y="${padT}" width="${slot}" height="${innerH}" fill="transparent" data-i="${i}"/>`;if(i%(opt.labelEvery||1)===0)labels+=`<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="11" fill="var(--ink-3)">${opt.labelFn?opt.labelFn(c):String(c).replace(/^\d{4}-/,'')}</text>`;});
+ const el=$(sel);el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${series.map(s=>s.name).join(', ')}">${frame(W,H,padL,padR,padT,padB,nice)}${lines}${hits}${labels}</svg>`;
+ hover(el,cats,series,opt);
+}
+function hover(el,cats,series,opt){el.querySelectorAll('.hit').forEach(r=>{const i=+r.dataset.i;const html=`<strong>${esc(opt.labelFn?opt.labelFn(cats[i]):cats[i])}</strong><br>`+series.map(s=>`${esc(s.name)}: ${fmt(s.values[i])}`).join('<br>');r.addEventListener('mousemove',e=>showTip(e.clientX,e.clientY,html));r.addEventListener('mouseleave',hideTip);r.addEventListener('touchstart',e=>{const t=e.touches[0];showTip(t.clientX,t.clientY,html);},{passive:true});});}
+function funnel(sel,steps){const max=steps[0][1]||1;const ramp=['var(--seq-550)','var(--seq-450)','var(--seq-350)','var(--seq-250)'];$(sel).innerHTML=`<ul class="hbars" style="grid-template-columns:none">${steps.map(([n,v],i)=>`<li style="grid-template-columns:minmax(118px,1.5fr) 2fr auto"><span class="name">${n}</span><span class="track"><span class="fill" style="width:${Math.max(v?2:0,v/max*100)}%;background:${ramp[i]}"></span></span><span class="num">${fmt(v)}<span class="pct">${pct(v,max)}</span></span></li>`).join('')}</ul>`;}
+function hbars(sel,map,labelFn,color){const rows=[...map.entries()].sort((a,b)=>b[1]-a[1]).slice(0,8);const total=rows.reduce((s,r)=>s+r[1],0);const max=rows[0]?rows[0][1]:1;$(sel).innerHTML=rows.length?rows.map(([k,v])=>`<li><span class="name">${esc(labelFn(k))}</span><span class="track"><span class="fill" style="width:${v/max*100}%${color?';background:'+color:''}"></span></span><span class="num">${fmt(v)}<span class="pct">${pct(v,total)}</span></span></li>`).join(''):'<li class="empty" style="display:block">None in this range.</li>';}
+function table(sel,head,rows,opt={}){const max=opt.bar?Math.max(1,...rows.map(r=>+r[1]||0)):0;$(sel).innerHTML=rows.length?`<table><thead><tr>${head.map((h,i)=>`<th class="${i&&(typeof (rows[0]||[])[i]!=='string'||/rate|time|%/i.test(h))?'num':''}">${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((c,i)=>{const num=i&&(typeof c==='number'||/%|\ss$/.test(String(c)));const bar=opt.bar&&i===1?`<span style="display:inline-block;width:70px;height:6px;vertical-align:middle;margin-left:8px;background:var(--brand-soft);border-radius:3px;overflow:hidden"><span style="display:block;height:100%;width:${(+c||0)/max*100}%;background:var(--s1)"></span></span>`:'';return `<td class="${num?'num':''}">${typeof c==='number'?fmt(c):(opt.html===i?c:esc(c))}${bar}</td>`;}).join('')}</tr>`).join('')}</tbody></table>`:'<p class="empty">Nothing in this range.</p>';}
 
 // ---------- demo data (deterministic) ----------
 function demoData(){
  let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;const pick=(arr,w)=>{let r=rnd()*w.reduce((a,b)=>a+b,0);for(let i=0;i<arr.length;i++){r-=w[i];if(r<=0)return arr[i];}return arr[arr.length-1];};
- const pages=Object.keys(PAGES),out=[];const days=daysBetween(state.from,state.to);
- days.forEach((day,di)=>{const base=new Date(day+'T00:00:00+05:30').getTime();const n=35+Math.round(rnd()*30)+(new Date(day).getDay()%6===0?-8:0);
+ const pages=Object.keys(PAGES),out=[];const days=daysBetween(dayKey(new Date(new Date(state.from+'T00:00:00Z').getTime()-daysBetween(state.from,state.to).length*864e5)),state.to);
+ days.forEach((day,di)=>{const base=new Date(day+'T00:00:00+05:30').getTime();const n=35+Math.round(rnd()*30)+(new Date(day).getDay()%6===0?-8:0)+(day>=state.from?6:0);
   for(let i=0;i<n;i++){const page=pick(pages,[34,20,14,12,11,9]);const device=rnd()<0.78?'mobile':'desktop';const src=pick(['google','direct','whatsapp','instagram'],[70,15,9,6]);const camp=src==='google'?(page.includes('delhi')?'delhi-near-me':page.split('-near-me-')[1].replace('/','')+'-near-me'):'';
    const hour=pick([8,9,10,11,12,13,14,15,16,17,18,19,20,21,22],[2,5,8,9,8,7,7,8,8,9,9,8,6,4,2]);const t0=base+hour*36e5+Math.floor(rnd()*36e5);const session='s'+di+'-'+i,visitor='v'+Math.floor(rnd()*(di*20+60));
    const mk=(event,offset,props)=>out.push({ts:new Date(t0+offset*1000),event,page,area:page.includes('delhi')?'delhi':page.split('-near-me-')[1].replace('/',''),device,visitor,session,utm_source:src==='direct'?'':src,utm_medium:src==='google'?'cpc':src==='direct'?'':'social',utm_campaign:camp,referrer:src==='direct'?'':src+'.com',props:props||{}});
-   mk('page_view',0,{});let t=5+rnd()*20;const concern=pick(['spine','joint','rehab','other'],[42,30,18,10]);
+   mk('page_view',0,{});let t=5+rnd()*20;const concern=pick(['spine','joint','rehab','other'],[42,30,18,10]);const depth=rnd();
+   const reach=['care','advanced-care','pricing','clinics','precision-recovery','faq','final-cta'];const cut=depth<0.35?1:depth<0.55?2:depth<0.72?3:depth<0.85?5:7;reach.slice(0,cut).forEach((s,k)=>mk('section_seen',t+k*6,{section:s}));
    if(rnd()<0.55){mk('concern_selected',t,{concern,placement:rnd()<0.8?'hero':'care_card'});t+=10+rnd()*30;}
-   if(rnd()<0.5)mk('scroll_50',t+5);if(rnd()<0.22)mk('scroll_90',t+40);
+   if(cut>=2)mk('scroll_50',t+5);if(cut>=6)mk('scroll_90',t+40);
    const r=rnd();
    if(r<0.11){mk('booking_opened',t,{placement:pick(['floating','hero','landing_card','pricing','clinic_card'],[40,20,15,15,10])});t+=40+rnd()*60;if(rnd()<0.72)mk('booking_request_sent',t,{clinic_id:page.includes('delhi')?pick(['gk','saket','help','dwarka'],[3,3,3,1]):page.split('-near-me-')[1].replace('/','')});else if(rnd()<0.3)mk('booking_request_failed',t,{reason:pick(['network','422','429'],[5,3,1])});}
    else if(r<0.19){mk('call_click',t,{placement:pick(['floating','header','landing_card','getting_here','clinic_card'],[45,20,15,10,10]),number:'01140846393'});}
-   else if(r<0.26){mk('whatsapp_open',t,{placement:'floating'});if(rnd()<0.6)mk('whatsapp_send',t+30,{intent:pick(['appointment','pricing','service','other'],[5,3,2,1])});}
-   if(rnd()<0.12)mk('directions_click',t+8,{clinic:'saket',placement:'getting_here'});if(rnd()<0.1)mk('faq_opened',t+12,{question:pick(['How much does a session cost?','Will I need every machine or therapy?','How many sessions will I need?'],[3,2,1])});if(rnd()<0.08)mk('reviews_opened',t+3);
-   mk('page_leave',t+20+rnd()*60,{seconds:Math.round(20+rnd()*160),max_scroll:Math.round(30+rnd()*70)});}
+   else if(r<0.26){mk('whatsapp_open',t,{placement:pick(['floating','faq'],[9,1])});if(rnd()<0.6)mk('whatsapp_send',t+30,{intent:pick(['appointment','pricing','service','other'],[5,3,2,1])});}
+   if(rnd()<0.12&&cut>=4)mk('directions_click',t+8,{clinic:'saket',placement:'getting_here'});if(rnd()<0.1&&cut>=6)mk('faq_opened',t+12,{question:pick(['How much does a session cost?','Will I need every machine or therapy?','How many sessions will I need?'],[3,2,1])});if(rnd()<0.08)mk('reviews_opened',t+3);if(rnd()<0.05)mk('clinic_pill_click',t+4,{clinic:'gk'});
+   mk('page_leave',t+20+rnd()*60,{seconds:Math.round(20+rnd()*160),max_scroll:Math.round(30+rnd()*70),last_section:['hero'].concat(reach)[cut]});}
  });
  return out;
 }
 
 // ---------- boot ----------
-(async()=>{if(state.demo){state.pw='demo';await load();open();return;}if(state.pw){const ok=await load();if(ok)open();else{$('#gate').hidden=false;}}})();
+(async()=>{if(state.demo){state.pw='demo';await load();openApp();return;}if(state.pw){const ok=await load();if(ok)openApp();}})();
 })();
 </script>
 </body>
