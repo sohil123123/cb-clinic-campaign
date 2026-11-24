@@ -7,7 +7,7 @@
   if(dialog.id!=='reviews-dialog')dialog.addEventListener('click',e=>{if(e.target!==dialog)return;const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();});
  });
  document.getElementById('open-reviews').addEventListener('click',()=>document.body.classList.add('modal-open'));
- function openBooking(){if(!clinic.value)clinic.value='help';document.getElementById('request-status').hidden=true;document.getElementById('request-error').hidden=true;document.getElementById('booking-submit').textContent='Request an appointment →';clinic.dispatchEvent(new Event('change'));openDialog(booking);booking.scrollTop=0;}
+ function openBooking(){if(!clinic.value)clinic.value='help';document.getElementById('request-status').hidden=true;document.getElementById('request-error').hidden=true;const submit=document.getElementById('booking-submit');submit.disabled=false;submit.textContent='Request an appointment →';clinic.dispatchEvent(new Event('change'));openDialog(booking);booking.scrollTop=0;}
  document.addEventListener('click',e=>{const link=e.target.closest('a[href="#book"], [data-select]');if(link){e.preventDefault();openBooking();}});
  document.getElementById('close-booking').addEventListener('click',()=>booking.close());
  if(location.hash==='#book')openBooking();

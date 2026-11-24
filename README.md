@@ -73,10 +73,12 @@ the Google Ads final URL.
 
 ## Before advertising
 
-- The booking form is a **demonstration**. It validates the phone number and
-  shows a thank-you message but does not send the request anywhere. Connect it
-  to the lead system and show success only after a saved lead. WhatsApp stays
-  optional.
+- The booking form posts to the main site's API at
+  `https://cbphysiotherapy.in/api/landing/book-appointment`, which emails the
+  team and saves the lead to the CRM. The thank-you message appears only after
+  the API confirms the save; otherwise the visitor sees an error with the call
+  option. WhatsApp stays an optional follow-up. The endpoint URL is the
+  `data-endpoint` attribute on the form in `index.html`.
 - No Google Ads or Tag Manager tag is on the page yet. Add it and test one
   conversion per saved request. Keep names, phone numbers, health concerns and
   WhatsApp message text out of analytics.
