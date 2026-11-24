@@ -136,13 +136,14 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(ent
  if(hero){
   const r=clinicReviews[c.id],rating=hasReview(r)?r.rating.toFixed(1)+' / 5 · '+r.count.toLocaleString('en-IN')+' Google reviews':'Read Google reviews';
   const phoneText=c.phone.replace(/^(\d{5})(\d{5})$/,'$1 $2');
+  const mark=c.landmark.split(' · ').pop(),streetLine=c.street.charAt(0).toUpperCase()+c.street.slice(1)+(c.street.toLowerCase().includes(mark.toLowerCase())?'':', '+mark.replace(/^(Near|Opposite|Behind|Beside) /,m=>m.toLowerCase()))+'.';
   const g='<svg class="google-review-logo" aria-hidden="true" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6C44.4 38.02 46.98 31.86 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.87 23.87 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>';
   hero.classList.add('local-hero');
   hero.innerHTML=`<div class="hero-copy">
-   <span class="eyebrow">BEST PHYSIOTHERAPY NEAR YOU · ${c.short.toUpperCase()}</span>
-   <h1>Physiotherapy in ${c.short},<br>${c.street}.</h1>
-   <p class="precision-line"><span>Recovery with</span> AI Precision</p>
-   <p class="local-line">${c.landmark.split(' · ').pop()} · Open 8am–8pm · Led by <a href="${c.profile}" target="_blank" rel="noopener">${c.head} (PT)</a></p>
+   <span class="eyebrow">CB PHYSIOTHERAPY · ${c.short.toUpperCase()}</span>
+   <h1>Best Physiotherapy<br>Near You in ${c.short}.</h1>
+   <p class="precision-line">${streetLine}</p>
+   <p class="local-line">Open 8am–8pm · Led by <a href="${c.profile}" target="_blank" rel="noopener">${c.head} (PT)</a> · Physiotherapist-led, AI-assisted assessment</p>
    <div class="care-shortcuts" aria-label="Choose your treatment">
     <button type="button" data-concern="spine" data-care-target="back-neck" aria-pressed="false">Back / Neck<span aria-hidden="true">→</span></button>
     <button type="button" data-concern="joint" data-care-target="joint-care" aria-pressed="false">Knee / Joint<span aria-hidden="true">→</span></button>
