@@ -1,0 +1,81 @@
+/* polish.css — loaded last. Readability floor, quick-action buttons, hero copy, loading placeholders. */
+
+/* ---------- Hero ---------- */
+.precision-line>span{display:inline;font:inherit;color:inherit;letter-spacing:inherit;margin:0}
+.care-shortcuts button{font-size:15px;line-height:1.3;min-height:56px;padding:14px 16px;letter-spacing:0}
+.care-shortcuts button span{font-size:20px}
+.hero-fees{font-size:13px}
+.rating-top strong{font-size:14px}.rating-stars{font-size:14px}.rating-bottom{font-size:12px}
+figcaption p,.slide-kicker{font-size:12px}
+@media(max-width:700px){.care-shortcuts button{font-size:14px;min-height:50px;padding:12px 13px}.care-shortcuts button span{font-size:17px}}
+@media(max-width:360px){.care-shortcuts button{font-size:13px;padding:11px 10px}}
+
+/* ---------- Header: Call Now ---------- */
+.nav .header-call{display:inline-flex;align-items:center;gap:8px;background:#1a73e8;border:1px solid #1a73e8;color:#fff;font-size:14px;font-weight:700;letter-spacing:.2px;padding:12px 18px;border-radius:999px;white-space:nowrap}
+.nav .header-call:hover{background:#1557b0;border-color:#1557b0}
+.nav .header-call svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+@media(max-width:700px){.nav .header-call{font-size:13px;padding:10px 14px;gap:6px}}
+
+/* ---------- Quick actions: Call (blue) · WhatsApp (green) · Book (brand) ---------- */
+.quick-actions{position:fixed;z-index:1000;display:flex;gap:10px}
+.qa{display:flex;align-items:center;justify-content:center;gap:9px;font:700 15px/1 Arial,Helvetica,sans-serif;color:#fff;border:0;border-radius:999px;padding:14px 20px;cursor:pointer;text-decoration:none;box-shadow:0 6px 20px rgba(20,62,55,.22);transition:transform .15s,background .15s}
+.qa:hover{transform:translateY(-1px)}
+.qa svg{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.qa-call{background:#1a73e8}.qa-call:hover{background:#1557b0}
+.qa-whatsapp{background:#25d366;color:#07301a}.qa-whatsapp:hover{background:#1fc45b}
+.qa-book{background:var(--green)}.qa-book:hover{background:#0e2e29}
+@media(min-width:701px){.quick-actions{right:24px;bottom:24px;flex-direction:row;align-items:center}}
+@media(max-width:700px){
+ .quick-actions{left:0;right:0;bottom:0;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(20,62,55,.08);gap:8px}
+ .qa{flex:1;min-height:48px;border-radius:10px;padding:12px 4px;font-size:14px;gap:7px;box-shadow:none}
+ .qa svg{width:20px;height:20px}
+ footer{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+}
+@media(max-width:340px){.qa{font-size:13px;gap:5px}}
+@media(prefers-reduced-motion:reduce){.qa{transition:none}.qa:hover{transform:none}}
+
+/* ---------- Readability floor (nothing below 12px, body copy 14px+) ---------- */
+.nav nav{font-size:15px}
+.location-links a{font-size:13px;padding:9px 15px}
+.landing-locations strong{font-size:14px;font-weight:700}
+.eyebrow,.price-label,.progress-example>span{font-size:11px;letter-spacing:1.4px}
+.care-card-body p,.care-card-body li{font-size:14px;line-height:1.55}
+.pathway-cta.button,.price-card .button{font-size:14px}
+.care-footnote p,.care-footnote a,.map-note,.visit-small,.pricing-note,.pricing-note strong,.process-bottom,.process-bottom span,.process-bottom a,.progress-example p{font-size:13px;line-height:1.5}
+.rail-toolbar,.rail-navigation,.rail-navigation span,.rail-navigation button.rail-show-all,.rail-navigation .skip-link,.rail-toolbar .skip-link,.touch-rail-hint,.desktop-rail-hint{font-size:12px}
+#map-legend button,.map-heading button{font-size:13px}#map-legend button b{font-size:11px}
+.clinic-card-content p,.clinic-lead,.clinic-lead a,.clinic-landmark,.clinic-meta,.clinic-meta span,.clinic-meta summary,.clinic-meta details p,.clinic-near{font-size:13px;line-height:1.5}
+.clinic-near{margin:4px 0 0;color:#4d5f55}.clinic-near span{display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#748270;margin-bottom:2px}
+.centre-region{font-size:12px}
+.review-summary,.centre-rating b{font-size:13px}.centre-rating small{font-size:12px}
+.clinic-card .links a{font-size:14px;font-weight:600}
+.price span{font-size:12px}.price-card>p{font-size:14px;line-height:1.55}
+.steps p,.visit-points p{font-size:14px;line-height:1.55}
+.faq p{font-size:15px;line-height:1.6}.faq summary{font-size:16px}
+.patient-voice a{font-size:13px}
+footer,footer p,footer a,footer span{font-size:13px}
+label,.consent,.consent span,.form-note{font-size:14px}
+#request-error{font-size:14px}
+.wa-options label,.wa-details label,.wa-intro,.wa-note,.wa-optional>summary,.wa-message-details summary{font-size:13px}
+.wa-options legend span,.wa-details label span,.wa-optional summary span{font-size:11px}
+.slider-controls span{font-size:12px}
+@media(max-width:700px){
+ .location-links a{font-size:12px;padding:8px 13px}
+ .care-card-body p,.care-card-body li,.price-card>p,.steps p,.visit-points p{font-size:14px}
+ .faq p{font-size:15px}.faq summary{font-size:15px}
+ .clinic-card{min-width:min(86vw,330px)}
+}
+
+/* ---------- Loading ---------- */
+#clinic-map:empty{display:flex;align-items:center;justify-content:center;color:#66716a;font-size:13px;background:#eef3ea}
+#clinic-map:empty::before{content:"Map loads as you scroll here"}
+.brand{display:flex;align-items:center}
+.brand img{position:static;width:100%;height:auto;max-width:100%;left:auto;top:auto}
+
+/* Specificity catch-ups for rules defined deeper in older files */
+.clinic-card .clinic-lead,.clinic-card .clinic-lead a,.clinic-card .clinic-landmark,.clinic-card .clinic-card-content p{font-size:13px;line-height:1.5}
+.care-card .care-card-image p,.care-card-image h3+p{font-size:13px}
+.care-card-body .pathway-cta.button{font-size:14px}
+.care-slider figcaption p,.slider-stage figcaption p{font-size:12px}
+.first-visit-compact .visit-small{font-size:13px}
+.slider-controls span,.slider-controls #slide-count{font-size:12px}

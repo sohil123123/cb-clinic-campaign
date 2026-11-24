@@ -35,6 +35,7 @@ revert commit to `main` and the previous version is redeployed the same way.
 | `robots.txt` | Allows crawling. Each campaign page carries its own `noindex` tag. |
 | `physiotherapy-near-me-delhi/` | The Delhi landing page: `index.html`, scripts, styles and images. |
 | `physiotherapy-near-me-delhi/clinic-reviews.js` | Google rating and review count per clinic. Edit this weekly. |
+| `physiotherapy-near-me-delhi/polish.css` | Loaded last: readability sizes, the Call / WhatsApp / Book quick actions, hero tweaks. Put small style overrides here. |
 | `.github/workflows/deploy.yml` | The automatic deployment. |
 
 Future campaign pages go in their own folder next to `physiotherapy-near-me-delhi/`
@@ -70,6 +71,14 @@ to do the first deploy by hand, or push any change to `main`.
 Nginx needs no custom rules. It serves each folder's `index.html` and keeps
 query parameters on the trailing-slash redirect. Use the trailing-slash URL as
 the Google Ads final URL.
+
+## Images and speed
+
+Large photos have `-800.webp` and `-1200.webp` variants next to the original
+and are referenced with `srcset`, so phones download the small one. The map
+library (Leaflet) and OpenStreetMap tiles load only when the map scrolls into
+view or a clinic pin is tapped. When adding a new photo, export it at 1200px
+wide as WebP and give the `<img>` `width`, `height` and `loading="lazy"`.
 
 ## Before advertising
 
