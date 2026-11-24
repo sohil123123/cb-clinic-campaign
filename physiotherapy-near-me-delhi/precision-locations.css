@@ -7,3 +7,16 @@
 
 .location-links.location-moving{scroll-snap-type:none;scroll-behavior:auto}
 @media(max-width:700px){.landing-locations #location-count{text-align:center}}
+
+/* Clinic strip ticker */
+.location-links.location-ticker{overflow:hidden!important;scroll-snap-type:none;padding-left:0;padding-right:0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+.location-track,.location-group{display:flex;flex:none;align-items:center;gap:8px}
+.location-track{width:max-content;padding:5px 0}
+.location-ticker .location-track{animation:location-ticker var(--ticker-duration,20s) linear infinite;will-change:transform}
+.location-ticker:hover .location-track,.location-ticker.is-paused .location-track{animation-play-state:paused}
+.location-ticker:focus-within .location-track{animation-play-state:paused}
+.location-ticker.is-keyboard{overflow-x:auto!important;-webkit-mask-image:none;mask-image:none}
+.location-ticker.is-keyboard .location-track{animation:none}
+@keyframes location-ticker{to{transform:translateX(calc(-1 * var(--ticker-distance,0px)))}}
+@media(max-width:700px){.location-track,.location-group{gap:7px}}
+@media(prefers-reduced-motion:reduce){.location-ticker .location-track{animation:none}}

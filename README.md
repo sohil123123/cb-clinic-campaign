@@ -83,8 +83,8 @@ the Google Ads final URL.
   conversion per saved request. Keep names, phone numbers, health concerns and
   WhatsApp message text out of analytics.
 - Verify the ratings and counts in `clinic-reviews.js` against each Google
-  listing. Dwarka is still empty, so the combined badge in the hero shows a
-  generic label until all five rows are filled.
+  listing. The hero badge shows the Delhi-wide figure from `cbReviewSummary`
+  in the same file; keep it in step with the clinic rows.
 - Test the live URL with a query string on a phone: four care cards, five map
   pins and clinic selections, fees, the Book Now popup, call and WhatsApp
   links.
@@ -93,5 +93,7 @@ the Google Ads final URL.
 
 Edit `physiotherapy-near-me-delhi/clinic-reviews.js` and change the rating and
 count for each clinic together. Leave both `null` until a clinic has a reliable
-figure. Once all five rows are filled, the hero shows the total count and the
-count-weighted average rating.
+figure. The hero badge uses the `cbReviewSummary` line in the same file (the
+Delhi-wide rating and review count). If that line is removed, the hero falls
+back to the sum of the clinic rows and their count-weighted average rating.
+The same figures feed the structured data that search engines read.
