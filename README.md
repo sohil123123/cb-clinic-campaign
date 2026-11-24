@@ -112,6 +112,11 @@ so the page itself holds no secret. `?demo=1` shows sample data.
 `utm_term`, `utm_content` (each 120, nullable), `gclid` (bool), `props` (json),
 `ip_hash` (64, optional), `created_at`. Index on `ts`, `event`, `page`.
 
+Page views also carry `props.ad` with the Google Ads ValueTrack values when the
+account tracking template is set: `loc`, `loci`, `kw`, `mt`, `net`, `dev`,
+`creative`, `cid`, `agid`. Nothing else needs to change on the API side; they
+live inside `props`.
+
 **`POST /api/landing/events`** – body is JSON sent as `text/plain` (so no CORS
 preflight), shape:
 
