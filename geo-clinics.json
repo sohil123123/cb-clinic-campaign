@@ -1,5 +1,5 @@
 {
- "_comment": "Google Ads location IDs (loc={loc_physical_ms}) mapped to the nearest clinic. Source: Google geotargets 2026-10-06. Edit freely; unknown IDs fall back to the five-clinic page.",
+ "_comment": "Google Ads location IDs (loc={loc_physical_ms}) mapped to the nearest clinic. Source: Google geotargets 2026-10-06. Edit freely; unknown IDs fall back to the five-clinic page. Updated 2026-11-24 from the Google Ads user-location report. Central Delhi (110001 etc.), Delhi Cantonment, east and north Delhi, Gurugram and Noida are deliberately unmapped.",
  "clinics": {
   "saket": {
    "9182620": "Saket (sub-district)",
@@ -8,7 +8,9 @@
    "9183503": "Mehrauli (sub-district)",
    "9061644": "110062 Sainik Farms / Khanpur",
    "9300870": "110068 Saket district centre",
-   "9061722": "110030 Mehrauli / Ghitorni"
+   "9061722": "110030 Mehrauli / Ghitorni",
+   "9061643": "110074 Chhatarpur",
+   "9303471": "110080 Saket / Pushp Vihar (new PIN)"
   },
   "gk": {
    "9198262": "Greater Kailash",
@@ -19,7 +21,12 @@
    "9198107": "Lajpat Nagar",
    "9061656": "110024 Lajpat Nagar",
    "9061655": "110065 East of Kailash",
-   "9061643": "110074 Chhatarpur"
+   "9061654": "110025 Jamia Nagar / Okhla",
+   "9061661": "110020 Okhla Industrial Area",
+   "9061651": "110014 Jangpura / Nizamuddin",
+   "9061652": "110013 Nizamuddin East",
+   "9246654": "Jasola Vihar",
+   "9242829": "Madanpur Khadar"
   },
   "safdarjung": {
    "9061647": "110029 Safdarjung Enclave / AIIMS",
@@ -33,7 +40,10 @@
    "9061716": "110021 Chanakyapuri / Moti Bagh",
    "9061717": "110023 Moti Bagh / Nanakpura",
    "9300305": "110066 Bhikaji Cama Place",
-   "9061720": "110067 Munirka / JNU"
+   "9061720": "110067 Munirka / JNU",
+   "9061650": "110003 Lodhi Road / Jor Bagh / Khan Market",
+   "9219093": "Malcha Marg, Chanakyapuri",
+   "9061648": "110011 Chanakyapuri / Nehru Bhawan"
   },
   "vasant": {
    "9197996": "Vasant Kunj",
@@ -45,7 +55,8 @@
    "9061713": "110037 Mahipalpur / Rangpuri",
    "9261983": "Aya Nagar",
    "9061725": "110047 Aya Nagar",
-   "9234981": "Satbari"
+   "9234981": "Satbari",
+   "9210565": "Sector D, Vasant Kunj"
   },
   "dwarka": {
    "9182825": "Dwarka (sub-district)",
@@ -58,7 +69,11 @@
    "9061699": "110059 Uttam Nagar / Dwarka Mor",
    "9212818": "Bharthal",
    "9061705": "110071 Chhawla",
-   "9061706": "110072 Najafgarh area"
+   "9061706": "110072 Najafgarh area",
+   "9061698": "110058 Janakpuri",
+   "9061688": "110064 Hari Nagar",
+   "9061697": "110018 Tilak Nagar",
+   "9061707": "110061 Bijwasan / Kapashera"
   }
  }
 }
