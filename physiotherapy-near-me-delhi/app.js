@@ -130,15 +130,23 @@ const GEO_CLINIC={"9182620":"saket","9061645":"saket","9198016":"saket","9183503
 // landing screen (who, where, book, call) -> care -> advanced care -> fees -> getting here (map, address, other clinics).
 (function applyArea(){
  const q=new URLSearchParams(location.search);
- let slug=((document.querySelector('meta[name="cb-area"]')||{}).content||q.get('area')||'').toLowerCase().trim(),geoGuess=false;
- // Central page: when Google Ads says where the searcher is (loc={loc_physical_ms}) and we know that place, lead with the nearest clinic.
+ let slug=((document.querySelector('meta[name="cb-area"]')||{}).content||q.get('area')||'').toLowerCase().trim(),guess='';
+ // Central page: pick a clinic from the ad click. What the person searched for (keyword, then loci = location of
+ // interest) beats where they are standing (loc = physical location). An unknown place leaves the page as it is.
  let geoOff=false;try{geoOff=sessionStorage.getItem('cb_geo_off')==='1';}catch(_){}
- if(!slug&&!geoOff){const loc=q.get('loc')||'';if(GEO_CLINIC[loc]){slug=GEO_CLINIC[loc];geoGuess=true;}}
- if(!slug)return;
  const norm=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+ const fromKeyword=kw=>{const k=' '+kw.toLowerCase().replace(/[^a-z0-9]+/g,' ')+' ';for(const x of clinics){const names=[x.short,x.name.replace(/,.*$/,'')].concat(x.near).concat(x.id==='gk'?['gk','gk 2','gk2','gk ii','greater kailash 2']:x.id==='safdarjung'?['safdarjung','sda']:x.id==='vasant'?['vasant kunj','vk']:[]);if(names.some(n=>k.includes(' '+n.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()+' ')))return x.id;}return '';};
+ if(!slug&&!geoOff){
+  const kwHit=fromKeyword(q.get('utm_term')||q.get('kw')||'');
+  if(kwHit){slug=kwHit;guess='keyword';}
+  else if(GEO_CLINIC[q.get('loci')||'']){slug=GEO_CLINIC[q.get('loci')];guess='interest';}
+  else if(GEO_CLINIC[q.get('loc')||'']){slug=GEO_CLINIC[q.get('loc')];guess='geo';}
+ }
+ if(!slug)return;
+ const geoGuess=!!guess;
  const c=clinics.find(x=>x.id===slug)||clinics.find(x=>norm(x.name)===slug||norm(x.short)===slug||x.near.some(n=>norm(n)===slug));
  if(!c)return;
- document.body.classList.add('area-mode','area-single');document.body.dataset.area=c.id;document.body.dataset.areaSource=geoGuess?'geo':'page';
+ document.body.classList.add('area-mode','area-single');document.body.dataset.area=c.id;document.body.dataset.areaSource=guess||'page';
  const P='/physiotherapy-near-me-delhi/assets/',tel='tel:+91'+c.phone;
  const r=clinicReviews[c.id],rating=hasReview(r)?r.rating.toFixed(1)+' / 5 · '+r.count.toLocaleString('en-IN')+' Google reviews':'Read Google reviews';
  const phoneText=c.phone.replace(/^(\d{5})(\d{5})$/,'$1 $2');
@@ -242,9 +250,9 @@ const GEO_CLINIC={"9182620":"saket","9061645":"saket","9198016":"saket","9183503
  const waIntro=document.querySelector('.wa-intro');if(waIntro)waIntro.textContent='Choose a topic and we will prepare your message to the '+c.short+' clinic. You can add details if you wish.';
  const waSummary=document.querySelector('.wa-optional>summary');if(waSummary)waSummary.innerHTML='Add more details <span>Optional</span>';
  document.querySelectorAll('a.header-call, a.qa-call').forEach(x=>{x.href=tel;x.dataset.call=c.id;x.setAttribute('aria-label','Call CB Physiotherapy '+c.short+' on '+c.phone);});
- const form=document.getElementById('booking-form');if(form)form.dataset.source=geoGuess?'google-ads-delhi-geo-'+c.id:'google-ads-'+c.id+'-landing';
- if(geoGuess&&hero){const note=document.createElement('div');note.className='geo-note wrap';note.innerHTML='<p>Showing our <strong>'+c.short+'</strong> clinic, the nearest to you. <button type="button" id="geo-all">Not right? See all five centres</button></p>';hero.insertAdjacentElement('beforebegin',note);
-  note.querySelector('#geo-all').addEventListener('click',()=>{try{sessionStorage.setItem('cb_geo_off','1');}catch(_){}track('geo_guess_dismissed',{clinic_id:c.id});const u=new URL(location.href);u.searchParams.delete('loc');location.replace(u.toString());});}
+ const form=document.getElementById('booking-form');if(form)form.dataset.source=geoGuess?'google-ads-delhi-'+guess+'-'+c.id:'google-ads-'+c.id+'-landing';
+ if(geoGuess&&hero){const note=document.createElement('div');note.className='geo-note wrap';note.innerHTML='<p>Showing our <strong>'+c.short+'</strong> clinic'+(guess==='geo'?', the nearest to you':'')+'. <button type="button" id="geo-all">Not right? See all five centres</button></p>';hero.insertAdjacentElement('beforebegin',note);
+  note.querySelector('#geo-all').addEventListener('click',()=>{try{sessionStorage.setItem('cb_geo_off','1');}catch(_){}track('geo_guess_dismissed',{clinic_id:c.id,how:guess});const u=new URL(location.href);['loc','loci'].forEach(k=>u.searchParams.delete(k));location.replace(u.toString());});}
  const cta=document.querySelector('.final-cta h2');if(cta)cta.innerHTML='Find the right care.<br>At our '+c.short+' clinic.';
  document.title=document.title.replace('in Delhi','in '+c.short);
  document.documentElement.classList.add('area-ready');
