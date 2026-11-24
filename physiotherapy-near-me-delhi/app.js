@@ -141,7 +141,8 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(ent
 
  // 1. Landing screen: who and where, said once. Photo card carries only the actions.
  const heroMeta=document.querySelector('meta[name="cb-hero"]');
- const heroImg=heroMeta&&heroMeta.content?{src:heroMeta.content,w:heroMeta.dataset.width||'',h:heroMeta.dataset.height||''}:{src:P+'clinics/'+c.id+'.webp',w:600,h:692};
+ const heroImg=heroMeta&&heroMeta.content?{src:heroMeta.content,srcset:heroMeta.dataset.srcset||'',sizes:heroMeta.dataset.sizes||'',w:heroMeta.dataset.width||'',h:heroMeta.dataset.height||''}:{src:P+'clinics/'+c.id+'.webp',srcset:'',sizes:'',w:600,h:692};
+ const clockIcon='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
  const hero=document.querySelector('.hero');
  if(hero){
   hero.classList.add('local-hero');
@@ -149,7 +150,7 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(ent
    <span class="eyebrow">CB PHYSIOTHERAPY · ${c.short.toUpperCase()}</span>
    <h1>Best Physiotherapy<br>Near You in ${c.short}.</h1>
    <p class="precision-line">${streetLine}</p>
-   <p class="local-line">Open 8am–8pm · Led by <a href="${c.profile}" target="_blank" rel="noopener">${c.head} (PT)</a> · Physiotherapist-led, AI-assisted assessment</p>
+   <p class="local-line">Recovery led by <a href="${c.profile}" target="_blank" rel="noopener">${c.head} (PT)</a>, with AI Precision.</p>
    <div class="care-shortcuts" aria-label="Choose your treatment">
     <button type="button" data-concern="spine" data-care-target="back-neck" aria-pressed="false">Back / Neck<span aria-hidden="true">→</span></button>
     <button type="button" data-concern="joint" data-care-target="joint-care" aria-pressed="false">Knee / Joint<span aria-hidden="true">→</span></button>
@@ -161,7 +162,7 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(ent
    </div>
   </div>
   <div class="hero-right local-card">
-   <figure class="local-photo"><img src="${heroImg.src}" alt="Inside CB Physiotherapy ${c.name}" width="${heroImg.w}" height="${heroImg.h}" fetchpriority="high" decoding="async"><figcaption>CB Physiotherapy ${c.name}</figcaption></figure>
+   <figure class="local-photo"><img src="${heroImg.src}"${heroImg.srcset?` srcset="${heroImg.srcset}" sizes="${heroImg.sizes}"`:''} alt="Inside CB Physiotherapy ${c.name}" width="${heroImg.w}" height="${heroImg.h}" fetchpriority="high" decoding="async"><span class="local-hours">${clockIcon}Open 8am–8pm</span><figcaption>CB Physiotherapy ${c.name}</figcaption></figure>
    <div class="local-ctas"><a class="button" href="#book" aria-haspopup="dialog">Book at ${c.short}<span aria-hidden="true">→</span></a><a class="button ghost" href="${tel}" data-call="${c.id}">${phoneIcon}Call ${phoneText}</a><a class="text-link local-directions" href="${directions(c)}" target="_blank" rel="noopener" data-map="${c.id}">${pinIcon}Directions</a></div>
   </div>`;
   hero.querySelectorAll('[data-concern]').forEach(bindConcern);
