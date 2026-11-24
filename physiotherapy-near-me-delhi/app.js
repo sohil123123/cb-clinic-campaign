@@ -121,23 +121,27 @@ document.getElementById('show-all-clinics').addEventListener('click',()=>{highli
 if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){initMap();observer.disconnect();}},{rootMargin:'400px'});observer.observe(document.getElementById('clinic-map'));}else initMap();
 
 // ---- Clinic landing mode ----
-// A generated folder (see areas.json) carries <meta name="cb-area" content="saket">; ?area=saket or a
-// nearby locality (?area=malviya-nagar) also works. The page then leads with that clinic.
+// A generated folder (see areas.json) carries <meta name="cb-area" content="saket">; ?area=saket or a nearby
+// locality (?area=malviya-nagar) also works. The page then leads with that clinic and says each fact once:
+// landing screen (who, where, book, call) -> care -> advanced care -> fees -> getting here (map, address, other clinics).
 (function applyArea(){
  const slug=((document.querySelector('meta[name="cb-area"]')||{}).content||new URLSearchParams(location.search).get('area')||'').toLowerCase().trim();
  if(!slug)return;
  const norm=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-');
  const c=clinics.find(x=>x.id===slug)||clinics.find(x=>norm(x.name)===slug||norm(x.short)===slug||x.near.some(n=>norm(n)===slug));
  if(!c)return;
- document.body.classList.add('area-mode');document.body.dataset.area=c.id;
- const tel='tel:+91'+c.phone,smooth=()=>matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
- // Local landing screen: street, landmark, clinic photo, clinic rating, clinic phone (replaces the generic hero + carousel)
+ document.body.classList.add('area-mode','area-single');document.body.dataset.area=c.id;
+ const P='/physiotherapy-near-me-delhi/assets/',tel='tel:+91'+c.phone;
+ const r=clinicReviews[c.id],rating=hasReview(r)?r.rating.toFixed(1)+' / 5 · '+r.count.toLocaleString('en-IN')+' Google reviews':'Read Google reviews';
+ const phoneText=c.phone.replace(/^(\d{5})(\d{5})$/,'$1 $2');
+ const mark=c.landmark.split(' · ').pop(),streetLine=c.street.charAt(0).toUpperCase()+c.street.slice(1)+(c.street.toLowerCase().includes(mark.toLowerCase())?'':', '+mark.replace(/^(Near|Opposite|Behind|Beside) /,m=>m.toLowerCase()))+'.';
+ const g='<svg class="google-review-logo" aria-hidden="true" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6C44.4 38.02 46.98 31.86 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.87 23.87 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>';
+ const phoneIcon='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>';
+ const pinIcon='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>';
+
+ // 1. Landing screen: who and where, said once. Photo card carries only the actions.
  const hero=document.querySelector('.hero');
  if(hero){
-  const r=clinicReviews[c.id],rating=hasReview(r)?r.rating.toFixed(1)+' / 5 · '+r.count.toLocaleString('en-IN')+' Google reviews':'Read Google reviews';
-  const phoneText=c.phone.replace(/^(\d{5})(\d{5})$/,'$1 $2');
-  const mark=c.landmark.split(' · ').pop(),streetLine=c.street.charAt(0).toUpperCase()+c.street.slice(1)+(c.street.toLowerCase().includes(mark.toLowerCase())?'':', '+mark.replace(/^(Near|Opposite|Behind|Beside) /,m=>m.toLowerCase()))+'.';
-  const g='<svg class="google-review-logo" aria-hidden="true" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6C44.4 38.02 46.98 31.86 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.87 23.87 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>';
   hero.classList.add('local-hero');
   hero.innerHTML=`<div class="hero-copy">
    <span class="eyebrow">CB PHYSIOTHERAPY · ${c.short.toUpperCase()}</span>
@@ -155,46 +159,77 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(ent
    </div>
   </div>
   <div class="hero-right local-card">
-   <figure class="local-photo"><img src="/physiotherapy-near-me-delhi/assets/clinics/${c.id}.webp" alt="Inside CB Physiotherapy ${c.name}" width="600" height="692" fetchpriority="high" decoding="async"><figcaption><span class="eyebrow">YOUR NEAREST CENTRE</span>CB Physiotherapy ${c.name}</figcaption></figure>
-   <div class="local-address">
-    <p class="local-addr">${c.address}</p>
-    <p class="local-serving">Also serving ${c.near.join(' · ')}</p>
-    <div class="local-ctas"><a class="button" href="#book" aria-haspopup="dialog">Book at ${c.short}<span aria-hidden="true">→</span></a><a class="button ghost" href="${tel}" data-call="${c.id}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call ${phoneText}</a></div>
-    <a class="text-link local-directions" href="${directions(c)}" target="_blank" rel="noopener" data-map="${c.id}">Get directions on Google Maps ↗</a>
-   </div>
+   <figure class="local-photo"><img src="${P}clinics/${c.id}.webp" alt="Inside CB Physiotherapy ${c.name}" width="600" height="692" fetchpriority="high" decoding="async"><figcaption>CB Physiotherapy ${c.name}</figcaption></figure>
+   <div class="local-ctas"><a class="button" href="#book" aria-haspopup="dialog">Book at ${c.short}<span aria-hidden="true">→</span></a><a class="button ghost" href="${tel}" data-call="${c.id}">${phoneIcon}Call ${phoneText}</a><a class="text-link local-directions" href="${directions(c)}" target="_blank" rel="noopener" data-map="${c.id}">${pinIcon}Directions</a></div>
   </div>`;
   hero.querySelectorAll('[data-concern]').forEach(bindConcern);
  }
- // Other clinics belong below the local landing screen on clinic pages, not above it
- const stripSection=document.querySelector('.locations-strip');if(stripSection&&hero)hero.insertAdjacentElement('afterend',stripSection);
- document.documentElement.classList.add('area-ready');
- const count=document.getElementById('location-count');if(count)count.textContent='Other Physio Clinics in Delhi';
+
+ // 2. Advanced care: the carousel's message as four still photographs, after the care cards.
+ const care=document.getElementById('care');
+ if(care){
+  const tiles=[
+   ['slider/spine',450,'Robotic spinal decompression','Computer-controlled traction for disc and nerve-related back and neck pain.'],
+   ['slider/laser',533,'Class 4 Laser and TECAR','Deep-tissue therapy to settle pain and inflammation sooner.'],
+   ['slider/exercise',600,'Guided strength and movement','Exercise built around what you need to do again, with your physio beside you.'],
+   ['precision-strength-testing',450,'Measured, AI-assisted assessment','Digital strength testing and tracked progress, reviewed by your physiotherapist.']];
+  const adv=document.createElement('section');adv.className='wrap advanced-care';adv.id='advanced-care';
+  adv.innerHTML=`<div class="advanced-head"><h2>Advanced care.<br>At every CB clinic.</h2><p class="advanced-voice">What you will find in ${c.short}, as in all five Delhi centres.</p></div>
+   <ul class="advanced-grid">${tiles.map(([img,h,t,d])=>`<li><img src="${P}${img}-800.webp" srcset="${P}${img}-800.webp 800w, ${P}${img}-1200.webp 1200w" sizes="(max-width:700px) 50vw, 25vw" alt="" loading="lazy" decoding="async" width="800" height="${h}"><h3>${t}</h3><p>${d}</p></li>`).join('')}</ul>`;
+  care.insertAdjacentElement('afterend',adv);
+ }
+
+ // 3. Fees come before the map on a clinic page: location is already settled, price is the next question.
+ const pricing=document.getElementById('pricing'),clinicsSec=document.getElementById('clinics');
+ if(pricing&&clinicsSec)clinicsSec.insertAdjacentElement('beforebegin',pricing);
+
+ // 4. Getting here: map + the full address and facts, once. Other clinics sit at the end of this block.
+ const heading=clinicsSec&&clinicsSec.querySelector('.section-heading');
+ if(heading){heading.querySelector('.eyebrow').textContent='GETTING HERE';heading.querySelector('h2').innerHTML='Getting to the<br>'+c.short+' clinic.';heading.querySelector('p').textContent='The address, the landmark and directions. Our other Delhi centres are listed below if '+c.short+' is not your closest.';}
+ const explorer=document.querySelector('.clinic-explorer'),railWrap=document.querySelector('.clinic-rail-wrap'),legend=document.getElementById('map-legend');
+ if(railWrap)railWrap.hidden=true;if(legend)legend.hidden=true;
+ const mapTitle=document.querySelector('.map-heading h3');if(mapTitle)mapTitle.textContent='CB Physiotherapy '+c.short;
+ const showAll=document.getElementById('show-all-clinics');if(showAll)showAll.textContent='Show all five centres';
+ const note=document.querySelector('.map-note');if(note)note.textContent='Tap the pin for directions.';
+ const here=document.createElement('div');here.className='getting-here';
+ here.innerHTML=`<address>
+   <p class="gh-address">${c.address}</p>
+   <p class="gh-mark">${mark}</p>
+   <dl class="gh-facts">
+    <div><dt>Open</dt><dd>8am–8pm</dd></div>
+    <div><dt>Phone</dt><dd><a href="${tel}" data-call="${c.id}">${phoneText}</a></dd></div>
+    <div><dt>Physiotherapist</dt><dd><a href="${c.profile}" target="_blank" rel="noopener">${c.head} (PT)</a></dd></div>
+    <div><dt>Also serving</dt><dd>${c.near.join(', ')}</dd></div>
+   </dl>
+   <div class="gh-ctas"><a class="button" href="${directions(c)}" target="_blank" rel="noopener" data-map="${c.id}">${pinIcon}Get directions</a><a class="button ghost" href="${tel}" data-call="${c.id}">${phoneIcon}Call the clinic</a></div>
+   <a class="gh-google" href="${googleProfile(c)}" target="_blank" rel="noopener">${g}<span>${rating} · Google profile ↗</span></a>
+  </address>`;
+ if(explorer&&railWrap)explorer.insertBefore(here,railWrap);
+ const stripSection=document.querySelector('.locations-strip');
+ if(stripSection&&clinicsSec){stripSection.classList.add('strip-inline');clinicsSec.appendChild(stripSection);}
+ const count=document.getElementById('location-count');if(count)count.textContent='Not near '+c.short+'? Our other CB clinics in Delhi';
  document.querySelectorAll('#location-links a[data-show-clinic="'+c.id+'"]').forEach(x=>x.remove());
- // Clinic section: this clinic first, others behind a link
- const heading=document.querySelector('#clinics .section-heading');
- if(heading){heading.querySelector('.eyebrow').textContent='GETTING HERE';heading.querySelector('h2').innerHTML='Find us '+c.street+'.<br>'+c.landmark.split(' · ').pop()+'.';heading.querySelector('p').textContent='Tap the pin for directions, or call the clinic if you need help finding us. Open 8am–8pm.';}
+
+ // Clinic cards stay available: this clinic first, the rest appear when the visitor asks for other centres.
  const card=document.getElementById('clinic-'+c.id);if(card){grid.prepend(card);card.classList.add('selected');}
  const others=[...grid.children].filter(el=>el!==card);others.forEach(el=>el.hidden=true);
- const nav=document.querySelector('[data-rail="clinic-grid"]'),toolbar=document.querySelector('.clinic-rail-wrap .rail-toolbar');
- if(nav)nav.hidden=true;if(toolbar)toolbar.hidden=true;
- const mapTitle=document.querySelector('.map-heading h3');if(mapTitle)mapTitle.textContent='Find us in '+c.short+'.';
- const showAll=document.getElementById('show-all-clinics');if(showAll)showAll.textContent='Show all five';
- document.querySelectorAll('#map-legend button').forEach(b=>{if(b.dataset.showClinic!==c.id)b.hidden=true;});
- const reveal=document.createElement('p');reveal.className='area-others';
- reveal.innerHTML='<button type="button" id="show-other-clinics">Not near '+c.short+'? See our other '+others.length+' Delhi centres <span aria-hidden="true">→</span></button>';
- grid.parentElement.insertBefore(reveal,nav||null);
- function expand(){others.forEach(el=>el.hidden=false);if(nav)nav.hidden=false;if(toolbar)toolbar.hidden=false;document.querySelectorAll('#map-legend button').forEach(b=>b.hidden=false);reveal.remove();document.body.classList.remove('area-single');if(clinicMap){clinicMap.closePopup();fitClinics();}track('area_other_clinics_shown',{clinic_id:c.id});}
- document.body.classList.add('area-single');
- reveal.querySelector('button').addEventListener('click',()=>{expand();grid.scrollIntoView({behavior:smooth(),block:'start'});});
- if(showAll)showAll.addEventListener('click',expand);
- const strip=document.getElementById('location-links');if(strip)strip.addEventListener('click',e=>{if(e.target.closest('a[data-show-clinic]')&&document.body.classList.contains('area-single'))expand();},true);
- // Map: zoom to this clinic until the visitor asks for all
  const originalFit=fitClinics;
+ function expand(){
+  if(!document.body.classList.contains('area-single'))return;
+  document.body.classList.remove('area-single');
+  others.forEach(el=>el.hidden=false);if(railWrap)railWrap.hidden=false;if(legend)legend.hidden=false;
+  if(clinicMap){clinicMap.closePopup();originalFit();}
+  track('area_other_clinics_shown',{clinic_id:c.id});
+ }
+ if(showAll)showAll.addEventListener('click',expand);
+ const strip=document.getElementById('location-links');if(strip)strip.addEventListener('click',e=>{if(e.target.closest('a[data-show-clinic]'))expand();},true);
  fitClinics=function(){if(document.body.classList.contains('area-single')&&clinicMap){clinicMap.setView(c.latlng,14);if(markers[c.id]&&innerWidth>700)markers[c.id].openPopup();}else originalFit();};
- // Booking, calls, WhatsApp, lead source
+
+ // Booking, calls, WhatsApp, lead source, title
  select.value=c.id;updateClinic();
  document.querySelectorAll('a.header-call, a.qa-call').forEach(x=>{x.href=tel;x.dataset.call=c.id;x.setAttribute('aria-label','Call CB Physiotherapy '+c.short+' on '+c.phone);});
  const form=document.getElementById('booking-form');if(form)form.dataset.source='google-ads-'+c.id+'-landing';
  const cta=document.querySelector('.final-cta h2');if(cta)cta.innerHTML='Find the right care.<br>At our '+c.short+' clinic.';
  document.title=document.title.replace('in Delhi','in '+c.short);
+ document.documentElement.classList.add('area-ready');
 })();

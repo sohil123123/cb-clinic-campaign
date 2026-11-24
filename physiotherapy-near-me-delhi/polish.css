@@ -118,3 +118,44 @@ html.area-page:not(.area-ready) .hero{visibility:hidden}
 body.area-mode .locations-strip{border-top:1px solid var(--line)}
 body.area-mode .hero{padding-bottom:28px}
 @media(max-width:700px){body.area-mode .hero{padding-bottom:18px}}
+
+/* ---------- Clinic pages v2: hero card carries only actions ---------- */
+.local-card .local-ctas{padding:14px 16px 16px;margin:0;align-items:center}
+.local-card .local-ctas .button{flex:1 1 180px}
+.local-card .local-directions{margin:0 0 0 auto;display:inline-flex;align-items:center;gap:6px;font-size:14px}
+.local-directions svg,.gh-ctas svg{width:17px;height:17px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.local-photo figcaption{font-size:18px;padding:30px 18px 14px}
+@media(max-width:700px){.local-card .local-ctas{padding:12px 12px 14px;gap:8px}.local-card .local-ctas .button{flex:1 1 100%;min-height:48px}.local-card .local-directions{margin:4px 0 0;width:100%;justify-content:center}}
+
+/* ---------- Advanced care: four photographs, captions beneath ---------- */
+.advanced-care{padding-top:0;padding-bottom:80px}
+.advanced-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:30px}
+.advanced-head h2{margin:0}
+.advanced-voice{font-family:Georgia,serif;font-style:italic;font-size:20px;line-height:1.4;color:#64876a;margin:0 0 6px;max-width:380px;text-align:right}
+.advanced-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.advanced-grid li{margin:0;min-width:0}
+.advanced-grid img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;background:#e9efdf}
+.advanced-grid h3{font-size:17px;line-height:1.3;margin:14px 0 6px;letter-spacing:-.2px;color:var(--green)}
+.advanced-grid p{margin:0;font-size:14px;line-height:1.55;color:#4d5f55}
+@media(max-width:1020px){.advanced-grid{gap:16px}.advanced-voice{font-size:18px}}
+@media(max-width:700px){.advanced-care{padding-bottom:54px}.advanced-head{display:block;margin-bottom:18px}.advanced-voice{text-align:left;margin:10px 0 0;font-size:17px;max-width:none}.advanced-grid{grid-template-columns:1fr 1fr;gap:20px 14px}.advanced-grid h3{font-size:15px;margin-top:10px}.advanced-grid p{font-size:13px}}
+
+/* ---------- Getting here ---------- */
+body.area-mode .map-panel{position:static;margin-bottom:0}
+@media(min-width:701px){body.area-mode.area-single .clinic-explorer{display:grid!important;grid-template-columns:1.15fr .85fr;gap:32px;align-items:start}}
+@media(max-width:700px){body.area-mode .map-panel{margin-bottom:22px}}
+.getting-here address{font-style:normal;padding:4px 0 0}
+.gh-address{margin:0;font-size:21px;line-height:1.4;letter-spacing:-.2px;color:var(--ink);max-width:28ch}
+.gh-mark{margin:8px 0 0;font-family:Georgia,serif;font-style:italic;font-size:19px;color:#64876a}
+.gh-facts{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;margin:24px 0 0;padding:24px 0 0;border-top:1px solid var(--line)}
+.gh-facts div{margin:0;min-width:0}
+.gh-facts dt{font-size:12px;color:#748270;margin-bottom:4px}
+.gh-facts dd{margin:0;font-size:15px;line-height:1.45;color:var(--ink)}
+.gh-facts a{color:var(--green);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.gh-ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.gh-ctas .button{gap:10px;padding:13px 18px;font-size:14px}
+.gh-google{display:inline-flex;align-items:center;gap:9px;margin-top:18px;font-size:13px;color:var(--green);font-weight:600}
+.gh-google .google-review-logo{width:16px;height:16px}
+.strip-inline{border:0!important;background:transparent!important;margin-top:34px}
+.strip-inline .wrap{padding-left:0!important;padding-right:0!important;min-height:0!important}
+@media(max-width:700px){.getting-here{margin-top:4px}.gh-address{font-size:17px;max-width:none}.gh-mark{font-size:17px}.gh-facts{gap:14px 16px;margin-top:18px;padding-top:18px}.gh-ctas .button{flex:1;min-height:46px;padding:11px 12px}.strip-inline{margin-top:26px}}
