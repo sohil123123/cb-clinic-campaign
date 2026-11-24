@@ -90,6 +90,13 @@ calls routed to the Saket number, and leads tagged `google-ads-saket-landing`.
 - To preview locally run `python3 scripts/build-areas.py` from the repository
   root; the generated folders are not committed.
 
+## Opening hours
+
+The hours shown on the clinic cards, the clinic landing screens and
+"Getting here" come from one line near the top of
+`physiotherapy-near-me-delhi/app.js`: `const HOURS='9am–8pm';`. Change it
+there when the season changes and push.
+
 ## Images and speed
 
 Large photos have `-800.webp` and `-1200.webp` variants next to the original
