@@ -1,11 +1,14 @@
 {
-  "_comment": "Clinic landing pages generated from physiotherapy-near-me-delhi at deploy time. Folder = physiotherapy-near-me-<slug>. 'clinic' must match an id in app.js (gk, safdarjung, saket, vasant, dwarka).",
+  "_comment": "Clinic landing pages generated from physiotherapy-near-me-delhi at deploy time. Folder = physiotherapy-near-me-<slug>. 'clinic' must match an id in app.js (gk, safdarjung, saket, vasant, dwarka). Optional 'hero', 'hero_width', 'hero_height' set the landing-screen photo; otherwise the clinic card photo is used.",
   "areas": [
     {
       "slug": "saket",
       "clinic": "saket",
       "title": "Best Physiotherapy Near You in Saket | CB Physiotherapy",
-      "description": "Physiotherapy in Saket for back, neck, knee and shoulder pain, injuries and post-surgery rehab. CB Physiotherapy Saket, J-25 Mandir Marg, also serving Malviya Nagar, Pushp Vihar, Sainik Farms and Mehrauli."
+      "description": "Physiotherapy in Saket for back, neck, knee and shoulder pain, injuries and post-surgery rehab. CB Physiotherapy Saket, J-25 Mandir Marg, also serving Malviya Nagar, Pushp Vihar, Sainik Farms and Mehrauli.",
+      "hero": "/physiotherapy-near-me-delhi/assets/clinics/saket-hero.webp",
+      "hero_width": 680,
+      "hero_height": 510
     }
   ]
 }

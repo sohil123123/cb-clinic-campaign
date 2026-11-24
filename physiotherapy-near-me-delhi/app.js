@@ -140,6 +140,8 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(ent
  const pinIcon='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>';
 
  // 1. Landing screen: who and where, said once. Photo card carries only the actions.
+ const heroMeta=document.querySelector('meta[name="cb-hero"]');
+ const heroImg=heroMeta&&heroMeta.content?{src:heroMeta.content,w:heroMeta.dataset.width||'',h:heroMeta.dataset.height||''}:{src:P+'clinics/'+c.id+'.webp',w:600,h:692};
  const hero=document.querySelector('.hero');
  if(hero){
   hero.classList.add('local-hero');
@@ -159,7 +161,7 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(ent
    </div>
   </div>
   <div class="hero-right local-card">
-   <figure class="local-photo"><img src="${P}clinics/${c.id}.webp" alt="Inside CB Physiotherapy ${c.name}" width="600" height="692" fetchpriority="high" decoding="async"><figcaption>CB Physiotherapy ${c.name}</figcaption></figure>
+   <figure class="local-photo"><img src="${heroImg.src}" alt="Inside CB Physiotherapy ${c.name}" width="${heroImg.w}" height="${heroImg.h}" fetchpriority="high" decoding="async"><figcaption>CB Physiotherapy ${c.name}</figcaption></figure>
    <div class="local-ctas"><a class="button" href="#book" aria-haspopup="dialog">Book at ${c.short}<span aria-hidden="true">→</span></a><a class="button ghost" href="${tel}" data-call="${c.id}">${phoneIcon}Call ${phoneText}</a><a class="text-link local-directions" href="${directions(c)}" target="_blank" rel="noopener" data-map="${c.id}">${pinIcon}Directions</a></div>
   </div>`;
   hero.querySelectorAll('[data-concern]').forEach(bindConcern);
