@@ -232,6 +232,9 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(ent
 
  // Booking, calls, WhatsApp, lead source, title
  select.value=c.id;updateClinic();
+ const waClinic=document.getElementById('wa-clinic');if(waClinic)waClinic.value=c.id;
+ const waIntro=document.querySelector('.wa-intro');if(waIntro)waIntro.textContent='Choose a topic and we will prepare your message to the '+c.short+' clinic. You can add details if you wish.';
+ const waSummary=document.querySelector('.wa-optional>summary');if(waSummary)waSummary.innerHTML='Add more details <span>Optional</span>';
  document.querySelectorAll('a.header-call, a.qa-call').forEach(x=>{x.href=tel;x.dataset.call=c.id;x.setAttribute('aria-label','Call CB Physiotherapy '+c.short+' on '+c.phone);});
  const form=document.getElementById('booking-form');if(form)form.dataset.source='google-ads-'+c.id+'-landing';
  const cta=document.querySelector('.final-cta h2');if(cta)cta.innerHTML='Find the right care.<br>At our '+c.short+' clinic.';

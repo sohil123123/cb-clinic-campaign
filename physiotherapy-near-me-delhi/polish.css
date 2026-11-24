@@ -170,3 +170,6 @@ body.area-mode .map-panel{position:static;margin-bottom:0}
 .offer-tag{display:inline-block;margin-left:8px;padding:3px 9px;border-radius:999px;background:var(--green);color:#fff;font-style:normal;font-size:10px;letter-spacing:1px;vertical-align:middle}
 #booking-fee s{color:#8a978e;text-decoration-color:#b45340;text-decoration-thickness:2px;font-weight:400}
 @media(max-width:700px){.price.offer .was{font-size:17px;margin-right:8px}.offer-tag{margin-left:6px;padding:2px 8px}}
+
+/* Clinic pages: the WhatsApp dialog already knows the clinic */
+body.area-mode label[for="wa-clinic"],body.area-mode #wa-clinic{display:none}
