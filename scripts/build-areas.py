@@ -20,6 +20,10 @@ for area in config["areas"]:
     out = re.sub(r"<title>.*?</title>", f"<title>{area['title']}</title>", out, count=1, flags=re.S)
     out = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{area["description"]}">', out, count=1)
     out = out.replace('<meta charset="utf-8">', f'<meta charset="utf-8"><meta name="cb-area" content="{clinic}">', 1)
+    out = out.replace('<html lang="en">', '<html lang="en" class="area-page">', 1)
+    # the local hero's largest image is the clinic photo, so preload that instead of the Delhi reception photo
+    photo = f'/physiotherapy-near-me-delhi/assets/clinics/{clinic}.webp'
+    out = re.sub(r'<link rel="preload" as="image"[^>]*>', f'<link rel="preload" as="image" href="{photo}">', out, count=1)
     if 'name="cb-area"' not in out:
         sys.exit(f"could not inject cb-area meta for {slug}")
     folder = root / f"physiotherapy-near-me-{slug}"

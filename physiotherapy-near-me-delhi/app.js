@@ -5,11 +5,11 @@ const clinics=[
 {id:'vasant',latlng:[28.524433,77.154562],name:'Vasant Kunj',area:'South West Delhi',address:'C-31, First Floor – C, Nathu Singh Market, near KL 27 Gym, Masoodpur, New Delhi 110070',phone:'9773664030'},
 {id:'dwarka',latlng:[28.594018681288997,77.02574329563622],name:'Dwarka, Sector 17',area:'West Delhi',address:'Plot 7, Basement, near Sarvodya Vidyalya School, Sector 17, Dwarka, New Delhi 110078',phone:'9217683886'}];
 const clinicDetails={
-gk:{short:'Greater Kailash',near:['Greater Kailash I','CR Park','Kalkaji','Nehru Place'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-greater-kailash',head:'Dr. Monika Bhardwaj',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/monika-bhardwaj',landmark:'S-210, Lower Ground Floor · GK II'},
-safdarjung:{short:'Safdarjung Enclave',near:['Green Park','Hauz Khas','R.K. Puram','Moti Bagh','Chanakyapuri'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-safdarjung-enclave',head:'Dr. Hardika Sood',profile:'https://cbphysiotherapy.in/delhi/sports-physiotherapist/hardik-sood',landmark:'A-1/295, Basement · Near AIIMS Trauma Centre'},
-saket:{short:'Saket',near:['Malviya Nagar','Pushp Vihar','Sainik Farms','Mehrauli'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-saket',head:'Dr. Nitish Kumar Srivastava',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/nitish-kumar-srivastava',landmark:'J-25, Basement · Near Hotel Saket 27'},
-vasant:{short:'Vasant Kunj',near:['Vasant Vihar','Mahipalpur','Kishangarh','Ghitorni'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-vasant-kunj',head:'Dr. Rahul Dogra',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/rahul-dogra',landmark:'C-31, First Floor · Nathu Singh Market'},
-dwarka:{short:'Dwarka',near:['Palam','Dwarka Mor','Uttam Nagar','Najafgarh'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-dwarka',head:'Dr. Amit',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/amit-2',landmark:'Plot 7, Basement · Sector 17'}
+gk:{street:'on 80 Feet Road',short:'Greater Kailash',near:['Greater Kailash I','CR Park','Kalkaji','Nehru Place'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-greater-kailash',head:'Dr. Monika Bhardwaj',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/monika-bhardwaj',landmark:'S-210, Lower Ground Floor · GK II'},
+safdarjung:{street:'near AIIMS Trauma Centre',short:'Safdarjung Enclave',near:['Green Park','Hauz Khas','R.K. Puram','Moti Bagh','Chanakyapuri'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-safdarjung-enclave',head:'Dr. Hardika Sood',profile:'https://cbphysiotherapy.in/delhi/sports-physiotherapist/hardik-sood',landmark:'A-1/295, Basement · Near AIIMS Trauma Centre'},
+saket:{street:'on Mandir Marg',short:'Saket',near:['Malviya Nagar','Pushp Vihar','Sainik Farms','Mehrauli'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-saket',head:'Dr. Nitish Kumar Srivastava',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/nitish-kumar-srivastava',landmark:'J-25, Basement · Near Hotel Saket 27'},
+vasant:{street:'at Nathu Singh Market, Masoodpur',short:'Vasant Kunj',near:['Vasant Vihar','Mahipalpur','Kishangarh','Ghitorni'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-vasant-kunj',head:'Dr. Rahul Dogra',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/rahul-dogra',landmark:'C-31, First Floor · Nathu Singh Market'},
+dwarka:{street:'in Sector 17',short:'Dwarka',near:['Palam','Dwarka Mor','Uttam Nagar','Najafgarh'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-dwarka',head:'Dr. Amit',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/amit-2',landmark:'Plot 7, Basement · Sector 17'}
 };
 clinics.forEach(c=>Object.assign(c,clinicDetails[c.id]));
 const select=document.getElementById('clinic');
@@ -28,7 +28,8 @@ function revealCard(card){
  const y=r.height<=avail?scrollY+r.top-top:scrollY+r.bottom-(innerHeight-barH-10);
  scrollTo({top:Math.max(0,y),behavior:smooth});
 }
-document.querySelectorAll('[data-concern]').forEach(link=>link.addEventListener('click',()=>{concern.value=link.dataset.concern;syncTreatment();if(link.dataset.careTarget)revealCard(document.getElementById(link.dataset.careTarget));}));
+function bindConcern(link){link.addEventListener('click',()=>{concern.value=link.dataset.concern;syncTreatment();if(link.dataset.careTarget)revealCard(document.getElementById(link.dataset.careTarget));});}
+document.querySelectorAll('[data-concern]').forEach(bindConcern);
 concern.addEventListener('change',syncTreatment);
 const track=(event,detail={})=>{window.dataLayer=window.dataLayer||[];window.dataLayer.push({event,...detail});};
 const grid=document.getElementById('clinic-grid');
@@ -130,13 +131,45 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(ent
  if(!c)return;
  document.body.classList.add('area-mode');document.body.dataset.area=c.id;
  const tel='tel:+91'+c.phone,smooth=()=>matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
- // Hero + strip
- const h1=document.querySelector('h1');if(h1)h1.innerHTML='Best Physiotherapy<br>Near You in '+c.short+'.';
+ // Local landing screen: street, landmark, clinic photo, clinic rating, clinic phone (replaces the generic hero + carousel)
+ const hero=document.querySelector('.hero');
+ if(hero){
+  const r=clinicReviews[c.id],rating=hasReview(r)?r.rating.toFixed(1)+' / 5 · '+r.count.toLocaleString('en-IN')+' Google reviews':'Read Google reviews';
+  const phoneText=c.phone.replace(/^(\d{5})(\d{5})$/,'$1 $2');
+  const g='<svg class="google-review-logo" aria-hidden="true" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6C44.4 38.02 46.98 31.86 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.87 23.87 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>';
+  hero.classList.add('local-hero');
+  hero.innerHTML=`<div class="hero-copy">
+   <span class="eyebrow">BEST PHYSIOTHERAPY NEAR YOU · ${c.short.toUpperCase()}</span>
+   <h1>Physiotherapy in ${c.short},<br>${c.street}.</h1>
+   <p class="precision-line"><span>Recovery with</span> AI Precision</p>
+   <p class="local-line">${c.landmark.split(' · ').pop()} · Open 8am–8pm · Led by <a href="${c.profile}" target="_blank" rel="noopener">${c.head} (PT)</a></p>
+   <div class="care-shortcuts" aria-label="Choose your treatment">
+    <button type="button" data-concern="spine" data-care-target="back-neck" aria-pressed="false">Back / Neck<span aria-hidden="true">→</span></button>
+    <button type="button" data-concern="joint" data-care-target="joint-care" aria-pressed="false">Knee / Joint<span aria-hidden="true">→</span></button>
+    <button type="button" data-concern="rehab" data-care-target="injury-care" aria-pressed="false">Injury / Surgery<span aria-hidden="true">→</span></button>
+    <button type="button" data-concern="other" data-care-target="other-care" aria-pressed="false">Other Issues<span aria-hidden="true">→</span></button>
+   </div>
+   <div class="hero-actions">
+    <button class="reviews-strip rating-badge" type="button" id="open-reviews" aria-haspopup="dialog" aria-label="${rating} for the ${c.short} clinic. Read reviews.">${g}<span class="rating-copy"><span class="rating-top"><span class="rating-stars" aria-hidden="true">★★★★★</span><strong>${rating}</strong></span><span class="rating-bottom"><span>${c.short} clinic</span><span class="rating-read">Read reviews ↗</span></span></span></button>
+   </div>
+  </div>
+  <div class="hero-right local-card">
+   <figure class="local-photo"><img src="/physiotherapy-near-me-delhi/assets/clinics/${c.id}.webp" alt="Inside CB Physiotherapy ${c.name}" width="600" height="692" fetchpriority="high" decoding="async"><figcaption><span class="eyebrow">YOUR NEAREST CENTRE</span>CB Physiotherapy ${c.name}</figcaption></figure>
+   <div class="local-address">
+    <p class="local-addr">${c.address}</p>
+    <p class="local-serving">Also serving ${c.near.join(' · ')}</p>
+    <div class="local-ctas"><a class="button" href="#book" aria-haspopup="dialog">Book at ${c.short}<span aria-hidden="true">→</span></a><a class="button ghost" href="${tel}" data-call="${c.id}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call ${phoneText}</a></div>
+    <a class="text-link local-directions" href="${directions(c)}" target="_blank" rel="noopener" data-map="${c.id}">Get directions on Google Maps ↗</a>
+   </div>
+  </div>`;
+  hero.querySelectorAll('[data-concern]').forEach(bindConcern);
+ }
+ document.documentElement.classList.add('area-ready');
  const count=document.getElementById('location-count');if(count)count.textContent='Other Physio Clinics in Delhi';
  document.querySelectorAll('#location-links a[data-show-clinic="'+c.id+'"]').forEach(x=>x.remove());
  // Clinic section: this clinic first, others behind a link
  const heading=document.querySelector('#clinics .section-heading');
- if(heading){heading.querySelector('.eyebrow').textContent='YOUR NEAREST CB CENTRE';heading.querySelector('h2').innerHTML='CB Physiotherapy '+c.short+'.<br>Minutes from '+c.near.slice(0,2).join(' and ')+'.';heading.querySelector('p').textContent='Led by '+c.head+' (PT). Also serving '+c.near.join(', ')+'. Open 8am–8pm.';}
+ if(heading){heading.querySelector('.eyebrow').textContent='GETTING HERE';heading.querySelector('h2').innerHTML='Find us '+c.street+'.<br>'+c.landmark.split(' · ').pop()+'.';heading.querySelector('p').textContent='Tap the pin for directions, or call the clinic if you need help finding us. Open 8am–8pm.';}
  const card=document.getElementById('clinic-'+c.id);if(card){grid.prepend(card);card.classList.add('selected');}
  const others=[...grid.children].filter(el=>el!==card);others.forEach(el=>el.hidden=true);
  const nav=document.querySelector('[data-rail="clinic-grid"]'),toolbar=document.querySelector('.clinic-rail-wrap .rail-toolbar');
