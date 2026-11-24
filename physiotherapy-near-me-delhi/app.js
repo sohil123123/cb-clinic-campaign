@@ -58,7 +58,7 @@ function initMap(){
  if(clinicMap)return;
  if(!window.L){document.getElementById('clinic-map').textContent='Map unavailable. Use the clinic directions links below.';return;}
  clinicMap=L.map('clinic-map',{scrollWheelZoom:false,dragging:!L.Browser.mobile});
- L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(clinicMap);
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,referrerPolicy:'strict-origin-when-cross-origin',attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(clinicMap);
  clinics.forEach((c,i)=>{const marker=L.marker(c.latlng,{title:c.name,alt:c.name,icon:L.divIcon({className:'clinic-pin',html:`<span aria-hidden="true" style="--pin-label:'${i+1}'">${i+1}</span>`,iconSize:[32,40],iconAnchor:[16,40],popupAnchor:[0,-38]})}).addTo(clinicMap);
  marker.bindPopup(`<div class="clinic-popup"><strong>${c.name}</strong><p>${c.address}</p><a href="${directions(c)}" target="_blank" rel="noopener">Directions →</a><a href="tel:+91${c.phone}">Call clinic →</a><button type="button" class="button" data-select="${c.id}">Choose this centre →</button></div>`,{maxWidth:245});markers[c.id]=marker;marker.on('click',()=>highlightClinic(c.id));});
  fitClinics();
