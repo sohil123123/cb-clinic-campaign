@@ -163,7 +163,7 @@ const GEO_CLINIC={"9182620":"saket","9061645":"saket","9198016":"saket","9183503
  if(hero){
   hero.classList.add('local-hero');
   hero.innerHTML=`<div class="hero-copy">
-   <span class="eyebrow">CB PHYSIOTHERAPY · ${c.short.toUpperCase()}</span>
+   <span class="eyebrow">${c.short.toUpperCase()} · ${c.area.toUpperCase()}</span>
    <h1>Best Physiotherapy<br>Near You in ${c.short}.</h1>
    <p class="precision-line">${streetLine}</p>
    <p class="local-line">Recovery led by <a href="${c.profile}" target="_blank" rel="noopener">${c.head} (PT)</a>, with AI Precision.</p>
@@ -254,6 +254,6 @@ const GEO_CLINIC={"9182620":"saket","9061645":"saket","9198016":"saket","9183503
  if(geoGuess&&hero){const note=document.createElement('div');note.className='geo-note wrap';note.innerHTML='<p>Showing our <strong>'+c.short+'</strong> clinic'+(guess==='geo'?', the nearest to you':'')+'. <button type="button" id="geo-all">Not right? See all five centres</button></p>';hero.insertAdjacentElement('beforebegin',note);
   note.querySelector('#geo-all').addEventListener('click',()=>{try{sessionStorage.setItem('cb_geo_off','1');}catch(_){}track('geo_guess_dismissed',{clinic_id:c.id,how:guess});const u=new URL(location.href);['loc','loci'].forEach(k=>u.searchParams.delete(k));location.replace(u.toString());});}
  const cta=document.querySelector('.final-cta h2');if(cta)cta.innerHTML='Find the right care.<br>At our '+c.short+' clinic.';
- document.title=document.title.replace('in Delhi','in '+c.short);
+ document.title=document.title.replace('in Delhi','in '+c.short+', Delhi');
  document.documentElement.classList.add('area-ready');
 })();
