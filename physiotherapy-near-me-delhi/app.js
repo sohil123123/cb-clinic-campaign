@@ -165,6 +165,8 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(ent
   </div>`;
   hero.querySelectorAll('[data-concern]').forEach(bindConcern);
  }
+ // Other clinics belong below the local landing screen on clinic pages, not above it
+ const stripSection=document.querySelector('.locations-strip');if(stripSection&&hero)hero.insertAdjacentElement('afterend',stripSection);
  document.documentElement.classList.add('area-ready');
  const count=document.getElementById('location-count');if(count)count.textContent='Other Physio Clinics in Delhi';
  document.querySelectorAll('#location-links a[data-show-clinic="'+c.id+'"]').forEach(x=>x.remove());

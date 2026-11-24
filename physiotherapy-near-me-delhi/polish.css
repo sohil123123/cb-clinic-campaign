@@ -113,3 +113,8 @@ html.area-page:not(.area-ready) .hero{visibility:hidden}
  .local-address{padding:14px 16px 16px}
  .local-ctas .button{min-height:46px;padding:11px 12px;font-size:14px;gap:8px}
 }
+
+/* Clinic pages: the other-clinics strip sits under the local landing screen */
+body.area-mode .locations-strip{border-top:1px solid var(--line)}
+body.area-mode .hero{padding-bottom:28px}
+@media(max-width:700px){body.area-mode .hero{padding-bottom:18px}}
