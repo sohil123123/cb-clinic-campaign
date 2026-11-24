@@ -23,10 +23,10 @@
  function setSending(on){sending=on;button.disabled=on;button.setAttribute('aria-busy',String(on));button.textContent=on?'Sending your request…':defaultLabel;}
  function failureMessage(res,data){
   if(res.status===422){const first=data&&data.errors&&Object.values(data.errors).flat().find(Boolean);return first||(data&&data.message)||'Please check your details and try again.';}
-  if(res.status===429)return 'Too many requests from your connection. Please wait a minute and try again, or call us on 98219 66696.';
-  if(res.status===403)return 'This form could not be verified from this page. Please call us on 98219 66696 or use WhatsApp.';
+  if(res.status===429)return 'Too many requests from your connection. Please wait a minute and try again, or call us on 011 4084 6393.';
+  if(res.status===403)return 'This form could not be verified from this page. Please call us on 011 4084 6393 or use WhatsApp.';
   if(res.status===502&&data&&data.message)return data.message;
-  return 'We could not save your request right now. Please call us on 98219 66696 or try again shortly.';
+  return 'We could not save your request right now. Please call us on 011 4084 6393 or try again shortly.';
  }
  form.addEventListener('submit',async event=>{
   event.preventDefault();if(sending||!form.reportValidity())return;
@@ -60,7 +60,7 @@
    track('booking_request_sent',{clinic_id:clinic.value});
    return;
   }
-  showError(res?failureMessage(res,data):'We could not reach our booking service. Please check your connection and try again, or call us on 98219 66696.');
+  showError(res?failureMessage(res,data):'We could not reach our booking service. Please check your connection and try again, or call us on 011 4084 6393.');
   track('booking_request_failed',{reason:res?String(res.status):'network'});
  });
  const dialog=document.getElementById('reviews-dialog');

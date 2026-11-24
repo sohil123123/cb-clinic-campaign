@@ -16,7 +16,19 @@ const select=document.getElementById('clinic');
 const concern=document.getElementById('concern');
 const concernLabels={spine:'back or neck pain',knee:'knee pain',shoulder:'shoulder pain',joint:'joint pain',injury:'injury rehabilitation',surgery:'post-surgery rehabilitation',rehab:'injury / surgery rehabilitation',other:'other ortho / neuro issues'};
 function syncTreatment(){document.querySelectorAll('.care-shortcuts [data-concern]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.concern===concern.value)));}
-document.querySelectorAll('[data-concern]').forEach(link=>link.addEventListener('click',()=>{concern.value=link.dataset.concern;syncTreatment();if(link.dataset.careTarget)document.getElementById(link.dataset.careTarget).scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}));
+// Scroll a card into view so its action button is visible: top under the sticky header when it fits,
+// otherwise bottom-aligned just above the mobile quick-action bar. Also slides horizontal rails to the card.
+function revealCard(card){
+ const smooth=matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+ const rail=card.parentElement;if(rail&&rail.scrollWidth>rail.clientWidth+4)rail.scrollTo({left:card.offsetLeft-rail.offsetLeft,behavior:smooth});
+ const header=document.querySelector('header'),bar=document.querySelector('.quick-actions');
+ const top=(header?header.getBoundingClientRect().height:0)+10;
+ const barH=bar&&innerWidth<=700?bar.getBoundingClientRect().height:0;
+ const r=card.getBoundingClientRect(),avail=innerHeight-top-barH-10;
+ const y=r.height<=avail?scrollY+r.top-top:scrollY+r.bottom-(innerHeight-barH-10);
+ scrollTo({top:Math.max(0,y),behavior:smooth});
+}
+document.querySelectorAll('[data-concern]').forEach(link=>link.addEventListener('click',()=>{concern.value=link.dataset.concern;syncTreatment();if(link.dataset.careTarget)revealCard(document.getElementById(link.dataset.careTarget));}));
 concern.addEventListener('change',syncTreatment);
 const track=(event,detail={})=>{window.dataLayer=window.dataLayer||[];window.dataLayer.push({event,...detail});};
 const grid=document.getElementById('clinic-grid');
@@ -59,7 +71,7 @@ const googleProfile = c => 'https://www.google.com/maps?cid=' + googleListingIds
       image: location.origin + '/physiotherapy-near-me-delhi/assets/clinics/' + c.id + '.webp',
       address: { '@type': 'PostalAddress', streetAddress: c.address.replace(/,\s*New Delhi\s*\d{6}$/, ''), addressLocality: 'New Delhi', addressRegion: 'Delhi', postalCode: postcode(c.address), addressCountry: 'IN' },
       geo: { '@type': 'GeoCoordinates', latitude: c.latlng[0], longitude: c.latlng[1] },
-      areaServed: [c.name].concat(c.near), hasMap: googleProfile(c), parentOrganization: { '@type': 'Organization', name: 'CB Physiotherapy', url: 'https://cbphysiotherapy.in/' }
+      areaServed: [c.name].concat(c.near), hasMap: googleProfile(c), parentOrganization: { '@type': 'Organization', name: 'CB Physiotherapy', url: 'https://cbphysiotherapy.in/', telephone: '+911140846393' }
     };
     if (hasReview(r)) item.aggregateRating = { '@type': 'AggregateRating', ratingValue: r.rating, reviewCount: r.count, bestRating: 5 };
     return item;
@@ -69,7 +81,7 @@ const googleProfile = c => 'https://www.google.com/maps?cid=' + googleListingIds
   document.head.appendChild(script);
 })();
 grid.innerHTML=clinics.map(c=>`<article class="clinic-card" id="clinic-${c.id}"><div class="centre-photo"><img class="clinic-cover" src="/physiotherapy-near-me-delhi/assets/clinics/${c.id}.webp" alt="Inside CB Physiotherapy ${c.name}" width="600" height="692" loading="lazy" decoding="async"><span class="centre-region">${c.area}</span></div><div class="clinic-card-content"><h3>${c.name}</h3><a class="centre-rating" href="${googleProfile(c)}" target="_blank" rel="noopener" aria-label="${c.name}: ${clinicReviewText(c.id)}. Open Google profile"><b class="review-summary"><span aria-hidden="true">${hasReview(clinicReviews[c.id]) ? "★★★★★" : ""}</span> ${clinicReviewText(c.id)}</b><small><svg class="google-review-logo" aria-hidden="true" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6C44.4 38.02 46.98 31.86 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.87 23.87 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg> View Google profile ↗</small></a><p class="clinic-lead">Led by <a href="${c.profile}" target="_blank" rel="noopener">${c.head} <span>(PT)</span></a></p><p class="clinic-landmark">${c.landmark}</p><p class="clinic-near"><span>Also near</span>${c.near.join(' · ')}</p><div class="clinic-meta"><span>8am–8pm</span><details><summary>Full address</summary><p>${c.address}</p></details></div><div class="links"><a href="tel:+91${c.phone}" data-call="${c.id}">Call clinic →</a><a href="${directions(c)}" target="_blank" rel="noopener" data-map="${c.id}">Directions →</a></div><button class="button" data-select="${c.id}">Choose this centre <span>→</span></button></div></article>`).join('');
-function updateClinic(){const c=clinics.find(c=>c.id===select.value),call=document.getElementById('clinic-call');call.href=c?'tel:+91'+c.phone:'tel:+919821966696';call.textContent=c?'Or call '+c.name+' →':'Prefer to call? Speak to our team →';if(c)track('clinic_selected',{clinic_id:c.id});}
+function updateClinic(){const c=clinics.find(c=>c.id===select.value),call=document.getElementById('clinic-call');call.href=c?'tel:+91'+c.phone:'tel:+911140846393';call.textContent=c?'Or call '+c.name+' →':'Prefer to call? Speak to our team →';if(c)track('clinic_selected',{clinic_id:c.id});}
 select.addEventListener('change',updateClinic);
 document.addEventListener('click',e=>{const b=e.target.closest('[data-select]');if(b){select.value=b.dataset.select;updateClinic();}const call=e.target.closest('[data-call]');if(call)track('clinic_call_click',{clinic_id:call.dataset.call});const map=e.target.closest('[data-map]');if(map)track('clinic_directions_click',{clinic_id:map.dataset.map});});
 document.getElementById('clinic-call').addEventListener('click',()=>track('clinic_call_click',{clinic_id:select.value||'central'}));
@@ -103,6 +115,6 @@ function fitClinics(){if(clinicMap)clinicMap.fitBounds(clinics.map(c=>c.latlng),
 function highlightClinic(id){const card=document.getElementById('clinic-'+id);if(card)grid.scrollTo({left:card.offsetLeft-grid.offsetLeft,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});document.querySelectorAll('.clinic-card').forEach(c=>c.classList.toggle('selected',c.id==='clinic-'+id));}
 function showClinic(id){highlightClinic(id);initMap().then(()=>{if(clinicMap&&markers[id])markers[id].openPopup();});}
 document.getElementById('map-legend').innerHTML=clinics.map((c,i)=>`<button type="button" data-show-clinic="${c.id}"><b>${i+1}</b>${c.name}</button>`).join('');
-document.querySelectorAll('[data-show-clinic]').forEach(b=>b.addEventListener('click',()=>showClinic(b.dataset.showClinic)));
+document.querySelectorAll('[data-show-clinic]').forEach(b=>{if(b.closest('#location-links'))return;b.addEventListener('click',()=>showClinic(b.dataset.showClinic));});
 document.getElementById('show-all-clinics').addEventListener('click',()=>{highlightClinic('');initMap().then(()=>{if(clinicMap){clinicMap.closePopup();fitClinics();}});});
 if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){initMap();observer.disconnect();}},{rootMargin:'400px'});observer.observe(document.getElementById('clinic-map'));}else initMap();

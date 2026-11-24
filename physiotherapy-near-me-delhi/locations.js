@@ -1,5 +1,5 @@
 // Top clinic strip: a slow, continuously scrolling ticker of the five Delhi clinics.
-// Links point at the real clinic pages (crawlable); clicking on this page shows the clinic on the map instead.
+// Links point at the real clinic pages (crawlable); clicking on this page scrolls to that clinic's card instead.
 // Pauses on hover, touch and keyboard focus. With "reduce motion" it becomes a plain swipeable row.
 (()=>{
 const links=document.getElementById('location-links');if(!links)return;
@@ -24,8 +24,9 @@ links.addEventListener('scroll',update,{passive:true});
 links.addEventListener('click',e=>{
  const a=e.target.closest('a[data-show-clinic]');if(!a)return;
  e.preventDefault();
- document.getElementById('clinics').scrollIntoView({behavior:motion(),block:'start'});
- if(a.closest('[aria-hidden="true"]')&&typeof showClinic==='function')showClinic(a.dataset.showClinic);
+ const id=a.dataset.showClinic,card=document.getElementById('clinic-'+id);
+ if(typeof highlightClinic==='function')highlightClinic(id);
+ if(card&&typeof revealCard==='function')revealCard(card);else document.getElementById('clinics').scrollIntoView({behavior:motion(),block:'start'});
 });
 // Keyboard users get a static, scrollable row so focused links stay in view; pointer and touch keep the ticker (paused while hovering/touching).
 let keyboard=false;
