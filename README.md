@@ -90,6 +90,48 @@ calls routed to the Saket number, and leads tagged `google-ads-saket-landing`.
 - To preview locally run `python3 scripts/build-areas.py` from the repository
   root; the generated folders are not committed.
 
+## Action analytics and the dashboard
+
+Every page loads `analytics.js`, which records anonymous actions (page views,
+concern taps, booking opened/sent/failed, call taps, WhatsApp opened/sent,
+directions, reviews, FAQ, scroll depth, time on page) and posts them in small
+batches to the endpoint in the `cb-analytics-endpoint` meta tag. No names,
+phone numbers, form values or message text are ever sent. Automated browsers
+are ignored.
+
+The dashboard lives at `https://book.cbphysiotherapy.in/dashboard/`. It asks
+for a password, then reads events from the API for a date range and draws
+everything in the browser. The password is checked by the API, not the page,
+so the page itself holds no secret. `?demo=1` shows sample data.
+
+### API contract (Laravel side)
+
+**Storage** – one table `landing_events`: `id`, `visitor` (36), `session` (36),
+`event` (40), `ts` (datetime, from the client), `page` (120), `area` (20),
+`device` (10), `referrer` (120), `utm_source`, `utm_medium`, `utm_campaign`,
+`utm_term`, `utm_content` (each 120, nullable), `gclid` (bool), `props` (json),
+`ip_hash` (64, optional), `created_at`. Index on `ts`, `event`, `page`.
+
+**`POST /api/landing/events`** – body is JSON sent as `text/plain` (so no CORS
+preflight), shape:
+
+    {"v":1,"visitor":"…","session":"…","sent_at":"ISO",
+     "events":[{"event":"page_view","ts":"ISO","page":"/physiotherapy-near-me-saket/",
+                "area":"saket","device":"mobile","referrer":"google.com",
+                "utm_source":"google","utm_medium":"cpc","utm_campaign":"…",
+                "utm_term":"","utm_content":"","gclid":1,"props":{…}}]}
+
+Accept up to 25 events per request, 60 requests per minute per IP, origin
+`https://book.cbphysiotherapy.in` only, return `204`. Drop events whose `ts`
+is more than a day off the server clock. Never store names or phone numbers
+(the pages do not send them).
+
+**`GET /api/landing/events?from=YYYY-MM-DD&to=YYYY-MM-DD`** – requires
+`Authorization: Bearer <DASHBOARD_PASSWORD>` where the password is an `.env`
+value; return `401` otherwise. Dates are inclusive, Indian time. Respond with
+`{"events":[…rows…]}` using the column names above (`props` may be a JSON
+string). Cap at 90 days per request. Same CORS origin.
+
 ## Opening hours
 
 The hours shown on the clinic cards, the clinic landing screens and
