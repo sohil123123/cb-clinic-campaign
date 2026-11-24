@@ -10,6 +10,34 @@
       "hero_width": 1200,
       "hero_height": 900,
       "hero_srcset": "/physiotherapy-near-me-delhi/assets/clinics/saket-hero-800.webp 800w, /physiotherapy-near-me-delhi/assets/clinics/saket-hero-1200.webp 1200w"
+    },
+    {
+      "slug": "greater-kailash",
+      "clinic": "gk",
+      "title": "Best Physiotherapy Near You in Greater Kailash | CB Physiotherapy",
+      "description": "Physiotherapy in Greater Kailash II for back, neck, knee and shoulder pain, injuries and post-surgery rehab. CB Physiotherapy GK II, S-210 80 Feet Road, also serving Greater Kailash I, CR Park, Kalkaji and Nehru Place."
+    },
+    {
+      "slug": "safdarjung-enclave",
+      "clinic": "safdarjung",
+      "title": "Best Physiotherapy Near You in Safdarjung Enclave | CB Physiotherapy",
+      "description": "Physiotherapy in Safdarjung Enclave for back, neck, knee and shoulder pain, injuries and post-surgery rehab. CB Physiotherapy near AIIMS Trauma Centre, also serving Green Park, Hauz Khas, R.K. Puram, Moti Bagh and Chanakyapuri."
+    },
+    {
+      "slug": "vasant-kunj",
+      "clinic": "vasant",
+      "title": "Best Physiotherapy Near You in Vasant Kunj | CB Physiotherapy",
+      "description": "Physiotherapy in Vasant Kunj for back, neck, knee and shoulder pain, injuries and post-surgery rehab. CB Physiotherapy at Nathu Singh Market, Masoodpur, also serving Vasant Vihar, Mahipalpur, Kishangarh and Ghitorni.",
+      "hero": "/physiotherapy-near-me-delhi/assets/reception-800.webp",
+      "hero_srcset": "/physiotherapy-near-me-delhi/assets/reception-800.webp 800w, /physiotherapy-near-me-delhi/assets/reception-1200.webp 1200w",
+      "hero_width": 1200,
+      "hero_height": 675
+    },
+    {
+      "slug": "dwarka",
+      "clinic": "dwarka",
+      "title": "Best Physiotherapy Near You in Dwarka | CB Physiotherapy",
+      "description": "Physiotherapy in Dwarka Sector 17 for back, neck, knee and shoulder pain, injuries and post-surgery rehab. CB Physiotherapy Dwarka, Plot 7 Sector 17, also serving Palam, Dwarka Mor, Uttam Nagar and Najafgarh."
     }
   ]
 }
