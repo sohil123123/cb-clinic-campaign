@@ -56,7 +56,7 @@ def page_url(c):
 
 # ---------- shared fragments ----------
 def central_cards(d):
-    return '\n   '.join(f'<div class="card wide"><img src="{e(m["img"])}" alt="{e(m["name"])}" width="600" height="600" loading="lazy" decoding="async"><b>{e(m["name"])}</b><span>{e(m["role"])}</span><small>{e(m["text"])}</small></div>' for m in d['central_team'])
+    return '\n   '.join(f'<div class="card wide"><img src="{e(m["img"])}" alt="{e(m["name"])}" width="320" height="320" loading="lazy" decoding="async"><b>{e(m["name"])}</b><span>{e(m["role"])}</span><small>{e(m["text"])}</small></div>' for m in d['central_team'])
 
 
 def review_date(s):
@@ -167,7 +167,7 @@ def build_clinic(d, c):
         f'<a href="{e(h["url"])}" target="_blank" rel="noopener" class="small muted">Full profile</a></div></div>'
         f'<p class="sub-line">Treating physiotherapists at {e(c["short"])}</p>'
         f'<div class="slider" aria-label="{e(c["short"])} physiotherapists">' +
-        ''.join(f'<a class="card" href="{e(m["url"])}" target="_blank" rel="noopener"><img src="{e(m["img"])}" alt="{e(m["name"])}" width="600" height="692" loading="lazy" decoding="async"><b>{e(m["name"])}</b><span>{e(m["role"])}</span><small>{e(m["expertise"])}</small></a>' for m in c['team']) +
+        ''.join(f'<a class="card" href="{e(m["url"])}" target="_blank" rel="noopener"><img src="{e(m["img"])}" alt="{e(m["name"])}" width="320" height="320" loading="lazy" decoding="async"><b>{e(m["name"])}</b><span>{e(m["role"])}</span><small>{e(m["expertise"])}</small></a>' for m in c['team']) +
         '</div>')
     near = c['near']
     here_text = f'{e(c["nearby"])}. The clinic is {e(c["landmark"].split(" · ")[0].lower())}, and serves {e(", ".join(near[:-1]))} and {e(near[-1])}.'
@@ -238,7 +238,7 @@ def build_central(d):
     rating = round(sum(c['rating'] * c['count'] for c in cs) / total, 1)
     lat = sum(c['latlng'][0] for c in cs) / len(cs)
     lng = sum(c['latlng'][1] for c in cs) / len(cs)
-    hero = {'src': '/physiotherapy-near-me-delhi/assets/reception-800.webp', 'srcset': '/physiotherapy-near-me-delhi/assets/reception-800.webp 800w, /physiotherapy-near-me-delhi/assets/reception-1200.webp 1200w', 'w': 1200, 'h': 675}
+    hero = {'src': '/physiotherapy-near-me-delhi/assets/reception-800.webp', 'srcset': '/physiotherapy-near-me-delhi/assets/reception-560.webp 560w, /physiotherapy-near-me-delhi/assets/reception-800.webp 800w, /physiotherapy-near-me-delhi/assets/reception-1200.webp 1200w', 'w': 1200, 'h': 675}
     page = SITE + '/physiotherapy-near-me-delhi/'
     # Delhi-wide reviews: the strongest from different clinics for each area
     reviews = {}
@@ -251,7 +251,7 @@ def build_central(d):
                 rows.append(r)
         rows.sort(key=lambda r: -len(r['text']))
         reviews[area] = rows[:3]
-    heads = ''.join(f'<a class="card" href="/physiotherapy-near-me-{c["slug"]}/"><img src="{e(c["head"]["img"])}" alt="{e(c["head"]["name"])}" width="600" height="692" loading="lazy" decoding="async"><b>{e(c["head"]["name"])}</b><span>{e(c["head"]["role"])}, {e(c["short"])}</span><small>{e(", ".join(c["head"]["creds"][:2]))}</small></a>' for c in cs)
+    heads = ''.join(f'<a class="card" href="/physiotherapy-near-me-{c["slug"]}/"><img src="{e(c["head"]["img"])}" alt="{e(c["head"]["name"])}" width="320" height="320" loading="lazy" decoding="async"><b>{e(c["head"]["name"])}</b><span>{e(c["head"]["role"])}, {e(c["short"])}</span><small>{e(", ".join(c["head"]["creds"][:2]))}</small></a>' for c in cs)
     team_section = (f'<h2>Clinic heads across Delhi</h2><p class="muted" style="margin-top:6px">Each clinic is led by a senior physiotherapist who oversees every treatment plan there, whichever physiotherapist you see. Tap a clinic to see its full team.</p>'
                     f'<div class="slider" aria-label="Clinic heads">{heads}</div><p class="doc-note sr" id="doc-note"></p>')
     cards = ''.join(

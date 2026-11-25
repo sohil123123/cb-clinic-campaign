@@ -11,7 +11,7 @@
    "role": "Head of operations",
    "creds": "",
    "text": "Reviews recorded sessions and milestones across all CB clinics, and steps in with the treating physio when a case is not moving as planned.",
-   "img": "https://cbphysiotherapy.in/images/team/deepanshu_khatri.webp",
+   "img": "/physiotherapy-near-me-delhi/assets/team/dr-deepanshu-khatri.webp",
    "url": "https://cbphysiotherapy.in/about"
   },
   {
@@ -19,7 +19,7 @@
    "role": "Senior Consultant, Case Monitoring & Audit",
    "creds": "",
    "text": "Writes the clinical protocols every CB clinic follows and audits recorded sessions against them. Academically and clinically rigorous, with an eye for the detail that keeps a plan on track.",
-   "img": "https://cbphysiotherapy.in/storage/images/user/600x692/iqra-altaf.webp",
+   "img": "/physiotherapy-near-me-delhi/assets/team/dr-iqra-altaf-pt.webp",
    "url": "https://cbphysiotherapy.in/delhi/physiotherapist/iqra-altaf"
   }
  ],
@@ -58,14 +58,14 @@
    "page": "https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-saket",
    "hero": {
     "src": "/physiotherapy-near-me-delhi/assets/clinics/saket-hero-800.webp",
-    "srcset": "/physiotherapy-near-me-delhi/assets/clinics/saket-hero-800.webp 800w, /physiotherapy-near-me-delhi/assets/clinics/saket-hero-1200.webp 1200w",
+    "srcset": "/physiotherapy-near-me-delhi/assets/clinics/saket-hero-560.webp 560w, /physiotherapy-near-me-delhi/assets/clinics/saket-hero-800.webp 800w, /physiotherapy-near-me-delhi/assets/clinics/saket-hero-1200.webp 1200w",
     "w": 1200,
     "h": 900
    },
    "head": {
     "name": "Dr. Nitish Kumar Srivastava (PT)",
     "url": "https://cbphysiotherapy.in/delhi/ortho-physiotherapist/nitish-kumar-srivastava",
-    "img": "https://cbphysiotherapy.in/storage/images/user/600x692/nitish-kumar-srivastava-2.webp",
+    "img": "/physiotherapy-near-me-delhi/assets/team/dr-nitish-kumar-srivastava-pt.webp",
     "role": "Head of the Clinic",
     "creds": [
      "Orthopaedic physiotherapy",
@@ -77,35 +77,35 @@
     {
      "name": "Dr. Riya Ranjan Singh",
      "url": "https://cbphysiotherapy.in/delhi/ortho-physiotherapist/riya-ranjan-singh",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/riya-ranjan-singh-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-riya-ranjan-singh.webp",
      "role": "Physiotherapist, MPT Ortho",
      "expertise": "Spine and joint pain, ortho rehab"
     },
     {
      "name": "Dr. Meghna Kirar",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/meghna-kirar",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/meghna-kirar-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-meghna-kirar.webp",
      "role": "Physiotherapist, BPT",
      "expertise": "Pain relief, mobility, strengthening"
     },
     {
      "name": "Dr. Saba Parveen",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/saba-parveen",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/saba-parveen-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-saba-parveen.webp",
      "role": "Physiotherapist, BPT",
      "expertise": "Posture, balance, arthritis"
     },
     {
      "name": "Dr. Sahil",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/sahil",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/sahil-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-sahil.webp",
      "role": "Consultant Physiotherapist, BPT",
      "expertise": "Spine, joints, chiropractic care"
     },
     {
      "name": "Dr. Aditi Verma",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/aditi-verma",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/aditi-verma-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-aditi-verma.webp",
      "role": "Physiotherapist, BPT",
      "expertise": "Back and neck, knee pain"
     }
@@ -234,7 +234,7 @@
    "head": {
     "name": "Dr. Monika Bhardwaj (PT)",
     "url": "https://cbphysiotherapy.in/delhi/ortho-physiotherapist/monika-bhardwaj",
-    "img": "https://cbphysiotherapy.in/storage/images/user/600x692/monika-bhardwaj-2.webp",
+    "img": "/physiotherapy-near-me-delhi/assets/team/dr-monika-bhardwaj-pt.webp",
     "role": "Head of the Clinic",
     "creds": [
      "Orthopaedic physiotherapy",
@@ -245,35 +245,35 @@
     {
      "name": "Dr. Mohd Faizan",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/mohd-faizan",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/mohd-faizan-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-mohd-faizan.webp",
      "role": "Consultant Physiotherapist, BPT",
      "expertise": "Back and neck, knee pain"
     },
     {
      "name": "Dr. Rushda Sabir",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/rushda-sabir",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/rushda-sabir-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-rushda-sabir.webp",
      "role": "Consultant Physiotherapist, BPT",
      "expertise": "Pain relief, mobility, strengthening"
     },
     {
      "name": "Dr. Nitish Kumar",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/nitish-kumar",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/nitish-kumar-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-nitish-kumar.webp",
      "role": "Consultant Physiotherapist, BPT",
      "expertise": "Posture, balance, arthritis"
     },
     {
      "name": "Dr. Kinjal Sharma",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/dr-kinjal-sharma",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/kinjal-sharma.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-kinjal-sharma.webp",
      "role": "Senior Physiotherapist, MPT",
      "expertise": "Injury and post-surgery rehab"
     },
     {
      "name": "Dr. Mahi Noor",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/mahi-noor",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/mahi-noor-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-mahi-noor.webp",
      "role": "Consultant Physiotherapist, BPT",
      "expertise": "Back and neck, knee pain"
     }
@@ -403,7 +403,7 @@
    "head": {
     "name": "Dr. Hardika Sood (PT)",
     "url": "https://cbphysiotherapy.in/delhi/sports-physiotherapist/hardik-sood",
-    "img": "https://cbphysiotherapy.in/storage/images/user/600x692/hardika-sood.webp",
+    "img": "/physiotherapy-near-me-delhi/assets/team/dr-hardika-sood-pt.webp",
     "role": "Clinical Head",
     "creds": [
      "Sports physiotherapy",
@@ -414,35 +414,35 @@
     {
      "name": "Dr. Anjali Pandey",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/anjali-pandey",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/anjali-pandey-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-anjali-pandey.webp",
      "role": "Physiotherapist, MPT Ortho",
      "expertise": "Spine and joint pain, ortho rehab"
     },
     {
      "name": "Dr. Diksha Jamwal",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/diksha-jamwal",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/diksha-jamwal-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-diksha-jamwal.webp",
      "role": "Physiotherapist, BPT",
      "expertise": "Pain relief, mobility, strengthening"
     },
     {
      "name": "Dr. Gurpreet Singh",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/gurpreet-singh",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/gurpreet-singh-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-gurpreet-singh.webp",
      "role": "Consultant Physiotherapist, BPT",
      "expertise": "Posture, balance, arthritis"
     },
     {
      "name": "Dr. Ahmed Raza",
      "url": "https://cbphysiotherapy.in/delhi/sports-physiotherapist/ahmed-raza",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/ahmed-raza-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-ahmed-raza.webp",
      "role": "Consultant Physiotherapist, MPT Sports",
      "expertise": "Sports injury and post-surgery rehab"
     },
     {
      "name": "Dr. Binish Khan",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/binish-khan",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/binish-khan-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-binish-khan.webp",
      "role": "Consultant Physiotherapist, BPT",
      "expertise": "Back and neck, knee pain"
     }
@@ -576,7 +576,7 @@
    "head": {
     "name": "Dr. Rahul Dogra (PT)",
     "url": "https://cbphysiotherapy.in/delhi/ortho-physiotherapist/rahul-dogra",
-    "img": "https://cbphysiotherapy.in/storage/images/user/600x692/rahul-dogra-2.webp",
+    "img": "/physiotherapy-near-me-delhi/assets/team/dr-rahul-dogra-pt.webp",
     "role": "Head of the Clinic",
     "creds": [
      "Orthopaedic physiotherapy",
@@ -587,28 +587,28 @@
     {
      "name": "Dr. Sristi Suman",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/sristi-suman",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/sristi-suman-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-sristi-suman.webp",
      "role": "Consultant Physiotherapist, BPT",
      "expertise": "Back and neck, knee pain"
     },
     {
      "name": "Dr. Chirag",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/chirag",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/chirag-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-chirag.webp",
      "role": "Physiotherapist, BPT",
      "expertise": "Pain relief, mobility, strengthening"
     },
     {
      "name": "Dr. Alona Thomas",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/alona-thomas",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/alona-thomas-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-alona-thomas.webp",
      "role": "Physiotherapist, BPT",
      "expertise": "Posture, balance, arthritis"
     },
     {
      "name": "Dr. Tabassum Jamal",
      "url": "https://cbphysiotherapy.in/delhi/ortho-physiotherapist/tabassum-jamal",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/tabassum-jamal-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-tabassum-jamal.webp",
      "role": "Consultant Physiotherapist, MPT",
      "expertise": "Injury and post-surgery rehab"
     }
@@ -742,7 +742,7 @@
    "head": {
     "name": "Dr. Amit (PT)",
     "url": "https://cbphysiotherapy.in/delhi/ortho-physiotherapist/amit-2",
-    "img": "https://cbphysiotherapy.in/storage/images/user/600x692/amit-3.webp",
+    "img": "/physiotherapy-near-me-delhi/assets/team/dr-amit-pt.webp",
     "role": "Center Head",
     "creds": [
      "Orthopaedic physiotherapy",
@@ -754,21 +754,21 @@
     {
      "name": "Dr. Saksham Kataria",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/saksham-kataria",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/saksham-kataria-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-saksham-kataria.webp",
      "role": "Physiotherapist, BPT",
      "expertise": "Back and neck, knee pain"
     },
     {
      "name": "Dr. Nikhil Sharma",
      "url": "https://cbphysiotherapy.in/delhi/physiotherapist/dr-nikhil-sharma",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/nikhil-sharma.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-nikhil-sharma.webp",
      "role": "Physiotherapist, MPT Ortho",
      "expertise": "Spine and joint pain, ortho rehab"
     },
     {
      "name": "Dr. Kuwali Das",
      "url": "https://cbphysiotherapy.in/delhi/sports-physiotherapist/kuwali-das",
-     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/kuwali-das-2.webp",
+     "img": "/physiotherapy-near-me-delhi/assets/team/dr-kuwali-das.webp",
      "role": "Physiotherapist, MPT Musculoskeletal",
      "expertise": "Spine, joints, sciatica"
     }
