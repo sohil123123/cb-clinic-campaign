@@ -146,6 +146,11 @@ section.block{padding-top:34px}
 .slider .card span{font-size:12.5px;color:var(--ink-2);line-height:1.3}
 .slider .card small{font-size:12px;color:var(--ink-3);line-height:1.35;margin-top:2px}
 .slider .card.wide{flex-basis:250px}
+.flow{margin:14px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.flow li{background:var(--mint);border-radius:12px;padding:10px 10px 11px;position:relative}
+.flow li b{display:block;font-size:13.5px;font-weight:600;line-height:1.25}
+.flow li span{display:block;font-size:12px;color:var(--ink-2);line-height:1.35;margin-top:3px}
+.flow li+li::before{content:"";position:absolute;left:-7px;top:50%;width:6px;height:6px;border-top:1.5px solid var(--green);border-right:1.5px solid var(--green);transform:translateY(-50%) rotate(45deg)}
 .slider .card .avatar{display:grid;place-items:center;width:100%;aspect-ratio:1/1;border-radius:10px;background:var(--mint);color:var(--green);font-size:64px;font-weight:600;margin-bottom:6px;font-family:"Fraunces",serif;font-style:italic}
 /* reviews */
 .reviews{display:grid;gap:10px;margin-top:16px}
@@ -277,11 +282,16 @@ footer b{color:var(--ink-2);font-weight:600}
  </section>
 
  <section class="block wrap" id="central">
-  <h2>A second pair of eyes on every case</h2>
-  <p>Your plan and progress at Saket are reviewed by CB Physiotherapy's central clinical team, with more than 20 years of combined experience across the five Delhi clinics.</p>
+  <h2>Your progress is watched, not assumed</h2>
+  <p>The AI assessment sets your goals and milestones. Every session is recorded against them. A central clinical team, with more than 20 years of combined experience, keeps watch on how each case is moving and steps in before you have to ask.</p>
+  <ol class="flow" aria-label="How progress is tracked">
+   <li><b>Assessment</b><span>Goals and milestones set, in writing</span></li>
+   <li><b>Every session</b><span>Recorded against those milestones</span></li>
+   <li><b>Central team</b><span>Reviews the trend and flags any case that slips</span></li>
+  </ol>
   <div class="slider" aria-label="Central case monitoring team">
-   <div class="card wide"><img src="https://cbphysiotherapy.in/images/team/deepanshu_khatri.webp" alt="" width="300" height="300" loading="lazy"><b>Dr. Deepanshu Khatri</b><span>Head of operations</span><small>Reviews treatment plans and outcomes across all CB clinics, and steps in when a case is not progressing as expected.</small></div>
-   <div class="card wide"><span class="avatar" aria-hidden="true">I</span><b>Iqra</b><span>Case monitoring</span><small>Tracks your progress between visits, checks in after each phase, and makes sure questions reach your physiotherapist the same day.</small></div>
+   <div class="card wide"><img src="https://cbphysiotherapy.in/images/team/deepanshu_khatri.webp" alt="" width="300" height="300" loading="lazy"><b>Dr. Deepanshu Khatri</b><span>Head of operations</span><small>Reviews recorded sessions and milestones across all CB clinics, and steps in with the treating physio when a case is not moving as planned.</small></div>
+   <div class="card wide"><span class="avatar" aria-hidden="true">I</span><b>Iqra</b><span>Case monitoring</span><small>Follows your milestones between visits, checks in after each phase of treatment, and makes sure a question reaches your physiotherapist the same day.</small></div>
   </div>
  </section>
 
@@ -442,7 +452,7 @@ footer b{color:var(--ink-2);font-weight:600}
     <li><i>2</i><div><b>Treatment, same day</b>
      <ul class="phase"><li><em>First</em><span>${d.relief}</span></li><li><em>Then</em><span>${d.recover}</span></li></ul>
      <div class="usp">${d.usp.map(u=>`<span>${u}</span>`).join('')}</div></div></li>
-    <li><i>3</i><div><b>Tracking</b><span>${d.track}</span></div></li>
+    <li><i>3</i><div><b>Tracking</b><span>${d.track} Every session is recorded against these milestones, and the central team keeps watch.</span></div></li>
    </ol>
    <figure><img src="${A}${d.img}" alt="" loading="lazy" decoding="async" width="800" height="450"><figcaption>${d.cap}</figcaption></figure>`;
   if(fromClick){panel.removeAttribute('data-swap');void panel.offsetWidth;panel.setAttribute('data-swap','');}
