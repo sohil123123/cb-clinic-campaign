@@ -19,25 +19,26 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.5 "Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-feature-settings:"ss01";}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.5 "Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 a{color:inherit}
 img{display:block;max-width:100%;height:auto}
 button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
 .wrap{max-width:var(--col);margin:0 auto;padding:0 var(--gutter)}
 h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.02em;line-height:1.12}
-h1{font-size:34px}h2{font-size:24px}h3{font-size:18px;letter-spacing:-.01em}
+h1{font-size:32px}h2{font-size:24px}h3{font-size:18px;letter-spacing:-.01em}
 p{margin:0}
 .muted{color:var(--ink-2)}
 .small{font-size:14px}
 
 /* top bar */
 .top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:12px;min-height:60px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;letter-spacing:-.01em}
+.top .wrap{display:flex;align-items:center;gap:12px;min-height:58px}
+.brand{display:flex;align-items:center;text-decoration:none}
 .brand img{height:30px;width:auto}
 .open{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-2);white-space:nowrap}
 .open i{width:8px;height:8px;border-radius:50%;background:#2bb673;box-shadow:0 0 0 3px #d9f3e3}
+.top .open{opacity:0;transition:opacity .2s}body.scrolled .top .open{opacity:1}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:12px 18px;border-radius:12px;border:1px solid var(--green);background:var(--green);color:#fff;font-weight:600;font-size:15px;text-decoration:none;cursor:pointer}
 .btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .btn.call{background:var(--call);border-color:var(--call)}
@@ -47,62 +48,75 @@ p{margin:0}
 .top .btn span{display:none}
 @media(min-width:420px){.top .btn span{display:inline}}
 
-/* hero */
-.hero{padding:26px 0 0}
-.place{font-size:15px;color:var(--ink-2);margin-bottom:10px}
-.place b{color:var(--ink);font-weight:600}
-.hero h1{max-width:14ch}
-.hero .lead{margin:14px 0 0;font-size:17px;line-height:1.45;max-width:36ch;color:var(--ink-2)}
-.hero .lead b{color:var(--ink);font-weight:600}
-.rating{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:14px;color:var(--ink-2)}
+/* hero: the clinic itself first */
+.cover{margin:0;position:relative;aspect-ratio:4/3;background:var(--mint);overflow:hidden}
+@media(min-width:721px){.cover{max-width:var(--col);margin:22px auto 0;border-radius:18px;aspect-ratio:16/9}}
+.cover img{width:100%;height:100%;object-fit:cover}
+.cover .tag{position:absolute;top:14px;left:var(--gutter);display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.92);font-size:13px;font-weight:500;color:var(--ink)}
+.cover .tag i{width:8px;height:8px;border-radius:50%;background:#2bb673}
+.cover figcaption{position:absolute;left:0;right:0;bottom:0;padding:70px var(--gutter) 18px;color:#fff;background:linear-gradient(transparent,rgba(8,30,25,.55) 45%,rgba(8,30,25,.85))}
+.cover figcaption b{display:block;font-size:26px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.cover .fees-line{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.cover .fees-line span{display:inline-block;padding:5px 10px;border-radius:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);font-size:13px;line-height:1.3;backdrop-filter:blur(4px)}
+.cover .fees-line span b{display:inline;font-size:13px;font-weight:600}
+.intro{padding:22px 0 0}
+.intro h1{max-width:16ch}
+.where{margin-top:12px;line-height:1.4}
+.where b{display:block;font-size:17px;font-weight:600}
+.where span{display:block;font-size:14px;color:var(--ink-2);margin-top:2px}
+.rating{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:14px;color:var(--ink-2)}
 .rating .stars{color:#e8a600;letter-spacing:1px;font-size:15px}
 .rating b{color:var(--ink);font-weight:600}
 .rating a{color:var(--ink-2)}
-.cta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-.photo{margin:22px calc(-1*var(--gutter)) 0;position:relative;aspect-ratio:4/3;background:var(--mint);overflow:hidden}
-@media(min-width:721px){.photo{margin-left:0;margin-right:0;border-radius:16px;aspect-ratio:16/9}}
-.photo img{width:100%;height:100%;object-fit:cover}
-.photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 20px 14px;color:#fff;font-size:14px;line-height:1.4;background:linear-gradient(transparent,rgba(10,30,26,.75))}
-.photo figcaption b{font-weight:600;display:block;font-size:15px}
+.cta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
 
-/* concern chooser: the one bold element */
-.choose{padding:30px 0 6px}
+/* care chooser */
+.choose{padding:32px 0 6px}
 .choose h2{font-size:22px}
 .choose .hint{margin-top:4px;font-size:14px;color:var(--ink-3)}
-.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
-.seg button{min-height:64px;padding:10px 10px;border:1.5px solid var(--line);border-radius:14px;background:#fff;text-align:left;cursor:pointer;line-height:1.25;font-weight:500;font-size:14px;position:relative;transition:border-color .15s,background .15s}
-.seg button small{display:block;font-size:12px;color:var(--ink-3);margin-top:3px;font-weight:400}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.seg button{min-height:52px;padding:12px 12px;border:1.5px solid var(--line);border-radius:14px;background:#fff;text-align:left;cursor:pointer;line-height:1.25;font-weight:500;font-size:15px;position:relative;transition:border-color .15s,background .15s}
 .seg button[aria-pressed="true"]{border-color:var(--green);background:var(--mint)}
 .seg button[aria-pressed="true"]::after{content:"";position:absolute;left:12px;right:12px;bottom:-2px;height:4px;border-radius:4px;background:var(--lime)}
-.panel{margin-top:18px;padding:20px;border-radius:18px;background:var(--mint)}
-.panel h3{font-size:20px;letter-spacing:-.015em}
+.panel{margin:18px calc(-1*var(--gutter)) 0;padding:20px var(--gutter) 0;background:var(--mint);overflow:hidden}
+@media(min-width:721px){.panel{margin-left:0;margin-right:0;border-radius:18px;padding:22px 22px 0}}
+.panel h3{font-size:21px;letter-spacing:-.015em}
 .panel .who{margin-top:4px;font-size:14px;color:var(--ink-2)}
-.panel ol{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:12px}
-.panel li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
-.panel li i{font-style:normal;width:28px;height:28px;border-radius:50%;background:#fff;border:1.5px solid var(--green);color:var(--green);display:grid;place-items:center;font-size:13px;font-weight:600}
-.panel li b{display:block;font-weight:600}
-.panel li span{font-size:14px;color:var(--ink-2)}
-.panel .tools{margin-top:16px;padding-top:14px;border-top:1px solid #cfe0cc;font-size:14px;color:var(--ink-2)}
-.panel .tools b{color:var(--ink);font-weight:600}
-.panel .act{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.steps{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:14px}
+.steps li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
+.steps li i{font-style:normal;width:28px;height:28px;border-radius:50%;background:#fff;border:1.5px solid var(--green);color:var(--green);display:grid;place-items:center;font-size:13px;font-weight:600}
+.steps li b{display:block;font-weight:600;line-height:1.3}
+.steps li span{display:block;font-size:14px;color:var(--ink-2);margin-top:2px}
+.usp{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+.usp li{display:grid;grid-template-columns:18px 1fr;gap:8px;font-size:14.5px;line-height:1.35;align-items:start}
+.usp li::before{content:"✓";color:var(--green);font-weight:700;font-size:13px;line-height:1.5}
+.usp li b{font-weight:600}
+.panel .act{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 0}
+.panel figure{margin:18px calc(-1*var(--gutter)) 0;position:relative;aspect-ratio:16/9;background:#dbe6d6}
+@media(min-width:721px){.panel figure{margin-left:-22px;margin-right:-22px}}
+.panel figure img{width:100%;height:100%;object-fit:cover}
+.panel figcaption{position:absolute;left:0;right:0;bottom:0;padding:50px var(--gutter) 14px;color:#fff;background:linear-gradient(transparent,rgba(8,30,25,.8));font-size:14px;line-height:1.35}
+.panel figcaption b{display:block;font-size:16px;font-weight:600}
 .panel[data-swap]{animation:swap .25s ease}
 @keyframes swap{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
 
 /* sections */
 section.block{padding:34px 0 0}
 .block h2+p{margin-top:6px;color:var(--ink-2)}
-.fees{margin-top:16px;border-top:1px solid var(--line)}
-.fees div{display:grid;grid-template-columns:1fr auto;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);align-items:baseline}
-.fees div span{font-size:14px;color:var(--ink-2);display:block}
-.fees div b{font-weight:600;font-size:17px;white-space:nowrap;text-align:right}
-.fees div b s{color:var(--ink-3);font-weight:400;font-size:14px;margin-right:6px}
-.fees .first{background:var(--mint);margin:0 calc(-1*var(--gutter));padding:13px var(--gutter);border-radius:0}
-@media(min-width:721px){.fees .first{margin:0;padding:13px 14px;border-radius:12px}}
-.note{margin-top:10px;font-size:13px;color:var(--ink-3)}
+.prices{display:grid;gap:10px;margin-top:16px}
+.price{border:1.5px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:start}
+.price.first{border-color:var(--green);background:var(--mint)}
+.price .k{font-size:13px;color:var(--ink-2);grid-column:1/-1}
+.price .k em{font-style:normal;color:var(--green);font-weight:600}
+.price h3{font-size:17px}
+.price .amt{text-align:right;white-space:nowrap;font-weight:600;font-size:22px;letter-spacing:-.02em;line-height:1}
+.price .amt s{display:block;font-size:13px;color:var(--ink-3);font-weight:400;margin-bottom:3px}
+.price .amt small{display:block;font-size:12px;color:var(--ink-3);font-weight:400;margin-top:4px}
+.price p{grid-column:1/-1;font-size:14px;color:var(--ink-2)}
+.price .btn{grid-column:1/-1;justify-self:start;min-height:42px;padding:9px 16px;font-size:14px;margin-top:4px}
+.note{margin-top:12px;font-size:13px;color:var(--ink-3)}
 
 .here{display:grid;gap:14px;margin-top:16px}
-.addr{font-size:16px;line-height:1.5}
-.addr b{font-weight:600}
 .times{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:15px}
 .times li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line)}
 .times li span{color:var(--ink-2);font-size:14px;white-space:nowrap}
@@ -117,8 +131,8 @@ section.block{padding:34px 0 0}
 .form{display:grid;gap:12px;margin-top:14px}
 .form[hidden]{display:none}
 .field label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}
-.field input,.field select{width:100%;min-height:48px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
-.field input:focus,.field select:focus{border-color:var(--green);outline:none}
+.field input{width:100%;min-height:48px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+.field input:focus{border-color:var(--green);outline:none}
 .when{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .when button{min-height:44px;border:1.5px solid var(--line);border-radius:10px;background:#fff;font-size:14px;cursor:pointer}
 .when button[aria-pressed="true"]{border-color:var(--green);background:var(--mint);font-weight:600}
@@ -152,48 +166,53 @@ footer b{color:var(--ink-2);font-weight:600}
  <div class="wrap">
   <a class="brand" href="#top" aria-label="CB Physiotherapy Saket"><img src="/physiotherapy-near-me-delhi/assets/cb-logo-480.webp" alt="CB Physiotherapy" width="480" height="120"></a>
   <span class="open" id="open-state"><i aria-hidden="true"></i>Open till 8pm</span>
-  <a class="btn call" href="tel:+917303335605" data-track="call_header">
+  <a class="btn call" href="tel:+917303335605">
    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg><span>Call</span>
   </a>
  </div>
 </header>
 
 <main id="top">
- <section class="hero wrap">
-  <p class="place"><b>Saket</b>, J-25 Mandir Marg, near Hotel Saket 27</p>
-  <h1>Physiotherapy a few minutes from you, for back, neck and joint pain.</h1>
-  <p class="lead">A physiotherapist assesses you and starts treatment in the same visit. <b>Same-day appointments</b>, 9am to 8pm, every day.</p>
+ <figure class="cover">
+  <img src="/physiotherapy-near-me-delhi/assets/clinics/saket-hero-800.webp" srcset="/physiotherapy-near-me-delhi/assets/clinics/saket-hero-800.webp 800w, /physiotherapy-near-me-delhi/assets/clinics/saket-hero-1200.webp 1200w" sizes="(max-width:720px) 100vw, 680px" width="800" height="600" alt="Reception of CB Physiotherapy Saket" fetchpriority="high" decoding="async">
+  <span class="tag" id="open-tag"><i aria-hidden="true"></i>Open today till 8pm</span>
+  <figcaption>
+   <b>CB Physiotherapy, Saket</b>
+   <div class="fees-line"><span>First assessment <b>₹499</b></span><span>Sessions <b>₹999 to ₹1,499</b></span><span>Same-day appointments</span></div>
+  </figcaption>
+ </figure>
+
+ <section class="intro wrap">
+  <h1>Advanced Physio Care.<br>Trusted Recovery.</h1>
+  <p class="where"><b>Mandir Marg, Saket, Delhi</b><span>Near Hotel Saket 27. Led by Dr. Nitish Kumar Srivastava (PT).</span></p>
   <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span><span><b>4.9</b> from 747 Google reviews of this clinic. <a href="https://www.google.com/maps/search/?api=1&query=CB+Physiotherapy+Saket+Mandir+Marg" target="_blank" rel="noopener">Read them</a></span></p>
   <div class="cta">
-   <a class="btn call" href="tel:+917303335605" data-track="call_hero"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call 73033 35605</a>
-   <a class="btn quiet" href="#book" data-track="book_hero">Book a slot</a>
+   <a class="btn call" href="tel:+917303335605"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call 73033 35605</a>
+   <a class="btn quiet" href="#book">Book a slot</a>
   </div>
-  <figure class="photo">
-   <img src="/physiotherapy-near-me-delhi/assets/clinics/saket-hero-800.webp" srcset="/physiotherapy-near-me-delhi/assets/clinics/saket-hero-800.webp 800w, /physiotherapy-near-me-delhi/assets/clinics/saket-hero-1200.webp 1200w" sizes="(max-width:720px) 100vw, 680px" width="800" height="600" alt="Reception of CB Physiotherapy Saket" fetchpriority="high" decoding="async">
-   <figcaption><b>Inside the Saket clinic</b>Basement, J-25 Mandir Marg. Led by Dr. Nitish Kumar Srivastava (PT).</figcaption>
-  </figure>
  </section>
 
  <section class="choose wrap" id="choose">
   <h2>What is bothering you?</h2>
-  <p class="hint">Pick one and the page shows what your first visit will look like.</p>
+  <p class="hint">Pick one to see how we treat it here.</p>
   <div class="seg" role="group" aria-label="Choose your concern">
-   <button type="button" data-c="spine" aria-pressed="true">Back or neck<small>Most people come for this</small></button>
-   <button type="button" data-c="joint" aria-pressed="false">Knee, shoulder, joint<small>Pain or stiffness</small></button>
-   <button type="button" data-c="rehab" aria-pressed="false">Injury or after surgery<small>Getting strength back</small></button>
+   <button type="button" data-c="spine" aria-pressed="true">Back &amp; Neck</button>
+   <button type="button" data-c="joint" aria-pressed="false">Knee, Shoulder &amp; Joint</button>
+   <button type="button" data-c="rehab" aria-pressed="false">Injury &amp; Post-surgery</button>
+   <button type="button" data-c="neuro" aria-pressed="false">Neuro &amp; Other</button>
   </div>
   <div class="panel" id="panel" aria-live="polite"></div>
  </section>
 
  <section class="block wrap" id="fees">
-  <h2>What it costs</h2>
-  <p>No packages to buy up front. You pay per visit, and the first one is an assessment.</p>
-  <div class="fees">
-   <div class="first"><span>First visit: assessment, report and a plan. Treatment starts the same day if you want it to.</span><b><s>₹999</s>₹499</b></div>
-   <div><span>Standard session: hands-on therapy and electrotherapy</span><b>₹999</b></div>
-   <div><span>Advanced session: spinal decompression, Class 4 laser or TECAR, when your physio recommends it</span><b>₹1,499</b></div>
+  <h2>Clear fees. Start with confidence.</h2>
+  <p>Start with an assessment. Your physiotherapist recommends the right care from there.</p>
+  <div class="prices">
+   <div class="price first"><span class="k">Your first step <em>Offer, save ₹500</em></span><h3>Assessment &amp; consultation</h3><div class="amt"><s>₹999</s>₹499<small>per assessment</small></div><p>AI-assisted clinical assessment with a report, reviewed by your physiotherapist.</p><a class="btn" href="#book">Book the assessment</a></div>
+   <div class="price"><span class="k">Ongoing care</span><h3>Standard physiotherapy</h3><div class="amt">₹999<small>per session</small></div><p>Hands-on manual therapy and electrotherapy, selected for your condition.</p></div>
+   <div class="price"><span class="k">Advanced modalities</span><h3>Advanced physiotherapy</h3><div class="amt">₹1,499<small>per session</small></div><p>Class 4 laser, TECAR or robotic spinal decompression, when clinically appropriate.</p></div>
   </div>
-  <p class="note">Multi-session plans are 10% less per session. Bring any MRI, X-ray or surgery notes you already have.</p>
+  <p class="note">Save 10% on multi-session treatment packages. Bring any MRI, X-ray or surgery notes you already have.</p>
  </section>
 
  <section class="block wrap" id="here">
@@ -208,7 +227,7 @@ footer b{color:var(--ink-2);font-weight:600}
     <li>From Saket metro (Yellow Line)<span>5 min by auto</span></li>
    </ul>
    <p class="small muted">Times are approximate, by car, outside peak hours. Open 9am to 8pm, every day.</p>
-   <a class="btn quiet" href="https://www.google.com/maps/search/?api=1&query=CB+Physiotherapy+Saket+Mandir+Marg" target="_blank" rel="noopener" data-track="directions"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>Open in Google Maps</a>
+   <a class="btn quiet" href="https://www.google.com/maps/search/?api=1&query=CB+Physiotherapy+Saket+Mandir+Marg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>Open in Google Maps</a>
   </div>
  </section>
 
@@ -216,7 +235,7 @@ footer b{color:var(--ink-2);font-weight:600}
   <h2>Book a slot</h2>
   <p>Tell us when suits you. We call back within 15 minutes during opening hours to confirm the time.</p>
   <div class="book">
-   <h3 id="book-title">Back or neck pain, first visit ₹499</h3>
+   <h3 id="book-title">Back &amp; neck, first visit ₹499</h3>
    <p class="small muted">Usually 40 minutes. Wear something you can move in.</p>
    <form class="form" id="form" novalidate>
     <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required></div>
@@ -241,8 +260,8 @@ footer b{color:var(--ink-2);font-weight:600}
   <div class="faq">
    <details><summary>Do I need a doctor's referral?</summary><p>No. You can book directly. If you already have a prescription, scans or surgery notes, bring them and your physiotherapist will work from them.</p></details>
    <details><summary>Can I come today?</summary><p>Usually yes. Call or request a call back and we will give you the next free slot. Evenings fill first, so for a same-day visit a morning or early afternoon slot is more likely.</p></details>
-   <details><summary>How many sessions will I need?</summary><p>You will get an estimate at the end of the first visit, once your physiotherapist has assessed you. Most back and neck problems settle in six to ten sessions; post-surgery rehab depends on the surgery and is planned with your surgeon's protocol.</p></details>
-   <details><summary>Will insurance cover it?</summary><p>Physiotherapy at a clinic is usually paid directly and claimed later where your policy allows outpatient care. You get a receipt and a report after every visit for that.</p></details>
+   <details><summary>How many sessions will I need?</summary><p>You will get an estimate at the end of the first visit, once your physiotherapist has assessed you. Most back and neck problems settle in six to ten sessions; post-surgery rehab follows your surgeon's protocol.</p></details>
+   <details><summary>Will insurance cover it?</summary><p>Clinic physiotherapy is usually paid directly and claimed later where your policy allows outpatient care. You get a receipt and a report after every visit for that.</p></details>
    <details><summary>Can the physiotherapist visit me at home?</summary><p>Yes, for people who cannot travel after surgery or with severe pain. Home visits cost more and have fewer time slots, so mention it when you call.</p></details>
   </div>
  </section>
@@ -254,28 +273,52 @@ footer b{color:var(--ink-2);font-weight:600}
 </footer>
 
 <div class="bar" id="bar" aria-label="Quick actions">
- <a class="btn call" href="tel:+917303335605" data-track="call_bar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call</a>
- <a class="btn wa" href="#" id="wa-bar" data-track="wa_bar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>WhatsApp</a>
- <a class="btn" href="#book" data-track="book_bar">Book a slot</a>
+ <a class="btn call" href="tel:+917303335605"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call</a>
+ <a class="btn wa" href="#" id="wa-bar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>WhatsApp</a>
+ <a class="btn" href="#book">Book a slot</a>
 </div>
 
 <script>
 (()=>{
+ const A='/physiotherapy-near-me-delhi/assets/';
  const CONCERNS={
-  spine:{name:'Back or neck pain',title:'Back or neck pain, first visit ₹499',who:'About half the people who walk in here come for this: a stiff neck from desk work, a lower back that locks, pain running down a leg.',
-   steps:[['Assessment, 25 to 40 minutes','Where it hurts, what movements set it off, a check of your spine, nerves and strength. You get a clear explanation of what is going on.'],['Treatment starts in the same visit','Usually hands-on work to ease the spasm, plus the first exercises. Spinal decompression or laser if a disc or nerve is involved.'],['A plan with a number','How many visits to expect, what to do at home, and when to review. Most back and neck problems settle in six to ten sessions.']],
-   tools:'Used for spine problems here: robotic spinal decompression, Class 4 laser, TECAR, and guided strengthening.',wa:'Hi, I have back or neck pain and would like an appointment at CB Physiotherapy Saket.'},
-  joint:{name:'Knee, shoulder or joint pain',title:'Knee, shoulder or joint pain, first visit ₹499',who:'Knees on stairs, a shoulder that will not lift, a hip or ankle that has been nagging for weeks. The second most common reason people come.',
-   steps:[['Assessment, 25 to 40 minutes','How the joint moves, what is weak around it, and whether the pain is from the joint, the tendon or the muscles. Scans are read if you have them.'],['Treatment starts in the same visit','Hands-on work and taping where it helps, laser or TECAR to calm the joint, and the first exercises for the muscles that protect it.'],['A plan with a number','A session estimate, home exercises that take ten minutes, and the activities to keep doing meanwhile.']],
-   tools:'Used for joints here: Class 4 laser, TECAR, digital strength testing to track progress, and guided exercise.',wa:'Hi, I have knee, shoulder or joint pain and would like an appointment at CB Physiotherapy Saket.'},
-  rehab:{name:'Injury or after surgery',title:'Injury or post-surgery rehab, first visit ₹499',who:'Ligament tears, fractures out of plaster, knee or hip replacements, shoulder repairs. Rehab is planned with your surgeon’s protocol.',
-   steps:[['Assessment, 25 to 40 minutes','Range, swelling, strength and how you walk or lift. Bring the surgery notes or the protocol if you have one; your physio works from it.'],['Treatment starts in the same visit','Safe movement for the stage you are at, swelling control, and the first strengthening you are allowed to do.'],['A staged plan','Milestones by week, what to avoid, and reviews timed with your surgeon’s follow-ups. Home visits can be arranged for the first weeks.']],
-   tools:'Used for rehab here: measured strength testing, laser and TECAR for healing tissue, and progressive loading.',wa:'Hi, I need physiotherapy after an injury or surgery and would like an appointment at CB Physiotherapy Saket.'}
+  spine:{name:'Back & neck pain',title:'Back & neck, first visit ₹499',who:'Half of the people who come here come for this: a stiff neck, a back that locks, pain running down a leg.',
+   assess:'Find the cause and explain it plainly.',
+   usp:[['Robotic spinal decompression','for disc and nerve-related pain'],['Class 4 laser and TECAR','targeted pain relief, faster'],['Precision exercise','built for your spine, tracked each visit']],
+   plan:'Session estimate, ten-minute home routine, review date.',
+   img:'slider/spine-800.webp',cap:['Robotic spinal decompression','Computer-controlled traction that takes pressure off the disc, used for sciatica and cervical pain.'],
+   wa:'Hi, I have back or neck pain and would like an appointment at CB Physiotherapy Saket.'},
+  joint:{name:'Knee, shoulder & joint pain',title:'Knee, shoulder & joint, first visit ₹499',who:'Knees on stairs, a shoulder that will not lift, a hip or ankle that keeps nagging.',
+   assess:'Joint, tendon or muscle: we find which one.',
+   usp:[['Laser and TECAR','calm the joint without injections'],['Digital strength testing','finds the weak link around the joint'],['Guided exercise','stable, confident movement again']],
+   plan:'Session estimate, exercises that take ten minutes, what to keep doing.',
+   img:'care/knee-rehab-800.webp',cap:['Measured, not guessed','Strength around the joint is tested on each visit, so you see progress in numbers.'],
+   wa:'Hi, I have knee, shoulder or joint pain and would like an appointment at CB Physiotherapy Saket.'},
+  rehab:{name:'Injury & post-surgery rehab',title:'Injury or post-surgery rehab, first visit ₹499',who:'Ligament tears, fractures out of plaster, knee or hip replacements, shoulder repairs.',
+   assess:'Range, swelling, strength, and your surgeon’s protocol.',
+   usp:[['Protocol-led rehab','in step with your surgeon’s plan'],['Laser and TECAR','for faster tissue healing'],['Strength milestones','measured week by week']],
+   plan:'Staged plan with reviews timed to your follow-ups. Home visits for the first weeks if needed.',
+   img:'slider/exercise-800.webp',cap:['Guided strength and movement','Progressive loading with your physio beside you, from the first safe movement to full function.'],
+   wa:'Hi, I need physiotherapy after an injury or surgery and would like an appointment at CB Physiotherapy Saket.'},
+  neuro:{name:'Neuro & other conditions',title:'Neuro & other conditions, first visit ₹499',who:'Stroke recovery, Parkinson’s, balance and gait problems, posture and work-related pain.',
+   assess:'Balance, gait, strength and daily tasks.',
+   usp:[['Balance and gait retraining','safe, practical, step by step'],['Strength and posture work','measured with digital testing'],['One physiotherapist','who owns your whole plan']],
+   plan:'Goals in your words, a weekly plan, and reviews you can see progress in.',
+   img:'precision-strength-testing-800.webp',cap:['AI-assisted assessment','Digital strength and movement testing, reviewed by your physiotherapist and tracked over time.'],
+   wa:'Hi, I need physiotherapy for a neurological or other condition and would like an appointment at CB Physiotherapy Saket.'}
  };
  const WA='https://wa.me/919821966696?text=';
  const $=s=>document.querySelector(s);
  let current='spine';
- function render(c,animate){const d=CONCERNS[c];const panel=$('#panel');panel.innerHTML=`<h3>${d.name}</h3><p class="who">${d.who}</p><ol>${d.steps.map((s,i)=>`<li><i>${i+1}</i><div><b>${s[0]}</b><span>${s[1]}</span></div></li>`).join('')}</ol><p class="tools">${d.tools}</p><div class="act"><a class="btn" href="#book">Book this first visit</a><a class="btn quiet" href="tel:+917303335605">Call to ask</a></div>`;
+ function render(c,animate){const d=CONCERNS[c];const panel=$('#panel');
+  panel.innerHTML=`<h3>${d.name}</h3><p class="who">${d.who}</p>
+   <ol class="steps">
+    <li><i>1</i><div><b>Assess, 25 to 40 minutes</b><span>${d.assess}</span></div></li>
+    <li><i>2</i><div><b>Treat, the same day</b><ul class="usp">${d.usp.map(u=>`<li><span><b>${u[0]}</b> ${u[1]}</span></li>`).join('')}</ul></div></li>
+    <li><i>3</i><div><b>Plan</b><span>${d.plan}</span></div></li>
+   </ol>
+   <div class="act"><a class="btn" href="#book">Book this first visit</a><a class="btn quiet" href="tel:+917303335605">Call to ask</a></div>
+   <figure><img src="${A}${d.img}" alt="" loading="lazy" decoding="async" width="800" height="450"><figcaption><b>${d.cap[0]}</b>${d.cap[1]}</figcaption></figure>`;
   if(animate){panel.removeAttribute('data-swap');void panel.offsetWidth;panel.setAttribute('data-swap','');}
   $('#book-title').textContent=d.title;$('#concern').value=c;const wa=WA+encodeURIComponent(d.wa);$('#wa-bar').href=wa;$('#wa-inline').href=wa;
   document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.c===c)));current=c;}
@@ -285,10 +328,8 @@ footer b{color:var(--ink-2);font-weight:600}
  $('#form').addEventListener('submit',e=>{e.preventDefault();const f=e.target;const name=f.name.value.trim(),phone=f.phone.value.replace(/\D/g,'');if(!name){f.name.focus();return;}if(phone.length<10){f.phone.focus();return;}
   const when={today:'today',tomorrow:'tomorrow',week:'this week'}[document.querySelector('.when [aria-pressed="true"]').dataset.when];
   const done=$('#done');done.innerHTML=`<b>Thanks, ${name.split(' ')[0]}.</b> We will call ${phone.replace(/(\d{5})(\d{5})$/,'$1 $2')} within 15 minutes to fix a time ${when} for ${CONCERNS[current].name.toLowerCase()}. <span class="muted">(Demo: nothing was sent.)</span>`;done.style.display='block';f.hidden=true;done.scrollIntoView({block:'nearest'});});
- // sticky bar after the first screen
- const bar=$('#bar'),hero=$('.hero');const upd=()=>bar.classList.toggle('show',scrollY>hero.offsetTop+hero.offsetHeight-200);upd();addEventListener('scroll',upd,{passive:true});
- // open state from the clock (IST)
- try{const h=+new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',hour12:false}).format(new Date());const el=$('#open-state');if(h<9||h>=20){el.innerHTML='<i style="background:#e0a100;box-shadow:0 0 0 3px #fdf0c8" aria-hidden="true"></i>Opens 9am';}}catch(_){}
+ const bar=$('#bar'),cover=$('.cover');const upd=()=>{bar.classList.toggle('show',scrollY>cover.offsetTop+cover.offsetHeight+200);document.body.classList.toggle('scrolled',scrollY>cover.offsetTop+cover.offsetHeight-60);};upd();addEventListener('scroll',upd,{passive:true});
+ try{const h=+new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',hour12:false}).format(new Date());if(h<9||h>=20){['#open-state','#open-tag'].forEach(s=>{const el=$(s);el.innerHTML='<i style="background:#e0a100;box-shadow:0 0 0 3px #fdf0c8" aria-hidden="true"></i>Opens 9am';});}}catch(_){}
 })();
 </script>
 </body>
