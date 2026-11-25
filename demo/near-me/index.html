@@ -8,7 +8,7 @@
 <meta name="description" content="Demo landing page: back, neck and joint pain physiotherapy in Saket, same-day appointments, ₹499 first assessment.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="/physiotherapy-near-me-delhi/assets/clinics/saket-hero-800.webp" imagesrcset="/physiotherapy-near-me-delhi/assets/clinics/saket-hero-800.webp 800w, /physiotherapy-near-me-delhi/assets/clinics/saket-hero-1200.webp 1200w" imagesizes="(max-width:720px) 100vw, 680px">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
 <style>
 :root{
  --paper:#fff;--ink:#16261f;--ink-2:#4b5a53;--ink-3:#73817a;--line:#dfe6df;
@@ -61,7 +61,11 @@ body.scrolled .open{opacity:1}
 .cover .fees-line span b{font-weight:600}
 .intro{padding-top:22px}
 .intro h1{max-width:18ch}
-.where{margin-top:12px;line-height:1.4}
+.tagline{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;font-size:34px;line-height:1.1;letter-spacing:-.01em;color:var(--green);margin:6px 0 0}
+.tagline em{font-style:italic;color:#108a80;background:linear-gradient(transparent 62%,var(--lime) 62%,var(--lime) 90%,transparent 90%);padding:0 3px;margin:0 -3px;position:relative}
+.tagline em::after{content:"";position:absolute;right:-9px;top:4px;width:7px;height:7px;border-radius:50%;background:var(--lime)}
+@media(max-width:400px){.tagline{font-size:30px}}
+.where{margin-top:14px;line-height:1.4}
 .where b{display:block;font-size:17px;font-weight:600}
 .where span{display:block;font-size:14px;color:var(--ink-2);margin-top:2px}
 .rating{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:14px;color:var(--ink-2)}
@@ -124,6 +128,16 @@ section.block{padding-top:34px}
 .price .btn{grid-column:1/-1;justify-self:start;min-height:42px;padding:9px 16px;font-size:14px;margin-top:4px}
 .note{margin-top:12px;font-size:13px;color:var(--ink-3)}
 
+/* doctor */
+.doc{display:grid;grid-template-columns:116px 1fr;gap:16px;margin-top:16px;align-items:start}
+.doc img{width:116px;height:134px;object-fit:cover;object-position:top;border-radius:14px;background:var(--mint)}
+.doc h3{font-size:18px}
+.doc .role{margin-top:4px;font-size:14.5px;color:var(--ink-2)}
+.creds{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.creds li{font-size:12.5px;font-weight:500;color:var(--green);background:var(--mint);border-radius:999px;padding:4px 9px}
+.doc-note{margin-top:10px;font-size:14.5px;line-height:1.45}
+.doc a{display:inline-block;margin-top:8px;font-size:14px;color:var(--ink-2)}
+@media(max-width:400px){.doc{grid-template-columns:96px 1fr;gap:12px}.doc img{width:96px;height:112px}}
 /* reviews */
 .reviews{display:grid;gap:10px;margin-top:16px}
 .review{border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:15px;line-height:1.5;position:relative}
@@ -199,8 +213,9 @@ footer b{color:var(--ink-2);font-weight:600}
  </figure>
 
  <section class="intro wrap">
-  <h1>Advanced Physio Care.<br>Recovery with AI Precision.</h1>
-  <p class="where"><b>Mandir Marg, Saket, Delhi</b><span>Near Hotel Saket 27. Led by Dr. Nitish Kumar Srivastava (PT).</span></p>
+  <h1>Advanced Physio Care.</h1>
+  <p class="tagline">Recovery with <em>AI Precision</em></p>
+  <p class="where"><b>Mandir Marg, Saket, Delhi</b></p>
   <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span><span><b>4.9</b> from 747 Google reviews of this clinic. <a href="https://www.google.com/maps/search/?api=1&query=CB+Physiotherapy+Saket+Mandir+Marg" target="_blank" rel="noopener">Read them</a></span></p>
   <div class="cta">
    <a class="btn call" href="tel:+917303335605"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call 73033 35605</a>
@@ -219,6 +234,20 @@ footer b{color:var(--ink-2);font-weight:600}
    </div>
   </div>
   <div class="panel" id="panel" aria-live="polite"></div>
+ </section>
+
+ <section class="block wrap" id="doctor">
+  <h2>Your physiotherapist</h2>
+  <div class="doc">
+   <img src="https://cbphysiotherapy.in/storage/images/user/600x692/nitish-kumar-srivastava-2.webp" alt="Dr. Nitish Kumar Srivastava" width="600" height="692" loading="lazy" decoding="async">
+   <div>
+    <h3>Dr. Nitish Kumar Srivastava (PT)</h3>
+    <p class="role">Head of the Saket clinic. Orthopaedic physiotherapist and certified chiropractor.</p>
+    <ul class="creds"><li>MPTh, Amity University</li><li>BPTh, NIMS University</li><li>4+ years in clinical practice</li></ul>
+    <p class="doc-note" id="doc-note"></p>
+    <a href="https://cbphysiotherapy.in/delhi/ortho-physiotherapist/nitish-kumar-srivastava" target="_blank" rel="noopener">Full profile</a>
+   </div>
+  </div>
  </section>
 
  <section class="block wrap" id="fees">
@@ -305,7 +334,7 @@ footer b{color:var(--ink-2);font-weight:600}
 (()=>{
  const A='/physiotherapy-near-me-delhi/assets/';
  const CONCERNS={
-  spine:{name:'Back & neck pain',short:'back & neck',title:'Back & neck, first visit ₹499',
+  spine:{name:'Back & neck pain',doc:'Sees back and neck problems every day, including disc and nerve-related pain, and personally plans the decompression and exercise programme.',short:'back & neck',title:'Back & neck, first visit ₹499',
    who:'A stiff neck, a lower back that locks, pain or tingling running down an arm or leg. Half the people who come here come for this.',
    assess:'Whether it is the muscle, a joint, a disc or a nerve; what we will do about it; and what to expect by when. You leave with a written report you can show anyone.',
    relief:'Hands-on release and Class 4 laser or TECAR to settle the spasm and take the edge off, usually from the first visit.',
@@ -319,7 +348,7 @@ footer b{color:var(--ink-2);font-weight:600}
    rvTitle:'What patients say about back and neck care here',
    reviews:[['Sample: came in unable to sit for ten minutes with sciatica. Decompression and the exercises they gave me made the difference. Pain-free in a month.','R. S.'],['Sample: desk-job neck pain for years. The report after the first visit explained it better than two doctors had. Five sessions and I sleep properly again.','Priya M.'],['Sample: slipped disc, was told surgery was the only option. Eight weeks here and I am back to the gym, carefully.','A. K.']],
    wa:'Hi, I have back or neck pain and would like an appointment at CB Physiotherapy Saket.'},
-  joint:{name:'Knee, shoulder & joint pain',short:'joint',title:'Knee, shoulder & joint, first visit ₹499',
+  joint:{name:'Knee, shoulder & joint pain',doc:'Treats knees, shoulders and hips daily, from frozen shoulder to arthritic knees, with hands-on care and measured strengthening.',short:'joint',title:'Knee, shoulder & joint, first visit ₹499',
    who:'Knees that complain on stairs, a shoulder that will not lift, a hip or ankle that has been nagging for weeks.',
    assess:'Whether the pain comes from the joint, the tendon or the muscles around it; how much movement and strength you have lost; and the plan to get it back. Written report included.',
    relief:'Class 4 laser or TECAR to calm the joint, with taping or hands-on work so it moves easier from day one.',
@@ -333,7 +362,7 @@ footer b{color:var(--ink-2);font-weight:600}
    rvTitle:'What patients say about knee and shoulder care here',
    reviews:[['Sample: frozen shoulder for six months. Could not fasten my own blouse. Laser plus the stretching plan and I have full movement back.','S. Kapoor'],['Sample: knee pain after forty that stopped my morning walk. They tested my strength, showed me the weak side, and fixed it in seven visits.','Manish T.'],['Sample: my mother has arthritis in both knees. She climbs to her flat without the lift now. Patient, kind staff.','N. Bhatia']],
    wa:'Hi, I have knee, shoulder or joint pain and would like an appointment at CB Physiotherapy Saket.'},
-  rehab:{name:'Injury & post-surgery rehab',short:'rehab',title:'Injury or post-surgery rehab, first visit ₹499',
+  rehab:{name:'Injury & post-surgery rehab',doc:'Runs post-surgery and sports injury rehab in step with the operating surgeon\u2019s protocol, with milestones checked each week.',short:'rehab',title:'Injury or post-surgery rehab, first visit ₹499',
    who:'Ligament tears, fractures out of plaster, knee or hip replacements, shoulder repairs. Rehab planned with your surgeon’s protocol.',
    assess:'Range, swelling, strength and how you walk or lift, checked against your surgeon’s protocol. A written plan with the stages ahead and what each one needs.',
    relief:'Pain and swelling control first: Class 4 laser or TECAR for healing tissue, and safe early movement so nothing stiffens.',
@@ -347,7 +376,7 @@ footer b{color:var(--ink-2);font-weight:600}
    rvTitle:'What patients say about rehab here',
    reviews:[['Sample: total knee replacement at 68. The team had me walking without a stick in three weeks and climbing stairs in six. They coordinated with my surgeon throughout.','V. Sharma'],['Sample: ACL reconstruction. Clear milestones every week, strength measured each time, and honest about what I could and could not do yet.','Rohan D.'],['Sample: wrist fracture, stiff after the cast. Six sessions and I am typing and cooking normally.','L. Mehra']],
    wa:'Hi, I need physiotherapy after an injury or surgery and would like an appointment at CB Physiotherapy Saket.'},
-  ortho:{name:'Other ortho and nerve-related problems',short:'ortho & neuro',title:'Other ortho / neuro, first visit ₹499',
+  ortho:{name:'Other ortho and nerve-related problems',doc:'Combines orthopaedic physiotherapy with chiropractic assessment for nerve, posture and alignment problems.',short:'ortho & neuro',title:'Other ortho / neuro, first visit ₹499',
    who:'Tingling or numbness in an arm or leg, sciatica, heel or elbow pain, posture-related pain, or balance that has not come back after an injury.',
    assess:'Which nerve, joint or muscle is behind it, what is safe to do now, and the plan to settle it. Written report included.',
    relief:'Nerve-gliding and hands-on work to ease the irritation, with Class 4 laser or TECAR for the painful area.',
@@ -378,7 +407,7 @@ footer b{color:var(--ink-2);font-weight:600}
    <figure><img src="${A}${d.img}" alt="" loading="lazy" decoding="async" width="800" height="450"><figcaption>${d.cap}</figcaption></figure>`;
   if(fromClick){panel.removeAttribute('data-swap');void panel.offsetWidth;panel.setAttribute('data-swap','');}
   $('#book-title').textContent=d.title;$('#book-sub').textContent=d.bookSub;$('#concern').value=c;$('#fee-adv').textContent=d.feeAdv;$('#faq-sessions').textContent=d.faq;
-  $('#rv-title').textContent=d.rvTitle;$('#rv-list').innerHTML=d.reviews.map(([t,by])=>`<div class="review"><span class="sample">sample for layout</span><span class="stars" aria-hidden="true">★★★★★</span><p>${t}</p><span class="by">${by}, Google review</span></div>`).join('');
+  $('#rv-title').textContent=d.rvTitle;$('#doc-note').textContent=d.doc;$('#rv-list').innerHTML=d.reviews.map(([t,by])=>`<div class="review"><span class="sample">sample for layout</span><span class="stars" aria-hidden="true">★★★★★</span><p>${t}</p><span class="by">${by}, Google review</span></div>`).join('');
   const wa=WA+encodeURIComponent(d.wa);$('#wa-bar').href=wa;$('#wa-inline').href=wa;
   document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.c===c)));current=c;
   if(fromClick){const y=$('#seg-wrap').getBoundingClientRect().top+scrollY-58;scrollTo({top:y,behavior:'smooth'});}}
