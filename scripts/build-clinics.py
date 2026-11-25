@@ -176,7 +176,7 @@ def build_clinic(d, c):
     here_section = (
         f'<h2>Getting here</h2><p>{here_text}</p><div class="here">'
         f'<p class="addr"><b>{e(c["full"])}</b><br>{e(c["address"])}<br>Open {hours_label(d)}, every day. Phone <a href="tel:{c["tel"]}" data-call="{c["id"]}">{c["phone_display"]}</a>.</p>'
-        f'<div class="map"><iframe title="Map of {e(c["full"])}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.openstreetmap.org/export/embed.html?bbox={bbox}&layer=mapnik&marker={lat}%2C{lng}"></iframe></div>'
+        f'<div class="map"><iframe title="Map of {e(c["full"])}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.openstreetmap.org/export/embed.html?bbox={bbox}&layer=mapnik&marker={lat}%2C{lng}"></iframe><a class="map-go" href="{maps_url(c)}" target="_blank" rel="noopener" data-map="{c["id"]}" aria-label="Open {e(c["full"])} in Google Maps"><span>Open in Google Maps</span></a></div>'
         f'<p class="small muted">Also serving</p><ul class="near">{"".join(f"<li>{e(n)}</li>" for n in near)}</ul>{metro}'
         f'<a class="btn quiet" href="{maps_url(c)}" target="_blank" rel="noopener" data-map="{c["id"]}">{PIN}Open in Google Maps</a></div>')
     others = ''.join(f'<a href="/physiotherapy-near-me-{o["slug"]}/">{e(o["short"])}</a>' for o in d['clinics'] if o['id'] != c['id']) + '<a href="/physiotherapy-near-me-delhi/?r=all">All five clinics</a>'
