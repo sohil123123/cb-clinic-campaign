@@ -26,7 +26,7 @@ button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
 .wrap{max-width:var(--col);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
 h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.02em;line-height:1.12}
-h1{font-size:32px}h2{font-size:24px}h3{font-size:18px;letter-spacing:-.01em}
+h1{font-size:28px}h2{font-size:23px}h3{font-size:18px;letter-spacing:-.01em}
 p{margin:0}
 .muted{color:var(--ink-2)}
 .small{font-size:14px}
@@ -48,41 +48,42 @@ p{margin:0}
 @media(min-width:420px){.top .btn span{display:inline}}
 
 /* hero: the clinic itself first */
-.cover{margin:0;position:relative;aspect-ratio:4/3;background:var(--mint);overflow:hidden}
+.cover{margin:0;position:relative;aspect-ratio:16/10;background:var(--mint);overflow:hidden}
 @media(min-width:721px){.cover{max-width:var(--col);margin:22px auto 0;border-radius:18px;aspect-ratio:16/9}}
 .cover img{width:100%;height:100%;object-fit:cover}
 .cover .fees-line{position:absolute;top:12px;left:var(--gutter);right:var(--gutter);display:flex;gap:6px;flex-wrap:nowrap;overflow:hidden}
 .cover .fees-line span{display:inline-block;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.96);color:var(--ink);font-size:12.5px;line-height:1.25;font-weight:500;white-space:nowrap}
 .cover .fees-line span b{font-weight:600}
-.cover .tagline{display:block;margin-top:4px;font-family:"Fraunces","Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;font-variation-settings:"opsz" 60;font-size:24px;line-height:1.15;letter-spacing:-.01em;color:#fff}
+.cover .tagline{display:block;margin-top:2px;font-family:"Fraunces","Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;font-variation-settings:"opsz" 60;font-size:22px;line-height:1.15;letter-spacing:-.01em;color:#fff}
 .cover .tagline em{font-style:italic;color:var(--lime)}
-.cover figcaption{position:absolute;left:0;right:0;bottom:0;padding:90px var(--gutter) 18px;color:#fff;background:linear-gradient(to bottom,rgba(8,30,25,0) 0%,rgba(8,30,25,.55) 40%,rgba(8,30,25,.92) 100%);text-shadow:0 1px 2px rgba(0,0,0,.45)}
-.cover .title{display:block;font-size:27px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
-.intro{padding-top:22px}
+.cover figcaption{position:absolute;left:0;right:0;bottom:0;padding:70px var(--gutter) 14px;color:#fff;background:linear-gradient(to bottom,rgba(8,30,25,0) 0%,rgba(8,30,25,.55) 40%,rgba(8,30,25,.92) 100%);text-shadow:0 1px 2px rgba(0,0,0,.45)}
+.cover .title{display:block;font-size:25px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.intro{padding-top:16px}
 .intro h1{max-width:18ch}
 .gmark{width:20px;height:20px;flex:none}
-.where{margin-top:8px;line-height:1.4}
+.where{margin-top:6px;line-height:1.4}
 .where a{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
 .where svg{width:20px;height:20px;fill:none;stroke:var(--call);stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round;flex:none}
 .where b{font-size:17px;font-weight:600}
 .where span{font-size:13px;color:var(--call);text-decoration:underline;text-underline-offset:3px;margin-left:2px}
-.rating{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;color:var(--ink-2);flex-wrap:wrap}
+.rating{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;color:var(--ink-2);flex-wrap:wrap}
 .rating .stars{color:#e8a600;letter-spacing:1px;font-size:15px}
 .rating b{color:var(--ink);font-weight:600}
 .rating a{color:var(--ink-2)}
-.cta{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:8px;margin-top:16px}
+.cta{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:8px;margin-top:12px}
+.cta .btn{min-height:46px}
 .cta .btn{white-space:nowrap;padding-left:8px;padding-right:8px;font-size:14.5px}
 @media(max-width:400px){h1{font-size:29px}.cta .btn{font-size:14px;gap:7px}}
 
 /* care chooser */
-.choose{padding-top:30px}
-.choose h2{font-size:22px}
-.seg-wrap{position:sticky;top:var(--bar);z-index:10;background:var(--paper);padding:10px var(--gutter);margin:8px calc(-1*var(--gutter)) 0}
+.choose{padding-top:22px}
+.choose h2{font-size:21px}
+.seg-wrap{position:sticky;top:var(--bar);z-index:10;background:var(--paper);padding:8px var(--gutter);margin:4px calc(-1*var(--gutter)) 0}
 @media(min-width:721px){.seg-wrap{margin-left:0;margin-right:0;padding-left:0;padding-right:0}}
 .seg-wrap::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line);opacity:0;transition:opacity .2s}
 .seg-wrap.stuck::after{opacity:1}
 .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.seg button{min-height:48px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:#fff;text-align:left;cursor:pointer;line-height:1.25;font-weight:500;font-size:14.5px;position:relative;transition:border-color .15s,background .15s}
+.seg button{min-height:44px;padding:9px 12px;border:1.5px solid var(--line);border-radius:12px;background:#fff;text-align:left;cursor:pointer;line-height:1.25;font-weight:500;font-size:14.5px;position:relative;transition:border-color .15s,background .15s}
 .seg button[aria-pressed="true"]{border-color:var(--green);background:var(--mint);font-weight:600}
 .seg button[aria-pressed="true"]::after{content:"";position:absolute;left:12px;right:12px;bottom:-2px;height:4px;border-radius:4px;background:var(--lime)}
 .panel{margin:10px calc(-1*var(--gutter)) 0;padding:20px var(--gutter) 0;background:var(--mint);overflow:hidden}
@@ -127,16 +128,25 @@ section.block{padding-top:34px}
 .price .btn{grid-column:1/-1;justify-self:start;min-height:42px;padding:9px 16px;font-size:14px;margin-top:4px}
 .note{margin-top:12px;font-size:13px;color:var(--ink-3)}
 
-/* doctor */
-.doc{display:grid;grid-template-columns:116px 1fr;gap:16px;margin-top:16px;align-items:start}
-.doc img{width:116px;height:134px;object-fit:cover;object-position:top;border-radius:14px;background:var(--mint)}
-.doc h3{font-size:18px}
-.doc .role{margin-top:4px;font-size:14.5px;color:var(--ink-2)}
-.creds{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+/* team */
+.lead{display:grid;grid-template-columns:104px 1fr;gap:14px;margin-top:16px;align-items:start}
+.lead img{width:104px;height:120px;object-fit:cover;object-position:top;border-radius:14px;background:var(--mint)}
+.lead h3{font-size:17px}
+.lead .role{margin-top:4px;font-size:14px;color:var(--ink-2);line-height:1.45}
+.creds{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
 .creds li{font-size:12.5px;font-weight:500;color:var(--green);background:var(--mint);border-radius:999px;padding:4px 9px}
-.doc-note{margin-top:10px;font-size:14.5px;line-height:1.45}
-.doc a{display:inline-block;margin-top:8px;font-size:14px;color:var(--ink-2)}
-@media(max-width:400px){.doc{grid-template-columns:96px 1fr;gap:12px}.doc img{width:96px;height:112px}}
+.doc-note{margin-top:8px;font-size:14px;line-height:1.45}
+.sub-line{margin-top:18px;font-size:14px;font-weight:600}
+.slider{display:flex;gap:10px;margin:10px calc(-1*var(--gutter)) 0;padding:2px var(--gutter) 8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.slider::-webkit-scrollbar{display:none}
+@media(min-width:721px){.slider{margin-left:0;margin-right:0;padding-left:0;padding-right:0}}
+.slider .card{flex:0 0 150px;scroll-snap-align:start;border:1px solid var(--line);border-radius:14px;padding:10px;background:#fff;display:flex;flex-direction:column;gap:3px}
+.slider .card img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;border-radius:10px;background:var(--mint);margin-bottom:6px}
+.slider .card b{font-size:14px;font-weight:600;line-height:1.25}
+.slider .card span{font-size:12.5px;color:var(--ink-2);line-height:1.3}
+.slider .card small{font-size:12px;color:var(--ink-3);line-height:1.35;margin-top:2px}
+.slider .card.wide{flex-basis:250px}
+.slider .card .avatar{display:grid;place-items:center;width:100%;aspect-ratio:1/1;border-radius:10px;background:var(--mint);color:var(--green);font-size:64px;font-weight:600;margin-bottom:6px;font-family:"Fraunces",serif;font-style:italic}
 /* reviews */
 .reviews{display:grid;gap:10px;margin-top:16px}
 .review{border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:15px;line-height:1.5;position:relative}
@@ -157,7 +167,15 @@ section.block{padding-top:34px}
 .book{margin-top:16px;padding:20px;border:1.5px solid var(--green);border-radius:18px}
 .book h3{font-size:20px}
 .book p.small{margin-top:4px}
-.form{display:grid;gap:12px;margin-top:14px}
+.act2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+dialog#book-dialog{border:0;padding:0;width:min(100%,520px);max-width:100%;border-radius:20px 20px 0 0;margin:auto 0 0;box-shadow:0 -10px 40px rgba(20,62,55,.18);background:#fff;color:var(--ink)}
+@media(min-width:721px){dialog#book-dialog{border-radius:20px;margin:auto}}
+dialog#book-dialog::backdrop{background:rgba(10,30,25,.45);backdrop-filter:blur(2px)}
+dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gutter) calc(20px + env(safe-area-inset-bottom))}
+.dlg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.dlg-head h3{font-size:19px}
+.dlg-head .x{border:0;background:var(--mint);width:36px;height:36px;border-radius:50%;font-size:22px;line-height:1;cursor:pointer;flex:none}
+.form{display:grid;gap:12px}
 .form[hidden]{display:none}
 .field label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}
 .field input{width:100%;min-height:48px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
@@ -166,7 +184,9 @@ section.block{padding-top:34px}
 .when button{min-height:44px;border:1.5px solid var(--line);border-radius:10px;background:#fff;font-size:14px;cursor:pointer}
 .when button[aria-pressed="true"]{border-color:var(--green);background:var(--mint);font-weight:600}
 .form .btn{width:100%;margin-top:4px}
-.done{display:none;margin-top:14px;padding:14px 16px;border-radius:12px;background:var(--mint);font-size:15px;line-height:1.5}
+.done{display:none;font-size:15px;line-height:1.5}
+.done .inner{padding:14px 16px;border-radius:12px;background:var(--mint)}
+.done .btn{margin-top:12px;width:100%}
 .done b{font-weight:600}
 .consent{font-size:12.5px;color:var(--ink-3);line-height:1.45}
 
@@ -218,12 +238,12 @@ footer b{color:var(--ink-2);font-weight:600}
   <div class="cta" id="hero-cta">
    <a class="btn call" href="tel:+917303335605"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call</a>
    <a class="btn wa" href="#" id="wa-hero"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>WhatsApp</a>
-   <a class="btn" href="#book">Book a slot</a>
+   <button class="btn" type="button" data-book>Book a slot</button>
   </div>
  </section>
 
  <section class="choose wrap" id="choose">
-  <h2 id="care-heading">Delhi's trusted care for</h2>
+  <h2 id="care-heading">Delhi's trusted physiotherapy for</h2>
   <div class="seg-wrap" id="seg-wrap">
    <div class="seg" role="group" aria-labelledby="care-heading">
     <button type="button" data-c="spine" aria-pressed="true">Back &amp; Neck</button>
@@ -235,17 +255,33 @@ footer b{color:var(--ink-2);font-weight:600}
   <div class="panel" id="panel" aria-live="polite"></div>
  </section>
 
- <section class="block wrap" id="doctor">
-  <h2>Your physiotherapist</h2>
-  <div class="doc">
+ <section class="block wrap" id="team">
+  <h2>Your care team at Saket</h2>
+  <div class="lead">
    <img src="https://cbphysiotherapy.in/storage/images/user/600x692/nitish-kumar-srivastava-2.webp" alt="Dr. Nitish Kumar Srivastava" width="600" height="692" loading="lazy" decoding="async">
    <div>
     <h3>Dr. Nitish Kumar Srivastava (PT)</h3>
-    <p class="role">Head of the Saket clinic. Orthopaedic physiotherapist and certified chiropractor.</p>
-    <ul class="creds"><li>MPTh, Amity University</li><li>BPTh, NIMS University</li><li>4+ years in clinical practice</li></ul>
+    <p class="role">Head of the Saket clinic. He oversees every treatment plan here, whichever physiotherapist you see.</p>
+    <ul class="creds"><li>Orthopaedic physiotherapy</li><li>Certified chiropractor</li><li>MPTh, Amity University</li></ul>
     <p class="doc-note" id="doc-note"></p>
-    <a href="https://cbphysiotherapy.in/delhi/ortho-physiotherapist/nitish-kumar-srivastava" target="_blank" rel="noopener">Full profile</a>
    </div>
+  </div>
+  <p class="sub-line">Treating physiotherapists at Saket</p>
+  <div class="slider" aria-label="Saket physiotherapists">
+   <div class="card"><img src="https://cbphysiotherapy.in/storage/images/user/600x692/riya-ranjan-singh-2.webp" alt="" width="600" height="692" loading="lazy"><b>Dr. Riya Ranjan Singh</b><span>Orthopaedic physiotherapist, MPT Ortho</span><small>Spine, joints, sciatica</small></div>
+   <div class="card"><img src="https://cbphysiotherapy.in/storage/images/user/600x692/meghna-kirar-2.webp" alt="" width="600" height="692" loading="lazy"><b>Dr. Meghna Kirar</b><span>Senior physiotherapist</span><small>Back and neck, arthritis, mobility</small></div>
+   <div class="card"><img src="https://cbphysiotherapy.in/storage/images/user/600x692/sahil-2.webp" alt="" width="600" height="692" loading="lazy"><b>Dr. Sahil</b><span>Consultant physiotherapist</span><small>Joint pain, injury and post-surgery rehab</small></div>
+   <div class="card"><img src="https://cbphysiotherapy.in/storage/images/user/600x692/saba-parveen-2.webp" alt="" width="600" height="692" loading="lazy"><b>Dr. Saba Parveen</b><span>Physiotherapist</span><small>Back and neck, knee, posture</small></div>
+   <div class="card"><img src="https://cbphysiotherapy.in/storage/images/user/600x692/aditi-verma-2.webp" alt="" width="600" height="692" loading="lazy"><b>Dr. Aditi Verma</b><span>Physiotherapist, University of Delhi</span><small>Back and neck, knee, balance</small></div>
+  </div>
+ </section>
+
+ <section class="block wrap" id="central">
+  <h2>A second pair of eyes on every case</h2>
+  <p>Your plan and progress at Saket are reviewed by CB Physiotherapy's central clinical team, with more than 20 years of combined experience across the five Delhi clinics.</p>
+  <div class="slider" aria-label="Central case monitoring team">
+   <div class="card wide"><img src="https://cbphysiotherapy.in/images/team/deepanshu_khatri.webp" alt="" width="300" height="300" loading="lazy"><b>Dr. Deepanshu Khatri</b><span>Head of operations</span><small>Reviews treatment plans and outcomes across all CB clinics, and steps in when a case is not progressing as expected.</small></div>
+   <div class="card wide"><span class="avatar" aria-hidden="true">I</span><b>Iqra</b><span>Case monitoring</span><small>Tracks your progress between visits, checks in after each phase, and makes sure questions reach your physiotherapist the same day.</small></div>
   </div>
  </section>
 
@@ -253,7 +289,7 @@ footer b{color:var(--ink-2);font-weight:600}
   <h2>Clear fees. Start with confidence.</h2>
   <p>Start with an assessment. Your physiotherapist recommends the right care from there.</p>
   <div class="prices">
-   <div class="price first"><span class="k">Your first step <em>Offer, save ₹500</em></span><h3>AI assessment &amp; consultation</h3><div class="amt"><s>₹999</s>₹499<small>per assessment</small></div><p id="fee-assess">AI-assisted clinical assessment with a written report, reviewed by your physiotherapist.</p><a class="btn" href="#book">Book the assessment</a></div>
+   <div class="price first"><span class="k">Your first step <em>Offer, save ₹500</em></span><h3>AI assessment &amp; consultation</h3><div class="amt"><s>₹999</s>₹499<small>per assessment</small></div><p id="fee-assess">AI-assisted clinical assessment with a written report, reviewed by your physiotherapist.</p><button class="btn" type="button" data-book>Book the assessment</button></div>
    <div class="price"><span class="k">Ongoing care</span><h3>Standard physiotherapy</h3><div class="amt">₹999<small>per session</small></div><p>Hands-on manual therapy and electrotherapy, selected for your condition.</p></div>
    <div class="price"><span class="k">Advanced modalities</span><h3>Advanced physiotherapy</h3><div class="amt">₹1,499<small>per session</small></div><p id="fee-adv">Class 4 laser, TECAR or robotic spinal decompression, when clinically appropriate.</p></div>
   </div>
@@ -288,21 +324,7 @@ footer b{color:var(--ink-2);font-weight:600}
   <div class="book">
    <h3 id="book-title">Back &amp; neck, first visit ₹499</h3>
    <p class="small muted" id="book-sub">Usually 30 to 40 minutes. Wear something you can bend and twist in.</p>
-   <form class="form" id="form" novalidate>
-    <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required></div>
-    <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" pattern="[0-9 +]{10,14}" required></div>
-    <div class="field"><label>When would you like to come?</label>
-     <div class="when" role="group" aria-label="Preferred time">
-      <button type="button" data-when="today" aria-pressed="true">Today</button>
-      <button type="button" data-when="tomorrow" aria-pressed="false">Tomorrow</button>
-      <button type="button" data-when="week" aria-pressed="false">This week</button>
-     </div>
-    </div>
-    <input type="hidden" name="concern" id="concern" value="spine">
-    <button class="btn" type="submit">Request a call back</button>
-    <p class="consent">We use your number only to confirm this appointment. Prefer to talk now? <a href="tel:+917303335605">Call 73033 35605</a> or <a href="#" id="wa-inline">message on WhatsApp</a>.</p>
-   </form>
-   <div class="done" id="done" role="status"></div>
+   <div class="act2"><button class="btn" type="button" data-book>Request a call back</button><a class="btn call" href="tel:+917303335605"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call now</a></div>
   </div>
  </section>
 
@@ -323,10 +345,29 @@ footer b{color:var(--ink-2);font-weight:600}
  This is a demo page for review. The booking form on this page does not send anything, and the review cards are layout samples to be replaced with real Google reviews.
 </footer>
 
+<dialog id="book-dialog" aria-labelledby="dlg-title">
+ <form class="form" id="form" novalidate>
+  <div class="dlg-head"><div><h3 id="dlg-title">Back &amp; neck, first visit ₹499</h3><p class="small muted" id="dlg-sub">We call back within 15 minutes to confirm a time.</p></div><button type="button" class="x" id="dlg-close" aria-label="Close">×</button></div>
+  <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required></div>
+  <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" pattern="[0-9 +]{10,14}" required></div>
+  <div class="field"><label>When would you like to come?</label>
+   <div class="when" role="group" aria-label="Preferred time">
+    <button type="button" data-when="today" aria-pressed="true">Today</button>
+    <button type="button" data-when="tomorrow" aria-pressed="false">Tomorrow</button>
+    <button type="button" data-when="week" aria-pressed="false">This week</button>
+   </div>
+  </div>
+  <input type="hidden" name="concern" id="concern" value="spine">
+  <button class="btn" type="submit">Request a call back</button>
+  <p class="consent">We use your number only to confirm this appointment. Prefer to talk now? <a href="tel:+917303335605">Call 73033 35605</a> or <a href="#" id="wa-inline">message on WhatsApp</a>.</p>
+ </form>
+ <div class="done" id="done" role="status"></div>
+</dialog>
+
 <div class="bar" id="bar" aria-label="Quick actions">
  <a class="btn call" href="tel:+917303335605"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call</a>
  <a class="btn wa" href="#" id="wa-bar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>WhatsApp</a>
- <a class="btn" href="#book">Book a slot</a>
+ <button class="btn" type="button" data-book>Book a slot</button>
 </div>
 
 <script>
@@ -395,7 +436,7 @@ footer b{color:var(--ink-2);font-weight:600}
  let current='spine';
  function render(c,fromClick){const d=CONCERNS[c];const panel=$('#panel');
   panel.innerHTML=`<h3>${d.name}</h3><p class="who">${d.intro}</p>
-   <div class="act"><a class="btn" href="#book">Book the first visit</a><a class="btn quiet" href="tel:+917303335605">Call to ask</a></div>
+   <div class="act"><button class="btn" type="button" data-book>Book the first visit</button><a class="btn quiet" href="tel:+917303335605">Call to ask</a></div>
    <ol class="steps">
     <li><i>1</i><div><b>AI assessment with report<small>15 to 30 min</small></b><span>${d.assess}</span></div></li>
     <li><i>2</i><div><b>Treatment, same day</b>
@@ -405,7 +446,7 @@ footer b{color:var(--ink-2);font-weight:600}
    </ol>
    <figure><img src="${A}${d.img}" alt="" loading="lazy" decoding="async" width="800" height="450"><figcaption>${d.cap}</figcaption></figure>`;
   if(fromClick){panel.removeAttribute('data-swap');void panel.offsetWidth;panel.setAttribute('data-swap','');}
-  $('#book-title').textContent=d.title;$('#book-sub').textContent=d.bookSub;$('#concern').value=c;$('#fee-adv').textContent=d.feeAdv;$('#faq-sessions').textContent=d.faq;
+  $('#book-title').textContent=d.title;$('#book-sub').textContent=d.bookSub;$('#dlg-title').textContent=d.title;$('#concern').value=c;$('#fee-adv').textContent=d.feeAdv;$('#faq-sessions').textContent=d.faq;
   $('#rv-title').textContent=d.rvTitle;$('#doc-note').textContent=d.doc;$('#rv-list').innerHTML=d.reviews.map(([t,by])=>`<div class="review"><span class="sample">sample for layout</span><span class="stars" aria-hidden="true">★★★★★</span><p>${t}</p><span class="by">${by}, Google review</span></div>`).join('');
   const wa=WA+encodeURIComponent(d.wa);$('#wa-bar').href=wa;$('#wa-inline').href=wa;$('#wa-hero').href=wa;
   document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.c===c)));current=c;
@@ -415,7 +456,8 @@ footer b{color:var(--ink-2);font-weight:600}
  document.querySelectorAll('.when button').forEach(b=>b.addEventListener('click',()=>document.querySelectorAll('.when button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))));
  $('#form').addEventListener('submit',e=>{e.preventDefault();const f=e.target;const name=f.name.value.trim(),phone=f.phone.value.replace(/\D/g,'');if(!name){f.name.focus();return;}if(phone.length<10){f.phone.focus();return;}
   const when={today:'today',tomorrow:'tomorrow',week:'this week'}[document.querySelector('.when [aria-pressed="true"]').dataset.when];
-  const done=$('#done');done.innerHTML=`<b>Thanks, ${name.split(' ')[0]}.</b> We will call ${phone.replace(/(\d{5})(\d{5})$/,'$1 $2')} within 15 minutes to fix a time ${when} for ${CONCERNS[current].short}. <span class="muted">(Demo: nothing was sent.)</span>`;done.style.display='block';f.hidden=true;done.scrollIntoView({block:'nearest'});});
+  const done=$('#done');done.innerHTML=`<div class="inner"><b>Thanks, ${name.split(' ')[0]}.</b> We will call ${phone.replace(/(\d{5})(\d{5})$/,'$1 $2')} within 15 minutes to fix a time ${when} for ${CONCERNS[current].short}. <span class="muted">(Demo: nothing was sent.)</span></div><button class="btn quiet" type="button" id="dlg-done">Done</button>`;done.style.display='block';f.hidden=true;$('#dlg-done').addEventListener('click',()=>dlg.close());});
+ const dlg=$('#book-dialog');document.querySelectorAll('[data-book]').forEach(b=>b.addEventListener('click',()=>{dlg.showModal();setTimeout(()=>$('#name').focus(),50);}));$('#dlg-close').addEventListener('click',()=>dlg.close());dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
  const bar=$('#bar'),cover=$('.cover'),segWrap=$('#seg-wrap'),heroCta=$('#hero-cta');
  const upd=()=>{const past=scrollY>cover.offsetTop+cover.offsetHeight;bar.classList.toggle('show',heroCta.getBoundingClientRect().bottom<0);document.body.classList.toggle('scrolled',past);segWrap.classList.toggle('stuck',segWrap.getBoundingClientRect().top<=59&&scrollY>0);};
  upd();addEventListener('scroll',upd,{passive:true});
