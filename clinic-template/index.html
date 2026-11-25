@@ -530,7 +530,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
   if($('#doc-note'))$('#doc-note').textContent=d.doc;
   const wa=WA+encodeURIComponent(d.wa);document.querySelectorAll('[data-wa]').forEach(a=>a.href=wa);
   document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.c===c)));current=c;
-  if(fromClick){const y=$('#seg-wrap').getBoundingClientRect().top+scrollY-58;scrollTo({top:y,behavior:'smooth'});}}
+  if(fromClick){const y=$('#care-heading').getBoundingClientRect().bottom+scrollY-58+2;scrollTo({top:Math.max(0,y),behavior:'smooth'});}}
  document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{chosen=true;render(b.dataset.c,true);push({event:'concern_selected',concern:b.dataset.concern,placement:'care_tabs'});}));
  render('all',false);
  // booking
