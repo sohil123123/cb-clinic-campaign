@@ -168,6 +168,48 @@ value; return `401` otherwise. Dates are inclusive, Indian time. Respond with
 `{"events":[…rows…]}` using the column names above (`props` may be a JSON
 string). Cap at 90 days per request. Same CORS origin.
 
+### Spend feed and change log (Laravel side, second step)
+
+The dashboard's **Decisions** tab joins Google Ads spend with the visits and
+leads above, so bids, keywords, negatives, routing rules and landing changes
+can be decided from one table. Spend arrives from a Google Ads Script
+(`scripts/google-ads-export.js`, installed inside the Google Ads account; the
+README header of that file has the steps) and is stored by two more routes.
+Until they exist the tab works from Google Ads CSV exports uploaded in the
+browser, which never leave that browser.
+
+**Storage** – table `landing_ads`: `id`, `date` (date), `kind` (12: campaign,
+keyword, search_term, location), `campaign` (120), `ad_group` (120), `key`
+(200: campaign name, keyword text, search term, or Google location ID),
+`match_type` (12), `status` (20), `impressions` (int), `clicks` (int), `cost`
+(decimal 10,2, INR), `conversions` (decimal 8,2), `updated_at`. Unique index on
+(`date`, `kind`, `campaign`, `ad_group`, `key`, `match_type`); index on `date`.
+
+**`POST /api/landing/ads`** – requires `Authorization: Bearer <ADS_FEED_TOKEN>`,
+a separate `.env` value given only to the Google Ads Script. Body is JSON:
+
+    {"v":1,"source":"google-ads-script","from":"YYYY-MM-DD","to":"YYYY-MM-DD",
+     "rows":[{"date":"YYYY-MM-DD","kind":"keyword","campaign":"…","ad_group":"…",
+              "key":"physiotherapy near me","match_type":"phrase","status":"enabled",
+              "impressions":120,"clicks":9,"cost":412.5,"conversions":1}]}
+
+Upsert every row on the unique key (the script re-sends the last three days
+each night, so later values replace earlier ones). Up to 400 rows per request.
+Return `204`. No CORS needed (server to server).
+
+**`GET /api/landing/ads?from=YYYY-MM-DD&to=YYYY-MM-DD[&kind=…]`** – same
+`Authorization: Bearer <DASHBOARD_PASSWORD>` and CORS origin as the events
+GET. Respond with `{"rows":[…]}` using the columns above, dates inclusive, cap
+90 days. Return `404` while the route does not exist; the dashboard then falls
+back to uploads.
+
+**Change log** – table `landing_notes`: `id`, `date` (date), `category` (20),
+`text` (300), `created_at`. Routes, all with the dashboard password and the
+same CORS origin: `GET /api/landing/notes` → `{"notes":[…]}` (newest first,
+cap 500); `POST /api/landing/notes` with JSON `{"date","category","text"}` →
+`201 {"note":{"id",…}}`; `DELETE /api/landing/notes/{id}` → `204`. Add
+`DELETE` and `Content-Type` to the CORS allow lists for this route.
+
 ## Cloudflare cache
 
 The subdomain is proxied by Cloudflare, which caches pages and files at its
@@ -207,8 +249,9 @@ wide as WebP and give the `<img>` `width`, `height` and `loading="lazy"`.
   the API confirms the save; otherwise the visitor sees an error with the call
   option. WhatsApp stays an optional follow-up. The endpoint URL is the
   `data-endpoint` attribute on the form in `index.html`.
-- No Google Ads or Tag Manager tag is on the page yet. Add it and test one
-  conversion per saved request. Keep names, phone numbers, health concerns and
+- No Google Ads conversion tag is on the page yet. Add it (booking sent, call
+  tap, WhatsApp send as three conversion actions) and test one conversion per
+  saved request, so Smart Bidding can optimise for leads. Keep names, phone numbers, health concerns and
   WhatsApp message text out of analytics.
 - Verify the ratings and counts in `clinic-reviews.js` against each Google
   listing. The hero badge shows the Delhi-wide figure from `cbReviewSummary`
@@ -216,6 +259,31 @@ wide as WebP and give the `<img>` `width`, `height` and `loading="lazy"`.
 - Test the live URL with a query string on a phone: four care cards, five map
   pins and clinic selections, fees, the Book Now popup, call and WhatsApp
   links.
+
+## Weekly decisions loop (Decisions tab)
+
+Open the dashboard, pick the last 7 or 28 days, and go to **Decisions**.
+
+1. Check the tiles: spend, clicks, visits that reached our pages, leads, cost
+   per lead. If "clicks reaching our pages" is low, the ad final URLs are
+   still pointing somewhere else; fix that before trusting the rest.
+2. Set the **target cost per lead** once (what a lead is worth to the clinics)
+   and the **minimum clicks** before a row earns a suggestion (25 by default;
+   fewer clicks is noise). Both are remembered in the browser.
+3. Read **Actions to consider this week**, then the Locations, Keywords and
+   Search terms tables. Suggestions are prompts: raise or lower a location bid
+   adjustment, pause a keyword, add a negative, add a converting search term
+   as an exact keyword, map an unmapped Delhi location in `geo-clinics.json`,
+   add a routing rule in `routing.json`, or change a page.
+4. Make the changes in Google Ads or the repository, and write each one in
+   the **Change log** with the date. Next week, read the numbers against it.
+
+Spend data comes from the nightly Google Ads Script once Sohil's `/ads` route
+is live; until then export the Keyword, Search terms, User location and
+Campaign reports for the same date range from Google Ads and drop them on the
+upload button. Uploads stay in the browser (IndexedDB) and are never sent
+anywhere; the previous upload of the same report is kept for comparison.
+Spend figures must never be committed to this public repository.
 
 ## Weekly Google review update
 
