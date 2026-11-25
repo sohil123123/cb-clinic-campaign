@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="{{CANONICAL}}">
+<meta name="theme-color" content="#143e37">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CB Physiotherapy">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="geo.region" content="IN-DL">
+<meta name="geo.placename" content="{{SHORT}}, New Delhi">
+<meta name="geo.position" content="{{LAT}};{{LNG}}">
+<meta name="ICBM" content="{{LAT}}, {{LNG}}">
+<meta name="cb-analytics-endpoint" content="https://cbphysiotherapy.in/api/landing/events">
+<meta name="cb-area" content="{{ID}}">
+<link rel="icon" href="/physiotherapy-near-me-delhi/assets/cb-logo-480.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="{{HERO_SRC}}"{{HERO_PRELOAD}}>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Fraunces:ital,opsz,wght@1,9..144,300..500&display=swap" rel="stylesheet">
+<script type="application/ld+json">{{JSONLD}}</script>
+<style>
+:root{
+ --paper:#fff;--ink:#16261f;--ink-2:#4b5a53;--ink-3:#73817a;--line:#dfe6df;
+ --green:#143e37;--green-ink:#0f2e29;--mint:#e9f1e6;--mint-2:#dbe9d6;--lime:#c9e98e;
+ --call:#1f6fe0;--wa:#1fa855;--focus:#1f6fe0;--bad:#9b2323;
+ --gutter:20px;--col:680px;--bar:58px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.5 "Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--col);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.02em;line-height:1.12}
+h1{font-size:22px}h2{font-size:22px}h3{font-size:18px;letter-spacing:-.01em}
+p{margin:0}
+.muted{color:var(--ink-2)}
+.small{font-size:14px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:12px;min-height:var(--bar)}
+.brand{display:flex;align-items:center;text-decoration:none}
+.brand img{height:30px;width:auto}
+.open{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#0f5a36;background:#d9f3e3;border-radius:999px;padding:8px 12px;white-space:nowrap}
+.open i{width:8px;height:8px;border-radius:50%;background:#2bb673}
+.open.closed{background:#fdf0c8;color:#6b4a00}.open.closed i{background:#e0a100}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:12px 18px;border-radius:12px;border:1px solid var(--green);background:var(--green);color:#fff;font-weight:600;font-size:15px;text-decoration:none;cursor:pointer}
+.btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn.call{background:var(--call);border-color:var(--call)}
+.btn.quiet{background:#fff;color:var(--green);border-color:#bccdb9}
+.btn.wa{background:var(--wa);border-color:var(--wa)}
+.btn[disabled]{opacity:.6;cursor:default}
+.top .btn{min-height:40px;padding:8px 14px;font-size:14px;border-radius:10px}
+.top .btn span{display:none}
+@media(min-width:420px){.top .btn span{display:inline}}
+
+/* hero */
+.cover{margin:0;position:relative;aspect-ratio:16/10;background:var(--mint);overflow:hidden}
+@media(min-width:721px){.cover{max-width:var(--col);margin:22px auto 0;border-radius:18px;aspect-ratio:16/9}}
+.cover img{width:100%;height:100%;object-fit:cover;object-position:center}
+.cover.portrait img{object-position:center 30%}
+.cover .fees-line{position:absolute;top:12px;left:var(--gutter);right:var(--gutter);display:flex;gap:6px;flex-wrap:nowrap;overflow:hidden}
+.cover .fees-line span{display:inline-block;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.96);color:var(--ink);font-size:12.5px;line-height:1.25;font-weight:500;white-space:nowrap}
+.cover .fees-line span b{font-weight:600}
+.cover figcaption{position:absolute;left:0;right:0;bottom:0;padding:70px var(--gutter) 14px;color:#fff;background:linear-gradient(to bottom,rgba(8,30,25,0) 0%,rgba(8,30,25,.55) 40%,rgba(8,30,25,.92) 100%);text-shadow:0 1px 2px rgba(0,0,0,.45)}
+.cover .title{display:block;font-size:25px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.cover .tagline{display:block;margin-top:2px;font-family:"Fraunces","Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;font-variation-settings:"opsz" 60;font-size:22px;line-height:1.15;letter-spacing:-.01em;color:#fff}
+.cover .tagline em{font-style:italic;color:var(--lime)}
+.intro{padding-top:16px}
+.intro h1{max-width:24ch;font-weight:600;letter-spacing:-.015em}
+.where{margin-top:6px;line-height:1.4}
+.where a{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.where svg{width:18px;height:18px;fill:none;stroke:var(--call);stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round;flex:none}
+.where b{font-size:15.5px;font-weight:600}
+.where span{font-size:12.5px;color:var(--call);text-decoration:underline;text-underline-offset:3px;margin-left:2px}
+.rating{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13.5px;color:var(--ink-2);flex-wrap:wrap}
+.rating .stars{color:#e8a600;letter-spacing:1px;font-size:13.5px}
+.rating b{color:var(--ink);font-weight:600}
+.rating a{color:var(--ink-2)}
+.gmark{width:18px;height:18px;flex:none}
+.cta{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:8px;margin-top:12px}
+.cta .btn{min-height:46px;white-space:nowrap;padding-left:8px;padding-right:8px;font-size:14px}
+@media(max-width:400px){.cta .btn{font-size:13.5px;gap:6px}}
+
+/* care chooser */
+.choose{padding-top:22px}
+.choose h2{font-size:19px}
+.seg-wrap{position:sticky;top:var(--bar);z-index:10;background:var(--paper);padding:8px var(--gutter);margin:4px calc(-1*var(--gutter)) 0}
+@media(min-width:721px){.seg-wrap{margin-left:0;margin-right:0;padding-left:0;padding-right:0}}
+.seg-wrap::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line);opacity:0;transition:opacity .2s}
+.seg-wrap.stuck::after{opacity:1}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg button{min-height:44px;padding:9px 12px;border:1.5px solid var(--line);border-radius:12px;background:#fff;text-align:left;cursor:pointer;line-height:1.25;font-weight:500;font-size:14px;position:relative;transition:border-color .15s,background .15s}
+.seg button[aria-pressed="true"]{border-color:var(--green);background:var(--mint);font-weight:600}
+.seg button[aria-pressed="true"]::after{content:"";position:absolute;left:12px;right:12px;bottom:-2px;height:4px;border-radius:4px;background:var(--lime)}
+.panel{margin:10px calc(-1*var(--gutter)) 0;padding:20px var(--gutter) 0;background:var(--mint);overflow:hidden}
+@media(min-width:721px){.panel{margin-left:0;margin-right:0;border-radius:18px;padding:22px 22px 0}}
+.panel h3{font-size:21px;letter-spacing:-.015em}
+.panel .who{margin-top:6px;font-size:14.5px;color:var(--ink-2);line-height:1.45}
+.panel .who b{color:var(--ink);font-weight:600}
+.panel .act{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 0}
+.panel .act .btn{min-height:46px;font-size:14.5px}
+.steps{margin:20px 0 0;padding:0;list-style:none;display:grid;gap:16px}
+.steps li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
+.steps li i{font-style:normal;width:28px;height:28px;border-radius:50%;background:#fff;border:1.5px solid var(--green);color:var(--green);display:grid;place-items:center;font-size:13px;font-weight:600}
+.steps li b{display:block;font-weight:600;line-height:1.3}
+.steps li b small{font-weight:500;color:var(--ink-2);font-size:13px;margin-left:6px}
+.steps li>div>span{display:block;font-size:14.5px;color:var(--ink-2);margin-top:3px}
+.steps .report{margin-top:8px;padding:8px 10px;border-left:3px solid var(--lime);background:rgba(255,255,255,.6);border-radius:0 8px 8px 0;color:var(--ink)}
+.steps .report b{display:inline;font-weight:600;color:var(--green)}
+.phase{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.phase li{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:14.5px;line-height:1.4;align-items:start}
+.phase li em{font-style:normal;font-size:12px;font-weight:600;color:var(--green);background:#fff;border:1px solid var(--mint-2);border-radius:6px;padding:2px 7px;margin-top:1px;white-space:nowrap}
+.usp{margin:10px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.usp span{font-size:13px;font-weight:600;color:var(--green-ink);background:var(--lime);border-radius:999px;padding:5px 10px;line-height:1.2}
+.panel figure{margin:18px calc(-1*var(--gutter)) 0;position:relative;aspect-ratio:16/9;background:var(--mint-2)}
+@media(min-width:721px){.panel figure{margin-left:-22px;margin-right:-22px}}
+.panel figure::before{content:"";position:absolute;left:0;right:0;top:0;height:36px;background:linear-gradient(var(--mint),rgba(233,241,230,0));z-index:1}
+.panel figure img{width:100%;height:100%;object-fit:cover}
+.panel figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px var(--gutter) 14px;color:#fff;background:linear-gradient(transparent,rgba(8,30,25,.82));font-size:15px;font-weight:500;line-height:1.35;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.panel[data-swap]{animation:swap .25s ease}
+@keyframes swap{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* sections */
+section.block{padding-top:34px}
+.block h2+p{margin-top:6px;color:var(--ink-2)}
+.lead{display:grid;grid-template-columns:104px 1fr;gap:14px;margin-top:16px;align-items:start}
+.lead img{width:104px;height:120px;object-fit:cover;object-position:top;border-radius:14px;background:var(--mint)}
+.lead h3{font-size:17px}
+.lead .role{margin-top:4px;font-size:14px;color:var(--ink-2);line-height:1.45}
+.creds{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.creds li{font-size:12.5px;font-weight:500;color:var(--green);background:var(--mint);border-radius:999px;padding:4px 9px}
+.doc-note{margin-top:8px;font-size:14px;line-height:1.45}
+.sub-line{margin-top:18px;font-size:14px;font-weight:600}
+.slider{display:flex;gap:10px;margin:10px calc(-1*var(--gutter)) 0;padding:2px var(--gutter) 8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.slider::-webkit-scrollbar{display:none}
+@media(min-width:721px){.slider{margin-left:0;margin-right:0;padding-left:0;padding-right:0}}
+.slider .card{flex:0 0 150px;scroll-snap-align:start;border:1px solid var(--line);border-radius:14px;padding:10px;background:#fff;display:flex;flex-direction:column;gap:3px;text-decoration:none}
+.slider .card img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;border-radius:10px;background:var(--mint);margin-bottom:6px}
+.slider .card b{font-size:14px;font-weight:600;line-height:1.25}
+.slider .card span{font-size:12.5px;color:var(--ink-2);line-height:1.3}
+.slider .card small{font-size:12px;color:var(--ink-3);line-height:1.35;margin-top:2px}
+.slider .card.wide{flex-basis:250px}
+.flow{margin:14px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.flow li{background:var(--mint);border-radius:12px;padding:10px 10px 11px;position:relative}
+.flow li b{display:block;font-size:13.5px;font-weight:600;line-height:1.25}
+.flow li span{display:block;font-size:12px;color:var(--ink-2);line-height:1.35;margin-top:3px}
+.flow li+li::before{content:"";position:absolute;left:-7px;top:50%;width:6px;height:6px;border-top:1.5px solid var(--green);border-right:1.5px solid var(--green);transform:translateY(-50%) rotate(45deg)}
+.prices{display:grid;gap:10px;margin-top:16px}
+.price{border:1.5px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:start}
+.price.first{border-color:var(--green);background:var(--mint)}
+.price .k{font-size:13px;color:var(--ink-2);grid-column:1/-1}
+.price .k em{font-style:normal;color:var(--green);font-weight:600}
+.price h3{font-size:17px}
+.price .amt{text-align:right;white-space:nowrap;font-weight:600;font-size:22px;letter-spacing:-.02em;line-height:1}
+.price .amt s{display:block;font-size:13px;color:var(--ink-3);font-weight:400;margin-bottom:3px}
+.price .amt small{display:block;font-size:12px;color:var(--ink-3);font-weight:400;margin-top:4px}
+.price p{grid-column:1/-1;font-size:14px;color:var(--ink-2)}
+.price .btn{grid-column:1/-1;justify-self:start;min-height:42px;padding:9px 16px;font-size:14px;margin-top:4px}
+.note{margin-top:12px;font-size:13px;color:var(--ink-3)}
+.reviews{display:grid;gap:10px;margin-top:16px}
+.review{border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:15px;line-height:1.5}
+.review .stars{color:#e8a600;font-size:13px;letter-spacing:1px}
+.review p{margin-top:6px}
+.review .by{display:block;margin-top:8px;font-size:13px;color:var(--ink-3)}
+.here{display:grid;gap:14px;margin-top:16px}
+.addr{font-size:15px;line-height:1.5}
+.near{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.near li{font-size:13px;color:var(--ink-2);background:var(--mint);border-radius:999px;padding:5px 10px}
+.map{border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;background:var(--mint)}
+.map iframe{width:100%;height:100%;border:0;display:block}
+.here .btn{justify-self:start}
+.book{margin-top:16px;padding:20px;border:1.5px solid var(--green);border-radius:18px}
+.book h3{font-size:20px}
+.book p.small{margin-top:4px}
+.act2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.faq{margin-top:12px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:14px 0;font-weight:500;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:22px;line-height:1;color:var(--ink-3);flex:none}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 0 14px;color:var(--ink-2);font-size:15px;max-width:60ch}
+.others{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.others a{font-size:14px;border:1px solid var(--line);border-radius:999px;padding:7px 12px;text-decoration:none;color:var(--ink-2)}
+footer{margin-top:40px;padding:22px 0 120px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3);line-height:1.6}
+footer b{color:var(--ink-2);font-weight:600}
+footer a{color:var(--ink-2)}
+
+/* booking dialog */
+dialog#book-dialog{border:0;padding:0;width:min(100%,520px);max-width:100%;border-radius:20px 20px 0 0;margin:auto 0 0;box-shadow:0 -10px 40px rgba(20,62,55,.18);background:#fff;color:var(--ink)}
+@media(min-width:721px){dialog#book-dialog{border-radius:20px;margin:auto}}
+dialog#book-dialog::backdrop{background:rgba(10,30,25,.45);backdrop-filter:blur(2px)}
+dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gutter) calc(20px + env(safe-area-inset-bottom))}
+.dlg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.dlg-head h3{font-size:19px}
+.dlg-head .x{border:0;background:var(--mint);width:36px;height:36px;border-radius:50%;font-size:22px;line-height:1;cursor:pointer;flex:none}
+.form{display:grid;gap:12px}
+.form[hidden]{display:none}
+.field label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}
+.field input{width:100%;min-height:48px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+.field input:focus{border-color:var(--green);outline:none}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.pick{display:flex;flex-wrap:wrap;gap:6px}
+.pick button{min-height:36px;padding:6px 11px;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-size:13.5px;cursor:pointer}
+.pick button[aria-pressed="true"]{border-color:var(--green);background:var(--mint);font-weight:600}
+.when{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.when button{min-height:44px;border:1.5px solid var(--line);border-radius:10px;background:#fff;font-size:14px;cursor:pointer}
+.when button[aria-pressed="true"]{border-color:var(--green);background:var(--mint);font-weight:600}
+.form .btn{width:100%;margin-top:4px}
+.err{display:none;padding:10px 12px;border-radius:10px;background:#fbe5e5;color:var(--bad);font-size:14px;line-height:1.45}
+.err a{color:inherit}
+.done{display:none;font-size:15px;line-height:1.5}
+.done .inner{padding:14px 16px;border-radius:12px;background:var(--mint)}
+.done .faster{margin-top:14px;font-size:14px;color:var(--ink-2);line-height:1.45}
+.done .btn{margin-top:10px;width:100%}
+.consent{font-size:12.5px;color:var(--ink-3);line-height:1.45}
+
+/* sticky bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:8px;padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .25s}
+.bar.show{transform:none}
+.bar .btn{min-height:46px;padding:10px 8px;font-size:14px;border-radius:12px}
+@media(min-width:721px){.bar{left:auto;right:24px;bottom:24px;width:auto;grid-template-columns:auto auto auto;padding:8px;border-radius:16px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(20,62,55,.12)}}
+</style>
+</head>
+<body data-area="{{ID}}" data-layout="clinic-v3">
+
+<header class="top">
+ <div class="wrap">
+  <a class="brand" href="#top" aria-label="{{FULL}}"><img src="/physiotherapy-near-me-delhi/assets/cb-logo-480.webp" alt="CB Physiotherapy" width="480" height="120"></a>
+  <span class="open" id="open-state"><i aria-hidden="true"></i>Open till 8pm</span>
+  <a class="btn call" href="tel:{{TEL}}" data-call="{{ID}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg><span>Call</span></a>
+ </div>
+</header>
+
+<main id="top">
+ <figure class="cover {{HERO_CLASS}}">
+  <img src="{{HERO_SRC}}"{{HERO_SRCSET_ATTR}} width="{{HERO_W}}" height="{{HERO_H}}" alt="Inside {{FULL}}" fetchpriority="high" decoding="async">
+  <div class="fees-line"><span>Sessions <b>₹999 to ₹1,499</b></span><span>Same-day appointments</span></div>
+  <figcaption>
+   <span class="title">{{FULL}}</span>
+   <span class="tagline">Recovery with <em>AI Precision</em></span>
+  </figcaption>
+ </figure>
+
+ <section class="intro wrap">
+  <h1>Advanced Physio Care near you in {{SHORT}}.</h1>
+  <p class="where"><a href="{{MAPS_URL}}" target="_blank" rel="noopener" data-map="{{ID}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg><b>{{WHERE}}</b><span>Directions</span></a></p>
+  <p class="rating"><svg class="gmark" viewBox="0 0 48 48" aria-label="Google"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6C44.4 38.02 46.98 31.86 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.87 23.87 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="stars" aria-hidden="true">★★★★★</span><span><b>{{RATING}}</b> from {{COUNT_FMT}} reviews. <a href="{{GOOGLE_URL}}" target="_blank" rel="noopener" data-reviews>Read them</a></span></p>
+  <div class="cta" id="hero-cta">
+   <a class="btn call" href="tel:{{TEL}}" data-call="{{ID}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call</a>
+   <a class="btn wa" href="#" data-wa data-intent="hero" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>WhatsApp</a>
+   <button class="btn" type="button" data-book data-place="hero">Book a slot</button>
+  </div>
+ </section>
+
+ <section class="choose wrap" id="care">
+  <h2 id="care-heading">Delhi's trusted physiotherapy for</h2>
+  <div class="seg-wrap" id="seg-wrap">
+   <div class="seg" role="group" aria-labelledby="care-heading">
+    <button type="button" data-c="spine" data-concern="spine" aria-pressed="false">Back or Neck</button>
+    <button type="button" data-c="joint" data-concern="joint" aria-pressed="false">Knee or Joint</button>
+    <button type="button" data-c="rehab" data-concern="rehab" aria-pressed="false">Injury or Surgery</button>
+    <button type="button" data-c="ortho" data-concern="other" aria-pressed="false">Other Ortho or Neuro</button>
+   </div>
+  </div>
+  <div class="panel" id="panel" aria-live="polite"></div>
+ </section>
+
+ <section class="block wrap" id="team">
+  <h2>Your care team at {{SHORT}}</h2>
+  {{TEAM_LEAD}}
+  <p class="sub-line">Treating physiotherapists at {{SHORT}}</p>
+  <div class="slider" aria-label="{{SHORT}} physiotherapists">
+   {{TEAM_CARDS}}
+  </div>
+ </section>
+
+ <section class="block wrap" id="central">
+  <h2>Your progress is watched, not assumed</h2>
+  <p>Your Recovery Plan Report sets the diagnosis, the plan and the milestones. Every session is recorded against them. A central clinical team, with more than 20 years of combined experience, keeps watch on how each case is moving and steps in before you have to ask.</p>
+  <ol class="flow" aria-label="How progress is tracked">
+   <li><b>Recovery Plan Report</b><span>Diagnosis, plan, timeline and milestones</span></li>
+   <li><b>Every session</b><span>Recorded against those milestones</span></li>
+   <li><b>Central team</b><span>Reviews the trend and flags any case that slips</span></li>
+  </ol>
+  <div class="slider" aria-label="Central case monitoring team">
+   {{CENTRAL_CARDS}}
+  </div>
+ </section>
+
+ <section class="block wrap" id="pricing">
+  <h2>Clear fees. Start with confidence.</h2>
+  <p>Start with an assessment. Your physiotherapist recommends the right care from there.</p>
+  <div class="prices">
+   <div class="price first"><span class="k">Your first step <em>Offer, save ₹500</em></span><h3>AI assessment &amp; consultation</h3><div class="amt"><s>₹999</s>₹499<small>per assessment</small></div><p>An AI-guided assessment by your physiotherapist, ending in your Recovery Plan Report: diagnosis, observations and tests, treatment plan and expected timeline.</p><button class="btn" type="button" data-book data-place="pricing">Book the assessment</button></div>
+   <div class="price"><span class="k">Ongoing care</span><h3>Standard physiotherapy</h3><div class="amt">₹999<small>per session</small></div><p>Hands-on manual therapy and electrotherapy, selected for your condition.</p></div>
+   <div class="price"><span class="k">Advanced modalities</span><h3>Advanced physiotherapy</h3><div class="amt">₹1,499<small>per session</small></div><p id="fee-adv">Class 4 laser, TECAR or robotic spinal decompression, when clinically appropriate.</p></div>
+  </div>
+  <p class="note">Save 10% on multi-session treatment packages. Bring any MRI, X-ray or surgery notes you already have.</p>
+ </section>
+
+ <section class="block wrap" id="reviews">
+  <h2 id="rv-title">What patients say about {{FULL}}</h2>
+  <p>From the clinic's patient reviews. <a href="{{GOOGLE_URL}}" target="_blank" rel="noopener" data-reviews>Read all {{COUNT_FMT}} on Google</a>.</p>
+  <div class="reviews" id="rv-list"></div>
+ </section>
+
+ <section class="block wrap" id="clinics">
+  <h2>Getting here</h2>
+  <p>{{HERE_TEXT}}</p>
+  <div class="here">
+   <p class="addr"><b>{{FULL}}</b><br>{{ADDRESS}}<br>Open {{HOURS}}, every day. Phone <a href="tel:{{TEL}}" data-call="{{ID}}">{{PHONE_DISPLAY}}</a>.</p>
+   <div class="map" id="map-box"><iframe title="Map of {{FULL}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.openstreetmap.org/export/embed.html?bbox={{BBOX}}&layer=mapnik&marker={{LAT}}%2C{{LNG}}"></iframe></div>
+   <p class="small muted">Also serving</p>
+   <ul class="near">{{NEAR_LIST}}</ul>
+   {{METRO_LINE}}
+   <a class="btn quiet" href="{{MAPS_URL}}" target="_blank" rel="noopener" data-map="{{ID}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>Open in Google Maps</a>
+  </div>
+ </section>
+
+ <section class="block wrap" id="book">
+  <h2>Book a slot</h2>
+  <p>Tell us when suits you. We call back within 15 minutes during opening hours to confirm the time.</p>
+  <div class="book">
+   <h3 id="book-title">Your first visit</h3>
+   <p class="small muted" id="book-sub">Usually 30 to 40 minutes. Tell us what it is for when you book, or let the physiotherapist work it out.</p>
+   <div class="act2"><button class="btn" type="button" data-book data-place="book_section">Request a call back</button><a class="btn call" href="tel:{{TEL}}" data-call="{{ID}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call now</a></div>
+  </div>
+ </section>
+
+ <section class="block wrap faq-section" id="faq">
+  <h2>Before you come</h2>
+  <div class="faq">
+   <details><summary>Do I need a doctor's referral?</summary><p>No. You can book directly. If you already have a prescription, scans or surgery notes, bring them and your physiotherapist will work from them.</p></details>
+   <details><summary>Can I come today?</summary><p>Usually yes. Call or request a call back and we will give you the next free slot. Evenings fill first, so for a same-day visit a morning or early afternoon slot is more likely.</p></details>
+   <details><summary>How many sessions will I need?</summary><p id="faq-sessions">You will get an estimate at the end of the first visit. Most problems settle in six to ten sessions; post-surgery rehab follows the surgeon's timeline.</p></details>
+   <details><summary>Will insurance cover it?</summary><p>Clinic physiotherapy is usually paid directly and claimed later where your policy allows outpatient care. You get a receipt and a report after every visit for that.</p></details>
+   <details><summary>Can the physiotherapist visit me at home?</summary><p>Yes, for people who cannot travel after surgery or with severe pain. Home visits cost more and have fewer time slots, so mention it when you call.</p></details>
+  </div>
+  <p class="sub-line">Other CB Physiotherapy clinics in Delhi</p>
+  <div class="others">{{OTHER_CLINICS}}</div>
+ </section>
+</main>
+
+<footer class="wrap">
+ <b>{{FULL}}</b>, {{ADDRESS}}. Open {{HOURS}}, every day. Phone <a href="tel:{{TEL}}">{{PHONE_DISPLAY}}</a>. Central line <a href="tel:+911140846393">011 4084 6393</a>. One of five CB Physiotherapy clinics in Delhi. <a href="{{MAIN_PAGE}}" rel="noopener">Clinic profile on cbphysiotherapy.in</a>.
+</footer>
+
+<dialog id="book-dialog" aria-labelledby="dlg-title">
+ <form class="form" id="form" novalidate data-endpoint="https://cbphysiotherapy.in/api/landing/book-appointment" data-source="google-ads-{{ID}}-landing">
+  <div class="dlg-head"><div><h3 id="dlg-title">Book your first visit</h3><p class="small muted" id="dlg-sub">We call back within 15 minutes to confirm a time.</p></div><button type="button" class="x" id="dlg-close" aria-label="Close">×</button></div>
+  <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required maxlength="80"></div>
+  <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" required></div>
+  <div class="field"><label>What is it for?</label>
+   <div class="pick" role="group" aria-label="Your concern">
+    <button type="button" data-pick="spine" aria-pressed="false">Back or neck</button>
+    <button type="button" data-pick="joint" aria-pressed="false">Knee or joint</button>
+    <button type="button" data-pick="rehab" aria-pressed="false">Injury or surgery</button>
+    <button type="button" data-pick="ortho" aria-pressed="false">Other ortho or neuro</button>
+    <button type="button" data-pick="unsure" aria-pressed="false">Not sure yet</button>
+   </div>
+  </div>
+  <div class="field"><label>When would you like to come?</label>
+   <div class="when" role="group" aria-label="Preferred time">
+    <button type="button" data-when="today" aria-pressed="true">Today</button>
+    <button type="button" data-when="tomorrow" aria-pressed="false">Tomorrow</button>
+    <button type="button" data-when="week" aria-pressed="false">This week</button>
+   </div>
+  </div>
+  <input type="hidden" name="concern" id="concern" value="">
+  <div class="hp" aria-hidden="true"><label>Website<input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></label></div>
+  <div class="err" id="form-error" role="alert"></div>
+  <button class="btn" type="submit" id="submit-btn">Request a call back</button>
+  <p class="consent">We use your number only to confirm this appointment. Prefer to talk now? <a href="tel:{{TEL}}">Call {{PHONE_DISPLAY}}</a> or <a href="#" id="wa-inline" data-wa data-intent="booking_form" target="_blank" rel="noopener">message on WhatsApp</a>.</p>
+ </form>
+ <div class="done" id="done" role="status"></div>
+</dialog>
+
+<div class="bar" id="bar" aria-label="Quick actions">
+ <a class="btn call" href="tel:{{TEL}}" data-call="{{ID}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call</a>
+ <a class="btn wa" href="#" data-wa data-intent="floating" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>WhatsApp</a>
+ <button class="btn" type="button" data-book data-place="floating">Book a slot</button>
+</div>
+
+<script id="clinic-data" type="application/json">{{DATA}}</script>
+<script>
+(()=>{
+ const D=JSON.parse(document.getElementById('clinic-data').textContent);
+ const A='/physiotherapy-near-me-delhi/assets/';
+ const WA='https://wa.me/'+D.whatsapp+'?text=';
+ const $=s=>document.querySelector(s);
+ const dl=window.dataLayer=window.dataLayer||[];const push=o=>dl.push(o);
+ window.cbRoute={decision:'page',clinic:D.id,kw_class:'',conditions:[],services:[],irrelevant:false};
+ const CONCERNS={
+  all:{name:'Assess first. Treat the same day. Track until you are better.',short:'a first assessment',title:'Your first visit',api:'',
+   intro:'<b>The CB Physiotherapy way</b>, behind '+D.rating+' stars from '+D.count_fmt+' Google reviews at '+D.short+'. Pick your concern above to see how it applies to you.',
+   assess:'Your physiotherapist works through an AI-guided assessment: history, movement, strength and the tests that fit your problem.',
+   relief:'Hands-on treatment, with Class 4 laser or TECAR where it helps, so you leave the first visit already feeling the difference.',
+   recover:'A programme built around the cause, not the symptom: spinal decompression, measured strengthening or staged rehab, matched to you.',
+   usp:['AI-assisted assessment','Advanced modalities','Precision exercise'],
+   track:'Goals in your words, milestones you can feel, and a plan that changes as you do.',
+   img:'precision-strength-testing-800.webp',cap:'AI-guided assessment, so the diagnosis and plan rest on measurements, not guesswork.',
+   feeAdv:'Class 4 laser, TECAR or robotic spinal decompression, when clinically appropriate.',
+   bookSub:'Usually 30 to 40 minutes. Tell us what it is for when you book, or let the physiotherapist work it out.',
+   faq:'You will get an estimate at the end of the first visit. Most problems settle in six to ten sessions; post-surgery rehab follows the surgeon’s timeline.',
+   rvTitle:'What patients say about '+D.full,doc:'Leads the '+D.short+' team and reviews every treatment plan here.',
+   wa:'Hi, I would like to book a first visit at '+D.full+'.'},
+  spine:{name:'Back or neck pain',short:'back or neck pain',title:'Back or neck, first visit',api:'spine',
+   intro:'<b>Root cause analysis and expert care</b> for slip disc, sciatica, cervical pain, muscle spasm, stiff neck and lower back pain.',
+   assess:'Whether it is the muscle, a joint, a disc or a nerve: history, posture, movement, nerve and strength tests, guided step by step.',
+   relief:'Hands-on release and Class 4 laser or TECAR to settle the spasm and take the edge off, usually from the first visit.',
+   recover:'Robotic spinal decompression for disc and nerve pain, and precision exercises that rebuild the support around your spine so it stays better.',
+   usp:['Robotic spinal decompression','Class 4 laser & TECAR','Precision spine exercise'],
+   track:'Milestones you can feel: sitting through a meeting, sleeping through the night, bending without bracing. Goals set with you and the plan adjusted at every review.',
+   img:'slider/spine-800.webp',cap:'Robotic spinal decompression, for disc and nerve-related back and neck pain.',
+   feeAdv:'Robotic spinal decompression, Class 4 laser or TECAR for the spine, when your physio recommends it.',
+   bookSub:'Usually 30 to 40 minutes. Wear something you can bend and twist in.',
+   faq:'You will get an estimate at the end of the first visit. Most back and neck problems settle in six to ten sessions; disc-related pain can take longer.',
+   rvTitle:'What patients say about back and neck care at '+D.short,doc:'Sees back and neck problems every day, including disc and nerve-related pain, and personally plans the decompression and exercise programme.',
+   wa:'Hi, I have back or neck pain and would like an appointment at '+D.full+'.'},
+  joint:{name:'Knee, shoulder or joint pain',short:'knee or joint pain',title:'Knee or joint, first visit',api:'joint',
+   intro:'<b>Find the source of the pain, with advanced care</b> for knee pain, frozen shoulder, arthritis, hip pain, ankle sprains and tennis elbow.',
+   assess:'Whether the pain comes from the joint, the tendon or the muscles around it, and how much movement and strength you have lost, measured.',
+   relief:'Class 4 laser or TECAR to calm the joint, with taping or hands-on work so it moves easier from day one.',
+   recover:'Strength around the joint measured with digital testing and rebuilt with guided exercise, so the pain does not come back when you stop.',
+   usp:['Class 4 laser & TECAR','Digital strength testing','Guided strengthening'],
+   track:'Stairs, squatting, reaching overhead: each becomes a milestone. Strength is re-tested so you see the numbers move, and the plan changes as you do.',
+   img:'care/knee-rehab-800.webp',cap:'Strength around the joint, measured on every visit, not guessed.',
+   feeAdv:'Class 4 laser or TECAR for the joint, when your physio recommends it.',
+   bookSub:'Usually 30 to 40 minutes. Shorts for knees, a vest or loose top for shoulders.',
+   faq:'You will get an estimate at the end of the first visit. Most joint problems improve in six to eight sessions; arthritic joints do best with an ongoing routine, which we teach you.',
+   rvTitle:'What patients say about knee and shoulder care at '+D.short,doc:'Treats knees, shoulders and hips daily, from frozen shoulder to arthritic knees, with hands-on care and measured strengthening.',
+   wa:'Hi, I have knee, shoulder or joint pain and would like an appointment at '+D.full+'.'},
+  rehab:{name:'Injury or post-surgery rehab',short:'rehab',title:'Injury or surgery rehab, first visit',api:'rehab',
+   intro:'<b>A structured recovery plan</b> for ACL and ligament tears, fractures, knee and hip replacement, shoulder surgery and sports injuries.',
+   assess:'Range, swelling, strength and how you walk or lift, checked against your surgeon’s protocol and the stage you are at.',
+   relief:'Pain and swelling control first: Class 4 laser or TECAR for healing tissue, and safe early movement so nothing stiffens.',
+   recover:'Progressive strengthening in stages, timed to your surgeon’s follow-ups, until you are back to the activity you miss.',
+   usp:['Protocol-led rehab','Laser & TECAR for healing','Measured strength milestones'],
+   track:'Week-by-week milestones: full bend, walking without support, first jog. Reviewed alongside your surgeon’s visits and adjusted as you heal.',
+   img:'slider/exercise-800.webp',cap:'Guided, progressive strength work, stage by stage, with your physio beside you.',
+   feeAdv:'Class 4 laser or TECAR for healing tissue, when your physio recommends it.',
+   bookSub:'Usually 40 minutes. Bring your discharge summary or surgeon’s protocol.',
+   faq:'It depends on the injury or surgery. Knee replacement rehab usually runs eight to twelve weeks; a ligament repair follows the surgeon’s timeline, which we plan around.',
+   rvTitle:'What patients say about rehab at '+D.short,doc:'Runs post-surgery and sports injury rehab in step with the operating surgeon’s protocol, with milestones checked each week.',
+   wa:'Hi, I need physiotherapy after an injury or surgery and would like an appointment at '+D.full+'.'},
+  ortho:{name:'Other ortho or nerve-related problems',short:'ortho or nerve care',title:'Other ortho or neuro, first visit',api:'other',
+   intro:'<b>Accurate diagnosis, with focused care</b> for pinched nerves, tingling and numbness, heel pain, posture-related pain and balance after a fall.',
+   assess:'Which nerve, joint or muscle is behind it, and what is safe to do now: nerve, posture and balance tests, guided step by step.',
+   relief:'Nerve-gliding and hands-on work to ease the irritation, with Class 4 laser or TECAR for the painful area.',
+   recover:'Strength, posture and balance retraining, measured with digital testing, so the problem does not creep back.',
+   usp:['Nerve & posture care','Class 4 laser & TECAR','Measured balance & strength'],
+   track:'Milestones in your words: typing without tingling, walking further, standing steadier. Checked and adjusted at each visit.',
+   img:'slider/laser-800.webp',cap:'Class 4 laser and TECAR, for irritated nerves and painful tissue.',
+   feeAdv:'Class 4 laser, TECAR or decompression for nerve-related pain, when your physio recommends it.',
+   bookSub:'Usually 30 to 40 minutes. Bring any nerve conduction or MRI reports you have.',
+   faq:'You will get an estimate at the end of the first visit. Nerve-related pain usually eases over six to ten sessions; posture and balance work continues at home.',
+   rvTitle:'What patients say about nerve and posture care at '+D.short,doc:'Combines orthopaedic physiotherapy with chiropractic assessment for nerve, posture and alignment problems.',
+   wa:'Hi, I have a nerve-related or other orthopaedic problem and would like an appointment at '+D.full+'.'}
+ };
+ let current='all',chosen=false;
+ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ function render(c,fromClick){const d=CONCERNS[c];const panel=$('#panel');
+  panel.innerHTML=`<h3>${d.name}</h3><p class="who">${d.intro}</p>
+   <div class="act"><button class="btn" type="button" data-book data-place="care_panel">Book the first visit</button><a class="btn quiet" href="tel:${D.tel}" data-call="${D.id}">Call to ask</a></div>
+   <ol class="steps">
+    <li><i>1</i><div><b>AI-guided assessment<small>15 to 30 min</small></b><span>${d.assess}</span><span class="report">It ends in your <b>Recovery Plan Report</b>: the diagnosis, what was observed and tested, the treatment plan and the expected timeline.</span></div></li>
+    <li><i>2</i><div><b>Treatment, same day</b><ul class="phase"><li><em>First</em><span>${d.relief}</span></li><li><em>Then</em><span>${d.recover}</span></li></ul><div class="usp">${d.usp.map(u=>`<span>${u}</span>`).join('')}</div></div></li>
+    <li><i>3</i><div><b>Tracking</b><span>${d.track} Every session is recorded against these milestones, and the central team keeps watch.</span></div></li>
+   </ol>
+   <figure><img src="${A}${d.img}" alt="" loading="lazy" decoding="async" width="800" height="450"><figcaption>${d.cap}</figcaption></figure>`;
+  if(fromClick){panel.removeAttribute('data-swap');void panel.offsetWidth;panel.setAttribute('data-swap','');}
+  $('#book-title').textContent=d.title;$('#book-sub').textContent=d.bookSub;$('#fee-adv').textContent=d.feeAdv;$('#faq-sessions').textContent=d.faq;
+  const rv=(D.reviews[c]&&D.reviews[c].length?D.reviews[c]:D.reviews.all)||[];
+  $('#rv-title').textContent=d.rvTitle;$('#rv-list').innerHTML=rv.map(r=>`<div class="review"><span class="stars" aria-hidden="true">★★★★★</span><p>${esc(r.text)}</p><span class="by">${esc(r.author)}, patient review${r.date?', '+esc(r.date.replace(/^\d+ /,'')):''}</span></div>`).join('')||'<p class="muted small">Reviews are on the clinic’s Google profile.</p>';
+  if($('#doc-note'))$('#doc-note').textContent=d.doc;
+  const wa=WA+encodeURIComponent(d.wa);document.querySelectorAll('[data-wa]').forEach(a=>a.href=wa);
+  document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.c===c)));current=c;
+  if(fromClick){const y=$('#seg-wrap').getBoundingClientRect().top+scrollY-58;scrollTo({top:y,behavior:'smooth'});}}
+ document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{chosen=true;render(b.dataset.c,true);push({event:'concern_selected',concern:b.dataset.concern,placement:'care_tabs'});}));
+ render('all',false);
+ // booking
+ const dlg=$('#book-dialog'),form=$('#form'),errBox=$('#form-error'),submitBtn=$('#submit-btn');
+ const pickBtns=[...document.querySelectorAll('.pick button')];
+ const setPick=v=>{pickBtns.forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.pick===v)));$('#concern').value=v||'';$('#dlg-title').textContent=v&&CONCERNS[v]?CONCERNS[v].title:'Book your first visit';};
+ pickBtns.forEach(b=>b.addEventListener('click',()=>setPick(b.dataset.pick)));
+ document.querySelectorAll('.when button').forEach(b=>b.addEventListener('click',()=>document.querySelectorAll('.when button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))));
+ document.addEventListener('click',e=>{const b=e.target.closest('[data-book]');if(!b)return;e.preventDefault();setPick(chosen?current:'');errBox.style.display='none';if(!dlg.open)dlg.showModal();setTimeout(()=>$('#name').focus(),50);});
+ $('#dlg-close').addEventListener('click',()=>dlg.close());dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
+ const showErr=m=>{errBox.innerHTML=m;errBox.style.display='block';};
+ const failMsg=(res,data)=>{if(!res)return `We could not reach our booking service. Please check your connection and try again, or call us on <a href="tel:${D.tel}">${D.phone_display}</a>.`;if(res.status===422)return (data&&data.message)?esc(data.message):'Please check the name and mobile number and try again.';if(res.status===429)return 'Too many attempts just now. Please wait a minute, or call us.';return `We could not save your request right now. Please call us on <a href="tel:${D.tel}">${D.phone_display}</a> or try again shortly.`;};
+ let sending=false;
+ form.addEventListener('submit',async e=>{e.preventDefault();if(sending)return;const name=form.name.value.trim();const raw=form.phone.value.trim();const phone=raw.replace(/[\s()-]/g,'').replace(/^(\+91|0091)/,'').replace(/^91(?=\d{10}$)/,'');
+  if(!name){form.name.focus();showErr('Please tell us your name.');return;}if(!/^[6-9]\d{9}$/.test(phone)){form.phone.focus();showErr('Please enter a valid 10-digit Indian mobile number.');return;}
+  const pick=$('#concern').value;if(!pick){showErr('Please pick what the visit is for, or choose "Not sure yet".');$('.pick button').focus();return;}
+  const when=document.querySelector('.when [aria-pressed="true"]').dataset.when;const whenText={today:'today',tomorrow:'tomorrow',week:'this week'}[when];
+  const forWhat=CONCERNS[pick]?CONCERNS[pick].short:'a first assessment';
+  const params=new URLSearchParams(location.search);
+  const payload={name,phone,clinic:D.id,website:$('#website').value,source:form.dataset.source,landing_url:location.href.slice(0,2000),preferred_time:when};
+  if(CONCERNS[pick]&&CONCERNS[pick].api)payload.concern=CONCERNS[pick].api;
+  ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'].forEach(k=>{const v=params.get(k);if(v)payload[k]=v.slice(0,200);});
+  sending=true;submitBtn.disabled=true;submitBtn.textContent='Sending…';errBox.style.display='none';
+  const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),20000);let res=null,data=null;
+  try{res=await fetch(form.dataset.endpoint,{method:'POST',mode:'cors',credentials:'omit',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload),signal:ctrl.signal});try{data=await res.json();}catch(_){data=null;}}catch(_){res=null;}
+  clearTimeout(timer);sending=false;submitBtn.disabled=false;submitBtn.textContent='Request a call back';
+  if(res&&res.ok&&data&&data.success===true){
+   const waMsg=WA+encodeURIComponent(`Hi, I just requested a call back on your website. Name: ${name}. For: ${forWhat}. Preferred time: ${whenText}. ${D.full}.`);
+   const done=$('#done');done.innerHTML=`<div class="inner"><b>Thanks, ${esc(name.split(' ')[0])}.</b> We have your request for ${D.short} and will call ${phone.replace(/(\d{5})(\d{5})$/,'$1 $2')} within 15 minutes during opening hours to fix a time ${whenText} for ${forWhat}.</div><p class="faster">Want a faster reply? Send the same request on WhatsApp and the team picks it up straight away.</p><a class="btn wa" href="${waMsg}" target="_blank" rel="noopener" data-intent="after_booking"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>Send on WhatsApp</a><button class="btn quiet" type="button" id="dlg-done">Done</button>`;
+   done.style.display='block';form.hidden=true;$('#dlg-done').addEventListener('click',()=>dlg.close());
+   push({event:'booking_request_sent',clinic_id:D.id,preferred:when});return;}
+  showErr(failMsg(res,data));push({event:'booking_request_failed',reason:res?String(res.status):'network'});});
+ // bars and open state
+ const bar=$('#bar'),cover=$('.cover'),segWrap=$('#seg-wrap'),heroCta=$('#hero-cta');
+ const upd=()=>{bar.classList.toggle('show',heroCta.getBoundingClientRect().bottom<0);segWrap.classList.toggle('stuck',segWrap.getBoundingClientRect().top<=59&&scrollY>0);};
+ upd();addEventListener('scroll',upd,{passive:true});
+ try{const h=+new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',hour12:false}).format(new Date());if(h<D.open_hour||h>=D.close_hour){const el=$('#open-state');el.classList.add('closed');el.innerHTML='<i aria-hidden="true"></i>Opens '+D.open_label;}}catch(_){}
+})();
+</script>
+<script src="/physiotherapy-near-me-delhi/analytics.js?v={{ANALYTICS_V}}" defer></script>
+</body>
+</html>

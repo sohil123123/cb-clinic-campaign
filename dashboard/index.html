@@ -295,7 +295,7 @@ table.inner{font-size:12px}table.inner th,table.inner td{padding:5px 8px}
 const API=document.querySelector('meta[name="cb-analytics-api"]').content;
 const TZ='Asia/Kolkata';
 const PAGES={'/physiotherapy-near-me-delhi/':'Delhi (central)','/physiotherapy-near-me-saket/':'Saket','/physiotherapy-near-me-greater-kailash/':'Greater Kailash','/physiotherapy-near-me-safdarjung-enclave/':'Safdarjung Enclave','/physiotherapy-near-me-vasant-kunj/':'Vasant Kunj','/physiotherapy-near-me-dwarka/':'Dwarka'};
-const SECTIONS=[['hero','Landing screen'],['care','Your concern (care cards)'],['advanced-care','Advanced care'],['pricing','Fees'],['clinics','Clinics / getting here'],['precision-recovery','AI precision section'],['faq','FAQ'],['final-cta','Final call to action']];
+const SECTIONS=[['hero','Landing screen'],['care','Care areas'],['advanced-care','Advanced care'],['team','Care team'],['central','Progress monitoring'],['pricing','Fees'],['reviews','Reviews'],['clinics','Clinics / getting here'],['book','Book a slot'],['precision-recovery','AI precision section'],['faq','FAQ'],['final-cta','Final call to action']];
 const CONCERNS={spine:'Back / Neck',joint:'Knee / Joint',rehab:'Injury / Surgery',other:'Other issues',knee:'Knee',shoulder:'Shoulder',injury:'Injury',surgery:'Surgery'};
 const PLACE={floating:'Floating bar / buttons',header:'Header',landing_card:'Landing photo card',getting_here:'Getting here block',clinic_card:'Clinic card',map:'Map pin popup',booking_form:'Booking form',whatsapp_dialog:'WhatsApp dialog',final_cta:'Final call to action',pricing:'Fees card',hero:'Hero',faq:'FAQ',page:'Elsewhere',care_card:'Care card'};
 const INTENT={appointment:'Book an appointment',pricing:'Pricing & packages',service:'Treatment for my concern',other:'Another question',after_booking:'After booking',none:'No topic'};
@@ -343,7 +343,7 @@ async function load(){
 let sessionAd=new Map();
 let sessionLayout=new Map();
 function indexAds(){sessionAd=new Map();sessionLayout=new Map();state.events.forEach(e=>{if(e.event!=='page_view'||!e.props)return;if(e.props.ad&&Object.keys(e.props.ad).length)sessionAd.set(e.session,e.props.ad);sessionLayout.set(e.session,e.props.layout||'hero1');});}
-const LAYOUT={hero1:'Landing screen v1 (concern buttons first)',hero2:'Landing screen v2 (place, price, call, expertise)'};const layoutOf=e=>sessionLayout.get(e.session)||'hero1';
+const LAYOUT={hero1:'Landing screen v1 (concern buttons first)',hero2:'Landing screen v2 (place, price, call, expertise)','clinic-v3':'Clinic page v3 (photo first, care areas, team)'};const layoutOf=e=>sessionLayout.get(e.session)||'hero1';
 const adOf=e=>sessionAd.get(e.session)||{};
 function normalise(rows){return rows.map(r=>{let props=r.props||{};if(typeof props==='string'){try{props=JSON.parse(props);}catch(_){props={};}}return {ts:new Date(r.ts||r.created_at),event:r.event,page:r.page||'',area:r.area||'',device:r.device||'',visitor:r.visitor||r.visitor_id||'',session:r.session||r.session_id||'',utm_source:r.utm_source||'',utm_medium:r.utm_medium||'',utm_campaign:r.utm_campaign||'',referrer:r.referrer||'',props};}).filter(e=>!isNaN(e.ts));}
 

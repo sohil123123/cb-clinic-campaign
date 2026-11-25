@@ -1,0 +1,850 @@
+{
+ "whatsapp": "919821966696",
+ "central_phone": "01140846393",
+ "hours": "9am to 8pm",
+ "hours_short": "9am to 8pm",
+ "open_hour": 9,
+ "close_hour": 20,
+ "central_team": [
+  {
+   "name": "Dr. Deepanshu Khatri",
+   "role": "Head of operations",
+   "creds": "",
+   "text": "Reviews recorded sessions and milestones across all CB clinics, and steps in with the treating physio when a case is not moving as planned.",
+   "img": "https://cbphysiotherapy.in/images/team/deepanshu_khatri.webp",
+   "url": "https://cbphysiotherapy.in/about"
+  },
+  {
+   "name": "Dr. Iqra Altaf (PT)",
+   "role": "Senior consultant, clinical process and quality control. MPT, dry needling specialist",
+   "creds": "",
+   "text": "Writes the clinical protocols every CB clinic follows and audits recorded sessions against them. Academically and clinically rigorous, with an eye for the detail that keeps a plan on track.",
+   "img": "https://cbphysiotherapy.in/storage/images/user/600x692/iqra-altaf.webp",
+   "url": "https://cbphysiotherapy.in/delhi/physiotherapist/iqra-altaf"
+  }
+ ],
+ "clinics": [
+  {
+   "id": "saket",
+   "slug": "saket",
+   "short": "Saket",
+   "name": "Saket",
+   "full": "CB Physiotherapy, Saket",
+   "area": "South Delhi",
+   "title": "Best Physiotherapy Near You in Saket, Delhi | CB Physiotherapy",
+   "description": "Physiotherapy in Saket for back, neck, knee and shoulder pain, injuries and post-surgery rehab. CB Physiotherapy Saket, J-25 Mandir Marg, also serving Malviya Nagar, Pushp Vihar, Sainik Farms and Mehrauli, New Delhi.",
+   "address": "J-25, Basement, Mandir Marg, near Hotel Saket 27, Block J, Saket, New Delhi 110017",
+   "postcode": "110017",
+   "phone": "7303335605",
+   "tel": "+917303335605",
+   "phone_display": "73033 35605",
+   "latlng": [
+    28.5213449,
+    77.2162732
+   ],
+   "where": "Mandir Marg, Saket, Delhi",
+   "nearby": "Near Hotel Saket 27",
+   "landmark": "J-25, Basement · Near Hotel Saket 27",
+   "near": [
+    "Malviya Nagar",
+    "Pushp Vihar",
+    "Sainik Farms",
+    "Mehrauli"
+   ],
+   "metro": "Saket metro (Yellow Line)",
+   "rating": 4.9,
+   "count": 747,
+   "cid": "3568327738796298549",
+   "page": "https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-saket",
+   "hero": {
+    "src": "/physiotherapy-near-me-delhi/assets/clinics/saket-hero-800.webp",
+    "srcset": "/physiotherapy-near-me-delhi/assets/clinics/saket-hero-800.webp 800w, /physiotherapy-near-me-delhi/assets/clinics/saket-hero-1200.webp 1200w",
+    "w": 1200,
+    "h": 900
+   },
+   "head": {
+    "name": "Dr. Nitish Kumar Srivastava (PT)",
+    "url": "https://cbphysiotherapy.in/delhi/ortho-physiotherapist/nitish-kumar-srivastava",
+    "img": "https://cbphysiotherapy.in/storage/images/user/600x692/nitish-kumar-srivastava-2.webp",
+    "role": "Head of the Clinic",
+    "creds": [
+     "Orthopaedic physiotherapy",
+     "Certified chiropractor",
+     "MPT"
+    ]
+   },
+   "team": [
+    {
+     "name": "Dr. Riya Ranjan Singh",
+     "url": "https://cbphysiotherapy.in/delhi/ortho-physiotherapist/riya-ranjan-singh",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/riya-ranjan-singh-2.webp",
+     "role": "Physiotherapist, MPT Ortho",
+     "expertise": "Spine and joint pain, ortho rehab"
+    },
+    {
+     "name": "Dr. Meghna Kirar",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/meghna-kirar",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/meghna-kirar-2.webp",
+     "role": "Physiotherapist, BPT",
+     "expertise": "Pain relief, mobility, strengthening"
+    },
+    {
+     "name": "Dr. Saba Parveen",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/saba-parveen",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/saba-parveen-2.webp",
+     "role": "Physiotherapist, BPT",
+     "expertise": "Posture, balance, arthritis"
+    },
+    {
+     "name": "Dr. Sahil",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/sahil",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/sahil-2.webp",
+     "role": "Consultant Physiotherapist, BPT",
+     "expertise": "Spine, joints, chiropractic care"
+    },
+    {
+     "name": "Dr. Aditi Verma",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/aditi-verma",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/aditi-verma-2.webp",
+     "role": "Physiotherapist, BPT",
+     "expertise": "Back and neck, knee pain"
+    }
+   ],
+   "reviews": {
+    "spine": [
+     {
+      "text": "I had a neck pain on the right which was very painfull and I went to CB Physiotheraphy, Saket and I was having a short stay 5 days here before going back to my country and with these short time they scheduled me a series of sessions and I see a progress all the way and got fully recovered and back to my normal state. Thankyou very much. I will always recomend my close ones to come @ CB Physiotheraphy. A huge thanks for Dr. Meghna for the relief and care.",
+      "author": "Temesgen Worku",
+      "date": "22 Mar 2026"
+     },
+     {
+      "text": "5 years back i fell on my back since then i was facing on and off back pain but since 2 months it is getting severe, then i visited cb physio and started my treatment with dr mehak With her true dedication and guidance im feeling much better now Thankyou cb team.",
+      "author": "Rajni Poswal",
+      "date": "22 Jan 2026"
+     },
+     {
+      "text": "CB Physiotherapy Clinic in Saket deserves high praise for their effective treatment of my chronic neck and shoulder pain. The physiotherapists employed a combination of manual therapy and targeted exercises that provided relief from the first session. If you're seeking professional and personalized care for neck and shoulder issues, the CB Physiotherapy Clinic is the place to go.",
+      "author": "Dr. Ram prasad",
+      "date": "30 Nov 2026"
+     }
+    ],
+    "joint": [
+     {
+      "text": "Dealing with arthritis, I found solace in the expert care provided by CB Physiotherapy Saket. The team implemented a comprehensive approach, combining joint mobilization techniques with tailored exercises to enhance my joint mobility. Their understanding of arthritis-specific challenges and commitment to minimizing pain has greatly improved my daily life.",
+      "author": "Mr. Atul",
+      "date": "12 Dec 2026"
+     },
+     {
+      "text": "I was in a lot of pain and couldn't move my shoulder at all. After just a few sessions at Physiotherapy. I was able to move my shoulder more freely and the pain was much less. I am so grateful to the physiotherapists for helping me to recover from frozen shoulder.",
+      "author": "Subhash kumar",
+      "date": "14 Nov 2026"
+     },
+     {
+      "text": "Got an ankle injury a year ago, since then i was having ankle pain on and off, but recently it got aggravated then I visited CB Physiotherapy and had my consultation with Dr Mehak and did my rehab for 10 days, now im doing absolutely great....",
+      "author": "Vandana Singh",
+      "date": "25 Apr 2026"
+     }
+    ],
+    "rehab": [
+     {
+      "text": "DR RAHUL is one of the most amazing physio at CB Physio Saket for sports rehab I came for my acl recovery and in a month I was ready to go back to my basket ball matches, He is so humble too.",
+      "author": "Desert Eagle King",
+      "date": "03 Mar 2026"
+     },
+     {
+      "text": "I had my ACL surgery past 4 months and having severe problems in mobility and strength. Then I started my sessions with Dr Saksham. I am very thankful to him I can see my activity of daily life is being easy and started my running. Significant increase in my strength. Thanks to Dr Saksham. Must visit for sports rehabilitation.",
+      "author": "Hritik Kataria",
+      "date": "03 Jul 2026"
+     },
+     {
+      "text": "I am visiting CB physiotherapy from last month for my knee rehab post ACL ligament tear surgery. I am thankful to doctor Rahul as he helped me in my recovery.",
+      "author": "Anushka Gautam",
+      "date": "06 Jun 2026"
+     }
+    ],
+    "ortho": [
+     {
+      "text": "CB Physiotherapy in Saket is an absolute gem! I went there since I had been experiencing shoulder ache for some weeks. The therapist not only efficiently cured my discomfort, but also advised me on posture correction and exercises to avoid future problems. The personnel is really kind and approachable. I'm really amazed.",
+      "author": "Akash chopra",
+      "date": "27 Dec 2026"
+     },
+     {
+      "text": "I have a problem of forward head posture due to my desk job and for that I had to sit for long hours. My neck became totally stiffed and spasmodic. Visited CB Physiotherapy,took a few sessions, Really got a relief now.",
+      "author": "Zakriya Ansari",
+      "date": "04 Mar 2026"
+     }
+    ],
+    "all": [
+     {
+      "text": "One of the best physiotherapy clinics I’ve visited. The therapist was patient, knowledgeable, and genuinely concerned about my recovery. I’m finally able to walk comfortably again.Very clean clinic with advanced equipment and supportive staff. My back pain improved significantly after a few sessions. Thank you for the amazing care.",
+      "author": "Sameen Anjum",
+      "date": "30 Apr 2026"
+     },
+     {
+      "text": "Dr. Saksham was incredibly knowledgeable and explained my condition and treatment plan in a way that was easy to understand. Their hands-on techniques were very effective, and I saw noticeable improvement in my cervical pain,after just a few sessions. I highly recommend them.",
+      "author": "Shikha Sharma",
+      "date": "01 Jul 2026"
+     },
+     {
+      "text": "I was diagnosed with ankle sprain and was not able to walk properly since 1 month hence I seek physiotherapy by dr riya at cb and within one week I am feeling my walking is much more effortless.",
+      "author": "Rohit Singh",
+      "date": "04 Mar 2026"
+     }
+    ]
+   }
+  },
+  {
+   "id": "gk",
+   "slug": "greater-kailash",
+   "short": "Greater Kailash",
+   "name": "Greater Kailash II",
+   "full": "CB Physiotherapy, Greater Kailash",
+   "area": "South Delhi",
+   "title": "Best Physiotherapy Near You in Greater Kailash, Delhi | CB Physiotherapy",
+   "description": "Physiotherapy in Greater Kailash II for back, neck, knee and shoulder pain, injuries and post-surgery rehab. CB Physiotherapy GK II, S-210 80 Feet Road, also serving Greater Kailash I, CR Park, Kalkaji and Nehru Place, New Delhi.",
+   "address": "LG Floor, S-210, 80 Feet Road, Block S, Greater Kailash II, New Delhi 110048",
+   "postcode": "110048",
+   "phone": "9818843774",
+   "tel": "+919818843774",
+   "phone_display": "98188 43774",
+   "latlng": [
+    28.5331683,
+    77.2452026
+   ],
+   "where": "M Block, Greater Kailash 2, Delhi",
+   "nearby": "S-210, Lower Ground Floor",
+   "landmark": "S-210, Lower Ground Floor · GK 2",
+   "near": [
+    "Greater Kailash I",
+    "CR Park",
+    "Kalkaji",
+    "Nehru Place"
+   ],
+   "metro": "Greater Kailash metro (Magenta Line)",
+   "rating": 4.9,
+   "count": 445,
+   "cid": "17518812248637208086",
+   "page": "https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-greater-kailash",
+   "hero": {
+    "src": "/physiotherapy-near-me-delhi/assets/clinics/gk.webp",
+    "srcset": "",
+    "w": 600,
+    "h": 692
+   },
+   "head": {
+    "name": "Dr. Monika Bhardwaj (PT)",
+    "url": "https://cbphysiotherapy.in/delhi/ortho-physiotherapist/monika-bhardwaj",
+    "img": "https://cbphysiotherapy.in/storage/images/user/600x692/monika-bhardwaj-2.webp",
+    "role": "Head of the Clinic",
+    "creds": [
+     "Orthopaedic physiotherapy",
+     "MPT Ortho"
+    ]
+   },
+   "team": [
+    {
+     "name": "Dr. Mohd Faizan",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/mohd-faizan",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/mohd-faizan-2.webp",
+     "role": "Consultant Physiotherapist, BPT",
+     "expertise": "Back and neck, knee pain"
+    },
+    {
+     "name": "Dr. Rushda Sabir",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/rushda-sabir",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/rushda-sabir-2.webp",
+     "role": "Consultant Physiotherapist, BPT",
+     "expertise": "Pain relief, mobility, strengthening"
+    },
+    {
+     "name": "Dr. Nitish Kumar",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/nitish-kumar",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/nitish-kumar-2.webp",
+     "role": "Consultant Physiotherapist, BPT",
+     "expertise": "Posture, balance, arthritis"
+    },
+    {
+     "name": "Dr. Kinjal Sharma",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/dr-kinjal-sharma",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/kinjal-sharma.webp",
+     "role": "Senior Physiotherapist, MPT",
+     "expertise": "Injury and post-surgery rehab"
+    },
+    {
+     "name": "Dr. Mahi Noor",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/mahi-noor",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/mahi-noor-2.webp",
+     "role": "Consultant Physiotherapist, BPT",
+     "expertise": "Back and neck, knee pain"
+    }
+   ],
+   "reviews": {
+    "spine": [
+     {
+      "text": "I visited CB Physiotherapy for pain in neck, shoulders and lower back. I was suggested to take 7 sessions. Dr Iqra treated me and taught exercises. Now I feel better and pain is gone. Dr Iqra is very helpful and very good at her work. Clinic is very clean. Thanks a lot.",
+      "author": "Supriya Dogra",
+      "date": "17 Jan 2026"
+     },
+     {
+      "text": "I had lower back pain all the time when I ran. The manual therapy and focused exercises offered by the CB Physiotherapy Clinic Gk, were exceptional. With the skills of his team and a targeted approach, they helped me not only heal from my pain but also avoid further flare-ups. I'm pain-free and back on the trails because of CB Physio.",
+      "author": "Umer hashmi",
+      "date": "25 Dec 2026"
+     },
+     {
+      "text": "I came here for a huge neck pain and Dr Palak diagnostic it very well. She and her team was very caring after 7 sessions I am recovered and I have several excercises to do so that the pain will not come back in future.",
+      "author": "Coralie D",
+      "date": "15 Nov 2026"
+     }
+    ],
+    "joint": [
+     {
+      "text": "I visited to CB physiotherapy for my elbow pain where Dr Faizan diagnosed my condition as Tennis Elbow. He advised 7 days course of treatment. Now pain has gone and I feel better. Such a good place highly recommended.",
+      "author": "Junaid Mo",
+      "date": "05 Apr 2026"
+     },
+     {
+      "text": "Excellent diagnosis by Dr. Monika Bhardwaj, followed by amazing physiotherapy sessions by Dr. Humaira Alam. Dr. Alam is very knowledgeable, and with her specialised master's degree, she makes very sincere efforts to help her patients. I am very satisfied with my tennis elbow, right knee, and lower/ middle back treatments. Thanks to the whole team!!",
+      "author": "Sharad Sahu",
+      "date": "16 Jan 2026"
+     },
+     {
+      "text": "I had limited mobility and shoulder pain for weeks, but after starting treatment with Dr. Iqra, At CB GK2. I noticed remarkable improvement. Her therapy plan and supportive approach made all the difference. My shoulder feels much better now—highly recommend Dr. Iqra.",
+      "author": "Varsha pandit",
+      "date": "27 Jan 2026"
+     }
+    ],
+    "rehab": [
+     {
+      "text": "I am a recreational athlete, and I recently suffered a sports injury. I was referred to CB Physiotherapy Clinic GK by my doctor, and I am so glad I went. The physiotherapists were able to diagnose my injury quickly and accurately, and they developed a treatment plan that helped me recover quickly and safely.",
+      "author": "Nishant kapooor",
+      "date": "02 Dec 2026"
+     },
+     {
+      "text": "Exceptional care at GK2 Clinic! Post-surgery rehab for my knee was seamless here. The therapists explained every step clearly and customized my treatment plan. Their use of advanced equipment and hands-on techniques sped up my recovery. The clinic’s ambiance is calming, and the front desk is always helpful. A trustworthy place for physiotherapy in GK2!",
+      "author": "Ram prakash",
+      "date": "29 Jan 2026"
+     },
+     {
+      "text": "Had visited the GK clinic for the first time due to an accident and Dr Palak Gupta had correctly diagnosed as a fracture in my wrist. After my plaster came off, I was thoroughly supported by Dr Palak and Dr Rushda for two weeks of the rehab process for my wrist. Dr Rushda has been exemplary and taken extremely good care of me. Even for my back pain, she identified the problem area and used a combination of modalities along with physical therapy. I am in a much better condition due to her efforts 🙏💯.",
+      "author": "Saakshi Sadhu",
+      "date": "02 Jan 2026"
+     }
+    ],
+    "ortho": [
+     {
+      "text": "I had shoulder pain due to wrong sleeping and sitting posture and I took 10 sessions with Dr. Rushda and she’s really good with her work. The place is very clean and hygienic and everyone is super polite.",
+      "author": "Prachi Paul",
+      "date": "10 Jun 2026"
+     },
+     {
+      "text": "My experience at CB physio therapy has been great. I went there last month in pain and in a month I have made a good recovery. Dr Rushada provided just the right therapies to me so that I can make a recovery. She is warm, pleasant and a thorough professional. The exercises given to me by her were also good and the other tips on posture correction have really helped me easing my pain. I would highly recommend Dr Rushada and CB physiotherapy.",
+      "author": "Lavanyaa Chopra",
+      "date": "03 Jul 2026"
+     }
+    ],
+    "all": [
+     {
+      "text": "Visited CB Physiotherapy for my recurring severe lower back pain. I took 20 odd sessions and finally seen a lot of improvement and close to pain free. Thanks to Dr Faizan and the team for providing the right treatment.",
+      "author": "Kushal Singh",
+      "date": "24 Feb 2026"
+     },
+     {
+      "text": "I had a wonderful time with Dr. Iqra. She accurately analyzed my sciatica problem, developed a specific treatment strategy, and achieved outstanding results in just a few days. Her detailed instructions made home exercises simple. I strongly suggest her for physiotherapy.",
+      "author": "Mehreen khan",
+      "date": "23 Jan 2026"
+     },
+     {
+      "text": "I had a great experience with Dr. Rushda. She really took the time to understand my condition and created a treatment plan that worked well for me. Her gentle approach and clear explanations made each session easy to follow and effective. I’m really grateful for her care and would definitely recommend her to anyone looking for a skilled and compassionate physiotherapist.",
+      "author": "Yasmeena jahan",
+      "date": "22 Jan 2026"
+     }
+    ]
+   }
+  },
+  {
+   "id": "safdarjung",
+   "slug": "safdarjung-enclave",
+   "short": "Safdarjung Enclave",
+   "name": "Safdarjung Enclave",
+   "full": "CB Physiotherapy, Safdarjung Enclave",
+   "area": "South Delhi",
+   "title": "Best Physiotherapy Near You in Safdarjung Enclave, Delhi | CB Physiotherapy",
+   "description": "Physiotherapy in Safdarjung Enclave for back, neck, knee and shoulder pain, injuries and post-surgery rehab. CB Physiotherapy near AIIMS Trauma Centre, also serving Green Park, Hauz Khas, R.K. Puram, Moti Bagh and Chanakyapuri, New Delhi.",
+   "address": "A-1/295, Basement, near AIIMS Trauma Center, Safdarjung Enclave, New Delhi 110029",
+   "postcode": "110029",
+   "phone": "9560762045",
+   "tel": "+919560762045",
+   "phone_display": "95607 62045",
+   "latlng": [
+    28.5681895,
+    77.2006879
+   ],
+   "where": "Safdarjung Enclave, Delhi",
+   "nearby": "Near AIIMS Trauma Centre",
+   "landmark": "A-1/295, Basement · Near AIIMS Trauma Centre",
+   "near": [
+    "Green Park",
+    "Hauz Khas",
+    "R.K. Puram",
+    "Moti Bagh",
+    "Chanakyapuri"
+   ],
+   "metro": "Green Park metro (Yellow Line)",
+   "rating": 4.8,
+   "count": 938,
+   "cid": "519412980264603946",
+   "page": "https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-safdarjung-enclave",
+   "hero": {
+    "src": "/physiotherapy-near-me-delhi/assets/clinics/safdarjung.webp",
+    "srcset": "",
+    "w": 600,
+    "h": 692
+   },
+   "head": {
+    "name": "Dr. Hardika Sood (PT)",
+    "url": "https://cbphysiotherapy.in/delhi/sports-physiotherapist/hardik-sood",
+    "img": "https://cbphysiotherapy.in/storage/images/user/600x692/hardika-sood.webp",
+    "role": "Clinical Head",
+    "creds": [
+     "Sports physiotherapy",
+     "MPT Sports"
+    ]
+   },
+   "team": [
+    {
+     "name": "Dr. Anjali Pandey",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/anjali-pandey",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/anjali-pandey-2.webp",
+     "role": "Physiotherapist, MPT Ortho",
+     "expertise": "Spine and joint pain, ortho rehab"
+    },
+    {
+     "name": "Dr. Diksha Jamwal",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/diksha-jamwal",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/diksha-jamwal-2.webp",
+     "role": "Physiotherapist, BPT",
+     "expertise": "Pain relief, mobility, strengthening"
+    },
+    {
+     "name": "Dr. Gurpreet Singh",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/gurpreet-singh",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/gurpreet-singh-2.webp",
+     "role": "Consultant Physiotherapist, BPT",
+     "expertise": "Posture, balance, arthritis"
+    },
+    {
+     "name": "Dr. Ahmed Raza",
+     "url": "https://cbphysiotherapy.in/delhi/sports-physiotherapist/ahmed-raza",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/ahmed-raza-2.webp",
+     "role": "Consultant Physiotherapist, MPT Sports",
+     "expertise": "Sports injury and post-surgery rehab"
+    },
+    {
+     "name": "Dr. Binish Khan",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/binish-khan",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/binish-khan-2.webp",
+     "role": "Consultant Physiotherapist, BPT",
+     "expertise": "Back and neck, knee pain"
+    }
+   ],
+   "reviews": {
+    "spine": [
+     {
+      "text": "Good treatment for sciatica back pain. Affordable prices much lower than similar advanced centers. Physiotherapy team is good and care about patient betterment. Overall recommeded for back pain, neck pain issues.",
+      "author": "Hatim Shah",
+      "date": "16 Dec 2026"
+     },
+     {
+      "text": "CB Physiotherapy in Safdarjung Enclave was a game changer for me. I went there for severe neck and upper back pain, and the treatment I received was excellent. The sessions included manual therapy, sophisticated modalities, and personalized exercises, and I felt relief within a few days.",
+      "author": "Madhav jain",
+      "date": "20 Jan 2026"
+     },
+     {
+      "text": "I got a treatment at the CB physiotherapist for my lower back pain, there Dr. Anjali treated me and I can really vouch that she knows what she's doing, I got TENS, Shock and Heat treatment and I got relieved in few sessions only and am able to hit back to my gym. A must go place for getting a treatment for sports injuries.",
+      "author": "Tushar Mehmi",
+      "date": "21 Jan 2026"
+     }
+    ],
+    "joint": [
+     {
+      "text": "My mother Kusum Garg has been taking treatment of Knee pain from Dr.Anjali since 8 days and she is feeling a lot of relief in her knee pain and her knee stiffness. All thanks to Dr. Anjali and CB physiotherapy and also Laser treatment is very effective.",
+      "author": "Ankit Garg",
+      "date": "01 Apr 2026"
+     },
+     {
+      "text": "Dr. Amisha treated me when I was suffering from Frozen shoulder. I was in unbearable pain. After taking three weeks of therapy, my shoulder pain is almost negligible and I can say that, she has helped me a lot. Definitely recommend her services at CB physiotherapy clinic Safdarjung enclave.",
+      "author": "Shoaib Qureshi",
+      "date": "05 Apr 2026"
+     },
+     {
+      "text": "I searched this physio centre on google and I was not very sure to continue after first session as I had knee pain and stiffness in my right knee … but Dr Amisha assure me that my knee problem we’ll be well treated and to my surprise after 5 session my knee pain almost vanished and I will continue with cb physio..Dr Amisha is a great physiotherapist… 👍.",
+      "author": "Sunder Paul",
+      "date": "25 Mar 2026"
+     }
+    ],
+    "rehab": [
+     {
+      "text": "CB Physiotherapy Safdarjung Enclave is my go-to place for sports injury recovery. The team not only helped me recover from my injury but also showed me how to prevent future ones. With targeted exercises, hands-on therapy, and expert advice, they made my recovery faster and smoother.",
+      "author": "Rahul singh",
+      "date": "12 Dec 2026"
+     },
+     {
+      "text": "After my ligament injury i took physiotherapy sessions from CB Didn't expect the results this early. I was in excruciating pain but only after 4-5 sessions I got a lot of relief. Dr. Anjali was very patient with me. the exercises she suggested are very helpful.",
+      "author": "Vinod kumar",
+      "date": "02 Oct 2026"
+     },
+     {
+      "text": "I recently visited cb physiotherapy for my chronic ACL injury, doctor advice me few couple of session for my recovery, I decided to take sessions then I started with Dr Sachin. He is very good person with good knowledge, he motivate me and advice exercises, now I m feeling much better and discontinue the treatment,, I appreciate his work.. thank you so much cb physiotherapy.",
+      "author": "Vipin Kumar",
+      "date": "07 Sep 2026"
+     }
+    ],
+    "ortho": [
+     {
+      "text": "I went to CB Physiotherapy Clinic Safdarjung Enclave exceeded my expectations in addressing my posture-related concerns.I've experienced a positive transformation in my posture and overall well-being. I highly recommend CB Physiotherapy Clinic for anyone looking to enhance their posture and prevent related issues.",
+      "author": "Kamran reshi",
+      "date": "05 Dec 2026"
+     },
+     {
+      "text": "I was living a very difficult life due to chronic vertigo. I saw multiple doctors, but I didn't get any better. I later came upon CB Physio. Their head exercises and vestibular therapy program turned out to be a revelation. It gave me my life back by progressively relieving my vertigo and dizziness. Their knowledge and commitment are much appreciated.",
+      "author": "Raju patel",
+      "date": "25 Dec 2026"
+     },
+     {
+      "text": "I went to the clinic for pain in my soles due to excessive walking..i was diagnosed with plantar fascitis.I was treated from Dr.Amisha who was very dedicated and skillful in her field and I got relief after 5 sessions.",
+      "author": "Bhavya Yadav",
+      "date": "21 Jan 2026"
+     }
+    ],
+    "all": [
+     {
+      "text": "I had nice experience at CB physiotherapy, i had pain in my neck since very long, they treated me within a pakage of 10 days and now its gone, additional exercises were game changer, higher recommended.",
+      "author": "Vinay Vashist",
+      "date": "18 Mar 2026"
+     },
+     {
+      "text": "I had a great experience. Deeksha treated me for my neck injury and was very professional and effective in her treatment. She picked out exercises suitable for my body as I gradually recovered and managed the treatment plan efficiently. Many thanks to her for her dedication!",
+      "author": "Arya Murali",
+      "date": "19 Aug 2026"
+     },
+     {
+      "text": "I took 7 days of treatment plan for my chronic neck pain, Dr Sachin is.my physiotherapist, it was an amazing experience with Dr Sachin he Sachin a nice and knowledgeable physiotherapist. I would recommend cb physiotherapy, great Dr Sachin thank you sir.",
+      "author": "Shrinath Kumar",
+      "date": "29 Jun 2026"
+     }
+    ]
+   }
+  },
+  {
+   "id": "vasant",
+   "slug": "vasant-kunj",
+   "short": "Vasant Kunj",
+   "name": "Vasant Kunj",
+   "full": "CB Physiotherapy, Vasant Kunj",
+   "area": "South West Delhi",
+   "title": "Best Physiotherapy Near You in Vasant Kunj, Delhi | CB Physiotherapy",
+   "description": "Physiotherapy in Vasant Kunj for back, neck, knee and shoulder pain, injuries and post-surgery rehab. CB Physiotherapy at Nathu Singh Market, Masoodpur, also serving Vasant Vihar, Mahipalpur, Kishangarh and Ghitorni, New Delhi.",
+   "address": "C-31, First Floor, Nathu Singh Market, near KL 27 Gym, Masoodpur, New Delhi 110070",
+   "postcode": "110070",
+   "phone": "9773664030",
+   "tel": "+919773664030",
+   "phone_display": "97736 64030",
+   "latlng": [
+    28.524433,
+    77.154562
+   ],
+   "where": "Masoodpur, Vasant Kunj, Delhi",
+   "nearby": "Nathu Singh Market, First Floor",
+   "landmark": "C-31, First Floor · Nathu Singh Market",
+   "near": [
+    "Vasant Vihar",
+    "Mahipalpur",
+    "Kishangarh",
+    "Ghitorni"
+   ],
+   "metro": "Vasant Vihar metro (Magenta Line)",
+   "rating": 4.9,
+   "count": 707,
+   "cid": "14031998325875161603",
+   "page": "https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-vasant-kunj",
+   "hero": {
+    "src": "/physiotherapy-near-me-delhi/assets/reception-800.webp",
+    "srcset": "/physiotherapy-near-me-delhi/assets/reception-800.webp 800w, /physiotherapy-near-me-delhi/assets/reception-1200.webp 1200w",
+    "w": 1200,
+    "h": 675
+   },
+   "head": {
+    "name": "Dr. Rahul Dogra (PT)",
+    "url": "https://cbphysiotherapy.in/delhi/ortho-physiotherapist/rahul-dogra",
+    "img": "https://cbphysiotherapy.in/storage/images/user/600x692/rahul-dogra-2.webp",
+    "role": "Head of the Clinic",
+    "creds": [
+     "Orthopaedic physiotherapy",
+     "MPT Ortho"
+    ]
+   },
+   "team": [
+    {
+     "name": "Dr. Sristi Suman",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/sristi-suman",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/sristi-suman-2.webp",
+     "role": "Consultant Physiotherapist, BPT",
+     "expertise": "Back and neck, knee pain"
+    },
+    {
+     "name": "Dr. Chirag",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/chirag",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/chirag-2.webp",
+     "role": "Physiotherapist, BPT",
+     "expertise": "Pain relief, mobility, strengthening"
+    },
+    {
+     "name": "Dr. Alona Thomas",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/alona-thomas",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/alona-thomas-2.webp",
+     "role": "Physiotherapist, BPT",
+     "expertise": "Posture, balance, arthritis"
+    },
+    {
+     "name": "Dr. Tabassum Jamal",
+     "url": "https://cbphysiotherapy.in/delhi/ortho-physiotherapist/tabassum-jamal",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/tabassum-jamal-2.webp",
+     "role": "Consultant Physiotherapist, MPT",
+     "expertise": "Injury and post-surgery rehab"
+    }
+   ],
+   "reviews": {
+    "spine": [
+     {
+      "text": "I had back back since 1 month, then I visit CB physiotherapy, Vasant kunj. The treatment given by Dr. Sristi has cured my back problem or even I am able to walk properly. Dr. Sristi is very great and capable physiotherapist.",
+      "author": "Mohit Kumar",
+      "date": "14 Jun 2026"
+     },
+     {
+      "text": "Suffering from cervical disc from long time i decided to get an appointment from Cb physiotherapy clinic they assigned me Dr.Chirag for my treatment had few sessions i noticed much relief from cervical pain.",
+      "author": "Jyoti sinha",
+      "date": "29 Nov 2026"
+     },
+     {
+      "text": "For a few years my aunty had back pain and could not even walk, then I visit the CB physiotherapy, Vasant Kunj. The treatment given to her by Dr.Sristi has cured her back pain or she is able to even walk better. Dr. Sristi is very good, hard working and capable physiotherapist.",
+      "author": "Varsha",
+      "date": "18 May 2026"
+     }
+    ],
+    "joint": [
+     {
+      "text": "I had been struggling with shoulder pain for a while and decided to visit CB Physiotherapy. Dr. Chirag provided a thorough assessment and personalized treatment plan. Thanks to his expertise, my shoulder pain has improved greatly, and I’m feeling much better. Highly recommend Dr. Chirag for any shoulder issues.",
+      "author": "Anil bishnoi",
+      "date": "26 Nov 2026"
+     },
+     {
+      "text": "I was suffering from a frozen shoulder, and I got treated at a CB physiotherapy clinic. I was very satisfied with the treatment I had, and after 2-3 sessions, I can move my shoulder with ease. I'm thankful to Dr. Rahul for such a good treatment.",
+      "author": "Vineta goyal",
+      "date": "01 Nov 2026"
+     },
+     {
+      "text": "I came to clinic for my knee pain due to gym and there I met Dr Rahul Dogra he took a deep assessment of my condition and in few sessions i was much better I recommend Dr Rahul Dogra for all kind of body ache.",
+      "author": "Abhinav Nayak",
+      "date": "15 Apr 2026"
+     }
+    ],
+    "rehab": [
+     {
+      "text": "I had a great experience as a patient here. They're good at what they do, and the cherry on top is that they're very flexible with their timings. had good for spine injury rehab Absolute bang for buck!",
+      "author": "Abhradeep Biswas",
+      "date": "26 Feb 2026"
+     },
+     {
+      "text": "Dr Shreya was really good and given the time period was less ( I had only 5 sessions) the pain on my back and shoulder has reduced a lot. The exercises and posture advise given are really helpful and i will be going at CB again instead of doing ayurvedic messages or sports massages. Thanks alot to all the staff.",
+      "author": "Parikshit Bhandari",
+      "date": "28 Sep 2026"
+     },
+     {
+      "text": "I had a very positive experience with my physiotherapy sessions. I’ve recovered from the injury i suffered with the help of the physiotherapist and their treatment. Thank you so much.",
+      "author": "Mitr Sharma",
+      "date": "14 Jun 2026"
+     }
+    ],
+    "ortho": [
+     {
+      "text": "Dr. Chirag’s expertise in pudendal nerve physiotherapy was life-changing for me. He identified that my pain was due to nerve compression from tight fascia and skillfully released it through MFR, providing significant relief. His precise approach, clear explanations, and effective techniques set him apart. Highly recommended for anyone dealing with pudendal neuralgia or pelvic pain!",
+      "author": "Kailash Lakhera",
+      "date": "24 Mar 2026"
+     },
+     {
+      "text": "Dr. Faizan is a good physiotherapist and his expertise and approach significantly improved my condition. He provided a clear assessment, explained the treatment plan thoroughly, and demonstrated excellent skills. This led to significant improvement in my recovery from plantar fasciitis. He is professional, skilled, and has good skill set as a physiotherapist.👌👍.",
+      "author": "Venkateswarlu Peri",
+      "date": "14 Jul 2026"
+     },
+     {
+      "text": "I came with neck pain Dr. Deepanshu assess me and educated me for my problem,he is polite and he has given detailed explanation everything including charges and how many sessions required for my condition. Dr. Shreya was my treating therapist,she help me in improving my posture and reducing pain.",
+      "author": "Nizam Uddin",
+      "date": "08 Feb 2026"
+     }
+    ],
+    "all": [
+     {
+      "text": "I have severe back pain from long time ago,I came here for consultation only but Dr. Shreya educated me about my condition and treatment plan, I took 20 days treatment as prescribed and now I am happy sith my decision. Dr. Shreya is doing excellent work and she gave me pain free life. Dedicated and passionate therapist.",
+      "author": "Parul mishra",
+      "date": "19 Nov 2026"
+     },
+     {
+      "text": "I have a sevre back pain with radiation in my leg. Thanks to Dr. Sristi Suman who took my consultation at CB physiotherapy vasant kunj and set my treatment protocol. Within a few days I recovered from my condition. She is such an amazing physiotherapist and her treatment plan is commendable. I would like to suggest everyone to visit CB physiotherapy vasant kunj.",
+      "author": "Aual Miya",
+      "date": "30 May 2026"
+     },
+     {
+      "text": "Within a few days of following Dr. Rahul's treatment plan, I started to see a significant improvement in my ankle. The pain and swelling decreased, and I was able to walk more freely. After a few weeks of physical therapy, I was able to resume all of my normal activities.",
+      "author": "Abhimanyu",
+      "date": "14 Nov 2026"
+     }
+    ]
+   }
+  },
+  {
+   "id": "dwarka",
+   "slug": "dwarka",
+   "short": "Dwarka",
+   "name": "Dwarka, Sector 17",
+   "full": "CB Physiotherapy, Dwarka",
+   "area": "West Delhi",
+   "title": "Best Physiotherapy Near You in Dwarka, Delhi | CB Physiotherapy",
+   "description": "Physiotherapy in Dwarka Sector 17 for back, neck, knee and shoulder pain, injuries and post-surgery rehab. CB Physiotherapy Dwarka, Plot 7 Sector 17, also serving Palam, Dwarka Mor, Uttam Nagar and Najafgarh, New Delhi.",
+   "address": "Plot 7, Basement, near Sarvodaya Vidyalaya School, Sector 17, Dwarka, New Delhi 110078",
+   "postcode": "110078",
+   "phone": "9217683886",
+   "tel": "+919217683886",
+   "phone_display": "92176 83886",
+   "latlng": [
+    28.594018681288997,
+    77.02574329563622
+   ],
+   "where": "Sector 17, Dwarka, Delhi",
+   "nearby": "Near Sarvodaya Vidyalaya",
+   "landmark": "Plot 7, Basement · Sector 17",
+   "near": [
+    "Palam",
+    "Dwarka Mor",
+    "Uttam Nagar",
+    "Najafgarh"
+   ],
+   "metro": "",
+   "rating": 4.9,
+   "count": 119,
+   "cid": "2587984129367049804",
+   "page": "https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-dwarka",
+   "hero": {
+    "src": "/physiotherapy-near-me-delhi/assets/clinics/dwarka.webp",
+    "srcset": "",
+    "w": 600,
+    "h": 692
+   },
+   "head": {
+    "name": "Dr. Amit (PT)",
+    "url": "https://cbphysiotherapy.in/delhi/ortho-physiotherapist/amit-2",
+    "img": "https://cbphysiotherapy.in/storage/images/user/600x692/amit-3.webp",
+    "role": "Center Head",
+    "creds": [
+     "Orthopaedic physiotherapy",
+     "Certified chiropractor",
+     "MPT Ortho"
+    ]
+   },
+   "team": [
+    {
+     "name": "Dr. Saksham Kataria",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/saksham-kataria",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/saksham-kataria-2.webp",
+     "role": "Physiotherapist, BPT",
+     "expertise": "Back and neck, knee pain"
+    },
+    {
+     "name": "Dr. Nikhil Sharma",
+     "url": "https://cbphysiotherapy.in/delhi/physiotherapist/dr-nikhil-sharma",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/nikhil-sharma.webp",
+     "role": "Physiotherapist, MPT Ortho",
+     "expertise": "Spine and joint pain, ortho rehab"
+    },
+    {
+     "name": "Dr. Kuwali Das",
+     "url": "https://cbphysiotherapy.in/delhi/sports-physiotherapist/kuwali-das",
+     "img": "https://cbphysiotherapy.in/storage/images/user/600x692/kuwali-das-2.webp",
+     "role": "Physiotherapist, MPT Musculoskeletal",
+     "expertise": "Spine, joints, sciatica"
+    }
+   ],
+   "reviews": {
+    "spine": [
+     {
+      "text": "Thank you so much Dr. Saksham for so well guided exercises and rehab plan. My back is perfect now. Can back to gym. Special thanks to dr. Saksham for the treatment and Dr. Amit for the well guided sessions and my plan.",
+      "author": "Vinam Singh Fartyal",
+      "date": "13 Nov 2026"
+     },
+     {
+      "text": "I had been there for severe back pain. Every one said it will take several months. But Dr. Saksham said give us 10 session only. With in 3 sitting pain reduced significantly. After that my rehabilitation exercise plan started. I m back to my work now. Thanks a lot Dr. Saksham and team at CB Dwarka.",
+      "author": "Ajay Sharma",
+      "date": "05 Nov 2026"
+     },
+     {
+      "text": "I had a very good experience with my neck therapy sessions with Dr. Amit and Dr. Pinki. Both were extremely professional, supportive, and attentive throughout the treatment. They explained everything clearly and provided the best assistance at every step. I truly appreciate their dedication, care, and friendly approach. I would definitely recommend Dr. Amit and Dr. Pinki to anyone looking for professional and effective neck therapy. Thank you both for your excellent support and guidance.",
+      "author": "Abhinav Sharma",
+      "date": "10 Nov 2026"
+     }
+    ],
+    "joint": [
+     {
+      "text": "I had physiotherapy sessions for tennis elbow with Dr. Kuwali Das, and my experience was very good. The treatment was professional, and the doctor explained the condition and treatment process clearly. I felt well cared for throughout the sessions. I would recommend Dr. Kuwali Das to anyone looking for physiotherapy treatment for tennis elbow and elbow pain.",
+      "author": "Gayatri Bhuyan",
+      "date": "09 Nov 2026"
+     },
+     {
+      "text": "I had been suffering from. Shoulder pain for quite some time, which was affecting my daily activities. I consulted Dr Saksham at CB physiotherapy, and the treatment was excellent. Dr Saksham carefully assessed my condition, explained everything clearly. After few sessions, I noticed significant movement. Highly recommended for anyone seeking professional physiotherapy care.com.",
+      "author": "Baldev Raj",
+      "date": "23 Nov 2026"
+     },
+     {
+      "text": "Highly recommend Dr. Saksham Kataria. I was struggling with chronic shoulder pain for a long time, and his targeted treatment plan resolved the issue within just a few sessions. He is incredibly knowledgeable and the staff at CB Physiotherapy Dwarka is wonderful.",
+      "author": "Hritik Kataria",
+      "date": "05 Nov 2026"
+     }
+    ],
+    "rehab": [
+     {
+      "text": "I am pain free after 8 years of knee pain. Even after surgery, I continued to suffer. After taking treatment here, I can confidently say that I am very happy with the results. This is a new centre in Dwarka and it's well designed, with good facilities.",
+      "author": "Akshit Mathur",
+      "date": "10 Feb 2026"
+     },
+     {
+      "text": "Really ambitious physiotherapists especially Dr. Amit, I had an annoying ankle injury which just wasn’t getting any better checked out CB physiotherapy and they helped a lot the whole team is great and they deliver real results.",
+      "author": "Ishant Sheoran",
+      "date": "09 Nov 2026"
+     }
+    ],
+    "ortho": [
+     {
+      "text": "I was undergoing treatment with Dr. Jaspreet( presently Clinic Head in CB, Dwarka) for severe cervical pain that had begun to interfere with my daily activities. With her holistic approach, targeted techniques, and well-structured long term exercise plan, she helped me recover completely. Her guidance has not only relieved my pain but also strengthened my overall posture and mobility.",
+      "author": "Garima Srivastava",
+      "date": "10 Feb 2026"
+     }
+    ],
+    "all": [
+     {
+      "text": "I had a really good experience with my physiotherapist. Very professional, knowledgeable, and attentive. They took the time to understand my problem and provided effective treatment along with helpful exercises. I noticed improvement in my shoulder and upper back discomfort after the sessions. Highly recommended for anyone looking for quality physiotherapy care!",
+      "author": "Rishabh",
+      "date": "29 Oct 2026"
+     },
+     {
+      "text": "Thank you Dr. kritika for all your physiotherapy sessions. You are well experienced and you have explained all the process of treatment very well. And after physiotherapy my mother had relief in her arm and back pain.",
+      "author": "Kusum Sood",
+      "date": "08 Apr 2026"
+     },
+     {
+      "text": "I visited CB Physiotherapy Clinic for my mother’s treatment for back pain and foot pain. Dr. Pinki treated her with great care and professionalism. She was very attentive, patient, and explained the treatment properly. My mother is feeling much better and we are very happy with the overall experience. Highly recommended.",
+      "author": "Manish Kumar",
+      "date": "24 Nov 2026"
+     }
+    ]
+   }
+  }
+ ]
+}

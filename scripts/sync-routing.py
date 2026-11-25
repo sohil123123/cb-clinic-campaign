@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Embed geo-clinics.json and routing.json into app.js so the page needs no extra request.
 
-Run from the repository root. The deploy workflow runs it before build-areas.py.
+Run from the repository root. The deploy workflow runs it before build-clinics.py.
 Both JSON files stay the single source of truth; the lines in app.js are generated.
 """
 import json, re, pathlib

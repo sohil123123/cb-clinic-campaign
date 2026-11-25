@@ -32,7 +32,7 @@ revert commit to `main` and the previous version is redeployed the same way.
 | Path | Purpose |
 |---|---|
 | `index.html` | Root of the subdomain. Forwards to the campaign page, keeping `gclid` and `utm_*` parameters. |
-| `robots.txt` | Allows crawling. Each campaign page carries its own `noindex` tag. |
+| `robots.txt` | Allows crawling, points to `sitemap.xml`, keeps the dashboard and demo out. The central Delhi page carries `noindex`; clinic pages are indexable. |
 | `physiotherapy-near-me-delhi/` | The Delhi landing page: `index.html`, scripts, styles and images. |
 | `physiotherapy-near-me-delhi/clinic-reviews.js` | Google rating and review count per clinic. Edit this weekly. |
 | `physiotherapy-near-me-delhi/polish.css` | Loaded last: readability sizes, the Call / WhatsApp / Book quick actions, hero tweaks. Put small style overrides here. |
@@ -103,23 +103,45 @@ pre-selects the concern (`conditions`) and the home-visit option
 4. Commit and push `routing.json` / `geo-clinics.json`. The deploy syncs them
    into the page (`scripts/sync-routing.py`); nothing else changes.
 
-## Clinic landing pages (one per clinic, same content)
+## Clinic landing pages (one per clinic)
 
-`areas.json` lists clinic pages such as `physiotherapy-near-me-saket`. At
-deploy time `scripts/build-areas.py` copies the Delhi page into each folder
-with that clinic's title and description and a `cb-area` tag. In the browser
-the page then leads with that clinic: headline "Near You in Saket", the Saket
-card first with the other four behind a link, Saket pre-selected in the form,
-calls routed to the Saket number, and leads tagged `google-ads-saket-landing`.
+The five clinic pages (`physiotherapy-near-me-saket`, `-greater-kailash`,
+`-safdarjung-enclave`, `-vasant-kunj`, `-dwarka`) are built at deploy time by
+`scripts/build-clinics.py` from two files:
 
-- To add a clinic page, add an entry to `areas.json` and push. The folder
-  appears at `https://book.cbphysiotherapy.in/physiotherapy-near-me-<slug>/`.
-- Content edits are made once, in `physiotherapy-near-me-delhi/`; every clinic
-  page picks them up on the next deploy.
-- `?area=saket` or `?area=malviya-nagar` on the Delhi URL does the same thing
-  without a separate folder, handy for testing.
-- To preview locally run `python3 scripts/build-areas.py` from the repository
-  root; the generated folders are not committed.
+- `clinic-template/index.html`: the page itself (one file, styles and script
+  inline). Placeholders such as `{{SHORT}}` are filled per clinic.
+- `clinics.json`: everything that differs per clinic: address, phone, map
+  position, locality line, nearby areas, Google rating and review count,
+  Google listing id, hero photo, the clinic head and treating physiotherapists
+  (names, photos and profile links from cbphysiotherapy.in), and the patient
+  reviews shown per care area. The central monitoring team is listed once at
+  the top of the file.
+
+What each page carries for search engines: an indexable title and
+description, canonical URL, Open Graph tags, and JSON-LD for the clinic
+(`MedicalClinic` with address, geo, opening hours, rating, staff, services and
+fee offers), an `FAQPage` and breadcrumbs. `sitemap.xml` lists the five pages;
+the central Delhi page stays `noindex` as before.
+
+How the page behaves: the first screen is the clinic photo, name and
+tagline, then headline, locality with directions, Google rating and the three
+actions. Choosing a care area (back or neck, knee or joint, injury or
+surgery, other ortho or neuro) rewrites the first-visit plan, the fee note,
+the FAQ answer, the reviews and the WhatsApp message. Booking opens a popup
+that posts to the same `book-appointment` API with `source`
+`google-ads-<clinic>-landing`, `clinic`, `concern` (when chosen) and
+`preferred_time`, then offers to send the same request on WhatsApp.
+
+- To change copy on all five pages, edit the template and push.
+- To change one clinic's facts, team or reviews, edit `clinics.json` and push.
+- To preview locally run `python3 scripts/build-clinics.py` from the
+  repository root and open the generated folder; generated folders are not
+  committed.
+- Reviews in `clinics.json` were taken from the patient reviews published on
+  cbphysiotherapy.in (attributed to each clinic or its physiotherapists) and
+  chosen per care area. Replace or add from the Google Business Profile when
+  that export is available; keep author names as published.
 
 ## Action analytics and the dashboard
 

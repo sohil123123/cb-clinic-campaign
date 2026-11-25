@@ -34,7 +34,7 @@
  document.addEventListener('visibilitychange',()=>{if(document.hidden){if(since){active+=Date.now()-since;since=null;}flush(true);}else since=Date.now();});
  addEventListener('scroll',()=>{const h=document.documentElement,pct=Math.round((scrollY+innerHeight)/h.scrollHeight*100);if(pct>maxScroll)maxScroll=Math.min(100,pct);if(!sent50&&maxScroll>=50){sent50=true;track('scroll_50');}if(!sent90&&maxScroll>=90){sent90=true;track('scroll_90');}},{passive:true});
  // ---- which sections are actually seen (layout input) ----
- const SECTIONS=['care','advanced-care','pricing','clinics','precision-recovery','faq','final-cta'];let lastSection='hero';
+ const SECTIONS=['care','advanced-care','team','central','pricing','reviews','clinics','book','precision-recovery','faq','final-cta'];let lastSection='hero';
  if('IntersectionObserver' in window){const seen=new Set();const io=new IntersectionObserver(entries=>{entries.forEach(en=>{if(!en.isIntersecting)return;const id=en.target.id||en.target.className.split(' ')[0];lastSection=id;if(seen.has(id))return;seen.add(id);track('section_seen',{section:id});});},{threshold:0.25});
   SECTIONS.forEach(id=>{const el=document.getElementById(id)||document.querySelector('.'+id);if(el)io.observe(el);});}
  addEventListener('pagehide',()=>{track('page_leave',{seconds:activeSeconds(),max_scroll:maxScroll,last_section:lastSection});flush(true);});
@@ -56,7 +56,9 @@
   if(a.id==='booking-whatsapp')return track('whatsapp_send',{intent:'after_booking'});
   if(a.matches('.care-shortcuts [data-concern]'))return track('concern_selected',{concern:a.dataset.concern,placement:'hero'});
   if(a.matches('.pathway-cta'))return track('concern_selected',{concern:a.dataset.concern,placement:'care_card'});
-  if(a.matches('a[href="#book"],[data-select]'))return track('booking_opened',{placement:where,clinic:a.dataset.select||''});
+  if(a.matches('a[href="#book"],[data-select],[data-book]'))return track('booking_opened',{placement:a.dataset.place||where,clinic:a.dataset.select||''});
+  if(a.matches('a[href*="wa.me"]'))return track('whatsapp_send',{intent:a.dataset.intent||'direct',clinic:document.body.dataset.area||''});
+  if(a.matches('[data-reviews]'))return track('reviews_opened',{});
   if(a.id==='open-reviews')return track('reviews_opened',{});
   if(a.matches('#location-links a'))return track('clinic_pill_click',{clinic:a.dataset.showClinic||''});
   if(a.matches('#map-legend button'))return track('map_pin_click',{clinic:a.dataset.showClinic||''});
