@@ -62,7 +62,6 @@ jobs:
             --exclude '*.md' \
             --exclude '/scripts/' \
             --exclude '/areas.json' \
-            --exclude '/geo-clinics.json' \
             --exclude '/.gitignore' \
             --filter 'P .well-known/' \
             -e "ssh -i ~/.ssh/deploy_key -p $PORT -o StrictHostKeyChecking=yes" \
