@@ -99,6 +99,8 @@ p{margin:0}
 .steps li b{display:block;font-weight:600;line-height:1.3}
 .steps li b small{font-weight:500;color:var(--ink-2);font-size:13px;margin-left:6px}
 .steps li>div>span{display:block;font-size:14.5px;color:var(--ink-2);margin-top:3px}
+.steps .report{margin-top:8px;padding:8px 10px;border-left:3px solid var(--lime);background:rgba(255,255,255,.6);border-radius:0 8px 8px 0;color:var(--ink)}
+.steps .report b{display:inline;font-weight:600;color:var(--green)}
 .phase{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:8px}
 .phase li{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:14.5px;line-height:1.4;align-items:start}
 .phase li em{font-style:normal;font-size:12px;font-weight:600;color:var(--green);background:#fff;border:1px solid var(--mint-2);border-radius:6px;padding:2px 7px;margin-top:1px;white-space:nowrap}
@@ -286,9 +288,9 @@ footer b{color:var(--ink-2);font-weight:600}
 
  <section class="block wrap" id="central">
   <h2>Your progress is watched, not assumed</h2>
-  <p>The AI assessment sets your goals and milestones. Every session is recorded against them. A central clinical team, with more than 20 years of combined experience, keeps watch on how each case is moving and steps in before you have to ask.</p>
+  <p>Your AI Recovery Report sets the diagnosis, the plan and the milestones. Every session is recorded against them. A central clinical team, with more than 20 years of combined experience, keeps watch on how each case is moving and steps in before you have to ask.</p>
   <ol class="flow" aria-label="How progress is tracked">
-   <li><b>Assessment</b><span>Goals and milestones set, in writing</span></li>
+   <li><b>AI Recovery Report</b><span>Diagnosis, plan, timeline and milestones</span></li>
    <li><b>Every session</b><span>Recorded against those milestones</span></li>
    <li><b>Central team</b><span>Reviews the trend and flags any case that slips</span></li>
   </ol>
@@ -302,7 +304,7 @@ footer b{color:var(--ink-2);font-weight:600}
   <h2>Clear fees. Start with confidence.</h2>
   <p>Start with an assessment. Your physiotherapist recommends the right care from there.</p>
   <div class="prices">
-   <div class="price first"><span class="k">Your first step <em>Offer, save ₹500</em></span><h3>AI assessment &amp; consultation</h3><div class="amt"><s>₹999</s>₹499<small>per assessment</small></div><p id="fee-assess">AI-assisted clinical assessment with a written report, reviewed by your physiotherapist.</p><button class="btn" type="button" data-book>Book the assessment</button></div>
+   <div class="price first"><span class="k">Your first step <em>Offer, save ₹500</em></span><h3>AI assessment &amp; consultation</h3><div class="amt"><s>₹999</s>₹499<small>per assessment</small></div><p id="fee-assess">An AI-guided assessment by your physiotherapist, ending in your AI Recovery Report: diagnosis, observations and tests, treatment plan and expected timeline.</p><button class="btn" type="button" data-book>Book the assessment</button></div>
    <div class="price"><span class="k">Ongoing care</span><h3>Standard physiotherapy</h3><div class="amt">₹999<small>per session</small></div><p>Hands-on manual therapy and electrotherapy, selected for your condition.</p></div>
    <div class="price"><span class="k">Advanced modalities</span><h3>Advanced physiotherapy</h3><div class="amt">₹1,499<small>per session</small></div><p id="fee-adv">Class 4 laser, TECAR or robotic spinal decompression, when clinically appropriate.</p></div>
   </div>
@@ -398,12 +400,12 @@ footer b{color:var(--ink-2);font-weight:600}
  const CONCERNS={
   all:{name:'Assess first. Treat the same day. Track until you are better.',short:'a first assessment',title:'Your first visit, ₹499',
    intro:'<b>The CB Physiotherapy way</b>, behind 4.9 stars from 2,956 Google reviews across five Delhi clinics. Pick your concern above to see how it applies to you.',
-   assess:'Where the pain comes from, what we will do about it, and what to expect by when. A written report you can show anyone, including your doctor.',
+   assess:'Your physiotherapist works through an AI-guided assessment: history, movement, strength and the tests that fit your problem.',
    relief:'Hands-on treatment, with Class 4 laser or TECAR where it helps, so you leave the first visit already feeling the difference.',
    recover:'A programme built around the cause, not the symptom: spinal decompression, measured strengthening or staged rehab, matched to you.',
    usp:['AI-assisted assessment','Advanced modalities','Precision exercise'],
    track:'Goals in your words, milestones you can feel, and a plan that changes as you do.',
-   img:'precision-strength-testing-800.webp',cap:'AI-assisted assessment, reviewed by your physiotherapist, so nothing is guessed.',
+   img:'precision-strength-testing-800.webp',cap:'AI-guided assessment, so the diagnosis and plan rest on measurements, not guesswork.',
    feeAdv:'Class 4 laser, TECAR or robotic spinal decompression, when clinically appropriate.',
    bookSub:'Usually 30 to 40 minutes. Tell us what it is for when you book, or let the physiotherapist work it out.',
    faq:'You will get an estimate at the end of the first visit. Most problems settle in six to ten sessions; post-surgery rehab follows the surgeon\u2019s timeline.',
@@ -413,7 +415,7 @@ footer b{color:var(--ink-2);font-weight:600}
    wa:'Hi, I would like to book a first visit at CB Physiotherapy Saket.'},
   spine:{name:'Back or neck pain',intro:'<b>Root cause analysis and expert care</b> for slip disc, sciatica, cervical pain, muscle spasm, stiff neck and lower back pain.',doc:'Sees back and neck problems every day, including disc and nerve-related pain, and personally plans the decompression and exercise programme.',short:'back or neck pain',title:'Back or neck, first visit ₹499',
    who:'A stiff neck, a lower back that locks, pain or tingling running down an arm or leg. Half the people who come here come for this.',
-   assess:'Whether it is the muscle, a joint, a disc or a nerve; what we will do about it; and what to expect by when. You leave with a written report you can show anyone.',
+   assess:'Whether it is the muscle, a joint, a disc or a nerve: history, posture, movement, nerve and strength tests, guided step by step.',
    relief:'Hands-on release and Class 4 laser or TECAR to settle the spasm and take the edge off, usually from the first visit.',
    recover:'Robotic spinal decompression for disc and nerve pain, and precision exercises that rebuild the support around your spine so it stays better.',
    usp:['Robotic spinal decompression','Class 4 laser & TECAR','Precision spine exercise'],
@@ -427,7 +429,7 @@ footer b{color:var(--ink-2);font-weight:600}
    wa:'Hi, I have back or neck pain and would like an appointment at CB Physiotherapy Saket.'},
   joint:{name:'Knee, shoulder or joint pain',intro:'<b>Find the source of the pain, with advanced care</b> for knee pain, frozen shoulder, arthritis, hip pain, ankle sprains and tennis elbow.',doc:'Treats knees, shoulders and hips daily, from frozen shoulder to arthritic knees, with hands-on care and measured strengthening.',short:'knee or joint pain',title:'Knee or joint, first visit ₹499',
    who:'Knees that complain on stairs, a shoulder that will not lift, a hip or ankle that has been nagging for weeks.',
-   assess:'Whether the pain comes from the joint, the tendon or the muscles around it; how much movement and strength you have lost; and the plan to get it back. Written report included.',
+   assess:'Whether the pain comes from the joint, the tendon or the muscles around it, and how much movement and strength you have lost, measured.',
    relief:'Class 4 laser or TECAR to calm the joint, with taping or hands-on work so it moves easier from day one.',
    recover:'Strength around the joint measured with digital testing and rebuilt with guided exercise, so the pain does not come back when you stop.',
    usp:['Class 4 laser & TECAR','Digital strength testing','Guided strengthening'],
@@ -441,7 +443,7 @@ footer b{color:var(--ink-2);font-weight:600}
    wa:'Hi, I have knee, shoulder or joint pain and would like an appointment at CB Physiotherapy Saket.'},
   rehab:{name:'Injury or post-surgery rehab',intro:'<b>A structured recovery plan</b> for ACL and ligament tears, fractures, knee and hip replacement, shoulder surgery and sports injuries.',doc:'Runs post-surgery and sports injury rehab in step with the operating surgeon\u2019s protocol, with milestones checked each week.',short:'rehab',title:'Injury or surgery rehab, first visit ₹499',
    who:'Ligament tears, fractures out of plaster, knee or hip replacements, shoulder repairs. Rehab planned with your surgeon’s protocol.',
-   assess:'Range, swelling, strength and how you walk or lift, checked against your surgeon’s protocol. A written plan with the stages ahead and what each one needs.',
+   assess:'Range, swelling, strength and how you walk or lift, checked against your surgeon’s protocol and the stage you are at.',
    relief:'Pain and swelling control first: Class 4 laser or TECAR for healing tissue, and safe early movement so nothing stiffens.',
    recover:'Progressive strengthening in stages, timed to your surgeon’s follow-ups, until you are back to the activity you miss.',
    usp:['Protocol-led rehab','Laser & TECAR for healing','Measured strength milestones'],
@@ -455,7 +457,7 @@ footer b{color:var(--ink-2);font-weight:600}
    wa:'Hi, I need physiotherapy after an injury or surgery and would like an appointment at CB Physiotherapy Saket.'},
   ortho:{name:'Other ortho or nerve-related problems',intro:'<b>Accurate diagnosis, with focused care</b> for pinched nerves, tingling and numbness, heel pain, posture-related pain and balance after a fall.',doc:'Combines orthopaedic physiotherapy with chiropractic assessment for nerve, posture and alignment problems.',short:'ortho or nerve care',title:'Other ortho or neuro, first visit ₹499',
    who:'Tingling or numbness in an arm or leg, sciatica, heel or elbow pain, posture-related pain, or balance that has not come back after an injury.',
-   assess:'Which nerve, joint or muscle is behind it, what is safe to do now, and the plan to settle it. Written report included.',
+   assess:'Which nerve, joint or muscle is behind it, and what is safe to do now: nerve, posture and balance tests, guided step by step.',
    relief:'Nerve-gliding and hands-on work to ease the irritation, with Class 4 laser or TECAR for the painful area.',
    recover:'Strength, posture and balance retraining, measured with digital testing, so the problem does not creep back.',
    usp:['Nerve & posture care','Class 4 laser & TECAR','Measured balance & strength'],
@@ -475,7 +477,7 @@ footer b{color:var(--ink-2);font-weight:600}
   panel.innerHTML=`<h3>${d.name}</h3><p class="who">${d.intro}</p>
    <div class="act"><button class="btn" type="button" data-book>Book the first visit</button><a class="btn quiet" href="tel:+917303335605">Call to ask</a></div>
    <ol class="steps">
-    <li><i>1</i><div><b>AI assessment with report<small>15 to 30 min</small></b><span>${d.assess}</span></div></li>
+    <li><i>1</i><div><b>AI-guided assessment<small>15 to 30 min</small></b><span>${d.assess}</span><span class="report">It ends in your <b>AI Recovery Report</b>: the diagnosis, what was observed and tested, the treatment plan and the expected timeline.</span></div></li>
     <li><i>2</i><div><b>Treatment, same day</b>
      <ul class="phase"><li><em>First</em><span>${d.relief}</span></li><li><em>Then</em><span>${d.recover}</span></li></ul>
      <div class="usp">${d.usp.map(u=>`<span>${u}</span>`).join('')}</div></div></li>
