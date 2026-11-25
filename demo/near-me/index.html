@@ -196,7 +196,8 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
 .form .btn{width:100%;margin-top:4px}
 .done{display:none;font-size:15px;line-height:1.5}
 .done .inner{padding:14px 16px;border-radius:12px;background:var(--mint)}
-.done .btn{margin-top:12px;width:100%}
+.done .btn{margin-top:10px;width:100%}
+.done .faster{margin-top:14px;font-size:14px;color:var(--ink-2);line-height:1.45}
 .done b{font-weight:600}
 .consent{font-size:12.5px;color:var(--ink-3);line-height:1.45}
 
@@ -495,7 +496,7 @@ footer b{color:var(--ink-2);font-weight:600}
  document.querySelectorAll('.when button').forEach(b=>b.addEventListener('click',()=>document.querySelectorAll('.when button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))));
  $('#form').addEventListener('submit',e=>{e.preventDefault();const f=e.target;const name=f.name.value.trim(),phone=f.phone.value.replace(/\D/g,'');if(!name){f.name.focus();return;}if(phone.length<10){f.phone.focus();return;}
   const pick=$('#concern').value;if(!pick){$('.pick').scrollIntoView({block:'center'});$('.pick button').focus();return;}const forWhat=CONCERNS[pick]?CONCERNS[pick].short:'a first assessment';const when={today:'today',tomorrow:'tomorrow',week:'this week'}[document.querySelector('.when [aria-pressed="true"]').dataset.when];
-  const done=$('#done');done.innerHTML=`<div class="inner"><b>Thanks, ${name.split(' ')[0]}.</b> We will call ${phone.replace(/(\d{5})(\d{5})$/,'$1 $2')} within 15 minutes to fix a time ${when} for ${forWhat}. <span class="muted">(Demo: nothing was sent.)</span></div><button class="btn quiet" type="button" id="dlg-done">Done</button>`;done.style.display='block';f.hidden=true;$('#dlg-done').addEventListener('click',()=>dlg.close());});
+  const done=$('#done');const waMsg=WA+encodeURIComponent(`Hi, I just requested a call back on your website. Name: ${name}. For: ${forWhat}. Preferred time: ${when}. CB Physiotherapy Saket.`);done.innerHTML=`<div class="inner"><b>Thanks, ${name.split(' ')[0]}.</b> We will call ${phone.replace(/(\d{5})(\d{5})$/,'$1 $2')} within 15 minutes to fix a time ${when} for ${forWhat}. <span class="muted">(Demo: nothing was sent.)</span></div><p class="faster">Want a faster reply? Send the same request on WhatsApp and the team picks it up straight away.</p><a class="btn wa" href="${waMsg}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>Send on WhatsApp</a><button class="btn quiet" type="button" id="dlg-done">Done</button>`;done.style.display='block';f.hidden=true;$('#dlg-done').addEventListener('click',()=>dlg.close());});
  const dlg=$('#book-dialog');const pickBtns=[...document.querySelectorAll('.pick button')];const setPick=v=>{pickBtns.forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.pick===v)));$('#concern').value=v||'';$('#dlg-title').textContent=v&&CONCERNS[v]?CONCERNS[v].title:'Book your first visit';};pickBtns.forEach(b=>b.addEventListener('click',()=>setPick(b.dataset.pick)));document.addEventListener('click',e=>{const b=e.target.closest('[data-book]');if(!b)return;e.preventDefault();setPick(chosen?current:'');dlg.showModal();setTimeout(()=>$('#name').focus(),50);});$('#dlg-close').addEventListener('click',()=>dlg.close());dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
  const bar=$('#bar'),cover=$('.cover'),segWrap=$('#seg-wrap'),heroCta=$('#hero-cta');
  const upd=()=>{const past=scrollY>cover.offsetTop+cover.offsetHeight;bar.classList.toggle('show',heroCta.getBoundingClientRect().bottom<0);document.body.classList.toggle('scrolled',past);segWrap.classList.toggle('stuck',segWrap.getBoundingClientRect().top<=59&&scrollY>0);};
