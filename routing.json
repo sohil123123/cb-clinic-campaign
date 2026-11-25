@@ -1,5 +1,5 @@
 {
- "_comment": "Routing rules for the central page and the dashboard's search-term analyser. Edit, commit, push: the deploy syncs it into app.js. Words are matched whole, case-insensitive, after punctuation is removed. Longest alias wins. Review weekly against the Routing tab. 'other_delhi' lists Delhi areas with no nearby clinic: they stay on the five-clinic page.",
+ "_comment": "Routing rules for the central page and the dashboard's search-term analyser. Edit, commit, push: the deploy syncs it into app.js. Words are matched whole, case-insensitive, after punctuation is removed. Longest alias wins. Review weekly against the Routing tab. 'other_delhi' lists Delhi areas with no nearby clinic: they stay on the five-clinic page. Generic Delhi-wide keywords are treated like neutral searches: nearest clinic by loc/loci when mapped, else the central page.",
  "version": "2026-11-25",
  "generic_locations": [
   "delhi",

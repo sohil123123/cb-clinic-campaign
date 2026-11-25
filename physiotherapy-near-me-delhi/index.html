@@ -14,7 +14,7 @@ var far=longest(t,R.far),gen=longest(t,R.generic),oth=longest(t,R.other);
 var cls=clinic?'locality':far?'far':oth?'other-delhi':gen?'generic':(kw?'neutral':'none');
 var dec='',slug='';
 if(clinic){slug=R.slugs[clinic];dec=area&&!kw?'area':'keyword';}
-else if(cls==='generic'||cls==='far'||cls==='other-delhi'){}
+else if(cls==='far'||cls==='other-delhi'){}
 else if(!off&&R.geo[q.get('loc')||'']){slug=R.slugs[R.geo[q.get('loc')]];dec='geo';}
 else if(!off&&R.geo[q.get('loci')||'']){slug=R.slugs[R.geo[q.get('loci')]];dec='interest';}
 window.__cbr={kw_class:cls,decision:(cls==='generic'||cls==='far'||cls==='other-delhi')?cls:'none'};

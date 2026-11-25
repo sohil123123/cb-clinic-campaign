@@ -78,9 +78,10 @@ The central Delhi page decides from the ad click, in this order:
 
 1. The matched keyword names a clinic area or one of its localities
    (`routing.json` → `clinics`): that clinic, wherever the person is.
-2. The keyword names Delhi as a whole (`generic_locations`) or somewhere far
-   (`far_locations`): the five-clinic page.
-3. Location-neutral keyword ("physiotherapy near me"): the clinic nearest the
+2. The keyword names somewhere far (`far_locations`) or another Delhi area
+   without a clinic (`other_delhi`): the five-clinic page.
+3. Location-neutral keyword ("physiotherapy near me") or a Delhi-wide one
+   ("physiotherapy in delhi", `generic_locations`): the clinic nearest the
    person if Google's `loc` id is in `geo-clinics.json`, else Google's
    location of interest (`loci`), else the five-clinic page.
 
