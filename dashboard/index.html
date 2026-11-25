@@ -169,7 +169,7 @@ details.tv summary{cursor:pointer;color:var(--ink-3)}
     <div class="card span-3"><h2>WhatsApp topics</h2><p class="sub">Topic chosen before sending</p><ul class="hbars" id="c-waintent"></ul></div>
     <div class="card span-6"><h2>Engagement</h2><p class="sub">How far people read and how long they stay</p><div id="c-engage"></div></div>
     <div class="card span-6"><h2>Booking problems</h2><p class="sub">Failed submissions by reason</p><ul class="hbars" id="c-failures"></ul></div>
-    <div class="card span-12"><h2>Latest actions</h2><p class="sub">Most recent 60 events in the selected range</p><div class="table-wrap" id="t-recent"></div></div>
+    <div class="card span-12"><h2>Latest visits</h2><p class="sub">One row per visit, most recent first, with what the person did in order. <label style="margin-left:10px"><input type="checkbox" id="recent-raw"> Show every event instead</label></p><div class="table-wrap" id="t-recent"></div></div>
    </div>
   </section>
 
@@ -300,6 +300,7 @@ $('#from').addEventListener('change',()=>{state.from=$('#from').value;document.q
 $('#to').addEventListener('change',()=>{state.to=$('#to').value;document.querySelectorAll('#range button').forEach(b=>b.setAttribute('aria-pressed','false'));load();});
 ['device','source'].forEach(k=>$('#f-'+k).addEventListener('change',e=>{state.filters[k]=e.target.value;render();}));
 $('#refresh').addEventListener('click',load);
+$('#recent-raw').addEventListener('change',render);
 function buildPageFilter(){
  const pages=[...new Set(state.events.map(e=>e.page))].filter(Boolean).sort((a,b)=>pageName(a).localeCompare(pageName(b)));
  $('#page-options').innerHTML=pages.map(p=>`<label><input type="checkbox" value="${esc(p)}"${state.filters.pages.has(p)?' checked':''}> ${esc(pageName(p))}</label>`).join('')||'<div class="empty">No pages yet</div>';
@@ -380,8 +381,18 @@ function renderOverview(ev){
  hbars('#c-callplace',a.callPlace,placeName);hbars('#c-waintent',a.waIntent,k=>INTENT[k]||k);
  $('#c-engage').innerHTML=[['Median time on page',a.medianSeconds?a.medianSeconds+' s':'–'],['Scrolled past half',pct(a.scroll50,a.n)],['Reached the end',pct(a.scroll90,a.n)],['FAQ opened',fmt(a.faq)],['Reviews opened',fmt(a.reviews)],['Directions tapped',fmt(a.directions)]].map(([l,v])=>`<div class="kv"><span>${l}</span><strong class="mono">${v}</strong></div>`).join('');
  hbars('#c-failures',a.failures,k=>FAIL[k]||'HTTP '+k,'var(--s2)');
- const recent=[...ev].filter(e=>e.event!=='section_seen').sort((x,y)=>y.ts-x.ts).slice(0,60).map(e=>[timeLabel(e.ts),pageName(e.page),e.event.replace(/_/g,' '),e.device,describe(e)]);
- table('#t-recent',['Time','Page','Action','Device','Details'],recent,{html:4});
+ if($('#recent-raw').checked){const recent=[...ev].filter(e=>e.event!=='section_seen').sort((x,y)=>y.ts-x.ts).slice(0,100).map(e=>[timeLabel(e.ts),pageName(e.page),e.event.replace(/_/g,' '),e.device,describe(e)]);table('#t-recent',['Time','Page','Action','Device','Details'],recent,{html:4});}
+ else{
+  const bySess=new Map();ev.forEach(e=>{(bySess.get(e.session)||bySess.set(e.session,[]).get(e.session)).push(e);});
+  const STEP={page_view:null,section_seen:null,scroll_50:null,scroll_90:'read to the end',concern_selected:e=>'chose '+(CONCERNS[e.props.concern]||e.props.concern),booking_opened:e=>'opened booking ('+placeName(e.props.placement).toLowerCase()+')',booking_request_sent:e=>'SENT BOOKING'+(e.props.clinic_id?' for '+e.props.clinic_id:''),booking_request_failed:e=>'booking failed ('+(FAIL[e.props.reason]||e.props.reason)+')',call_click:e=>'CALLED ('+placeName(e.props.placement).toLowerCase()+')',whatsapp_open:()=>'opened WhatsApp',whatsapp_send:e=>'SENT WHATSAPP ('+(INTENT[e.props.intent]||e.props.intent)+')',directions_click:()=>'directions',google_profile_click:()=>'Google profile',reviews_opened:()=>'reviews',faq_opened:e=>'FAQ: '+(e.props.question||'').slice(0,40),clinic_pill_click:e=>'clinic strip: '+e.props.clinic,map_pin_click:e=>'map pin: '+e.props.clinic,other_clinics_opened:()=>'other centres',area_other_clinics_shown:()=>'other centres',clinic_selected:null,outbound_click:e=>'opened '+(e.props.to||'clinic page'),geo_guess_dismissed:()=>'rejected suggested clinic',page_leave:null,endpoint_check:null};
+  const rows=[...bySess.values()].map(list=>{list.sort((a,b)=>a.ts-b.ts);const first=list[0],view=list.find(e=>e.event==='page_view')||first,leave=[...list].reverse().find(e=>e.event==='page_leave');
+   const steps=list.map(e=>{const f=STEP[e.event];if(f===null)return null;if(f===undefined)return e.event.replace(/_/g,' ');return typeof f==='function'?f(e):f;}).filter(Boolean);
+   const r=(view.props&&view.props.route)||{};const ad=adOf(view);const where=r.loc||ad.loc||'';
+   const src=[view.utm_source||(view.referrer?view.referrer:'direct'),view.utm_campaign].filter(Boolean).join(' / ');
+   const dur=leave&&leave.props.seconds?leave.props.seconds+' s'+(leave.props.max_scroll?', '+leave.props.max_scroll+'%':''):'';
+   return {ts:first.ts,cells:[timeLabel(first.ts),pageName(view.page)+(r.decision&&r.decision!=='page'&&r.decision!=='none'?' → '+(DEC[r.decision]||r.decision).toLowerCase():''),where?locLabel(where).replace(/ \(\d+\)$/,''):'–',ad.kw||'–',view.device,src,steps.length?steps.join(' → '):'looked only',dur]};}).sort((a,b)=>b.ts-a.ts).slice(0,60);
+  table('#t-recent',['Started','Page','Where','Keyword','Device','Source','What they did','Stayed'],rows.map(r=>r.cells));
+ }
 }
 function describe(e){const p=e.props||{};const parts=[];if(p.concern)parts.push(CONCERNS[p.concern]||p.concern);if(p.clinic)parts.push('clinic: '+p.clinic);if(p.clinic_id)parts.push('clinic: '+p.clinic_id);if(p.placement)parts.push('from '+placeName(p.placement).toLowerCase());if(p.intent)parts.push('topic: '+(INTENT[p.intent]||p.intent));if(p.number)parts.push(p.number);if(p.seconds!=null)parts.push(p.seconds+' s, '+(p.max_scroll||0)+'% scrolled');if(p.reason)parts.push('reason: '+(FAIL[p.reason]||p.reason));if(p.question)parts.push('"'+p.question+'"');if(e.utm_campaign)parts.push(e.utm_source+' / '+e.utm_campaign);return esc(parts.join(' · '));}
 
