@@ -72,6 +72,37 @@ Nginx needs no custom rules. It serves each folder's `index.html` and keeps
 query parameters on the trailing-slash redirect. Use the trailing-slash URL as
 the Google Ads final URL.
 
+## Routing: which clinic a visitor from an ad sees
+
+The central Delhi page decides from the ad click, in this order:
+
+1. The matched keyword names a clinic area or one of its localities
+   (`routing.json` → `clinics`): that clinic, wherever the person is.
+2. The keyword names Delhi as a whole (`generic_locations`) or somewhere far
+   (`far_locations`): the five-clinic page.
+3. Location-neutral keyword ("physiotherapy near me"): the clinic nearest the
+   person if Google's `loc` id is in `geo-clinics.json`, else Google's
+   location of interest (`loci`), else the five-clinic page.
+
+Clinic pages always show their own clinic. On every page the keyword also
+pre-selects the concern (`conditions`) and the home-visit option
+(`services.home_visit`), and tags the visit with conditions, services and an
+`irrelevant` flag for the dashboard.
+
+**Weekly review** (Routing tab in the dashboard):
+
+1. Download the Search terms report from Google Ads (all campaigns, last 7 or
+   30 days) and drop it on the Routing tab. Every term is classified with the
+   current rules.
+2. Look at "needs a rule": neutral terms containing words the rules do not know.
+   A locality goes into `clinics`, a city or district into `generic_locations`
+   or `far_locations`, a symptom into `conditions`, a treatment into
+   `services`, junk into `irrelevant` (and into the Ads negative list).
+3. Look at the Google location IDs table for ids with visits that are not
+   mapped; add them to `geo-clinics.json` under the nearest clinic.
+4. Commit and push `routing.json` / `geo-clinics.json`. The deploy syncs them
+   into the page (`scripts/sync-routing.py`); nothing else changes.
+
 ## Clinic landing pages (one per clinic, same content)
 
 `areas.json` lists clinic pages such as `physiotherapy-near-me-saket`. At
