@@ -68,5 +68,5 @@
  // Google Ads ValueTrack values from the account tracking template (loc = searcher's physical location id,
  // loci = location of interest, kw/mt = keyword and match type, net = network, dev = Google's device, cid/agid = ids).
  const ad={};[['loc','loc'],['loci','loci'],['utm_term','kw'],['mt','mt'],['net','net'],['dev','dev'],['utm_content','creative'],['cid','cid'],['agid','agid']].forEach(([q,k])=>{const v=params.get(q);if(v&&!/^\{.*\}$/.test(v))ad[k]=v.slice(0,80);});
- track('page_view',{title:document.title,ad,route:window.cbRoute||null});
+ track('page_view',{title:document.title,ad,route:window.cbRoute||null,layout:document.body.dataset.layout||'hero1'});
 })();

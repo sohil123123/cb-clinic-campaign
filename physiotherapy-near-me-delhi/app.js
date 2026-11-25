@@ -5,11 +5,11 @@ const clinics=[
 {id:'vasant',latlng:[28.524433,77.154562],name:'Vasant Kunj',area:'South West Delhi',address:'C-31, First Floor – C, Nathu Singh Market, near KL 27 Gym, Masoodpur, New Delhi 110070',phone:'9773664030'},
 {id:'dwarka',latlng:[28.594018681288997,77.02574329563622],name:'Dwarka, Sector 17',area:'West Delhi',address:'Plot 7, Basement, near Sarvodya Vidyalya School, Sector 17, Dwarka, New Delhi 110078',phone:'9217683886'}];
 const clinicDetails={
-gk:{street:'near M Block, GK 2',short:'Greater Kailash',near:['Greater Kailash I','CR Park','Kalkaji','Nehru Place'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-greater-kailash',head:'Dr. Monika Bhardwaj',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/monika-bhardwaj',landmark:'S-210, Lower Ground Floor · GK 2'},
-safdarjung:{street:'near AIIMS Trauma Centre',short:'Safdarjung Enclave',near:['Green Park','Hauz Khas','R.K. Puram','Moti Bagh','Chanakyapuri'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-safdarjung-enclave',head:'Dr. Hardika Sood',profile:'https://cbphysiotherapy.in/delhi/sports-physiotherapist/hardik-sood',landmark:'A-1/295, Basement · Near AIIMS Trauma Centre'},
-saket:{street:'on Mandir Marg',short:'Saket',near:['Malviya Nagar','Pushp Vihar','Sainik Farms','Mehrauli'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-saket',head:'Dr. Nitish Kumar Srivastava',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/nitish-kumar-srivastava',landmark:'J-25, Basement · Near Hotel Saket 27'},
-vasant:{street:'at Nathu Singh Market, Masoodpur',short:'Vasant Kunj',near:['Vasant Vihar','Mahipalpur','Kishangarh','Ghitorni'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-vasant-kunj',head:'Dr. Rahul Dogra',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/rahul-dogra',landmark:'C-31, First Floor · Nathu Singh Market'},
-dwarka:{street:'in Sector 17, near Sarvodaya Vidyalaya',short:'Dwarka',near:['Palam','Dwarka Mor','Uttam Nagar','Najafgarh'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-dwarka',head:'Dr. Amit',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/amit-2',landmark:'Plot 7, Basement · Sector 17'}
+gk:{street:'near M Block, GK 2',where:'M Block, Greater Kailash 2, Delhi',nearby:'S-210, Lower Ground Floor',short:'Greater Kailash',near:['Greater Kailash I','CR Park','Kalkaji','Nehru Place'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-greater-kailash',head:'Dr. Monika Bhardwaj',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/monika-bhardwaj',landmark:'S-210, Lower Ground Floor · GK 2'},
+safdarjung:{street:'near AIIMS Trauma Centre',where:'Safdarjung Enclave, Delhi',nearby:'Near AIIMS Trauma Centre',short:'Safdarjung Enclave',near:['Green Park','Hauz Khas','R.K. Puram','Moti Bagh','Chanakyapuri'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-safdarjung-enclave',head:'Dr. Hardika Sood',profile:'https://cbphysiotherapy.in/delhi/sports-physiotherapist/hardik-sood',landmark:'A-1/295, Basement · Near AIIMS Trauma Centre'},
+saket:{street:'on Mandir Marg',where:'Mandir Marg, Saket, Delhi',nearby:'Near Hotel Saket 27',short:'Saket',near:['Malviya Nagar','Pushp Vihar','Sainik Farms','Mehrauli'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-clinic-saket',head:'Dr. Nitish Kumar Srivastava',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/nitish-kumar-srivastava',landmark:'J-25, Basement · Near Hotel Saket 27'},
+vasant:{street:'at Nathu Singh Market, Masoodpur',where:'Masoodpur, Vasant Kunj, Delhi',nearby:'Nathu Singh Market, First Floor',short:'Vasant Kunj',near:['Vasant Vihar','Mahipalpur','Kishangarh','Ghitorni'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-vasant-kunj',head:'Dr. Rahul Dogra',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/rahul-dogra',landmark:'C-31, First Floor · Nathu Singh Market'},
+dwarka:{street:'in Sector 17, near Sarvodaya Vidyalaya',where:'Sector 17, Dwarka, Delhi',nearby:'Near Sarvodaya Vidyalaya',short:'Dwarka',near:['Palam','Dwarka Mor','Uttam Nagar','Najafgarh'],page:'https://cbphysiotherapy.in/delhi/physiotherapy-clinic/cb-physiotherapy-dwarka',head:'Dr. Amit',profile:'https://cbphysiotherapy.in/delhi/ortho-physiotherapist/amit-2',landmark:'Plot 7, Basement · Sector 17'}
 };
 clinics.forEach(c=>Object.assign(c,clinicDetails[c.id]));
 // Opening hours shown on clinic cards, the clinic landing screen and Getting here. Winter timing.
@@ -30,6 +30,7 @@ function revealCard(card){
  const y=r.height<=avail?scrollY+r.top-top:scrollY+r.bottom-(innerHeight-barH-10);
  scrollTo({top:Math.max(0,y),behavior:smooth});
 }
+(()=>{const bar=document.querySelector('.quick-actions');if(!bar)return;const hero=document.querySelector('.hero');const upd=()=>{const limit=hero?hero.getBoundingClientRect().bottom+scrollY-140:300;bar.classList.toggle('qa-wait',scrollY<limit);};upd();addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);})();
 function bindConcern(link){link.addEventListener('click',()=>{concern.value=link.dataset.concern;syncTreatment();if(link.dataset.careTarget)revealCard(document.getElementById(link.dataset.careTarget));});}
 document.querySelectorAll('[data-concern]').forEach(bindConcern);
 concern.addEventListener('change',syncTreatment);
@@ -187,16 +188,20 @@ const ROUTING={"version":"2026-11-25","generic_locations":["delhi","new delhi","
  const hero=document.querySelector('.hero');
  if(hero){
   hero.classList.add('local-hero');
-  hero.innerHTML=`<div class="hero-copy">
+  const nearLine=(c.nearby||mark)+(c.near&&c.near.length?' · Also serving '+c.near.slice(0,3).join(', '):'');
+  hero.innerHTML=`<div class="hero-copy hero-v2">
    <span class="eyebrow">${c.short.toUpperCase()} · ${c.area.toUpperCase()}</span>
    <h1>Best Physiotherapy<br>Near You in ${c.short}.</h1>
-   <p class="precision-line">${streetLine}</p>
-   <p class="local-line">Recovery led by <a href="${c.profile}" target="_blank" rel="noopener">${c.head} (PT)</a>, with AI Precision.</p>
-   <div class="care-shortcuts" aria-label="Choose your treatment">
-    <button type="button" data-concern="spine" data-care-target="back-neck" aria-pressed="false">Back / Neck<span aria-hidden="true">→</span></button>
-    <button type="button" data-concern="joint" data-care-target="joint-care" aria-pressed="false">Knee / Joint<span aria-hidden="true">→</span></button>
-    <button type="button" data-concern="rehab" data-care-target="injury-care" aria-pressed="false">Injury / Surgery<span aria-hidden="true">→</span></button>
-    <button type="button" data-concern="other" data-care-target="other-care" aria-pressed="false">Other Issues<span aria-hidden="true">→</span></button>
+   <p class="position-line">Advanced Ortho, Spine &amp; Sports Rehab.</p>
+   <p class="where-line"><strong>${c.where||c.short+', Delhi'}</strong><span>${nearLine}</span></p>
+   <p class="offer-line"><strong>Advanced physio ₹999 to ₹1,499</strong> per session · First assessment <s>₹999</s> <strong>₹499</strong> · <strong>Same-day appointments</strong></p>
+   <div class="hero-cta"><a class="button" href="${tel}" data-call="${c.id}">${phoneIcon}Call Now</a><a class="button ghost" href="#book" aria-haspopup="dialog">Book at ${c.short}<span aria-hidden="true">→</span></a></div>
+   <div class="care-shortcuts expertise" aria-label="What we treat">
+    <span class="expertise-title">Our expertise</span>
+    <button type="button" data-concern="spine" data-care-target="back-neck" aria-pressed="false"><b>Back &amp; Neck Pain</b><small>Spine, disc, sciatica</small></button>
+    <button type="button" data-concern="joint" data-care-target="joint-care" aria-pressed="false"><b>Knee, Shoulder &amp; Joint</b><small>Arthritis, stiffness, ortho pain</small></button>
+    <button type="button" data-concern="rehab" data-care-target="injury-care" aria-pressed="false"><b>Sports Injury &amp; Post-surgery</b><small>Ligament, fracture, replacement</small></button>
+    <button type="button" data-concern="other" data-care-target="other-care" aria-pressed="false"><b>Neuro &amp; Other Conditions</b><small>Stroke, Parkinson's, posture</small></button>
    </div>
    <div class="hero-actions">
     <button class="reviews-strip rating-badge" type="button" id="open-reviews" aria-haspopup="dialog" aria-label="${rating} for the ${c.short} clinic. Read reviews.">${g}<span class="rating-copy"><span class="rating-top"><span class="rating-stars" aria-hidden="true">★★★★★</span><strong>${rating}</strong></span><span class="rating-bottom"><span>${c.short} clinic</span><span class="rating-read">Read reviews ↗</span></span></span></button>
@@ -204,8 +209,9 @@ const ROUTING={"version":"2026-11-25","generic_locations":["delhi","new delhi","
   </div>
   <div class="hero-right local-card">
    <figure class="local-photo"><img src="${heroImg.src}"${heroImg.srcset?` srcset="${heroImg.srcset}" sizes="${heroImg.sizes}"`:''} alt="Inside CB Physiotherapy ${c.name}" width="${heroImg.w}" height="${heroImg.h}" fetchpriority="high" decoding="async"><span class="local-hours">${clockIcon}Open ${HOURS}</span><figcaption>CB Physiotherapy ${c.name}</figcaption></figure>
-   <div class="local-ctas"><a class="button" href="#book" aria-haspopup="dialog">Book at ${c.short}<span aria-hidden="true">→</span></a><a class="button ghost" href="${tel}" data-call="${c.id}">${phoneIcon}Call ${phoneText}</a><a class="text-link local-directions" href="${directions(c)}" target="_blank" rel="noopener" data-map="${c.id}">${pinIcon}Directions</a></div>
+   <div class="local-ctas local-foot"><p class="local-line">Led by <a href="${c.profile}" target="_blank" rel="noopener">${c.head} (PT)</a> · AI-assisted assessment</p><a class="text-link local-directions" href="${directions(c)}" target="_blank" rel="noopener" data-map="${c.id}">${pinIcon}Directions</a></div>
   </div>`;
+  document.body.dataset.layout='hero2';
   hero.querySelectorAll('[data-concern]').forEach(bindConcern);syncTreatment();
  }
 

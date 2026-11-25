@@ -198,6 +198,7 @@ table.inner{font-size:12px}table.inner th,table.inner td{padding:5px 8px}
     <div class="seg" id="cmp-dim">
      <button type="button" data-dim="page" aria-pressed="true">Pages</button>
      <button type="button" data-dim="device" aria-pressed="false">Devices</button>
+     <button type="button" data-dim="layout" aria-pressed="false">Layouts</button>
      <button type="button" data-dim="source" aria-pressed="false">Sources</button>
      <button type="button" data-dim="campaign" aria-pressed="false">Campaigns</button>
      <button type="button" data-dim="keyword" aria-pressed="false">Keywords</button>
@@ -340,7 +341,9 @@ async function load(){
  }catch(err){$('#gate-error').textContent='Could not load data: '+err.message;$('#status').textContent='Load failed';return false;}
 }
 let sessionAd=new Map();
-function indexAds(){sessionAd=new Map();state.events.forEach(e=>{if(e.event==='page_view'&&e.props&&e.props.ad&&Object.keys(e.props.ad).length)sessionAd.set(e.session,e.props.ad);});}
+let sessionLayout=new Map();
+function indexAds(){sessionAd=new Map();sessionLayout=new Map();state.events.forEach(e=>{if(e.event!=='page_view'||!e.props)return;if(e.props.ad&&Object.keys(e.props.ad).length)sessionAd.set(e.session,e.props.ad);sessionLayout.set(e.session,e.props.layout||'hero1');});}
+const LAYOUT={hero1:'Landing screen v1 (concern buttons first)',hero2:'Landing screen v2 (place, price, call, expertise)'};const layoutOf=e=>sessionLayout.get(e.session)||'hero1';
 const adOf=e=>sessionAd.get(e.session)||{};
 function normalise(rows){return rows.map(r=>{let props=r.props||{};if(typeof props==='string'){try{props=JSON.parse(props);}catch(_){props={};}}return {ts:new Date(r.ts||r.created_at),event:r.event,page:r.page||'',area:r.area||'',device:r.device||'',visitor:r.visitor||r.visitor_id||'',session:r.session||r.session_id||'',utm_source:r.utm_source||'',utm_medium:r.utm_medium||'',utm_campaign:r.utm_campaign||'',referrer:r.referrer||'',props};}).filter(e=>!isNaN(e.ts));}
 
@@ -454,6 +457,7 @@ function groups(ev){
  const dim=state.dim;
  if(dim==='period'){const prev=previousPeriodEvents();return [{label:`This period (${state.from} to ${state.to})`,ev},{label:`Previous ${prev.span} days`,ev:prev.events}];}
  if(dim==='device')return ['mobile','desktop'].map(d=>({label:d[0].toUpperCase()+d.slice(1),ev:ev.filter(e=>e.device===d)}));
+ if(dim==='layout'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>layoutOf(e)).entries()].sort((a,b)=>b[1]-a[1]).map(x=>x[0]);return keys.map(k=>({label:LAYOUT[k]||k,ev:ev.filter(e=>layoutOf(e)===k)}));}
  if(dim==='source'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>e.utm_source||'direct').entries()].sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);return keys.map(k=>({label:k,ev:ev.filter(e=>(e.utm_source||'direct')===k)}));}
  if(dim==='keyword'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>adOf(e).kw||'(no keyword)').entries()].sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);return keys.map(k=>({label:k,ev:ev.filter(e=>(adOf(e).kw||'(no keyword)')===k)}));}
  if(dim==='campaign'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>e.utm_campaign||'(none)').entries()].sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);return keys.map(k=>({label:k,ev:ev.filter(e=>(e.utm_campaign||'(none)')===k)}));}
