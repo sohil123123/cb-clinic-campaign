@@ -168,6 +168,22 @@ value; return `401` otherwise. Dates are inclusive, Indian time. Respond with
 `{"events":[…rows…]}` using the column names above (`props` may be a JSON
 string). Cap at 90 days per request. Same CORS origin.
 
+## Cloudflare cache
+
+The subdomain is proxied by Cloudflare, which caches pages and files at its
+edge. Versioned assets are safe, but a fresh deploy of a page or of the rule
+files can stay invisible until the edge copy expires. The deploy workflow
+purges the cache for the subdomain automatically when two repository
+secrets exist:
+
+| Secret | Value |
+|---|---|
+| `CF_ZONE_ID` | the zone id shown on the Cloudflare overview page for the domain |
+| `CF_API_TOKEN` | an API token with the single permission *Zone, Cache Purge, Purge* for that zone |
+
+Until they are added, purge manually in Cloudflare after a deploy (Caching,
+Configuration, Purge Everything), or wait for the edge TTL.
+
 ## Opening hours
 
 The hours shown on the clinic cards, the clinic landing screens and

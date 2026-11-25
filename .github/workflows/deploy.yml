@@ -67,6 +67,16 @@ jobs:
             -e "ssh -i ~/.ssh/deploy_key -p $PORT -o StrictHostKeyChecking=yes" \
             ./ "$USER@$HOST:$DEST/"
 
+      - name: Purge the Cloudflare cache (skipped until CF_ZONE_ID and CF_API_TOKEN secrets exist)
+        if: ${{ env.CF_ZONE_ID != '' && env.CF_API_TOKEN != '' }}
+        env:
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        run: |
+          curl -fsS -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" \
+            -H "Authorization: Bearer $CF_API_TOKEN" -H "Content-Type: application/json" \
+            --data '{"hosts":["book.cbphysiotherapy.in"]}' > /dev/null && echo "Cloudflare cache purged for book.cbphysiotherapy.in"
+
       - name: Confirm the live page responds
         run: |
           url="https://book.cbphysiotherapy.in/physiotherapy-near-me-delhi/"
