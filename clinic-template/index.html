@@ -214,6 +214,41 @@ footer{margin-top:40px;padding:22px 0 120px;border-top:1px solid var(--line);fon
 footer b{color:var(--ink-2);font-weight:600}
 footer a{color:var(--ink-2)}
 
+/* central page: clinic strip, map and carousel */
+.strip{background:var(--mint);border-bottom:1px solid var(--line);overflow:hidden}
+.strip .wrap{display:flex;align-items:center;gap:12px;min-height:46px}
+.strip b{font-size:13px;white-space:nowrap;font-weight:600}
+@media(max-width:400px){.strip b{font-size:12.5px}}
+.strip .track{flex:1;overflow:hidden;position:relative;mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 14px),transparent)}
+.strip ul{display:flex;gap:8px;margin:0;padding:0 2px;list-style:none;width:max-content;animation:tick 28s linear infinite}
+.strip:hover ul,.strip:focus-within ul{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.strip ul{animation:none}}
+@media(min-width:721px){.strip ul{animation:none}}
+.strip li a{display:inline-block;font-size:13px;font-weight:500;color:var(--green);background:#fff;border:1px solid var(--mint-2);border-radius:999px;padding:6px 12px;text-decoration:none;white-space:nowrap}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.cmap{height:260px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--mint);position:relative;margin-top:16px}
+.cmap .ph{position:absolute;inset:0;display:grid;place-items:center;font-size:14px;color:var(--ink-3)}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.legend button{display:inline-flex;align-items:center;gap:6px;font-size:13px;border:1px solid var(--line);border-radius:999px;padding:6px 11px;background:#fff;cursor:pointer}
+.legend button b{width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;font-size:12px;display:grid;place-items:center}
+.legend button[aria-pressed="true"]{border-color:var(--green);background:var(--mint)}
+.clinic-pin span{display:grid;place-items:center;width:32px;height:32px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--green);color:#fff;font-weight:700;font-size:13px;border:2px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.25)}
+.clinic-pin span::after{content:attr(data-n);transform:rotate(45deg);display:block}
+.ccar{display:flex;gap:12px;margin:14px calc(-1*var(--gutter)) 0;padding:2px var(--gutter) 10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.ccar::-webkit-scrollbar{display:none}
+@media(min-width:721px){.ccar{margin-left:0;margin-right:0;padding-left:0;padding-right:0}}
+.cc{flex:0 0 280px;scroll-snap-align:start;border:1.5px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:border-color .15s}
+.cc.sel{border-color:var(--green);box-shadow:0 0 0 3px var(--mint)}
+.cc img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center 35%}
+.cc .body{padding:12px 14px 14px;display:grid;gap:4px}
+.cc h3{font-size:16px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.cc h3 small{font-size:12.5px;color:var(--ink-2);font-weight:500;white-space:nowrap}
+.cc .w{font-size:13.5px;color:var(--ink-2);line-height:1.4}
+.cc .acts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.cc .acts a,.cc .acts button{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:8px 6px;background:#fff;cursor:pointer;color:var(--ink)}
+.cc .acts a.call{color:#fff;background:var(--call);border-color:var(--call)}
+.cc .acts button.bk{color:#fff;background:var(--green);border-color:var(--green)}
+.cc .acts svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 /* booking dialog */
 dialog#book-dialog{border:0;padding:0;width:min(100%,520px);max-width:100%;border-radius:20px 20px 0 0;margin:auto 0 0;box-shadow:0 -10px 40px rgba(20,62,55,.18);background:#fff;color:var(--ink)}
 @media(min-width:721px){dialog#book-dialog{border-radius:20px;margin:auto}}
@@ -259,7 +294,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
   <a class="btn call" href="tel:{{TEL}}" data-call="{{ID}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg><span>Call</span></a>
  </div>
 </header>
-
+{{TOP_STRIP}}
 <main id="top">
  <figure class="cover {{HERO_CLASS}}">
   <img src="{{HERO_SRC}}"{{HERO_SRCSET_ATTR}} width="{{HERO_W}}" height="{{HERO_H}}" alt="Inside {{FULL}}" fetchpriority="high" decoding="async">
@@ -501,7 +536,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
  const setPick=v=>{pickBtns.forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.pick===v)));$('#concern').value=v||'';$('#dlg-title').textContent=v&&CONCERNS[v]?CONCERNS[v].title:'Book your first visit';};
  pickBtns.forEach(b=>b.addEventListener('click',()=>setPick(b.dataset.pick)));
  document.querySelectorAll('.when button').forEach(b=>b.addEventListener('click',()=>document.querySelectorAll('.when button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))));
- document.addEventListener('click',e=>{const b=e.target.closest('[data-book]');if(!b)return;e.preventDefault();setPick(chosen?current:'');errBox.style.display='none';if(!dlg.open)dlg.showModal();setTimeout(()=>$('#name').focus(),50);});
+ document.addEventListener('click',e=>{const b=e.target.closest('[data-book]');if(!b)return;e.preventDefault();setPick(chosen?current:'');errBox.style.display='none';if(b.dataset.clinic&&clinicBtns.length)clinicBtns.forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.clinic===b.dataset.clinic)));if(!dlg.open)dlg.showModal();setTimeout(()=>$('#name').focus(),50);});
  $('#dlg-close').addEventListener('click',()=>dlg.close());dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
  const showErr=m=>{errBox.innerHTML=m;errBox.style.display='block';};
  const failMsg=(res,data)=>{if(!res)return `We could not reach our booking service. Please check your connection and try again, or call us on <a href="tel:${D.tel}">${D.phone_display}</a>.`;if(res.status===422)return (data&&data.message)?esc(data.message):'Please check the name and mobile number and try again.';if(res.status===429)return 'Too many attempts just now. Please wait a minute, or call us.';return `We could not save your request right now. Please call us on <a href="tel:${D.tel}">${D.phone_display}</a> or try again shortly.`;};
@@ -526,6 +561,18 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
    done.style.display='block';form.hidden=true;$('#dlg-done').addEventListener('click',()=>dlg.close());
    push({event:'booking_request_sent',clinic_id:clinicId,preferred:when});return;}
   showErr(failMsg(res,data));push({event:'booking_request_failed',reason:res?String(res.status):'network'});});
+ // central page: clinic map, legend and carousel
+ if(D.mode==='central'&&D.clinics){
+  const C=D.clinics;let map=null,markers={},loading=null;
+  const loadLeaflet=()=>{if(window.L)return Promise.resolve();if(loading)return loading;loading=new Promise((res,rej)=>{const base='/physiotherapy-near-me-delhi/vendor/leaflet/';let n=2;const done=()=>{if(--n===0)res();};const css=document.createElement('link');css.rel='stylesheet';css.href=base+'leaflet.css';css.onload=done;css.onerror=done;document.head.appendChild(css);const js=document.createElement('script');js.src=base+'leaflet.js';js.async=true;js.onload=done;js.onerror=()=>rej(new Error('leaflet'));document.head.appendChild(js);});return loading;};
+  const select=id=>{document.querySelectorAll('.cc').forEach(c=>c.classList.toggle('sel',c.dataset.id===id));document.querySelectorAll('.legend button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.id===id)));const card=document.querySelector('.cc[data-id="'+id+'"]');if(card){const car=card.parentElement;car.scrollTo({left:card.offsetLeft-car.offsetLeft,behavior:'smooth'});}};
+  const initMap=()=>loadLeaflet().then(()=>{if(map||!window.L)return;const el=$('#clinic-map');el.innerHTML='';map=L.map(el,{scrollWheelZoom:false,dragging:!L.Browser.mobile});L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,referrerPolicy:'strict-origin-when-cross-origin',attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+   C.forEach((c,i)=>{const m=L.marker(c.latlng,{title:c.short,alt:c.short,icon:L.divIcon({className:'clinic-pin',html:'<span data-n="'+(i+1)+'"></span>',iconSize:[32,40],iconAnchor:[16,40],popupAnchor:[0,-38]})}).addTo(map);m.bindPopup('<b>'+esc(c.full)+'</b><br>'+esc(c.where)+'<br><a href="'+c.maps+'" target="_blank" rel="noopener">Directions</a>');m.on('click',()=>{select(c.id);push({event:'map_pin_click',clinic:c.id});});markers[c.id]=m;});
+   map.fitBounds(C.map(c=>c.latlng),{padding:[30,30]});}).catch(()=>{});
+  const mapEl=$('#clinic-map');if('IntersectionObserver' in window){const io=new IntersectionObserver(en=>{if(en.some(x=>x.isIntersecting)){initMap();io.disconnect();}},{rootMargin:'400px'});io.observe(mapEl);}else initMap();
+  document.querySelectorAll('.legend button').forEach(b=>b.addEventListener('click',()=>{select(b.dataset.id);initMap().then(()=>{if(markers[b.dataset.id])markers[b.dataset.id].openPopup();});}));
+  document.querySelectorAll('.cc').forEach(c=>c.addEventListener('click',e=>{if(e.target.closest('a,button'))return;select(c.dataset.id);}));
+ }
  // bars and open state
  const bar=$('#bar'),cover=$('.cover'),segWrap=$('#seg-wrap'),heroCta=$('#hero-cta');
  const upd=()=>{bar.classList.toggle('show',heroCta.getBoundingClientRect().bottom<0);segWrap.classList.toggle('stuck',segWrap.getBoundingClientRect().top<=59&&scrollY>0);};

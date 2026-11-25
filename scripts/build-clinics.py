@@ -187,7 +187,7 @@ def build_clinic(d, c):
                                                            {'@type': 'ListItem', 'position': 2, 'name': c['full'], 'item': page}]}]}
     repl = common(d, c['hero'], data, lat, lng)
     repl.update({
-        'HEAD_SCRIPT': '', 'ROBOTS': 'index, follow, max-image-preview:large', 'PLACENAME': e(c['short'] + ', New Delhi'), 'AREA_META': c['id'],
+        'HEAD_SCRIPT': '', 'TOP_STRIP': '', 'ROBOTS': 'index, follow, max-image-preview:large', 'PLACENAME': e(c['short'] + ', New Delhi'), 'AREA_META': c['id'],
         'TITLE': e(c['title']), 'DESCRIPTION': e(c['description']), 'CANONICAL': page, 'OG_IMAGE': SITE + c['hero']['src'],
         'FULL': e(c['full']), 'SHORT': e(c['short']), 'ID': c['id'], 'TEL': c['tel'], 'PHONE_DISPLAY': c['phone_display'],
         'PLACE_LINE': f'<p class="where"><a href="{maps_url(c)}" target="_blank" rel="noopener" data-map="{c["id"]}">{PIN}<b>{e(c["where"])}</b><span>Directions</span></a></p>',
@@ -258,15 +258,26 @@ def build_central(d):
         f'<p class="w">{e(c["where"])}. {e(c["nearby"])}. Also serving {e(", ".join(c["near"][:3]))}.</p>'
         f'<div class="acts"><a class="call" href="tel:{c["tel"]}" data-call="{c["id"]}">{PHONE}Call {c["phone_display"]}</a><a href="{maps_url(c)}" target="_blank" rel="noopener" data-map="{c["id"]}">{PIN}Directions</a><a href="{google_url(c)}" target="_blank" rel="noopener" data-reviews>★ {c["rating"]} · {fmt_count(c["count"])}</a></div></div>'
         for c in cs)
+    legend = ''.join(f'<button type="button" data-id="{c["id"]}" aria-pressed="false"><b>{i+1}</b>{e(c["short"])}</button>' for i, c in enumerate(cs))
+    ccards = ''.join(
+        f'<article class="cc" data-id="{c["id"]}" id="clinic-{c["id"]}"><img src="{e(c["hero"]["src"] if c["hero"].get("srcset") else "/physiotherapy-near-me-delhi/assets/clinics/" + c["id"] + ".webp")}" alt="Inside {e(c["full"])}" width="600" height="375" loading="lazy" decoding="async">'
+        f'<div class="body"><h3>{i+1}. {e(c["short"])}<small>★ {c["rating"]} · {fmt_count(c["count"])}</small></h3><p class="w">{e(c["where"])}. {e(c["nearby"])}.<br>Open {hours_label(d)}, every day.</p>'
+        f'<div class="acts"><a class="call" href="tel:{c["tel"]}" data-call="{c["id"]}">{PHONE}Call</a><button class="bk" type="button" data-book data-clinic="{c["id"]}" data-place="clinic_card">Book here</button>'
+        f'<a href="{maps_url(c)}" target="_blank" rel="noopener" data-map="{c["id"]}">{PIN}Directions</a><a href="/physiotherapy-near-me-{c["slug"]}/">Clinic page</a></div></div></article>'
+        for i, c in enumerate(cs))
     here_section = (f'<h2>Five clinics across Delhi</h2><p>All open {hours_label(d)}, every day, with the same fees, the same assessment and the same central monitoring. Not sure which is closest? Call <a href="tel:{CENTRAL_TEL}">{CENTRAL_DISPLAY}</a> and we will tell you.</p>'
-                    f'<div class="clist">{cards}</div>')
+                    f'<div class="cmap" id="clinic-map"><div class="ph">Map loads as you scroll</div></div><div class="legend" aria-label="Clinics on the map">{legend}</div>'
+                    f'<div class="ccar" aria-label="Our clinics">{ccards}</div>')
+    strip = ('<div class="strip" aria-label="Find a clinic near you"><div class="wrap"><b>Find a clinic near you</b><div class="track"><ul>' +
+             ''.join(f'<li><a href="/physiotherapy-near-me-{c["slug"]}/">{e(c["short"])}</a></li>' for c in cs) * 2 + '</ul></div></div></div>')
     clinic_field = ('<div class="field"><label>Which clinic?</label><div class="pick clinics" role="group" aria-label="Clinic">' +
                     ''.join(f'<button type="button" data-clinic="{c["id"]}" aria-pressed="false">{e(c["short"])}</button>' for c in cs) +
                     '<button type="button" data-clinic="help" aria-pressed="false">Nearest to me</button></div></div>\n  ')
     data = {'mode': 'central', 'id': 'delhi', 'short': 'Delhi', 'full': 'CB Physiotherapy, Delhi', 'wa_name': 'CB Physiotherapy in Delhi', 'at': 'across our five Delhi clinics', 'rv_at': 'our Delhi clinics',
             'tel': CENTRAL_TEL, 'phone_display': CENTRAL_DISPLAY, 'whatsapp': d['whatsapp'], 'rating': rating, 'count_fmt': fmt_count(total),
             'open_hour': d.get('open_hour', 9), 'close_hour': d.get('close_hour', 20), 'open_label': open_label(d), 'reviews': reviews,
-            'clinic_names': {c['id']: c['short'] for c in cs}}
+            'clinic_names': {c['id']: c['short'] for c in cs},
+            'clinics': [{'id': c['id'], 'short': c['short'], 'full': c['full'], 'where': c['where'], 'latlng': c['latlng'], 'maps': maps_url(c)} for c in cs]}
     org = {'@type': 'MedicalOrganization', '@id': page + '#org', 'name': 'CB Physiotherapy Delhi', 'url': page, 'logo': SITE + '/physiotherapy-near-me-delhi/assets/cb-logo-480.webp',
            'telephone': CENTRAL_TEL, 'medicalSpecialty': 'Physiotherapy', 'areaServed': {'@type': 'City', 'name': 'New Delhi'},
            'aggregateRating': {'@type': 'AggregateRating', 'ratingValue': rating, 'reviewCount': total, 'bestRating': 5},
@@ -274,7 +285,7 @@ def build_central(d):
     ld = {'@context': 'https://schema.org', '@graph': [org] + [clinic_ld(d, c, with_staff=False) for c in cs] + [faq_ld(d, 'Delhi', CENTRAL_DISPLAY)]}
     repl = common(d, hero, data, round(lat, 5), round(lng, 5))
     repl.update({
-        'HEAD_SCRIPT': routing_script(d), 'ROBOTS': 'noindex, follow', 'PLACENAME': 'New Delhi', 'AREA_META': 'delhi',
+        'HEAD_SCRIPT': routing_script(d), 'TOP_STRIP': strip, 'ROBOTS': 'noindex, follow', 'PLACENAME': 'New Delhi', 'AREA_META': 'delhi',
         'TITLE': 'Best Physiotherapy Near You in Delhi | CB Physiotherapy', 'DESCRIPTION': 'Physiotherapy in Delhi for back, neck, knee and shoulder pain, injuries and post-surgery rehab at five CB Physiotherapy clinics: Saket, Greater Kailash, Safdarjung Enclave, Vasant Kunj and Dwarka. Same-day appointments, ₹499 first assessment.',
         'CANONICAL': page, 'OG_IMAGE': SITE + hero['src'], 'FULL': 'CB Physiotherapy, Delhi', 'SHORT': 'Delhi', 'ID': 'delhi', 'TEL': CENTRAL_TEL, 'PHONE_DISPLAY': CENTRAL_DISPLAY,
         'PLACE_LINE': f'<p class="where"><a href="#clinics">{PIN}<b>5 clinics in South &amp; West Delhi</b><span>Nearest</span></a></p>',
