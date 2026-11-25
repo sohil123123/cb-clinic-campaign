@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+{{HEAD_SCRIPT}}<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{TITLE}}</title>
 <meta name="description" content="{{DESCRIPTION}}">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="{{ROBOTS}}">
 <link rel="canonical" href="{{CANONICAL}}">
 <meta name="theme-color" content="#143e37">
 <meta property="og:type" content="website">
@@ -17,11 +17,11 @@
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="geo.region" content="IN-DL">
-<meta name="geo.placename" content="{{SHORT}}, New Delhi">
+<meta name="geo.placename" content="{{PLACENAME}}">
 <meta name="geo.position" content="{{LAT}};{{LNG}}">
 <meta name="ICBM" content="{{LAT}}, {{LNG}}">
 <meta name="cb-analytics-endpoint" content="https://cbphysiotherapy.in/api/landing/events">
-<meta name="cb-area" content="{{ID}}">
+<meta name="cb-area" content="{{AREA_META}}">
 <link rel="icon" href="/physiotherapy-near-me-delhi/assets/cb-logo-480.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="{{HERO_SRC}}"{{HERO_PRELOAD}}>
@@ -196,6 +196,18 @@ section.block{padding-top:34px}
 .faq details[open] summary::after{content:"–"}
 .faq details p{padding:0 0 14px;color:var(--ink-2);font-size:15px;max-width:60ch}
 .others{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.route-note{background:var(--lime);color:var(--green-ink);font-size:14px;line-height:1.45;padding:10px var(--gutter)}
+.route-note .wrap{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:0}
+.route-note a{font-weight:600;white-space:nowrap}
+.clist{display:grid;gap:10px;margin-top:16px}
+.cl{border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:start}
+.cl h3{font-size:16px}
+.cl .w{grid-column:1;font-size:14px;color:var(--ink-2);line-height:1.4}
+.cl .acts{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.cl .acts a{font-size:13.5px;font-weight:600;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 11px;display:inline-flex;align-items:center;gap:6px}
+.cl .acts a.call{color:var(--call);border-color:#bcd3f5}
+.cl .acts a svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.cl .pg{grid-column:2;grid-row:1;font-size:13px;color:var(--ink-2);white-space:nowrap}
 .others a{font-size:14px;border:1px solid var(--line);border-radius:999px;padding:7px 12px;text-decoration:none;color:var(--ink-2)}
 footer{margin-top:40px;padding:22px 0 120px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3);line-height:1.6}
 footer b{color:var(--ink-2);font-weight:600}
@@ -237,7 +249,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
 @media(min-width:721px){.bar{left:auto;right:24px;bottom:24px;width:auto;grid-template-columns:auto auto auto;padding:8px;border-radius:16px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(20,62,55,.12)}}
 </style>
 </head>
-<body data-area="{{ID}}" data-layout="clinic-v3">
+<body data-area="{{AREA_META}}" data-layout="clinic-v3">
 
 <header class="top">
  <div class="wrap">
@@ -259,8 +271,8 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
 
  <section class="intro wrap">
   <h1>Advanced Physio Care near you in {{SHORT}}.</h1>
-  <p class="where"><a href="{{MAPS_URL}}" target="_blank" rel="noopener" data-map="{{ID}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg><b>{{WHERE}}</b><span>Directions</span></a></p>
-  <p class="rating"><svg class="gmark" viewBox="0 0 48 48" aria-label="Google"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6C44.4 38.02 46.98 31.86 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.87 23.87 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="stars" aria-hidden="true">★★★★★</span><span><b>{{RATING}}</b> from {{COUNT_FMT}} reviews. <a href="{{GOOGLE_URL}}" target="_blank" rel="noopener" data-reviews>Read them</a></span></p>
+  {{PLACE_LINE}}
+  <p class="rating"><svg class="gmark" viewBox="0 0 48 48" aria-label="Google"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6C44.4 38.02 46.98 31.86 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.87 23.87 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="stars" aria-hidden="true">★★★★★</span><span><b>{{RATING}}</b> from {{COUNT_FMT}} reviews{{RATING_SUFFIX}}. <a href="{{GOOGLE_URL}}" target="_blank" rel="noopener" data-reviews>Read them</a></span></p>
   <div class="cta" id="hero-cta">
    <a class="btn call" href="tel:{{TEL}}" data-call="{{ID}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call</a>
    <a class="btn wa" href="#" data-wa data-intent="hero" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>WhatsApp</a>
@@ -282,12 +294,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
  </section>
 
  <section class="block wrap" id="team">
-  <h2>Your care team at {{SHORT}}</h2>
-  {{TEAM_LEAD}}
-  <p class="sub-line">Treating physiotherapists at {{SHORT}}</p>
-  <div class="slider" aria-label="{{SHORT}} physiotherapists">
-   {{TEAM_CARDS}}
-  </div>
+  {{TEAM_SECTION}}
  </section>
 
  <section class="block wrap" id="central">
@@ -316,21 +323,12 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
 
  <section class="block wrap" id="reviews">
   <h2 id="rv-title">What patients say about {{FULL}}</h2>
-  <p>From the clinic's patient reviews. <a href="{{GOOGLE_URL}}" target="_blank" rel="noopener" data-reviews>Read all {{COUNT_FMT}} on Google</a>.</p>
+  <p>{{REVIEWS_SUB}}</p>
   <div class="reviews" id="rv-list"></div>
  </section>
 
  <section class="block wrap" id="clinics">
-  <h2>Getting here</h2>
-  <p>{{HERE_TEXT}}</p>
-  <div class="here">
-   <p class="addr"><b>{{FULL}}</b><br>{{ADDRESS}}<br>Open {{HOURS}}, every day. Phone <a href="tel:{{TEL}}" data-call="{{ID}}">{{PHONE_DISPLAY}}</a>.</p>
-   <div class="map" id="map-box"><iframe title="Map of {{FULL}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.openstreetmap.org/export/embed.html?bbox={{BBOX}}&layer=mapnik&marker={{LAT}}%2C{{LNG}}"></iframe></div>
-   <p class="small muted">Also serving</p>
-   <ul class="near">{{NEAR_LIST}}</ul>
-   {{METRO_LINE}}
-   <a class="btn quiet" href="{{MAPS_URL}}" target="_blank" rel="noopener" data-map="{{ID}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>Open in Google Maps</a>
-  </div>
+  {{HERE_SECTION}}
  </section>
 
  <section class="block wrap" id="book">
@@ -352,17 +350,16 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
    <details><summary>Will insurance cover it?</summary><p>Clinic physiotherapy is usually paid directly and claimed later where your policy allows outpatient care. You get a receipt and a report after every visit for that.</p></details>
    <details><summary>Can the physiotherapist visit me at home?</summary><p>Yes, for people who cannot travel after surgery or with severe pain. Home visits cost more and have fewer time slots, so mention it when you call.</p></details>
   </div>
-  <p class="sub-line">Other CB Physiotherapy clinics in Delhi</p>
-  <div class="others">{{OTHER_CLINICS}}</div>
+  {{OTHERS_BLOCK}}
  </section>
 </main>
 
 <footer class="wrap">
- <b>{{FULL}}</b>, {{ADDRESS}}. Open {{HOURS}}, every day. Phone <a href="tel:{{TEL}}">{{PHONE_DISPLAY}}</a>. Central line <a href="tel:+911140846393">011 4084 6393</a>. One of five CB Physiotherapy clinics in Delhi. <a href="{{MAIN_PAGE}}" rel="noopener">Clinic profile on cbphysiotherapy.in</a>.
+ {{FOOTER_LINE}}
 </footer>
 
 <dialog id="book-dialog" aria-labelledby="dlg-title">
- <form class="form" id="form" novalidate data-endpoint="https://cbphysiotherapy.in/api/landing/book-appointment" data-source="google-ads-{{ID}}-landing">
+ <form class="form" id="form" novalidate data-endpoint="https://cbphysiotherapy.in/api/landing/book-appointment" data-source="{{SOURCE}}">
   <div class="dlg-head"><div><h3 id="dlg-title">Book your first visit</h3><p class="small muted" id="dlg-sub">We call back within 15 minutes to confirm a time.</p></div><button type="button" class="x" id="dlg-close" aria-label="Close">×</button></div>
   <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required maxlength="80"></div>
   <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" required></div>
@@ -375,7 +372,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
     <button type="button" data-pick="unsure" aria-pressed="false">Not sure yet</button>
    </div>
   </div>
-  <div class="field"><label>When would you like to come?</label>
+  {{CLINIC_FIELD}}<div class="field"><label>When would you like to come?</label>
    <div class="when" role="group" aria-label="Preferred time">
     <button type="button" data-when="today" aria-pressed="true">Today</button>
     <button type="button" data-when="tomorrow" aria-pressed="false">Tomorrow</button>
@@ -405,10 +402,13 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
  const WA='https://wa.me/'+D.whatsapp+'?text=';
  const $=s=>document.querySelector(s);
  const dl=window.dataLayer=window.dataLayer||[];const push=o=>dl.push(o);
- window.cbRoute={decision:'page',clinic:D.id,kw_class:'',conditions:[],services:[],irrelevant:false};
+ const Q=new URLSearchParams(location.search);const R=(Q.get('r')||'').replace(/[^a-z-]/g,'');
+ const H=window.__cbr||{};
+ window.cbRoute={decision:D.mode==='clinic'?(R||'page'):(H.decision||'none'),clinic:D.mode==='clinic'?D.id:'',kw_class:D.mode==='clinic'?(Q.get('rk')||'').replace(/[^a-z-]/g,''):(H.kw_class||''),conditions:[],services:[],irrelevant:false};
+ if(D.mode==='clinic'&&R){document.body.dataset.areaSource=R;if(R==='geo'||R==='interest'){const n=document.createElement('div');n.className='route-note';const back=new URL('/physiotherapy-near-me-delhi/',location.origin);Q.forEach((v,k)=>{if(k!=='r'&&k!=='rk')back.searchParams.set(k,v);});back.searchParams.set('r','all');n.innerHTML=`<div class="wrap"><span>Showing our <b>${D.short}</b> clinic, the nearest to you.</span><a href="${back}" id="geo-all">Not right? See all five</a></div>`;document.querySelector('main').insertAdjacentElement('afterbegin',n);n.querySelector('#geo-all').addEventListener('click',()=>{try{sessionStorage.setItem('cb_geo_off','1');}catch(_){}push({event:'geo_guess_dismissed',clinic_id:D.id,how:R});});}}
  const CONCERNS={
   all:{name:'Assess first. Treat the same day. Track until you are better.',short:'a first assessment',title:'Your first visit',api:'',
-   intro:'<b>The CB Physiotherapy way</b>, behind '+D.rating+' stars from '+D.count_fmt+' Google reviews at '+D.short+'. Pick your concern above to see how it applies to you.',
+   intro:'<b>The CB Physiotherapy way</b>, behind '+D.rating+' stars from '+D.count_fmt+' Google reviews '+D.at+'. Pick your concern above to see how it applies to you.',
    assess:'Your physiotherapist works through an AI-guided assessment: history, movement, strength and the tests that fit your problem.',
    relief:'Hands-on treatment, with Class 4 laser or TECAR where it helps, so you leave the first visit already feeling the difference.',
    recover:'A programme built around the cause, not the symptom: spinal decompression, measured strengthening or staged rehab, matched to you.',
@@ -418,8 +418,8 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
    feeAdv:'Class 4 laser, TECAR or robotic spinal decompression, when clinically appropriate.',
    bookSub:'Usually 30 to 40 minutes. Tell us what it is for when you book, or let the physiotherapist work it out.',
    faq:'You will get an estimate at the end of the first visit. Most problems settle in six to ten sessions; post-surgery rehab follows the surgeon’s timeline.',
-   rvTitle:'What patients say about '+D.full,doc:'Leads the '+D.short+' team and reviews every treatment plan here.',
-   wa:'Hi, I would like to book a first visit at '+D.full+'.'},
+   rvTitle:'What patients say about '+(D.mode==='clinic'?D.full:'CB Physiotherapy in Delhi'),doc:'Leads the '+D.short+' team and reviews every treatment plan here.',
+   wa:'Hi, I would like to book a first visit at '+D.wa_name+'.'},
   spine:{name:'Back or neck pain',short:'back or neck pain',title:'Back or neck, first visit',api:'spine',
    intro:'<b>Root cause analysis and expert care</b> for slip disc, sciatica, cervical pain, muscle spasm, stiff neck and lower back pain.',
    assess:'Whether it is the muscle, a joint, a disc or a nerve: history, posture, movement, nerve and strength tests, guided step by step.',
@@ -431,8 +431,8 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
    feeAdv:'Robotic spinal decompression, Class 4 laser or TECAR for the spine, when your physio recommends it.',
    bookSub:'Usually 30 to 40 minutes. Wear something you can bend and twist in.',
    faq:'You will get an estimate at the end of the first visit. Most back and neck problems settle in six to ten sessions; disc-related pain can take longer.',
-   rvTitle:'What patients say about back and neck care at '+D.short,doc:'Sees back and neck problems every day, including disc and nerve-related pain, and personally plans the decompression and exercise programme.',
-   wa:'Hi, I have back or neck pain and would like an appointment at '+D.full+'.'},
+   rvTitle:'What patients say about back and neck care at '+D.rv_at,doc:'Sees back and neck problems every day, including disc and nerve-related pain, and personally plans the decompression and exercise programme.',
+   wa:'Hi, I have back or neck pain and would like an appointment at '+D.wa_name+'.'},
   joint:{name:'Knee, shoulder or joint pain',short:'knee or joint pain',title:'Knee or joint, first visit',api:'joint',
    intro:'<b>Find the source of the pain, with advanced care</b> for knee pain, frozen shoulder, arthritis, hip pain, ankle sprains and tennis elbow.',
    assess:'Whether the pain comes from the joint, the tendon or the muscles around it, and how much movement and strength you have lost, measured.',
@@ -444,8 +444,8 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
    feeAdv:'Class 4 laser or TECAR for the joint, when your physio recommends it.',
    bookSub:'Usually 30 to 40 minutes. Shorts for knees, a vest or loose top for shoulders.',
    faq:'You will get an estimate at the end of the first visit. Most joint problems improve in six to eight sessions; arthritic joints do best with an ongoing routine, which we teach you.',
-   rvTitle:'What patients say about knee and shoulder care at '+D.short,doc:'Treats knees, shoulders and hips daily, from frozen shoulder to arthritic knees, with hands-on care and measured strengthening.',
-   wa:'Hi, I have knee, shoulder or joint pain and would like an appointment at '+D.full+'.'},
+   rvTitle:'What patients say about knee and shoulder care at '+D.rv_at,doc:'Treats knees, shoulders and hips daily, from frozen shoulder to arthritic knees, with hands-on care and measured strengthening.',
+   wa:'Hi, I have knee, shoulder or joint pain and would like an appointment at '+D.wa_name+'.'},
   rehab:{name:'Injury or post-surgery rehab',short:'rehab',title:'Injury or surgery rehab, first visit',api:'rehab',
    intro:'<b>A structured recovery plan</b> for ACL and ligament tears, fractures, knee and hip replacement, shoulder surgery and sports injuries.',
    assess:'Range, swelling, strength and how you walk or lift, checked against your surgeon’s protocol and the stage you are at.',
@@ -457,8 +457,8 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
    feeAdv:'Class 4 laser or TECAR for healing tissue, when your physio recommends it.',
    bookSub:'Usually 40 minutes. Bring your discharge summary or surgeon’s protocol.',
    faq:'It depends on the injury or surgery. Knee replacement rehab usually runs eight to twelve weeks; a ligament repair follows the surgeon’s timeline, which we plan around.',
-   rvTitle:'What patients say about rehab at '+D.short,doc:'Runs post-surgery and sports injury rehab in step with the operating surgeon’s protocol, with milestones checked each week.',
-   wa:'Hi, I need physiotherapy after an injury or surgery and would like an appointment at '+D.full+'.'},
+   rvTitle:'What patients say about rehab at '+D.rv_at,doc:'Runs post-surgery and sports injury rehab in step with the operating surgeon’s protocol, with milestones checked each week.',
+   wa:'Hi, I need physiotherapy after an injury or surgery and would like an appointment at '+D.wa_name+'.'},
   ortho:{name:'Other ortho or nerve-related problems',short:'ortho or nerve care',title:'Other ortho or neuro, first visit',api:'other',
    intro:'<b>Accurate diagnosis, with focused care</b> for pinched nerves, tingling and numbness, heel pain, posture-related pain and balance after a fall.',
    assess:'Which nerve, joint or muscle is behind it, and what is safe to do now: nerve, posture and balance tests, guided step by step.',
@@ -470,8 +470,8 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
    feeAdv:'Class 4 laser, TECAR or decompression for nerve-related pain, when your physio recommends it.',
    bookSub:'Usually 30 to 40 minutes. Bring any nerve conduction or MRI reports you have.',
    faq:'You will get an estimate at the end of the first visit. Nerve-related pain usually eases over six to ten sessions; posture and balance work continues at home.',
-   rvTitle:'What patients say about nerve and posture care at '+D.short,doc:'Combines orthopaedic physiotherapy with chiropractic assessment for nerve, posture and alignment problems.',
-   wa:'Hi, I have a nerve-related or other orthopaedic problem and would like an appointment at '+D.full+'.'}
+   rvTitle:'What patients say about nerve and posture care at '+D.rv_at,doc:'Combines orthopaedic physiotherapy with chiropractic assessment for nerve, posture and alignment problems.',
+   wa:'Hi, I have a nerve-related or other orthopaedic problem and would like an appointment at '+D.wa_name+'.'}
  };
  let current='all',chosen=false;
  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -496,7 +496,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
  render('all',false);
  // booking
  const dlg=$('#book-dialog'),form=$('#form'),errBox=$('#form-error'),submitBtn=$('#submit-btn');
- const pickBtns=[...document.querySelectorAll('.pick button')];
+ const pickBtns=[...document.querySelectorAll('.pick:not(.clinics) button')];const clinicBtns=[...document.querySelectorAll('.pick.clinics button')];clinicBtns.forEach(b=>b.addEventListener('click',()=>clinicBtns.forEach(x=>x.setAttribute('aria-pressed',String(x===b)))));
  const setPick=v=>{pickBtns.forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.pick===v)));$('#concern').value=v||'';$('#dlg-title').textContent=v&&CONCERNS[v]?CONCERNS[v].title:'Book your first visit';};
  pickBtns.forEach(b=>b.addEventListener('click',()=>setPick(b.dataset.pick)));
  document.querySelectorAll('.when button').forEach(b=>b.addEventListener('click',()=>document.querySelectorAll('.when button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))));
@@ -508,10 +508,11 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
  form.addEventListener('submit',async e=>{e.preventDefault();if(sending)return;const name=form.name.value.trim();const raw=form.phone.value.trim();const phone=raw.replace(/[\s()-]/g,'').replace(/^(\+91|0091)/,'').replace(/^91(?=\d{10}$)/,'');
   if(!name){form.name.focus();showErr('Please tell us your name.');return;}if(!/^[6-9]\d{9}$/.test(phone)){form.phone.focus();showErr('Please enter a valid 10-digit Indian mobile number.');return;}
   const pick=$('#concern').value;if(!pick){showErr('Please pick what the visit is for, or choose "Not sure yet".');$('.pick button').focus();return;}
+  let clinicId=D.id;if(D.mode==='central'){const cb=document.querySelector('.pick.clinics [aria-pressed="true"]');if(!cb){showErr('Please pick a clinic, or choose "Nearest to me".');clinicBtns[0].focus();return;}clinicId=cb.dataset.clinic;}
   const when=document.querySelector('.when [aria-pressed="true"]').dataset.when;const whenText={today:'today',tomorrow:'tomorrow',week:'this week'}[when];
   const forWhat=CONCERNS[pick]?CONCERNS[pick].short:'a first assessment';
   const params=new URLSearchParams(location.search);
-  const payload={name,phone,clinic:D.id,website:$('#website').value,source:form.dataset.source,landing_url:location.href.slice(0,2000),preferred_time:when};
+  const payload={name,phone,clinic:clinicId,website:$('#website').value,source:(D.mode==='clinic'&&R?'google-ads-delhi-'+R+'-'+D.id:form.dataset.source),landing_url:location.href.slice(0,2000),preferred_time:when};
   if(CONCERNS[pick]&&CONCERNS[pick].api)payload.concern=CONCERNS[pick].api;
   ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'].forEach(k=>{const v=params.get(k);if(v)payload[k]=v.slice(0,200);});
   sending=true;submitBtn.disabled=true;submitBtn.textContent='Sending…';errBox.style.display='none';
@@ -519,10 +520,10 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
   try{res=await fetch(form.dataset.endpoint,{method:'POST',mode:'cors',credentials:'omit',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload),signal:ctrl.signal});try{data=await res.json();}catch(_){data=null;}}catch(_){res=null;}
   clearTimeout(timer);sending=false;submitBtn.disabled=false;submitBtn.textContent='Request a call back';
   if(res&&res.ok&&data&&data.success===true){
-   const waMsg=WA+encodeURIComponent(`Hi, I just requested a call back on your website. Name: ${name}. For: ${forWhat}. Preferred time: ${whenText}. ${D.full}.`);
-   const done=$('#done');done.innerHTML=`<div class="inner"><b>Thanks, ${esc(name.split(' ')[0])}.</b> We have your request for ${D.short} and will call ${phone.replace(/(\d{5})(\d{5})$/,'$1 $2')} within 15 minutes during opening hours to fix a time ${whenText} for ${forWhat}.</div><p class="faster">Want a faster reply? Send the same request on WhatsApp and the team picks it up straight away.</p><a class="btn wa" href="${waMsg}" target="_blank" rel="noopener" data-intent="after_booking"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>Send on WhatsApp</a><button class="btn quiet" type="button" id="dlg-done">Done</button>`;
+   const waMsg=WA+encodeURIComponent(`Hi, I just requested a call back on your website. Name: ${name}. For: ${forWhat}. Preferred time: ${whenText}. ${D.mode==='central'?(clinicId==='help'?'Nearest CB clinic in Delhi':'CB Physiotherapy, '+(D.clinic_names[clinicId]||clinicId)):D.full}.`);
+   const done=$('#done');done.innerHTML=`<div class="inner"><b>Thanks, ${esc(name.split(' ')[0])}.</b> We have your request${D.mode==='central'?'':' for '+D.short} and will call ${phone.replace(/(\d{5})(\d{5})$/,'$1 $2')} within 15 minutes during opening hours to fix a time ${whenText} for ${forWhat}.</div><p class="faster">Want a faster reply? Send the same request on WhatsApp and the team picks it up straight away.</p><a class="btn wa" href="${waMsg}" target="_blank" rel="noopener" data-intent="after_booking"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>Send on WhatsApp</a><button class="btn quiet" type="button" id="dlg-done">Done</button>`;
    done.style.display='block';form.hidden=true;$('#dlg-done').addEventListener('click',()=>dlg.close());
-   push({event:'booking_request_sent',clinic_id:D.id,preferred:when});return;}
+   push({event:'booking_request_sent',clinic_id:clinicId,preferred:when});return;}
   showErr(failMsg(res,data));push({event:'booking_request_failed',reason:res?String(res.status):'network'});});
  // bars and open state
  const bar=$('#bar'),cover=$('.cover'),segWrap=$('#seg-wrap'),heroCta=$('#hero-cta');

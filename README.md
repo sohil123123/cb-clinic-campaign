@@ -101,7 +101,7 @@ pre-selects the concern (`conditions`) and the home-visit option
 3. Look at the Google location IDs table for ids with visits that are not
    mapped; add them to `geo-clinics.json` under the nearest clinic.
 4. Commit and push `routing.json` / `geo-clinics.json`. The deploy syncs them
-   into the page (`scripts/sync-routing.py`); nothing else changes.
+   into the page (`scripts/build-clinics.py`); nothing else changes.
 
 ## Clinic landing pages (one per clinic)
 
@@ -252,7 +252,7 @@ Configuration, Purge Everything), or wait for the edge TTL.
 
 The hours shown on the clinic cards, the clinic landing screens and
 "Getting here" come from one line near the top of
-`physiotherapy-near-me-delhi/app.js`: `const HOURS='9am–8pm';`. Change it
+`clinics.json` (`hours`, `open_hour`, `close_hour`). Change them there and push; every page and the schema pick it up.
 there when the season changes and push.
 
 ## Images and speed

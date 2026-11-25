@@ -31,8 +31,7 @@ jobs:
 
       - name: Build clinic landing folders
         run: |
-          python3 scripts/sync-routing.py
-          python3 scripts/build-clinics.py
+                    python3 scripts/build-clinics.py
 
       - name: Prepare SSH
         env:
