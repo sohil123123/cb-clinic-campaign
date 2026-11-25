@@ -134,6 +134,7 @@ def fill(repl, out_path, label):
     out = TEMPLATE
     for k, v in repl.items():
         out = out.replace('{{' + k + '}}', v)
+    out = out.replace('href="#clinics" target="_blank" rel="noopener"', 'href="#clinics"')
     left = re.findall(r'\{\{[A-Z_]+\}\}', out)
     if left:
         raise SystemExit(f'unfilled placeholders for {label}: {sorted(set(left))}')
