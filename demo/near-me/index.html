@@ -62,14 +62,16 @@ p{margin:0}
 .intro h1{max-width:18ch}
 .gmark{width:20px;height:20px;flex:none}
 .where{margin-top:8px;line-height:1.4}
-.where b{display:block;font-size:17px;font-weight:600}
-.where span{display:block;font-size:14px;color:var(--ink-2);margin-top:2px}
+.where a{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.where svg{width:20px;height:20px;fill:none;stroke:var(--call);stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round;flex:none}
+.where b{font-size:17px;font-weight:600}
+.where span{font-size:13px;color:var(--call);text-decoration:underline;text-underline-offset:3px;margin-left:2px}
 .rating{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;color:var(--ink-2);flex-wrap:wrap}
 .rating .stars{color:#e8a600;letter-spacing:1px;font-size:15px}
 .rating b{color:var(--ink);font-weight:600}
 .rating a{color:var(--ink-2)}
-.cta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
-.cta .btn{white-space:nowrap;padding-left:10px;padding-right:10px;font-size:14.5px}
+.cta{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:8px;margin-top:16px}
+.cta .btn{white-space:nowrap;padding-left:8px;padding-right:8px;font-size:14.5px}
 @media(max-width:400px){h1{font-size:29px}.cta .btn{font-size:14px;gap:7px}}
 
 /* care chooser */
@@ -211,11 +213,12 @@ footer b{color:var(--ink-2);font-weight:600}
 
  <section class="intro wrap">
   <h1>Advanced Physio Care.</h1>
-  <p class="where"><b>Mandir Marg, Saket, Delhi</b></p>
+  <p class="where"><a href="https://www.google.com/maps/search/?api=1&query=CB+Physiotherapy+Saket+Mandir+Marg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg><b>Mandir Marg, Saket, Delhi</b><span>Directions</span></a></p>
   <p class="rating"><svg class="gmark" viewBox="0 0 48 48" aria-label="Google"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6C44.4 38.02 46.98 31.86 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.87 23.87 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="stars" aria-hidden="true">★★★★★</span><span><b>4.9</b> from 747 reviews. <a href="https://www.google.com/maps/search/?api=1&query=CB+Physiotherapy+Saket+Mandir+Marg" target="_blank" rel="noopener">Read them</a></span></p>
-  <div class="cta">
-   <a class="btn call" href="tel:+917303335605"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call 73033 35605</a>
-   <a class="btn quiet" href="#book">Book a slot</a>
+  <div class="cta" id="hero-cta">
+   <a class="btn call" href="tel:+917303335605"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call</a>
+   <a class="btn wa" href="#" id="wa-hero"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>WhatsApp</a>
+   <a class="btn" href="#book">Book a slot</a>
   </div>
  </section>
 
@@ -330,7 +333,7 @@ footer b{color:var(--ink-2);font-weight:600}
 (()=>{
  const A='/physiotherapy-near-me-delhi/assets/';
  const CONCERNS={
-  spine:{name:'Back & neck pain',conds:'slip disc, sciatica, cervical pain, muscle spasm, stiff neck, lower back pain',doc:'Sees back and neck problems every day, including disc and nerve-related pain, and personally plans the decompression and exercise programme.',short:'back & neck',title:'Back & neck, first visit ₹499',
+  spine:{name:'Back & neck pain',intro:'<b>Expert care for</b> slip disc, sciatica, cervical pain, muscle spasm, stiff neck and lower back pain.',doc:'Sees back and neck problems every day, including disc and nerve-related pain, and personally plans the decompression and exercise programme.',short:'back & neck',title:'Back & neck, first visit ₹499',
    who:'A stiff neck, a lower back that locks, pain or tingling running down an arm or leg. Half the people who come here come for this.',
    assess:'Whether it is the muscle, a joint, a disc or a nerve; what we will do about it; and what to expect by when. You leave with a written report you can show anyone.',
    relief:'Hands-on release and Class 4 laser or TECAR to settle the spasm and take the edge off, usually from the first visit.',
@@ -344,7 +347,7 @@ footer b{color:var(--ink-2);font-weight:600}
    rvTitle:'What patients say about back and neck care here',
    reviews:[['Sample: came in unable to sit for ten minutes with sciatica. Decompression and the exercises they gave me made the difference. Pain-free in a month.','R. S.'],['Sample: desk-job neck pain for years. The report after the first visit explained it better than two doctors had. Five sessions and I sleep properly again.','Priya M.'],['Sample: slipped disc, was told surgery was the only option. Eight weeks here and I am back to the gym, carefully.','A. K.']],
    wa:'Hi, I have back or neck pain and would like an appointment at CB Physiotherapy Saket.'},
-  joint:{name:'Knee, shoulder & joint pain',conds:'knee pain, frozen shoulder, arthritis, hip pain, ankle sprain, tennis elbow',doc:'Treats knees, shoulders and hips daily, from frozen shoulder to arthritic knees, with hands-on care and measured strengthening.',short:'joint',title:'Knee, shoulder & joint, first visit ₹499',
+  joint:{name:'Knee, shoulder & joint pain',intro:'Knee pain, frozen shoulder, arthritis, hip pain, ankle sprains and tennis elbow: <b>treated here every day.</b>',doc:'Treats knees, shoulders and hips daily, from frozen shoulder to arthritic knees, with hands-on care and measured strengthening.',short:'joint',title:'Knee, shoulder & joint, first visit ₹499',
    who:'Knees that complain on stairs, a shoulder that will not lift, a hip or ankle that has been nagging for weeks.',
    assess:'Whether the pain comes from the joint, the tendon or the muscles around it; how much movement and strength you have lost; and the plan to get it back. Written report included.',
    relief:'Class 4 laser or TECAR to calm the joint, with taping or hands-on work so it moves easier from day one.',
@@ -358,7 +361,7 @@ footer b{color:var(--ink-2);font-weight:600}
    rvTitle:'What patients say about knee and shoulder care here',
    reviews:[['Sample: frozen shoulder for six months. Could not fasten my own blouse. Laser plus the stretching plan and I have full movement back.','S. Kapoor'],['Sample: knee pain after forty that stopped my morning walk. They tested my strength, showed me the weak side, and fixed it in seven visits.','Manish T.'],['Sample: my mother has arthritis in both knees. She climbs to her flat without the lift now. Patient, kind staff.','N. Bhatia']],
    wa:'Hi, I have knee, shoulder or joint pain and would like an appointment at CB Physiotherapy Saket.'},
-  rehab:{name:'Injury & post-surgery rehab',conds:'ACL and ligament tears, fractures after plaster, knee and hip replacement, shoulder surgery, sports injuries',doc:'Runs post-surgery and sports injury rehab in step with the operating surgeon\u2019s protocol, with milestones checked each week.',short:'rehab',title:'Injury or post-surgery rehab, first visit ₹499',
+  rehab:{name:'Injury & post-surgery rehab',intro:'<b>Rehab that follows your surgeon\u2019s plan</b> after ACL and ligament tears, fractures, knee and hip replacement, shoulder surgery and sports injuries.',doc:'Runs post-surgery and sports injury rehab in step with the operating surgeon\u2019s protocol, with milestones checked each week.',short:'rehab',title:'Injury or post-surgery rehab, first visit ₹499',
    who:'Ligament tears, fractures out of plaster, knee or hip replacements, shoulder repairs. Rehab planned with your surgeon’s protocol.',
    assess:'Range, swelling, strength and how you walk or lift, checked against your surgeon’s protocol. A written plan with the stages ahead and what each one needs.',
    relief:'Pain and swelling control first: Class 4 laser or TECAR for healing tissue, and safe early movement so nothing stiffens.',
@@ -372,7 +375,7 @@ footer b{color:var(--ink-2);font-weight:600}
    rvTitle:'What patients say about rehab here',
    reviews:[['Sample: total knee replacement at 68. The team had me walking without a stick in three weeks and climbing stairs in six. They coordinated with my surgeon throughout.','V. Sharma'],['Sample: ACL reconstruction. Clear milestones every week, strength measured each time, and honest about what I could and could not do yet.','Rohan D.'],['Sample: wrist fracture, stiff after the cast. Six sessions and I am typing and cooking normally.','L. Mehra']],
    wa:'Hi, I need physiotherapy after an injury or surgery and would like an appointment at CB Physiotherapy Saket.'},
-  ortho:{name:'Other ortho and nerve-related problems',conds:'pinched nerve, tingling and numbness, heel pain, posture-related pain, balance after a fall',doc:'Combines orthopaedic physiotherapy with chiropractic assessment for nerve, posture and alignment problems.',short:'ortho & neuro',title:'Other ortho / neuro, first visit ₹499',
+  ortho:{name:'Other ortho and nerve-related problems',intro:'Pinched nerves, tingling and numbness, heel pain, posture-related pain and balance after a fall: <b>orthopaedic care with a nerve focus.</b>',doc:'Combines orthopaedic physiotherapy with chiropractic assessment for nerve, posture and alignment problems.',short:'ortho & neuro',title:'Other ortho / neuro, first visit ₹499',
    who:'Tingling or numbness in an arm or leg, sciatica, heel or elbow pain, posture-related pain, or balance that has not come back after an injury.',
    assess:'Which nerve, joint or muscle is behind it, what is safe to do now, and the plan to settle it. Written report included.',
    relief:'Nerve-gliding and hands-on work to ease the irritation, with Class 4 laser or TECAR for the painful area.',
@@ -391,7 +394,7 @@ footer b{color:var(--ink-2);font-weight:600}
  const $=s=>document.querySelector(s);
  let current='spine';
  function render(c,fromClick){const d=CONCERNS[c];const panel=$('#panel');
-  panel.innerHTML=`<h3>${d.name}</h3><p class="who"><b>Expert care for</b> ${d.conds}.</p>
+  panel.innerHTML=`<h3>${d.name}</h3><p class="who">${d.intro}</p>
    <div class="act"><a class="btn" href="#book">Book the first visit</a><a class="btn quiet" href="tel:+917303335605">Call to ask</a></div>
    <ol class="steps">
     <li><i>1</i><div><b>AI assessment with report<small>15 to 30 min</small></b><span>${d.assess}</span></div></li>
@@ -404,7 +407,7 @@ footer b{color:var(--ink-2);font-weight:600}
   if(fromClick){panel.removeAttribute('data-swap');void panel.offsetWidth;panel.setAttribute('data-swap','');}
   $('#book-title').textContent=d.title;$('#book-sub').textContent=d.bookSub;$('#concern').value=c;$('#fee-adv').textContent=d.feeAdv;$('#faq-sessions').textContent=d.faq;
   $('#rv-title').textContent=d.rvTitle;$('#doc-note').textContent=d.doc;$('#rv-list').innerHTML=d.reviews.map(([t,by])=>`<div class="review"><span class="sample">sample for layout</span><span class="stars" aria-hidden="true">★★★★★</span><p>${t}</p><span class="by">${by}, Google review</span></div>`).join('');
-  const wa=WA+encodeURIComponent(d.wa);$('#wa-bar').href=wa;$('#wa-inline').href=wa;
+  const wa=WA+encodeURIComponent(d.wa);$('#wa-bar').href=wa;$('#wa-inline').href=wa;$('#wa-hero').href=wa;
   document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.c===c)));current=c;
   if(fromClick){const y=$('#seg-wrap').getBoundingClientRect().top+scrollY-58;scrollTo({top:y,behavior:'smooth'});}}
  document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>render(b.dataset.c,true)));
@@ -413,8 +416,8 @@ footer b{color:var(--ink-2);font-weight:600}
  $('#form').addEventListener('submit',e=>{e.preventDefault();const f=e.target;const name=f.name.value.trim(),phone=f.phone.value.replace(/\D/g,'');if(!name){f.name.focus();return;}if(phone.length<10){f.phone.focus();return;}
   const when={today:'today',tomorrow:'tomorrow',week:'this week'}[document.querySelector('.when [aria-pressed="true"]').dataset.when];
   const done=$('#done');done.innerHTML=`<b>Thanks, ${name.split(' ')[0]}.</b> We will call ${phone.replace(/(\d{5})(\d{5})$/,'$1 $2')} within 15 minutes to fix a time ${when} for ${CONCERNS[current].short}. <span class="muted">(Demo: nothing was sent.)</span>`;done.style.display='block';f.hidden=true;done.scrollIntoView({block:'nearest'});});
- const bar=$('#bar'),cover=$('.cover'),segWrap=$('#seg-wrap');
- const upd=()=>{const past=scrollY>cover.offsetTop+cover.offsetHeight;bar.classList.toggle('show',scrollY>cover.offsetTop+cover.offsetHeight+200);document.body.classList.toggle('scrolled',past);segWrap.classList.toggle('stuck',segWrap.getBoundingClientRect().top<=59&&scrollY>0);};
+ const bar=$('#bar'),cover=$('.cover'),segWrap=$('#seg-wrap'),heroCta=$('#hero-cta');
+ const upd=()=>{const past=scrollY>cover.offsetTop+cover.offsetHeight;bar.classList.toggle('show',heroCta.getBoundingClientRect().bottom<0);document.body.classList.toggle('scrolled',past);segWrap.classList.toggle('stuck',segWrap.getBoundingClientRect().top<=59&&scrollY>0);};
  upd();addEventListener('scroll',upd,{passive:true});
  try{const h=+new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',hour12:false}).format(new Date());if(h<9||h>=20){$('#open-state').innerHTML='<i style="background:#e0a100" aria-hidden="true"></i>Opens 9am';$('#open-state').style.background='#fdf0c8';$('#open-state').style.color='#6b4a00';}}catch(_){}
 })();
