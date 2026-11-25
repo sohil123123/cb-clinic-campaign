@@ -26,7 +26,7 @@ button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
 .wrap{max-width:var(--col);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
 h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.02em;line-height:1.12}
-h1{font-size:28px}h2{font-size:23px}h3{font-size:18px;letter-spacing:-.01em}
+h1{font-size:22px}h2{font-size:22px}h3{font-size:18px;letter-spacing:-.01em}
 p{margin:0}
 .muted{color:var(--ink-2)}
 .small{font-size:14px}
@@ -59,31 +59,31 @@ p{margin:0}
 .cover figcaption{position:absolute;left:0;right:0;bottom:0;padding:70px var(--gutter) 14px;color:#fff;background:linear-gradient(to bottom,rgba(8,30,25,0) 0%,rgba(8,30,25,.55) 40%,rgba(8,30,25,.92) 100%);text-shadow:0 1px 2px rgba(0,0,0,.45)}
 .cover .title{display:block;font-size:25px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
 .intro{padding-top:16px}
-.intro h1{max-width:18ch}
-.gmark{width:20px;height:20px;flex:none}
+.intro h1{max-width:24ch;font-weight:600;letter-spacing:-.015em}
+.gmark{width:18px;height:18px;flex:none}
 .where{margin-top:6px;line-height:1.4}
 .where a{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
-.where svg{width:20px;height:20px;fill:none;stroke:var(--call);stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round;flex:none}
-.where b{font-size:17px;font-weight:600}
-.where span{font-size:13px;color:var(--call);text-decoration:underline;text-underline-offset:3px;margin-left:2px}
-.rating{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;color:var(--ink-2);flex-wrap:wrap}
-.rating .stars{color:#e8a600;letter-spacing:1px;font-size:15px}
+.where svg{width:18px;height:18px;fill:none;stroke:var(--call);stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round;flex:none}
+.where b{font-size:15.5px;font-weight:600}
+.where span{font-size:12.5px;color:var(--call);text-decoration:underline;text-underline-offset:3px;margin-left:2px}
+.rating{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13.5px;color:var(--ink-2);flex-wrap:wrap}
+.rating .stars{color:#e8a600;letter-spacing:1px;font-size:13.5px}
 .rating b{color:var(--ink);font-weight:600}
 .rating a{color:var(--ink-2)}
 .cta{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:8px;margin-top:12px}
 .cta .btn{min-height:46px}
-.cta .btn{white-space:nowrap;padding-left:8px;padding-right:8px;font-size:14.5px}
-@media(max-width:400px){h1{font-size:29px}.cta .btn{font-size:14px;gap:7px}}
+.cta .btn{white-space:nowrap;padding-left:8px;padding-right:8px;font-size:14px}
+@media(max-width:400px){.cta .btn{font-size:13.5px;gap:6px}}
 
 /* care chooser */
 .choose{padding-top:22px}
-.choose h2{font-size:21px}
+.choose h2{font-size:19px}
 .seg-wrap{position:sticky;top:var(--bar);z-index:10;background:var(--paper);padding:8px var(--gutter);margin:4px calc(-1*var(--gutter)) 0}
 @media(min-width:721px){.seg-wrap{margin-left:0;margin-right:0;padding-left:0;padding-right:0}}
 .seg-wrap::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line);opacity:0;transition:opacity .2s}
 .seg-wrap.stuck::after{opacity:1}
 .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.seg button{min-height:44px;padding:9px 12px;border:1.5px solid var(--line);border-radius:12px;background:#fff;text-align:left;cursor:pointer;line-height:1.25;font-weight:500;font-size:14.5px;position:relative;transition:border-color .15s,background .15s}
+.seg button{min-height:44px;padding:9px 12px;border:1.5px solid var(--line);border-radius:12px;background:#fff;text-align:left;cursor:pointer;line-height:1.25;font-weight:500;font-size:14px;position:relative;transition:border-color .15s,background .15s}
 .seg button[aria-pressed="true"]{border-color:var(--green);background:var(--mint);font-weight:600}
 .seg button[aria-pressed="true"]::after{content:"";position:absolute;left:12px;right:12px;bottom:-2px;height:4px;border-radius:4px;background:var(--lime)}
 .panel{margin:10px calc(-1*var(--gutter)) 0;padding:20px var(--gutter) 0;background:var(--mint);overflow:hidden}
@@ -237,7 +237,7 @@ footer b{color:var(--ink-2);font-weight:600}
  </figure>
 
  <section class="intro wrap">
-  <h1>Advanced Physio Care.</h1>
+  <h1>Advanced Physio Care near you.</h1>
   <p class="where"><a href="https://www.google.com/maps/search/?api=1&query=CB+Physiotherapy+Saket+Mandir+Marg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg><b>Mandir Marg, Saket, Delhi</b><span>Directions</span></a></p>
   <p class="rating"><svg class="gmark" viewBox="0 0 48 48" aria-label="Google"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6C44.4 38.02 46.98 31.86 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.87 23.87 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="stars" aria-hidden="true">★★★★★</span><span><b>4.9</b> from 747 reviews. <a href="https://www.google.com/maps/search/?api=1&query=CB+Physiotherapy+Saket+Mandir+Marg" target="_blank" rel="noopener">Read them</a></span></p>
   <div class="cta" id="hero-cta">
@@ -291,7 +291,7 @@ footer b{color:var(--ink-2);font-weight:600}
   </ol>
   <div class="slider" aria-label="Central case monitoring team">
    <div class="card wide"><img src="https://cbphysiotherapy.in/images/team/deepanshu_khatri.webp" alt="" width="300" height="300" loading="lazy"><b>Dr. Deepanshu Khatri</b><span>Head of operations</span><small>Reviews recorded sessions and milestones across all CB clinics, and steps in with the treating physio when a case is not moving as planned.</small></div>
-   <div class="card wide"><span class="avatar" aria-hidden="true">I</span><b>Iqra</b><span>Case monitoring</span><small>Follows your milestones between visits, checks in after each phase of treatment, and makes sure a question reaches your physiotherapist the same day.</small></div>
+   <div class="card wide"><img src="https://cbphysiotherapy.in/storage/images/user/600x692/iqra-altaf.webp" alt="" width="600" height="692" loading="lazy"><b>Dr. Iqra Altaf (PT)</b><span>Senior consultant, clinical process and quality control. MPT, dry needling specialist</span><small>Writes the clinical protocols every CB clinic follows and audits recorded sessions against them. Academically and clinically rigorous, with an eye for the detail that keeps a plan on track.</small></div>
   </div>
  </section>
 
