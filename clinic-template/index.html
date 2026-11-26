@@ -77,8 +77,8 @@ p{margin:0}
 .cover img{width:100%;height:100%;object-fit:cover;object-position:center}
 .cover.portrait img{object-position:center 30%}
 .cover .fees-line{position:absolute;top:12px;left:var(--gutter);right:var(--gutter);display:flex;gap:6px;flex-wrap:nowrap;overflow:hidden}
-.cover .fees-line span{display:inline-block;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.96);color:var(--ink);font-size:12.5px;line-height:1.25;font-weight:500;white-space:nowrap}
-.cover .fees-line span b{font-weight:600}
+.cover .fees-line span{display:inline-block;padding:8px 13px;border-radius:10px;background:rgba(255,255,255,.97);color:var(--ink);font-size:14px;line-height:1.25;font-weight:500;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.cover .fees-line span b{font-weight:700;color:var(--green);font-size:15px}
 .cover figcaption{position:absolute;left:0;right:0;bottom:0;padding:70px var(--gutter) 14px;color:#fff;background:linear-gradient(to bottom,rgba(8,30,25,0) 0%,rgba(8,30,25,.55) 40%,rgba(8,30,25,.92) 100%);text-shadow:0 1px 2px rgba(0,0,0,.45)}
 .cover .title{display:block;font-size:25px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
 .cover .tagline{display:block;margin-top:2px;font-family:"Fraunces","Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;font-variation-settings:"opsz" 60;font-size:22px;line-height:1.15;letter-spacing:-.01em;color:#fff}
@@ -304,7 +304,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
 <main id="top">
  <figure class="cover {{HERO_CLASS}}">
   <img src="{{HERO_SRC}}"{{HERO_SRCSET_ATTR}} width="{{HERO_W}}" height="{{HERO_H}}" alt="Inside {{FULL}}" fetchpriority="high" decoding="async">
-  <div class="fees-line"><span>Sessions <b>₹999 to ₹1,499</b></span><span>Same-day appointments</span></div>
+  <div class="fees-line"><span>Sessions <b>₹999 to ₹1,499</b></span></div>
   <figcaption>
    <span class="title">{{FULL}}</span>
    <span class="tagline">Recovery with <em>AI Precision</em></span>
