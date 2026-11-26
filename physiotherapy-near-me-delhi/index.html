@@ -542,7 +542,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
  function render(c,fromClick){const d=CONCERNS[c];const panel=$('#panel');
   panel.innerHTML=`<h3>${d.name}</h3><p class="who">${d.intro}</p>
-   <div class="act"><button class="btn" type="button" data-book data-place="care_panel">Book the first visit</button><a class="btn quiet" href="tel:${D.tel}" data-call="${D.id}">Call to ask</a></div>
+   <div class="act"><button class="btn" type="button" data-book data-place="care_panel">Book the first visit</button><a class="btn quiet" href="tel:${D.tel}" data-call="${D.id}">Call Now</a></div>
    <ol class="steps">
     <li><i>1</i><div><b>AI-guided assessment<small>15 to 30 min</small></b><span>${d.assess}</span><span class="report">It ends in your <b>Recovery Plan Report</b>: the diagnosis, what was observed and tested, the treatment plan and the expected timeline.</span></div></li>
     <li><i>2</i><div><b>Treatment, same day</b><ul class="phase"><li><em>First</em><span>${d.relief}</span></li><li><em>Then</em><span>${d.recover}</span></li></ul><div class="usp">${d.usp.map(u=>`<span>${u}</span>`).join('')}</div></div></li>
