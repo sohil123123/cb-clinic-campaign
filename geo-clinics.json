@@ -1,5 +1,5 @@
 {
- "_comment": "Google Ads location IDs (loc={loc_physical_ms}) mapped to the nearest clinic. Source: Google geotargets 2026-10-06. Edit freely; unknown IDs fall back to the five-clinic page. Updated 2026-11-24 from the Google Ads user-location report. Central Delhi (110001 etc.), Delhi Cantonment, east and north Delhi, Gurugram and Noida are deliberately unmapped.",
+ "_comment": "Google Ads location IDs (loc={loc_physical_ms}) mapped to the nearest clinic. Source: Google geotargets 2026-10-06. Edit freely; unknown IDs fall back to the five-clinic page. Updated 2026-11-24 from the Google Ads user-location report. Central Delhi 110001 (Connaught Place) is mapped to Safdarjung Enclave as of 2026-11-26; other central PINs, Delhi Cantonment, east and north Delhi, Gurugram and Noida are deliberately unmapped.",
  "clinics": {
   "saket": {
    "9182620": "Saket (sub-district)",
@@ -43,7 +43,8 @@
    "9061720": "110067 Munirka / JNU",
    "9061650": "110003 Lodhi Road / Jor Bagh / Khan Market",
    "9219093": "Malcha Marg, Chanakyapuri",
-   "9061648": "110011 Chanakyapuri / Nehru Bhawan"
+   "9061648": "110011 Chanakyapuri / Nehru Bhawan",
+   "9061649": "110001 Connaught Place / Janpath / Barakhamba"
   },
   "vasant": {
    "9197996": "Vasant Kunj",
