@@ -16,7 +16,6 @@ var dec='',slug='';
 if(clinic){slug=R.slugs[clinic];dec=area&&!kw?'area':'keyword';}
 else if(cls==='far'||cls==='other-delhi'){}
 else if(!off&&R.geo[q.get('loc')||'']){slug=R.slugs[R.geo[q.get('loc')]];dec='geo';}
-else if(!off&&R.geo[q.get('loci')||'']){slug=R.slugs[R.geo[q.get('loci')]];dec='interest';}
 window.__cbr={kw_class:cls,decision:(cls==='generic'||cls==='far'||cls==='other-delhi')?cls:'none'};
 if(!slug)return;q.delete('area');q.set('r',dec);q.set('rk',cls);
 location.replace('/physiotherapy-near-me-'+slug+'/?'+q.toString()+location.hash);

@@ -7,7 +7,7 @@ Writes physiotherapy-near-me-<slug>/index.html for each clinic (generated, git-i
 physiotherapy-near-me-delhi/index.html (the central page, committed for visibility).
 
 The central page carries the routing rules from routing.json and geo-clinics.json inline: when an
-ad click names a clinic area (keyword alias), or the keyword is neutral or Delhi-wide and Google places the visitor near a clinic (loc / loci),
+ad click names a clinic area (keyword alias), or the keyword is neutral or Delhi-wide and Google places the visitor near a clinic (loc),
 the page hands over to that clinic's page with the ad parameters plus r=<decision>&rk=<keyword class>.
 """
 import html
@@ -224,7 +224,6 @@ var dec='',slug='';
 if(clinic){slug=R.slugs[clinic];dec=area&&!kw?'area':'keyword';}
 else if(cls==='far'||cls==='other-delhi'){}
 else if(!off&&R.geo[q.get('loc')||'']){slug=R.slugs[R.geo[q.get('loc')]];dec='geo';}
-else if(!off&&R.geo[q.get('loci')||'']){slug=R.slugs[R.geo[q.get('loci')]];dec='interest';}
 window.__cbr={kw_class:cls,decision:(cls==='generic'||cls==='far'||cls==='other-delhi')?cls:'none'};
 if(!slug)return;q.delete('area');q.set('r',dec);q.set('rk',cls);
 location.replace('/physiotherapy-near-me-'+slug+'/?'+q.toString()+location.hash);

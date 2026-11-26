@@ -82,8 +82,7 @@ The central Delhi page decides from the ad click, in this order:
    without a clinic (`other_delhi`): the five-clinic page.
 3. Location-neutral keyword ("physiotherapy near me") or a Delhi-wide one
    ("physiotherapy in delhi", `generic_locations`): the clinic nearest the
-   person if Google's `loc` id is in `geo-clinics.json`, else Google's
-   location of interest (`loci`), else the five-clinic page.
+   person if Google's `loc` id is in `geo-clinics.json`; otherwise the central page. Google's location of interest (`loci`) is recorded but no longer used for routing (dropped 2026-11-26: 32 routed visits, no leads).
 
 Clinic pages always show their own clinic. On every page the keyword also
 pre-selects the concern (`conditions`) and the home-visit option
