@@ -6,6 +6,7 @@
  const meta=document.querySelector('meta[name="cb-analytics-endpoint"]'),endpoint=meta&&meta.content||'';
  const debug=(()=>{try{return localStorage.getItem('cb_debug')==='1';}catch(_){return false;}})();
  if(navigator.webdriver&&!debug)return; // automated browsers (tests, crawlers) are not visitors
+ if(/AdsBot|Googlebot|Google-InspectionTool|Google-Read-Aloud|Mediapartners|Lighthouse|HeadlessChrome|PTST|GTmetrix|Pingdom|bingbot|YandexBot|AhrefsBot|SemrushBot|facebookexternalhit|Applebot|DuckDuckBot|Bytespider|PetalBot/i.test(navigator.userAgent))return; // known crawlers and ad-review bots
  const uid=()=>crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36);
  const remember=(storage,key)=>{try{let v=storage.getItem(key);if(!v){v=uid();storage.setItem(key,v);}return v;}catch(_){return uid();}};
  const visitor=remember(localStorage,'cb_vid'),session=remember(sessionStorage,'cb_sid');
@@ -70,5 +71,7 @@
  // Google Ads ValueTrack values from the account tracking template (loc = searcher's physical location id,
  // loci = location of interest, kw/mt = keyword and match type, net = network, dev = Google's device, cid/agid = ids).
  const ad={};[['loc','loc'],['loci','loci'],['utm_term','kw'],['mt','mt'],['net','net'],['dev','dev'],['utm_content','creative'],['cid','cid'],['agid','agid']].forEach(([q,k])=>{const v=params.get(q);if(v&&!/^\{.*\}$/.test(v))ad[k]=v.slice(0,80);});
- track('page_view',{title:document.title,ad,route:window.cbRoute||null,layout:document.body.dataset.layout||'hero1'});
+ // Google's ad-review fetches look like ad clicks but carry no click id, no keyword and creative=0: mark them so the dashboard can set them aside.
+ const suspect=(ctx.utm_source==='google'&&!ctx.gclid&&!ad.kw)||ad.creative==='0';
+ track('page_view',{title:document.title,ad,route:window.cbRoute||null,layout:document.body.dataset.layout||'hero1',suspect});
 })();

@@ -17,7 +17,7 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://book.cbphysiotherapy.in'
-ANALYTICS_V = '20261127b'
+ANALYTICS_V = '20261126b'
 CENTRAL_TEL = '+911140846393'
 CENTRAL_DISPLAY = '011 4084 6393'
 PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>'

@@ -159,6 +159,7 @@ table.inner{font-size:12px}table.inner th,table.inner td{padding:5px 8px}
    <details class="multi" id="f-pages"><summary>All pages</summary><div class="menu"><div id="page-options"></div><div class="row"><button type="button" data-act="all">Select all</button><button type="button" data-act="none">Clear</button></div></div></details>
    <select id="f-device" aria-label="Device"><option value="">All devices</option><option value="mobile">Mobile</option><option value="desktop">Desktop</option></select>
    <select id="f-source" aria-label="Source"><option value="">All sources</option></select>
+   <label class="ctl" title="Google's ad-review and landing-page checks: no click id, no keyword, creative=0"><input type="checkbox" id="f-bots"> Include suspected bots</label>
    <span class="spacer"></span>
    <span class="status" id="count"></span>
   </div>
@@ -337,7 +338,7 @@ async function load(){
    if(!r.ok)throw new Error('HTTP '+r.status);
    const data=await r.json();state.events=normalise(data.events||data);
   }
-  indexAds();buildPageFilter();render();$('#status').textContent='Updated '+new Intl.DateTimeFormat('en-IN',{timeZone:TZ,hour:'2-digit',minute:'2-digit'}).format(new Date());return true;
+  indexAds();indexBots();buildPageFilter();render();$('#status').textContent='Updated '+new Intl.DateTimeFormat('en-IN',{timeZone:TZ,hour:'2-digit',minute:'2-digit'}).format(new Date());return true;
  }catch(err){$('#gate-error').textContent='Could not load data: '+err.message;$('#status').textContent='Load failed';return false;}
 }
 let sessionAd=new Map();
@@ -345,13 +346,14 @@ let sessionLayout=new Map();
 function indexAds(){sessionAd=new Map();sessionLayout=new Map();state.events.forEach(e=>{if(e.event!=='page_view'||!e.props)return;if(e.props.ad&&Object.keys(e.props.ad).length)sessionAd.set(e.session,e.props.ad);sessionLayout.set(e.session,e.props.layout||'hero1');});}
 const LAYOUT={hero1:'Landing screen v1 (concern buttons first)',hero2:'Landing screen v2 (place, price, call, expertise)','clinic-v3':'Clinic page v3 (photo first, care areas, team)'};const layoutOf=e=>sessionLayout.get(e.session)||'hero1';
 const adOf=e=>sessionAd.get(e.session)||{};
-function normalise(rows){return rows.map(r=>{let props=r.props||{};if(typeof props==='string'){try{props=JSON.parse(props);}catch(_){props={};}}return {ts:new Date(r.ts||r.created_at),event:r.event,page:r.page||'',area:r.area||'',device:r.device||'',visitor:r.visitor||r.visitor_id||'',session:r.session||r.session_id||'',utm_source:r.utm_source||'',utm_medium:r.utm_medium||'',utm_campaign:r.utm_campaign||'',referrer:r.referrer||'',props};}).filter(e=>!isNaN(e.ts));}
+function normalise(rows){return rows.map(r=>{let props=r.props||{};if(typeof props==='string'){try{props=JSON.parse(props);}catch(_){props={};}}return {ts:new Date(r.ts||r.created_at),event:r.event,page:r.page||'',area:r.area||'',device:r.device||'',gclid:+(r.gclid||0),visitor:r.visitor||r.visitor_id||'',session:r.session||r.session_id||'',utm_source:r.utm_source||'',utm_medium:r.utm_medium||'',utm_campaign:r.utm_campaign||'',referrer:r.referrer||'',props};}).filter(e=>!isNaN(e.ts));}
 
 // ---------- filters ----------
 document.querySelectorAll('#range button').forEach(b=>b.addEventListener('click',()=>{setRange(+b.dataset.days);load();}));
 $('#from').addEventListener('change',()=>{state.from=$('#from').value;document.querySelectorAll('#range button').forEach(b=>b.setAttribute('aria-pressed','false'));load();});
 $('#to').addEventListener('change',()=>{state.to=$('#to').value;document.querySelectorAll('#range button').forEach(b=>b.setAttribute('aria-pressed','false'));load();});
 ['device','source'].forEach(k=>$('#f-'+k).addEventListener('change',e=>{state.filters[k]=e.target.value;render();}));
+$('#f-bots').addEventListener('change',render);
 $('#refresh').addEventListener('click',load);
 function buildPageFilter(){
  const pages=[...new Set(state.events.map(e=>e.page))].filter(Boolean).sort((a,b)=>pageName(a).localeCompare(pageName(b)));
@@ -366,7 +368,9 @@ function updatePageSummary(){const n=state.filters.pages.size,all=document.query
 function fillSelect(id,values,current){const s=$(id);const first=s.firstElementChild.outerHTML;s.innerHTML=first+values.map(v=>`<option value="${esc(v)}"${v===current?' selected':''}>${esc(v)}</option>`).join('');}
 function passes(e,f){return (!f.pages.size||f.pages.has(e.page))&&(!f.device||e.device===f.device)&&(!f.source||(e.utm_source||'direct')===f.source);}
 function inRange(e){const k=dayKey(e.ts);return k>=state.from&&k<=state.to;}
-function filtered(){return state.events.filter(e=>inRange(e)&&passes(e,state.filters));}
+let botSessions=new Set();
+function indexBots(){botSessions=new Set();state.events.forEach(e=>{if(e.event!=='page_view')return;const p=e.props||{},ad=p.ad||{};const suspect=p.suspect===true||((e.utm_source==='google')&&!e.gclid&&!ad.kw)||ad.creative==='0';if(suspect)botSessions.add(e.session);});}
+function filtered(){const bots=$('#f-bots').checked;const rows=state.events.filter(e=>inRange(e)&&passes(e,state.filters)&&(bots||!botSessions.has(e.session)));return rows;}
 $('#export').addEventListener('click',()=>{const rows=filtered();const head=['time','event','page','device','visitor','session','utm_source','utm_medium','utm_campaign','referrer','props'];const csv=[head.join(',')].concat(rows.map(e=>[e.ts.toISOString(),e.event,e.page,e.device,e.visitor,e.session,e.utm_source,e.utm_medium,e.utm_campaign,e.referrer,JSON.stringify(e.props)].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(','))).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=`landing-events-${state.from}-to-${state.to}.csv`;a.click();});
 
 // ---------- tabs ----------
@@ -401,7 +405,7 @@ function daysBetween(from,to){const out=[];const d=new Date(from+'T00:00:00Z');c
 function previousPeriodEvents(){const span=daysBetween(state.from,state.to).length;const prevFrom=dayKey(new Date(new Date(state.from+'T00:00:00Z').getTime()-span*864e5));return {span,events:state.events.filter(e=>{const k=dayKey(e.ts);return k<state.from&&k>=prevFrom;}).filter(e=>passes(e,state.filters))};}
 
 // ---------- render ----------
-function render(){const ev=filtered();$('#count').textContent=fmt(ev.length)+' events';if(state.tab==='overview')renderOverview(ev);else if(state.tab==='compare')renderCompare(ev);else if(state.tab==='layout')renderLayout(ev);else if(state.tab==='decisions')renderDecisions(ev);else renderRouting(ev);}
+function render(){const ev=filtered();const hidden=$('#f-bots').checked?0:state.events.filter(e=>inRange(e)&&botSessions.has(e.session)&&e.event==='page_view').length;$('#count').textContent=fmt(ev.length)+' events'+(hidden?' · '+fmt(hidden)+' bot visits hidden':'');if(state.tab==='overview')renderOverview(ev);else if(state.tab==='compare')renderCompare(ev);else if(state.tab==='layout')renderLayout(ev);else if(state.tab==='decisions')renderDecisions(ev);else renderRouting(ev);}
 
 function renderOverview(ev){
  const a=metrics(ev),{span,events:prevEv}=previousPeriodEvents(),p=metrics(prevEv);
