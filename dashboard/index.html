@@ -153,8 +153,9 @@ table.pages tr.pg-sub.strong td{color:var(--ink);font-weight:500}table.pages tr.
  <main class="wrap">
   <div class="filters" role="group" aria-label="Filters">
    <div class="seg" id="range">
-    <button type="button" data-days="1">Today</button>
-    <button type="button" data-days="7" aria-pressed="true">7 days</button>
+    <button type="button" data-days="1" aria-pressed="true">Today</button>
+    <button type="button" data-days="1" data-offset="1">Yesterday</button>
+    <button type="button" data-days="7">7 days</button>
     <button type="button" data-days="28">28 days</button>
     <button type="button" data-days="90">90 days</button>
    </div>
@@ -182,7 +183,7 @@ table.pages tr.pg-sub.strong td{color:var(--ink);font-weight:500}table.pages tr.
     <div class="card span-4"><h2>From visit to booking</h2><p class="sub">Share of visits reaching each step</p><div id="c-funnel"></div></div>
     <div class="card span-8"><h2>Leads per day</h2><p class="sub">Bookings, calls and WhatsApp messages</p><div class="legend" id="l-leads"></div><div class="chart" id="c-leads"></div><details class="tv"><summary>Table</summary><div class="table-wrap" id="t-leads"></div></details></div>
     <div class="card span-4"><h2>Devices</h2><p class="sub">Visits and lead rate</p><div id="c-device"></div></div>
-    <div class="card span-12"><h2>By page</h2><p class="sub">Click a page to split it: direct arrivals against visits handed over from the central page, and the central page's hand-overs by clinic.</p><div class="table-wrap" id="t-pages"></div></div>
+    <div class="card span-12"><h2>By page</h2><p class="sub">Click a page to split it. Clinic pages: direct arrivals, automatic hand-overs and people who chose the clinic by hand on the central page. Central page: its median time counts a hand-picked clinic visit as part of the same journey, and automatic hand-overs are listed but never counted in its time.</p><div class="table-wrap" id="t-pages"></div></div>
     <div class="card span-6"><h2>By campaign</h2><p class="sub">UTM source, medium and campaign from the ad URL</p><div class="table-wrap" id="t-sources"></div></div>
     <div class="card span-6"><h2>By keyword</h2><p class="sub">Search keyword and match type from Google Ads (needs the tracking template)</p><div class="table-wrap" id="t-keywords"></div></div>
     <div class="card span-6"><h2>Google location IDs</h2><p class="sub">Where Google placed the searcher, by its location ID. Use this to map IDs to clinics.</p><div class="table-wrap" id="t-locs"></div></div>
@@ -320,9 +321,9 @@ const CLINIC={saket:'Saket','greater-kailash':'Greater Kailash',gk:'Greater Kail
 const placeName=p=>PLACE[p]||String(p||'?').replace(/_/g,' ');
 
 // ---------- state ----------
-const state={pw:sessionStorage.getItem('cb_dash_pw')||'',from:null,to:null,events:[],demo:new URLSearchParams(location.search).get('demo')==='1',filters:{pages:new Set(),device:'',source:''},tab:'overview',dim:'page'};
-function setRange(days){const now=new Date();const d=new Date(now.getTime()-(days-1)*864e5);state.from=dayKey(d);state.to=dayKey(now);$('#from').value=state.from;$('#to').value=state.to;document.querySelectorAll('#range button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.days===days)));}
-setRange(7);
+const state={pw:sessionStorage.getItem('cb_dash_pw')||'',from:null,to:null,events:[],demo:new URLSearchParams(location.search).get('demo')==='1',filters:{pages:new Set(),device:'',source:'google'},tab:'overview',dim:'page'};
+function setRange(days,offset){offset=offset||0;const end=new Date(Date.now()-offset*864e5);const d=new Date(end.getTime()-(days-1)*864e5);state.from=dayKey(d);state.to=dayKey(end);$('#from').value=state.from;$('#to').value=state.to;document.querySelectorAll('#range button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.days===days&&(+b.dataset.offset||0)===offset)));}
+setRange(1);
 
 // ---------- gate ----------
 $('#gate-form').addEventListener('submit',async e=>{e.preventDefault();const pw=$('#pw').value.trim();if(!pw)return;state.pw=pw;$('#gate-error').textContent='';const ok=await load();if(ok){sessionStorage.setItem('cb_dash_pw',pw);openApp();}});
@@ -348,14 +349,15 @@ async function load(){
 let sessionAd=new Map();
 let sessionLayout=new Map(),sessionArrival=new Map();
 const ROUTED=['geo','interest','keyword','area'];
-function arrivalOf(v){const r=(v.props&&v.props.route)||{};const dec=r.decision||'';if(ROUTED.includes(dec))return {kind:'via',how:dec,clinic:r.clinic||(v.page.includes('delhi')?'':v.area)};if(v.page.includes('near-me-delhi'))return {kind:'central',how:dec||'none',clinic:''};return {kind:'direct',how:'page',clinic:v.area};}
-function indexAds(){sessionAd=new Map();sessionLayout=new Map();state.events.forEach(e=>{if(e.event!=='page_view'||!e.props)return;if(e.props.ad&&Object.keys(e.props.ad).length)sessionAd.set(e.session,e.props.ad);sessionLayout.set(e.session,e.props.layout||'hero1');if(!sessionArrival.has(e.session))sessionArrival.set(e.session,arrivalOf(e));});}
+let visitArrival=new Map();const varr=e=>visitArrival.get(e.session+'|'+e.page)||sessionArrival.get(e.session)||{kind:'direct',how:'page',clinic:''};
+function arrivalOf(v){const r=(v.props&&v.props.route)||{};const dec=r.decision||'';if(dec==='pick')return {kind:'pick',how:'pick',clinic:r.clinic||v.area};if(ROUTED.includes(dec))return {kind:'via',how:dec,clinic:r.clinic||(v.page.includes('delhi')?'':v.area)};if(v.page.includes('near-me-delhi'))return {kind:'central',how:dec||'none',clinic:''};return {kind:'direct',how:'page',clinic:v.area};}
+function indexAds(){sessionAd=new Map();sessionLayout=new Map();sessionArrival=new Map();visitArrival=new Map();state.events.forEach(e=>{if(e.event!=='page_view'||!e.props)return;if(e.props.ad&&Object.keys(e.props.ad).length)sessionAd.set(e.session,e.props.ad);sessionLayout.set(e.session,e.props.layout||'hero1');if(!sessionArrival.has(e.session))sessionArrival.set(e.session,arrivalOf(e));const vk=e.session+'|'+e.page;if(!visitArrival.has(vk))visitArrival.set(vk,arrivalOf(e));});}
 const LAYOUT={hero1:'Landing screen v1 (concern buttons first)',hero2:'Landing screen v2 (place, price, call, expertise)','clinic-v3':'Clinic page v3 (photo first, care areas, team)'};const layoutOf=e=>sessionLayout.get(e.session)||'hero1';
 const adOf=e=>sessionAd.get(e.session)||{};
 function normalise(rows){return rows.map(r=>{let props=r.props||{};if(typeof props==='string'){try{props=JSON.parse(props);}catch(_){props={};}}return {ts:new Date(r.ts||r.created_at),event:r.event,page:r.page||'',area:r.area||'',device:r.device||'',gclid:+(r.gclid||0),visitor:r.visitor||r.visitor_id||'',session:r.session||r.session_id||'',utm_source:r.utm_source||'',utm_medium:r.utm_medium||'',utm_campaign:r.utm_campaign||'',referrer:r.referrer||'',props};}).filter(e=>!isNaN(e.ts));}
 
 // ---------- filters ----------
-document.querySelectorAll('#range button').forEach(b=>b.addEventListener('click',()=>{setRange(+b.dataset.days);load();}));
+document.querySelectorAll('#range button').forEach(b=>b.addEventListener('click',()=>{setRange(+b.dataset.days,+b.dataset.offset||0);load();}));
 $('#from').addEventListener('change',()=>{state.from=$('#from').value;document.querySelectorAll('#range button').forEach(b=>b.setAttribute('aria-pressed','false'));load();});
 $('#to').addEventListener('change',()=>{state.to=$('#to').value;document.querySelectorAll('#range button').forEach(b=>b.setAttribute('aria-pressed','false'));load();});
 ['device','source'].forEach(k=>$('#f-'+k).addEventListener('change',e=>{state.filters[k]=e.target.value;render();}));
@@ -364,7 +366,7 @@ $('#refresh').addEventListener('click',load);
 function buildPageFilter(){
  const pages=[...new Set(state.events.map(e=>e.page))].filter(Boolean).sort((a,b)=>pageName(a).localeCompare(pageName(b)));
  $('#page-options').innerHTML=pages.map(p=>`<label><input type="checkbox" value="${esc(p)}"${state.filters.pages.has(p)?' checked':''}> ${esc(pageName(p))}</label>`).join('')||'<div class="empty">No pages yet</div>';
- fillSelect('#f-source',[...new Set(state.events.map(e=>e.utm_source||'direct'))].sort(),state.filters.source);
+ fillSelect('#f-source',[...new Set(state.events.map(e=>e.utm_source||'direct').concat('google'))].sort(),state.filters.source);
  updatePageSummary();
 }
 $('#page-options').addEventListener('change',e=>{const v=e.target.value;if(e.target.checked)state.filters.pages.add(v);else state.filters.pages.delete(v);updatePageSummary();render();});
@@ -405,7 +407,7 @@ function metrics(ev){
   concerns:by(ev.filter(e=>e.event==='concern_selected'),e=>e.props.concern||'?'),concernByPlace:by(ev.filter(e=>e.event==='concern_selected'),e=>(e.props.concern||'?')+'|'+(e.props.placement||'?')),
   bookPlace:by(ev.filter(e=>e.event==='booking_opened'),e=>e.props.placement||'?'),callPlace:by(ev.filter(e=>e.event==='call_click'),e=>e.props.placement||'?'),waPlace:by(ev.filter(e=>e.event==='whatsapp_open'),e=>e.props.placement||'?'),
   waIntent:by(ev.filter(e=>e.event==='whatsapp_send'),e=>e.props.intent||'?'),failures:by(ev.filter(e=>e.event==='booking_request_failed'),e=>e.props.reason||'?'),faqQ:by(ev.filter(e=>e.event==='faq_opened'),e=>e.props.question||'?'),
-  pills:count('clinic_pill_click'),pins:count('map_pin_click'),others:count('other_clinics_opened')+count('area_other_clinics_shown'),outbound:count('outbound_click')};
+  pills:count('clinic_pill_click')+count('clinic_pick'),pins:count('map_pin_click'),others:count('other_clinics_opened')+count('area_other_clinics_shown'),outbound:count('outbound_click')};
 }
 function daysBetween(from,to){const out=[];const d=new Date(from+'T00:00:00Z');const end=new Date(to+'T00:00:00Z');while(d<=end){out.push(d.toISOString().slice(0,10));d.setUTCDate(d.getUTCDate()+1);}return out;}
 function previousPeriodEvents(){const span=daysBetween(state.from,state.to).length;const prevFrom=dayKey(new Date(new Date(state.from+'T00:00:00Z').getTime()-span*864e5));return {span,events:state.events.filter(e=>{const k=dayKey(e.ts);return k<state.from&&k>=prevFrom;}).filter(e=>passes(e,state.filters))};}
@@ -444,7 +446,7 @@ function renderOverview(ev){
  hbars('#c-failures',a.failures,k=>FAIL[k]||'HTTP '+k,'var(--s2)');
  {
   const bySess=new Map();ev.forEach(e=>{(bySess.get(e.session)||bySess.set(e.session,[]).get(e.session)).push(e);});
-  const STEP={page_view:null,section_seen:null,scroll_50:null,scroll_90:'read to the end',concern_selected:e=>'chose '+(CONCERNS[e.props.concern]||e.props.concern),booking_opened:e=>'opened booking ('+placeName(e.props.placement).toLowerCase()+')',booking_request_sent:e=>'SENT BOOKING'+(e.props.clinic_id?' for '+e.props.clinic_id:''),booking_request_failed:e=>'booking failed ('+(FAIL[e.props.reason]||e.props.reason)+')',call_click:e=>'CALLED ('+placeName(e.props.placement).toLowerCase()+')',whatsapp_open:()=>'opened WhatsApp',whatsapp_send:e=>'SENT WHATSAPP ('+(INTENT[e.props.intent]||e.props.intent)+')',directions_click:()=>'directions',google_profile_click:()=>'Google profile',reviews_opened:()=>'reviews',faq_opened:e=>'FAQ: '+(e.props.question||'').slice(0,40),clinic_pill_click:e=>'clinic strip: '+e.props.clinic,map_pin_click:e=>'map pin: '+e.props.clinic,other_clinics_opened:()=>'other centres',area_other_clinics_shown:()=>'other centres',clinic_selected:null,outbound_click:e=>'opened '+(e.props.to||'clinic page'),geo_guess_dismissed:()=>'rejected suggested clinic',page_leave:null,endpoint_check:null};
+  const STEP={page_view:null,section_seen:null,scroll_50:null,scroll_90:'read to the end',concern_selected:e=>'chose '+(CONCERNS[e.props.concern]||e.props.concern),booking_opened:e=>'opened booking ('+placeName(e.props.placement).toLowerCase()+')',booking_request_sent:e=>'SENT BOOKING'+(e.props.clinic_id?' for '+e.props.clinic_id:''),booking_request_failed:e=>'booking failed ('+(FAIL[e.props.reason]||e.props.reason)+')',call_click:e=>'CALLED ('+placeName(e.props.placement).toLowerCase()+')',whatsapp_open:()=>'opened WhatsApp',whatsapp_send:e=>'SENT WHATSAPP ('+(INTENT[e.props.intent]||e.props.intent)+')',directions_click:()=>'directions',google_profile_click:()=>'Google profile',reviews_opened:()=>'reviews',faq_opened:e=>'FAQ: '+(e.props.question||'').slice(0,40),clinic_pill_click:e=>'clinic strip: '+e.props.clinic,clinic_pick:e=>'chose clinic: '+e.props.clinic+' ('+(e.props.placement||'link')+')',map_pin_click:e=>'map pin: '+e.props.clinic,other_clinics_opened:()=>'other centres',area_other_clinics_shown:()=>'other centres',clinic_selected:null,outbound_click:e=>'opened '+(e.props.to||'clinic page'),geo_guess_dismissed:()=>'rejected suggested clinic',page_leave:null,endpoint_check:null};
   const SEC=Object.fromEntries(SECTIONS);
   const visits=[...bySess.entries()].map(([sid,list])=>{list.sort((a,b)=>a.ts-b.ts);const first=list[0],view=list.find(e=>e.event==='page_view')||first,leave=[...list].reverse().find(e=>e.event==='page_leave');
    const steps=list.map(e=>{const f=STEP[e.event];if(f===null)return null;if(f===undefined)return e.event.replace(/_/g,' ');return typeof f==='function'?f(e):f;}).filter(Boolean);
@@ -459,15 +461,29 @@ function renderOverview(ev){
   $('#t-recent').querySelectorAll('tr.visit').forEach(tr=>{const open=()=>{const dt=tr.nextElementSibling;dt.hidden=!dt.hidden;tr.setAttribute('aria-expanded',String(!dt.hidden));tr.querySelector('.caret').textContent=dt.hidden?'▸':'▾';};tr.addEventListener('click',open);tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});});
  }
 }
-const HOW={geo:'Nearest clinic from location',interest:'Google location of interest',keyword:'Keyword named the area',area:'Area link'};
+const HOW={geo:'Nearest clinic from location',interest:'Google location of interest',keyword:'Keyword named the area',area:'Area link',pick:'Chose it on the central page'};
 function renderPages(ev){
- const arr=s=>sessionArrival.get(s)||{kind:'direct',how:'page',clinic:''};
- const row=(label,sub,cls)=>{const s=metrics(sub);return {label,n:s.n,cells:[s.n,s.bookings,s.calls,s.wa,pct(s.leadSessions,s.n),s.medianSeconds?s.medianSeconds+' s':'–'],cls:cls||''};};
+ const arr=varr;const isC=pg=>pg.includes('near-me-delhi');
+ // Time a session spent across the given pages: the sum of its page_leave seconds, one value per session.
+ const journey=sub=>{const m=new Map();sub.forEach(e=>{if(e.event!=='page_leave')return;const k=e.session;m.set(k,(m.get(k)||0)+(+e.props.seconds||0));});return median([...m.values()].filter(x=>x>0));};
+ const row=(label,sub,cls,secs)=>{const s=metrics(sub);const t=secs===undefined?s.medianSeconds:secs;return {label,n:s.n,cells:[s.n,s.bookings,s.calls,s.wa,pct(s.leadSessions,s.n),t?t+' s':'–'],cls:cls||''};};
  const pages=[...new Set(ev.map(e=>e.page))].filter(Boolean);const groups=[];
- pages.forEach(pg=>{const pe=ev.filter(e=>e.page===pg);const isCentral=pg.includes('near-me-delhi');const top=row(pageName(pg),pe);const subs=[];
-  if(isCentral){const stayed=pe.filter(e=>arr(e.session).kind==='central');const shownAs=pe.filter(e=>arr(e.session).kind==='via');subs.push(row('Stayed on the central page',stayed,'sub'));if(shownAs.length)subs.push(row('Shown as a clinic inside the central page (older layout)',shownAs,'sub'));
-   const handed=ev.filter(e=>!e.page.includes('near-me-delhi')&&arr(e.session).kind==='via');if(handed.length){subs.push(row('Handed over to a clinic page',handed,'sub strong'));[...new Set(handed.map(e=>e.page))].forEach(cp=>subs.push(row('→ '+pageName(cp),handed.filter(e=>e.page===cp),'sub2')));}}
-  else{const direct=pe.filter(e=>arr(e.session).kind==='direct');const via=pe.filter(e=>arr(e.session).kind==='via');subs.push(row('Direct: clinic ad or link',direct,'sub'));if(via.length){subs.push(row('Via the central page',via,'sub strong'));[...new Set(via.map(e=>arr(e.session).how))].forEach(h=>subs.push(row('→ '+(HOW[h]||h),via.filter(e=>arr(e.session).how===h),'sub2')));}}
+ pages.forEach(pg=>{const pe=ev.filter(e=>e.page===pg);const subs=[];let top;
+  if(isC(pg)){
+   // Sessions that chose a clinic by hand: their central time and the clinic page time count as one journey.
+   const picked=ev.filter(e=>!isC(e.page)&&arr(e).kind==='pick');const pickSess=new Set(picked.map(e=>e.session));
+   const stayed=pe.filter(e=>!pickSess.has(e.session));const central=pe.filter(e=>pickSess.has(e.session)).concat(picked);
+   top=row(pageName(pg),pe,'',journey(pe.concat(picked)));
+   subs.push(row('Stayed on the central page',stayed,'sub'));
+   if(central.length){subs.push(row('Chose a clinic by hand (central + clinic page time)',central,'sub strong',journey(central)));[...new Set(picked.map(e=>e.page))].forEach(cp=>{const ce=picked.filter(e=>e.page===cp);const ss=new Set(ce.map(e=>e.session));subs.push(row('→ '+pageName(cp),ce,'sub2',journey(pe.filter(e=>ss.has(e.session)).concat(ce))));});}
+   const handed=ev.filter(e=>!isC(e.page)&&arr(e).kind==='via');if(handed.length){subs.push(row('Handed over automatically (not counted above)',handed,'sub strong'));[...new Set(handed.map(e=>e.page))].forEach(cp=>subs.push(row('→ '+pageName(cp),handed.filter(e=>e.page===cp),'sub2')));}
+  }else{
+   top=row(pageName(pg),pe);
+   const direct=pe.filter(e=>arr(e).kind==='direct'),via=pe.filter(e=>arr(e).kind==='via'),pick=pe.filter(e=>arr(e).kind==='pick');
+   subs.push(row('Direct: clinic ad or link',direct,'sub'));
+   if(via.length){subs.push(row('Handed over automatically from the central page',via,'sub strong'));[...new Set(via.map(e=>arr(e).how))].forEach(h=>subs.push(row('→ '+(HOW[h]||h),via.filter(e=>arr(e).how===h),'sub2')));}
+   if(pick.length)subs.push(row('Chosen by hand on the central page',pick,'sub strong'));
+  }
   groups.push({top,subs});});
  groups.sort((a,b)=>b.top.n-a.top.n);const max=Math.max(1,...groups.map(g=>g.top.n));
  const bar=n=>`<span style="display:inline-block;width:70px;height:6px;vertical-align:middle;margin-left:8px;background:var(--brand-soft);border-radius:3px;overflow:hidden"><span style="display:block;height:100%;width:${n/max*100}%;background:var(--s1)"></span></span>`;
@@ -482,7 +498,7 @@ function groups(ev){
  const dim=state.dim;
  if(dim==='period'){const prev=previousPeriodEvents();return [{label:`This period (${state.from} to ${state.to})`,ev},{label:`Previous ${prev.span} days`,ev:prev.events}];}
  if(dim==='device')return ['mobile','desktop'].map(d=>({label:d[0].toUpperCase()+d.slice(1),ev:ev.filter(e=>e.device===d)}));
- if(dim==='arrival'){const A={direct:'Direct to a clinic page',via:'Via the central page (handed over)',central:'Stayed on the central page'};return ['direct','via','central'].map(k=>({label:A[k],ev:ev.filter(e=>(sessionArrival.get(e.session)||{kind:'direct'}).kind===k)})).filter(g=>g.ev.length);}
+ if(dim==='arrival'){const A={direct:'Direct to a clinic page',via:'Handed over automatically from the central page',pick:'Chose a clinic by hand on the central page',central:'Stayed on the central page'};return ['direct','via','pick','central'].map(k=>({label:A[k],ev:ev.filter(e=>varr(e).kind===k)})).filter(g=>g.ev.length);}
  if(dim==='layout'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>layoutOf(e)).entries()].sort((a,b)=>b[1]-a[1]).map(x=>x[0]);return keys.map(k=>({label:LAYOUT[k]||k,ev:ev.filter(e=>layoutOf(e)===k)}));}
  if(dim==='source'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>e.utm_source||'direct').entries()].sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);return keys.map(k=>({label:k,ev:ev.filter(e=>(e.utm_source||'direct')===k)}));}
  if(dim==='keyword'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>adOf(e).kw||'(no keyword)').entries()].sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);return keys.map(k=>({label:k,ev:ev.filter(e=>(adOf(e).kw||'(no keyword)')===k)}));}

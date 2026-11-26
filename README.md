@@ -84,6 +84,16 @@ The central Delhi page decides from the ad click, in this order:
    ("physiotherapy in delhi", `generic_locations`): the clinic nearest the
    person if Google's `loc` id is in `geo-clinics.json`; otherwise the central page. Google's location of interest (`loci`) is recorded but no longer used for routing (dropped 2026-11-26: 32 routed visits, no leads).
 
+A hand-over carries the ad parameters plus `r` (`geo`, `keyword`, `area`) so
+the clinic page knows how the visitor arrived. When someone on the central page
+picks a clinic themselves (clinic pills, clinic cards), the link carries the
+same parameters with `r=pick`: the clinic page records the arrival as a manual
+choice, the lead source becomes `google-ads-delhi-pick-<clinic>`, and the
+central page records a `clinic_pick` event. The dashboard's "By page" table
+keeps the three apart: direct arrivals, automatic hand-overs (never counted in
+the central page's time) and hand-picked clinics, whose central time and clinic
+page time are added together as one journey.
+
 Clinic pages always show their own clinic. On every page the keyword also
 pre-selects the concern (`conditions`) and the home-visit option
 (`services.home_visit`), and tags the visit with conditions, services and an
@@ -168,7 +178,9 @@ are ignored.
 The dashboard lives at `https://book.cbphysiotherapy.in/dashboard/`. It asks
 for a password, then reads events from the API for a date range and draws
 everything in the browser. The password is checked by the API, not the page,
-so the page itself holds no secret. `?demo=1` shows sample data.
+so the page itself holds no secret. `?demo=1` shows sample data. It opens on
+today's Google traffic (range Today, source google); Yesterday, 7 days and
+28 days are one click away.
 
 ### API contract (Laravel side)
 

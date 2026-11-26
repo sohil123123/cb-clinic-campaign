@@ -17,7 +17,7 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://book.cbphysiotherapy.in'
-ANALYTICS_V = '20261126c'
+ANALYTICS_V = '20261126d'
 CENTRAL_TEL = '+911140846393'
 CENTRAL_DISPLAY = '011 4084 6393'
 PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>'
@@ -277,6 +277,7 @@ def build_central(d):
             'tel': CENTRAL_TEL, 'phone_display': CENTRAL_DISPLAY, 'whatsapp': d['whatsapp'], 'rating': rating, 'count_fmt': fmt_count(total),
             'open_hour': d.get('open_hour', 9), 'close_hour': d.get('close_hour', 20), 'open_label': open_label(d), 'reviews': reviews,
             'clinic_names': {c['id']: c['short'] for c in cs},
+            'slug_ids': {c['slug']: c['id'] for c in cs},
             'clinics': [{'id': c['id'], 'short': c['short'], 'full': c['full'], 'where': c['where'], 'latlng': c['latlng'], 'maps': maps_url(c)} for c in cs]}
     org = {'@type': 'MedicalOrganization', '@id': page + '#org', 'name': 'CB Physiotherapy Delhi', 'url': page, 'logo': SITE + '/physiotherapy-near-me-delhi/assets/cb-logo-480.webp',
            'telephone': CENTRAL_TEL, 'medicalSpecialty': 'Physiotherapy', 'areaServed': {'@type': 'City', 'name': 'New Delhi'},

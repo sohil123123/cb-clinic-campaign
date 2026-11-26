@@ -61,6 +61,7 @@
   if(a.matches('a[href*="wa.me"]'))return track('whatsapp_send',{intent:a.dataset.intent||'direct',clinic:document.body.dataset.area||''});
   if(a.matches('[data-reviews]'))return track('reviews_opened',{});
   if(a.id==='open-reviews')return track('reviews_opened',{});
+  if(a.matches('a[data-goto]'))return track('clinic_pick',{clinic:a.dataset.goto,placement:a.closest('.clinic-pills')?'pills':a.closest('.cc')?'card':a.closest('.route-note')?'route_note':'link'});
   if(a.matches('#location-links a'))return track('clinic_pill_click',{clinic:a.dataset.showClinic||''});
   if(a.matches('#map-legend button'))return track('map_pin_click',{clinic:a.dataset.showClinic||''});
   if(a.id==='show-all-clinics'||a.id==='show-other-clinics')return track('other_clinics_opened',{});
