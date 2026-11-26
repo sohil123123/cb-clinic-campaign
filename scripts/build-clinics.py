@@ -262,9 +262,9 @@ def build_central(d):
     legend = ''.join(f'<button type="button" data-id="{c["id"]}" aria-pressed="false"><b>{i+1}</b>{e(c["short"])}</button>' for i, c in enumerate(cs))
     ccards = ''.join(
         f'<article class="cc" data-id="{c["id"]}" id="clinic-{c["id"]}"><img src="{e(c["hero"]["src"] if c["hero"].get("srcset") else "/physiotherapy-near-me-delhi/assets/clinics/" + c["id"] + ".webp")}" alt="Inside {e(c["full"])}" width="600" height="375" loading="lazy" decoding="async">'
-        f'<div class="body"><h3>{i+1}. {e(c["short"])}<small>★ {c["rating"]} · {fmt_count(c["count"])}</small></h3><p class="w">{e(c["where"])}. {e(c["nearby"])}.<br>Open {hours_label(d)}, every day.</p>'
-        f'<div class="acts"><a class="call" href="tel:{c["tel"]}" data-call="{c["id"]}">{PHONE}Call</a><button class="bk" type="button" data-book data-clinic="{c["id"]}" data-place="clinic_card">Book here</button>'
-        f'<a href="{maps_url(c)}" target="_blank" rel="noopener" data-map="{c["id"]}">{PIN}Directions</a><a href="/physiotherapy-near-me-{c["slug"]}/">Clinic page</a></div></div></article>'
+        f'<div class="body"><h3>{i+1}. {e(c["short"])}<small>★ {c["rating"]} · {fmt_count(c["count"])}</small></h3>'
+        f'<a class="w addr-link" href="{maps_url(c)}" target="_blank" rel="noopener" data-map="{c["id"]}">{PIN}<span>{e(c["where"])}. {e(c["nearby"])}.</span></a><p class="w">Open {hours_label(d)}, every day. <a href="/physiotherapy-near-me-{c["slug"]}/">Clinic page</a></p>'
+        f'<div class="acts one"><a class="call" href="tel:{c["tel"]}" data-call="{c["id"]}">{PHONE}Call to Book Now</a></div></div></article>'
         for i, c in enumerate(cs))
     here_section = (f'<h2>Five clinics across Delhi</h2><p>All open {hours_label(d)}, every day, with the same fees, the same assessment and the same central monitoring. Not sure which is closest? Call <a href="tel:{CENTRAL_TEL}">{CENTRAL_DISPLAY}</a> and we will tell you.</p>'
                     f'<div class="cmap" id="clinic-map"><div class="ph">Map loads as you scroll</div></div><div class="legend" aria-label="Clinics on the map">{legend}</div>'
