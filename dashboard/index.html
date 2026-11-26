@@ -474,7 +474,7 @@ function renderPages(ev){
    const picked=ev.filter(e=>!isC(e.page)&&arr(e).kind==='pick');const pickSess=new Set(picked.map(e=>e.session));
    const stayed=pe.filter(e=>!pickSess.has(e.session));const central=pe.filter(e=>pickSess.has(e.session)).concat(picked);
    top=row(pageName(pg),pe,'',journey(pe.concat(picked)));
-   subs.push(row('Stayed on the central page',stayed,'sub'));
+   subs.push(row('Stayed on the central page',stayed,'sub',journey(stayed)));
    if(central.length){subs.push(row('Chose a clinic by hand (central + clinic page time)',central,'sub strong',journey(central)));[...new Set(picked.map(e=>e.page))].forEach(cp=>{const ce=picked.filter(e=>e.page===cp);const ss=new Set(ce.map(e=>e.session));subs.push(row('→ '+pageName(cp),ce,'sub2',journey(pe.filter(e=>ss.has(e.session)).concat(ce))));});}
    const handed=ev.filter(e=>!isC(e.page)&&arr(e).kind==='via');if(handed.length){subs.push(row('Handed over automatically (not counted above)',handed,'sub strong'));[...new Set(handed.map(e=>e.page))].forEach(cp=>subs.push(row('→ '+pageName(cp),handed.filter(e=>e.page===cp),'sub2')));}
   }else{
