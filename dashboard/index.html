@@ -109,6 +109,9 @@ table.visits .caret{color:var(--ink-3);width:20px}
 table.visits tr.visit>td:nth-child(2),table.visits tr.visit>td:nth-child(9){white-space:nowrap}
 table.visits tr.visit-detail>td{background:var(--bg);padding:10px 12px 14px}
 table.inner{font-size:12px}table.inner th,table.inner td{padding:5px 8px}
+table.pages tr.pg{cursor:pointer}table.pages tr.pg:hover td{background:var(--brand-soft)}
+table.pages tr.pg-sub td{color:var(--ink-2);font-size:13px;background:var(--bg)}table.pages tr.pg-sub td:nth-child(2){padding-left:22px}
+table.pages tr.pg-sub.strong td{color:var(--ink);font-weight:500}table.pages tr.sub2 td:nth-child(2){padding-left:38px}
 .demo-note{background:var(--brand-soft);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;margin:0 0 14px}
 .kv{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
 .kv span{color:var(--ink-2)}
@@ -179,7 +182,7 @@ table.inner{font-size:12px}table.inner th,table.inner td{padding:5px 8px}
     <div class="card span-4"><h2>From visit to booking</h2><p class="sub">Share of visits reaching each step</p><div id="c-funnel"></div></div>
     <div class="card span-8"><h2>Leads per day</h2><p class="sub">Bookings, calls and WhatsApp messages</p><div class="legend" id="l-leads"></div><div class="chart" id="c-leads"></div><details class="tv"><summary>Table</summary><div class="table-wrap" id="t-leads"></div></details></div>
     <div class="card span-4"><h2>Devices</h2><p class="sub">Visits and lead rate</p><div id="c-device"></div></div>
-    <div class="card span-12"><h2>By page</h2><p class="sub">Compare the Delhi page with each clinic page</p><div class="table-wrap" id="t-pages"></div></div>
+    <div class="card span-12"><h2>By page</h2><p class="sub">Click a page to split it: direct arrivals against visits handed over from the central page, and the central page's hand-overs by clinic.</p><div class="table-wrap" id="t-pages"></div></div>
     <div class="card span-6"><h2>By campaign</h2><p class="sub">UTM source, medium and campaign from the ad URL</p><div class="table-wrap" id="t-sources"></div></div>
     <div class="card span-6"><h2>By keyword</h2><p class="sub">Search keyword and match type from Google Ads (needs the tracking template)</p><div class="table-wrap" id="t-keywords"></div></div>
     <div class="card span-6"><h2>Google location IDs</h2><p class="sub">Where Google placed the searcher, by its location ID. Use this to map IDs to clinics.</p><div class="table-wrap" id="t-locs"></div></div>
@@ -200,6 +203,7 @@ table.inner{font-size:12px}table.inner th,table.inner td{padding:5px 8px}
      <button type="button" data-dim="page" aria-pressed="true">Pages</button>
      <button type="button" data-dim="device" aria-pressed="false">Devices</button>
      <button type="button" data-dim="layout" aria-pressed="false">Layouts</button>
+     <button type="button" data-dim="arrival" aria-pressed="false">Direct vs via central</button>
      <button type="button" data-dim="source" aria-pressed="false">Sources</button>
      <button type="button" data-dim="campaign" aria-pressed="false">Campaigns</button>
      <button type="button" data-dim="keyword" aria-pressed="false">Keywords</button>
@@ -342,8 +346,10 @@ async function load(){
  }catch(err){$('#gate-error').textContent='Could not load data: '+err.message;$('#status').textContent='Load failed';return false;}
 }
 let sessionAd=new Map();
-let sessionLayout=new Map();
-function indexAds(){sessionAd=new Map();sessionLayout=new Map();state.events.forEach(e=>{if(e.event!=='page_view'||!e.props)return;if(e.props.ad&&Object.keys(e.props.ad).length)sessionAd.set(e.session,e.props.ad);sessionLayout.set(e.session,e.props.layout||'hero1');});}
+let sessionLayout=new Map(),sessionArrival=new Map();
+const ROUTED=['geo','interest','keyword','area'];
+function arrivalOf(v){const r=(v.props&&v.props.route)||{};const dec=r.decision||'';if(ROUTED.includes(dec))return {kind:'via',how:dec,clinic:r.clinic||(v.page.includes('delhi')?'':v.area)};if(v.page.includes('near-me-delhi'))return {kind:'central',how:dec||'none',clinic:''};return {kind:'direct',how:'page',clinic:v.area};}
+function indexAds(){sessionAd=new Map();sessionLayout=new Map();state.events.forEach(e=>{if(e.event!=='page_view'||!e.props)return;if(e.props.ad&&Object.keys(e.props.ad).length)sessionAd.set(e.session,e.props.ad);sessionLayout.set(e.session,e.props.layout||'hero1');if(!sessionArrival.has(e.session))sessionArrival.set(e.session,arrivalOf(e));});}
 const LAYOUT={hero1:'Landing screen v1 (concern buttons first)',hero2:'Landing screen v2 (place, price, call, expertise)','clinic-v3':'Clinic page v3 (photo first, care areas, team)'};const layoutOf=e=>sessionLayout.get(e.session)||'hero1';
 const adOf=e=>sessionAd.get(e.session)||{};
 function normalise(rows){return rows.map(r=>{let props=r.props||{};if(typeof props==='string'){try{props=JSON.parse(props);}catch(_){props={};}}return {ts:new Date(r.ts||r.created_at),event:r.event,page:r.page||'',area:r.area||'',device:r.device||'',gclid:+(r.gclid||0),visitor:r.visitor||r.visitor_id||'',session:r.session||r.session_id||'',utm_source:r.utm_source||'',utm_medium:r.utm_medium||'',utm_campaign:r.utm_campaign||'',referrer:r.referrer||'',props};}).filter(e=>!isNaN(e.ts));}
@@ -421,8 +427,7 @@ function renderOverview(ev){
  table('#t-leads',['Day','Bookings','Calls','WhatsApp'],days.map((d,i)=>[d,series[0].values[i],series[1].values[i],series[2].values[i]]));
  funnel('#c-funnel',[['Visited',a.n],['Chose a concern',a.concernSess],['Opened booking',a.opened],['Sent a booking',a.sent]]);
  $('#c-device').innerHTML=['mobile','desktop'].map(d=>{const s=metrics(ev.filter(e=>e.device===d));return `<div class="kv"><div><div style="font-weight:600;text-transform:capitalize;color:var(--ink)">${d}</div><div class="status">${pct(s.n,a.n)} of visits</div></div><div style="text-align:right"><div class="mono" style="font-size:22px;font-weight:600;color:var(--ink)">${fmt(s.n)}</div><div class="status">lead rate ${pct(s.leadSessions,s.n)}</div></div></div>`;}).join('');
- const pages=[...new Set(ev.map(e=>e.page))].filter(Boolean).map(pg=>{const s=metrics(ev.filter(e=>e.page===pg));return [pageName(pg),s.n,s.bookings,s.calls,s.wa,pct(s.leadSessions,s.n),s.medianSeconds?s.medianSeconds+' s':'–'];}).sort((x,y)=>y[1]-x[1]);
- table('#t-pages',['Page','Visits','Bookings','Calls','WhatsApp','Lead rate','Median time'],pages,{bar:1});
+ renderPages(ev);
  const srcKey=e=>[(e.utm_source||'direct'),e.utm_medium||'',e.utm_campaign||''].join(' / ').replace(/( \/ )+$/,'');
  const srcs=[...new Set(ev.map(srcKey))].map(k=>{const s=metrics(ev.filter(e=>srcKey(e)===k));return [k,s.n,s.bookings+s.calls+s.wa,pct(s.leadSessions,s.n)];}).sort((x,y)=>y[1]-x[1]).slice(0,15);
  table('#t-sources',['Source / medium / campaign','Visits','Leads','Lead rate'],srcs,{bar:1});
@@ -454,6 +459,22 @@ function renderOverview(ev){
   $('#t-recent').querySelectorAll('tr.visit').forEach(tr=>{const open=()=>{const dt=tr.nextElementSibling;dt.hidden=!dt.hidden;tr.setAttribute('aria-expanded',String(!dt.hidden));tr.querySelector('.caret').textContent=dt.hidden?'▸':'▾';};tr.addEventListener('click',open);tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});});
  }
 }
+const HOW={geo:'Nearest clinic from location',interest:'Google location of interest',keyword:'Keyword named the area',area:'Area link'};
+function renderPages(ev){
+ const arr=s=>sessionArrival.get(s)||{kind:'direct',how:'page',clinic:''};
+ const row=(label,sub,cls)=>{const s=metrics(sub);return {label,n:s.n,cells:[s.n,s.bookings,s.calls,s.wa,pct(s.leadSessions,s.n),s.medianSeconds?s.medianSeconds+' s':'–'],cls:cls||''};};
+ const pages=[...new Set(ev.map(e=>e.page))].filter(Boolean);const groups=[];
+ pages.forEach(pg=>{const pe=ev.filter(e=>e.page===pg);const isCentral=pg.includes('near-me-delhi');const top=row(pageName(pg),pe);const subs=[];
+  if(isCentral){const stayed=pe.filter(e=>arr(e.session).kind==='central');const shownAs=pe.filter(e=>arr(e.session).kind==='via');subs.push(row('Stayed on the central page',stayed,'sub'));if(shownAs.length)subs.push(row('Shown as a clinic inside the central page (older layout)',shownAs,'sub'));
+   const handed=ev.filter(e=>!e.page.includes('near-me-delhi')&&arr(e.session).kind==='via');if(handed.length){subs.push(row('Handed over to a clinic page',handed,'sub strong'));[...new Set(handed.map(e=>e.page))].forEach(cp=>subs.push(row('→ '+pageName(cp),handed.filter(e=>e.page===cp),'sub2')));}}
+  else{const direct=pe.filter(e=>arr(e.session).kind==='direct');const via=pe.filter(e=>arr(e.session).kind==='via');subs.push(row('Direct: clinic ad or link',direct,'sub'));if(via.length){subs.push(row('Via the central page',via,'sub strong'));[...new Set(via.map(e=>arr(e.session).how))].forEach(h=>subs.push(row('→ '+(HOW[h]||h),via.filter(e=>arr(e.session).how===h),'sub2')));}}
+  groups.push({top,subs});});
+ groups.sort((a,b)=>b.top.n-a.top.n);const max=Math.max(1,...groups.map(g=>g.top.n));
+ const bar=n=>`<span style="display:inline-block;width:70px;height:6px;vertical-align:middle;margin-left:8px;background:var(--brand-soft);border-radius:3px;overflow:hidden"><span style="display:block;height:100%;width:${n/max*100}%;background:var(--s1)"></span></span>`;
+ const cells=(r,withBar)=>r.cells.map((c,i)=>`<td class="num">${typeof c==='number'?fmt(c):c}${withBar&&i===0?bar(c):''}</td>`).join('');
+ $('#t-pages').innerHTML=groups.length?`<table class="pages"><thead><tr><th style="width:20px"></th><th>Page</th><th class="num">Visits</th><th class="num">Bookings</th><th class="num">Calls</th><th class="num">WhatsApp</th><th class="num">Lead rate</th><th class="num">Median time</th></tr></thead><tbody>${groups.map((g,i)=>`<tr class="pg" data-i="${i}" tabindex="0" role="button" aria-expanded="false"><td class="caret">▸</td><td>${esc(g.top.label)}</td>${cells(g.top,true)}</tr>${g.subs.map(s=>`<tr class="pg-sub ${s.cls}" hidden><td></td><td>${esc(s.label)}</td>${cells(s,false)}</tr>`).join('')}`).join('')}</tbody></table>`:'<p class="empty">No visits in this range.</p>';
+ $('#t-pages').querySelectorAll('tr.pg').forEach(tr=>{const open=()=>{let n=tr.nextElementSibling;const show=tr.getAttribute('aria-expanded')!=='true';while(n&&n.classList.contains('pg-sub')){n.hidden=!show;n=n.nextElementSibling;}tr.setAttribute('aria-expanded',String(show));tr.querySelector('.caret').textContent=show?'▾':'▸';};tr.addEventListener('click',open);tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});});
+}
 function describe(e){const p=e.props||{};const parts=[];if(p.concern)parts.push(CONCERNS[p.concern]||p.concern);if(p.clinic)parts.push('clinic: '+p.clinic);if(p.clinic_id)parts.push('clinic: '+p.clinic_id);if(p.placement)parts.push('from '+placeName(p.placement).toLowerCase());if(p.intent)parts.push('topic: '+(INTENT[p.intent]||p.intent));if(p.number)parts.push(p.number);if(p.seconds!=null)parts.push(p.seconds+' s, '+(p.max_scroll||0)+'% scrolled');if(p.reason)parts.push('reason: '+(FAIL[p.reason]||p.reason));if(p.question)parts.push('"'+p.question+'"');if(e.utm_campaign)parts.push(e.utm_source+' / '+e.utm_campaign);return esc(parts.join(' · '));}
 
 // ---------- compare ----------
@@ -461,6 +482,7 @@ function groups(ev){
  const dim=state.dim;
  if(dim==='period'){const prev=previousPeriodEvents();return [{label:`This period (${state.from} to ${state.to})`,ev},{label:`Previous ${prev.span} days`,ev:prev.events}];}
  if(dim==='device')return ['mobile','desktop'].map(d=>({label:d[0].toUpperCase()+d.slice(1),ev:ev.filter(e=>e.device===d)}));
+ if(dim==='arrival'){const A={direct:'Direct to a clinic page',via:'Via the central page (handed over)',central:'Stayed on the central page'};return ['direct','via','central'].map(k=>({label:A[k],ev:ev.filter(e=>(sessionArrival.get(e.session)||{kind:'direct'}).kind===k)})).filter(g=>g.ev.length);}
  if(dim==='layout'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>layoutOf(e)).entries()].sort((a,b)=>b[1]-a[1]).map(x=>x[0]);return keys.map(k=>({label:LAYOUT[k]||k,ev:ev.filter(e=>layoutOf(e)===k)}));}
  if(dim==='source'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>e.utm_source||'direct').entries()].sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);return keys.map(k=>({label:k,ev:ev.filter(e=>(e.utm_source||'direct')===k)}));}
  if(dim==='keyword'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>adOf(e).kw||'(no keyword)').entries()].sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);return keys.map(k=>({label:k,ev:ev.filter(e=>(adOf(e).kw||'(no keyword)')===k)}));}
