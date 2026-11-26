@@ -90,9 +90,10 @@ picks a clinic themselves (clinic pills, clinic cards), the link carries the
 same parameters with `r=pick`: the clinic page records the arrival as a manual
 choice, the lead source becomes `google-ads-delhi-pick-<clinic>`, and the
 central page records a `clinic_pick` event. The dashboard's "By page" table
-keeps the three apart: direct arrivals, automatic hand-overs (never counted in
-the central page's time) and hand-picked clinics, whose central time and clinic
-page time are added together as one journey.
+credits each visit once, to the page that did the work: direct arrivals and
+automatic hand-overs count for the clinic page; a clinic chosen by hand counts
+for the central page as one journey (central time plus clinic page time, with
+any booking or call made on the clinic page).
 
 Clinic pages always show their own clinic. On every page the keyword also
 pre-selects the concern (`conditions`) and the home-visit option

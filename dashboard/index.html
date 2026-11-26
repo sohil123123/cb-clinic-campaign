@@ -131,6 +131,7 @@ table.pages tr.pg-sub.strong td{color:var(--ink);font-weight:500}table.pages tr.
 .cmp-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
 .cmp-best{background:var(--brand-soft);border-radius:4px;padding:0 4px}
 .sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:8px;vertical-align:-1px}
+tr.pg-sub.note td{color:var(--muted,#6b7280);font-style:italic}
 </style>
 </head>
 <body>
@@ -183,7 +184,7 @@ table.pages tr.pg-sub.strong td{color:var(--ink);font-weight:500}table.pages tr.
     <div class="card span-4"><h2>From visit to booking</h2><p class="sub">Share of visits reaching each step</p><div id="c-funnel"></div></div>
     <div class="card span-8"><h2>Leads per day</h2><p class="sub">Bookings, calls and WhatsApp messages</p><div class="legend" id="l-leads"></div><div class="chart" id="c-leads"></div><details class="tv"><summary>Table</summary><div class="table-wrap" id="t-leads"></div></details></div>
     <div class="card span-4"><h2>Devices</h2><p class="sub">Visits and lead rate</p><div id="c-device"></div></div>
-    <div class="card span-12"><h2>By page</h2><p class="sub">Click a page to split it. Clinic pages: direct arrivals, automatic hand-overs and people who chose the clinic by hand on the central page. Central page: its median time counts a hand-picked clinic visit as part of the same journey, and automatic hand-overs are listed but never counted in its time.</p><div class="table-wrap" id="t-pages"></div></div>
+    <div class="card span-12"><h2>By page</h2><p class="sub">Click a page to split it. Clinic pages: direct arrivals, automatic hand-overs and people who chose the clinic by hand on the central page. Credit goes to the page that did the work: an automatic hand-over counts for the clinic page, a clinic chosen by hand counts for the central page as one journey (central time + clinic page time, with any booking or call made there). Each visit is counted once; information rows marked as such repeat numbers credited elsewhere.</p><div class="table-wrap" id="t-pages"></div></div>
     <div class="card span-6"><h2>By campaign</h2><p class="sub">UTM source, medium and campaign from the ad URL</p><div class="table-wrap" id="t-sources"></div></div>
     <div class="card span-6"><h2>By keyword</h2><p class="sub">Search keyword and match type from Google Ads (needs the tracking template)</p><div class="table-wrap" id="t-keywords"></div></div>
     <div class="card span-6"><h2>Google location IDs</h2><p class="sub">Where Google placed the searcher, by its location ID. Use this to map IDs to clinics.</p><div class="table-wrap" id="t-locs"></div></div>
@@ -473,16 +474,16 @@ function renderPages(ev){
    // Sessions that chose a clinic by hand: their central time and the clinic page time count as one journey.
    const picked=ev.filter(e=>!isC(e.page)&&arr(e).kind==='pick');const pickSess=new Set(picked.map(e=>e.session));
    const stayed=pe.filter(e=>!pickSess.has(e.session));const central=pe.filter(e=>pickSess.has(e.session)).concat(picked);
-   top=row(pageName(pg),pe,'',journey(pe.concat(picked)));
+   const credited=pe.concat(picked);top=row(pageName(pg),credited,'',journey(credited));
    subs.push(row('Stayed on the central page',stayed,'sub',journey(stayed)));
-   if(central.length){subs.push(row('Chose a clinic by hand (central + clinic page time)',central,'sub strong',journey(central)));[...new Set(picked.map(e=>e.page))].forEach(cp=>{const ce=picked.filter(e=>e.page===cp);const ss=new Set(ce.map(e=>e.session));subs.push(row('→ '+pageName(cp),ce,'sub2',journey(pe.filter(e=>ss.has(e.session)).concat(ce))));});}
-   const handed=ev.filter(e=>!isC(e.page)&&arr(e).kind==='via');if(handed.length){subs.push(row('Handed over automatically (not counted above)',handed,'sub strong'));[...new Set(handed.map(e=>e.page))].forEach(cp=>subs.push(row('→ '+pageName(cp),handed.filter(e=>e.page===cp),'sub2')));}
+   if(central.length){subs.push(row('Chose a clinic by hand (journey: central + clinic page, leads included)',central,'sub strong',journey(central)));[...new Set(picked.map(e=>e.page))].forEach(cp=>{const ce=picked.filter(e=>e.page===cp);const ss=new Set(ce.map(e=>e.session));subs.push(row('→ '+pageName(cp),ce,'sub2',journey(pe.filter(e=>ss.has(e.session)).concat(ce))));});}
+   const handed=ev.filter(e=>!isC(e.page)&&arr(e).kind==='via');if(handed.length){subs.push(row('Handed over automatically (counted under the clinic page)',handed,'sub note'));[...new Set(handed.map(e=>e.page))].forEach(cp=>subs.push(row('→ '+pageName(cp),handed.filter(e=>e.page===cp),'sub2')));}
   }else{
-   top=row(pageName(pg),pe);
    const direct=pe.filter(e=>arr(e).kind==='direct'),via=pe.filter(e=>arr(e).kind==='via'),pick=pe.filter(e=>arr(e).kind==='pick');
+   top=row(pageName(pg),direct.concat(via));
    subs.push(row('Direct: clinic ad or link',direct,'sub'));
    if(via.length){subs.push(row('Handed over automatically from the central page',via,'sub strong'));[...new Set(via.map(e=>arr(e).how))].forEach(h=>subs.push(row('→ '+(HOW[h]||h),via.filter(e=>arr(e).how===h),'sub2')));}
-   if(pick.length)subs.push(row('Chosen by hand on the central page',pick,'sub strong'));
+   if(pick.length)subs.push(row('Chosen by hand on the central page (counted under Delhi (central), not above)',pick,'sub note'));
   }
   groups.push({top,subs});});
  groups.sort((a,b)=>b.top.n-a.top.n);const max=Math.max(1,...groups.map(g=>g.top.n));
@@ -498,7 +499,7 @@ function groups(ev){
  const dim=state.dim;
  if(dim==='period'){const prev=previousPeriodEvents();return [{label:`This period (${state.from} to ${state.to})`,ev},{label:`Previous ${prev.span} days`,ev:prev.events}];}
  if(dim==='device')return ['mobile','desktop'].map(d=>({label:d[0].toUpperCase()+d.slice(1),ev:ev.filter(e=>e.device===d)}));
- if(dim==='arrival'){const A={direct:'Direct to a clinic page',via:'Handed over automatically from the central page',pick:'Chose a clinic by hand on the central page',central:'Stayed on the central page'};return ['direct','via','pick','central'].map(k=>({label:A[k],ev:ev.filter(e=>varr(e).kind===k)})).filter(g=>g.ev.length);}
+ if(dim==='arrival'){const A={direct:'Direct to a clinic page',via:'Handed over automatically from the central page',pick:'Central page, then chose a clinic by hand (whole journey)',central:'Stayed on the central page'};const pickS=new Set(ev.filter(e=>varr(e).kind==='pick').map(e=>e.session));const kindOf=e=>{const k=varr(e).kind;if(k==='central'&&pickS.has(e.session))return 'pick';return k;};return ['direct','via','pick','central'].map(k=>({label:A[k],ev:ev.filter(e=>kindOf(e)===k)})).filter(g=>g.ev.length);}
  if(dim==='layout'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>layoutOf(e)).entries()].sort((a,b)=>b[1]-a[1]).map(x=>x[0]);return keys.map(k=>({label:LAYOUT[k]||k,ev:ev.filter(e=>layoutOf(e)===k)}));}
  if(dim==='source'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>e.utm_source||'direct').entries()].sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);return keys.map(k=>({label:k,ev:ev.filter(e=>(e.utm_source||'direct')===k)}));}
  if(dim==='keyword'){const keys=[...by(ev.filter(e=>e.event==='page_view'),e=>adOf(e).kw||'(no keyword)').entries()].sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);return keys.map(k=>({label:k,ev:ev.filter(e=>(adOf(e).kw||'(no keyword)')===k)}));}
