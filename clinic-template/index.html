@@ -219,12 +219,9 @@ footer b{color:var(--ink-2);font-weight:600}
 footer a{color:var(--ink-2)}
 
 /* central page: clinic strip, map and carousel */
-.clinic-pills{display:flex;flex-wrap:nowrap;gap:6px;margin:10px calc(-1*var(--gutter)) 0;padding:0 var(--gutter);list-style:none;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.clinic-pills::-webkit-scrollbar{display:none}
-.clinic-pills li{flex:none}
-@media(min-width:721px){.clinic-pills{margin-left:0;margin-right:0;padding-left:0;padding-right:0;flex-wrap:wrap}}
-.clinic-pills li a{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:500;color:var(--green);background:var(--mint);border:1px solid var(--mint-2);border-radius:999px;padding:7px 12px;text-decoration:none}
-.clinic-pills li a::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
+.clinic-pills{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0;padding:0;list-style:none}
+.clinic-pills li a{display:inline-block;font-size:13px;font-weight:500;color:var(--green);background:var(--mint);border:1px solid var(--mint-2);border-radius:999px;padding:6px 10px;text-decoration:none;white-space:nowrap}
+
 .strip{background:var(--mint);border-bottom:1px solid var(--line);overflow:hidden}
 .strip .wrap{display:flex;align-items:center;gap:12px;min-height:46px}
 .strip b{font-size:13px;white-space:nowrap;font-weight:600}
