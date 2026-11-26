@@ -237,6 +237,9 @@ footer b{color:var(--ink-2);font-weight:600}
 footer a{color:var(--ink-2)}
 
 /* central page: clinic strip, map and carousel */
+.clinic-pills{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0;padding:0;list-style:none}
+.clinic-pills li a{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:500;color:var(--green);background:var(--mint);border:1px solid var(--mint-2);border-radius:999px;padding:7px 12px;text-decoration:none}
+.clinic-pills li a::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
 .strip{background:var(--mint);border-bottom:1px solid var(--line);overflow:hidden}
 .strip .wrap{display:flex;align-items:center;gap:12px;min-height:46px}
 .strip b{font-size:13px;white-space:nowrap;font-weight:600}
@@ -311,25 +314,25 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
 
 <header class="top">
  <div class="wrap">
-  <a class="brand" href="#top" aria-label="CB Physiotherapy, Delhi"><img src="/physiotherapy-near-me-delhi/assets/cb-logo-240.webp" alt="CB Physiotherapy" width="240" height="91"></a>
+  <a class="brand" href="#top" aria-label="CB Physiotherapy Clinics, Delhi"><img src="/physiotherapy-near-me-delhi/assets/cb-logo-240.webp" alt="CB Physiotherapy" width="240" height="91"></a>
   <span class="open" id="open-state"><i aria-hidden="true"></i>Open till 8pm</span>
   <button class="btn" type="button" data-book data-place="header">Book Now</button>
  </div>
 </header>
-<div class="strip" aria-label="Find a clinic near you"><div class="wrap"><b>Find a clinic near you</b><div class="track"><ul><li><a href="/physiotherapy-near-me-saket/">Saket</a></li><li><a href="/physiotherapy-near-me-greater-kailash/">Greater Kailash</a></li><li><a href="/physiotherapy-near-me-safdarjung-enclave/">Safdarjung Enclave</a></li><li><a href="/physiotherapy-near-me-vasant-kunj/">Vasant Kunj</a></li><li><a href="/physiotherapy-near-me-dwarka/">Dwarka</a></li><li><a href="/physiotherapy-near-me-saket/">Saket</a></li><li><a href="/physiotherapy-near-me-greater-kailash/">Greater Kailash</a></li><li><a href="/physiotherapy-near-me-safdarjung-enclave/">Safdarjung Enclave</a></li><li><a href="/physiotherapy-near-me-vasant-kunj/">Vasant Kunj</a></li><li><a href="/physiotherapy-near-me-dwarka/">Dwarka</a></li></ul></div></div></div>
+
 <main id="top">
  <figure class="cover ">
-  <img src="/physiotherapy-near-me-delhi/assets/reception-800.webp" srcset="/physiotherapy-near-me-delhi/assets/reception-560.webp 560w, /physiotherapy-near-me-delhi/assets/reception-800.webp 800w, /physiotherapy-near-me-delhi/assets/reception-1200.webp 1200w" sizes="(max-width:720px) 100vw, 680px" width="1200" height="675" alt="Inside CB Physiotherapy, Delhi" fetchpriority="high" decoding="async">
+  <img src="/physiotherapy-near-me-delhi/assets/reception-800.webp" srcset="/physiotherapy-near-me-delhi/assets/reception-560.webp 560w, /physiotherapy-near-me-delhi/assets/reception-800.webp 800w, /physiotherapy-near-me-delhi/assets/reception-1200.webp 1200w" sizes="(max-width:720px) 100vw, 680px" width="1200" height="675" alt="Inside CB Physiotherapy Clinics, Delhi" fetchpriority="high" decoding="async">
   <div class="fees-line"><span>Sessions <b>₹999 to ₹1,499</b></span></div>
   <figcaption>
-   <span class="title">CB Physiotherapy, Delhi</span>
+   <span class="title">CB Physiotherapy Clinics, Delhi</span>
    <span class="tagline">Recovery with <em>Precision</em></span>
   </figcaption>
  </figure>
 
  <section class="intro wrap">
   <h1>Advanced Physio Care near you</h1>
-  <p class="where"><a href="#clinics"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg><b>5 clinics in South &amp; West Delhi</b><span>Nearest</span></a></p>
+  <ul class="clinic-pills" aria-label="Our clinics"><li><a href="/physiotherapy-near-me-saket/">Saket</a></li><li><a href="/physiotherapy-near-me-greater-kailash/">Greater Kailash</a></li><li><a href="/physiotherapy-near-me-safdarjung-enclave/">Safdarjung Enclave</a></li><li><a href="/physiotherapy-near-me-vasant-kunj/">Vasant Kunj</a></li><li><a href="/physiotherapy-near-me-dwarka/">Dwarka</a></li></ul>
   <p class="rating"><svg class="gmark" viewBox="0 0 48 48" aria-label="Google"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6C44.4 38.02 46.98 31.86 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.87 23.87 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="stars" aria-hidden="true">★★★★★</span><span><b>4.9</b> from <a href="#clinics" data-reviews>2,956 reviews</a>, 5 clinics</span></p>
   <div class="cta" id="hero-cta">
    <a class="btn call" href="tel:+911140846393" data-call="delhi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg>Call to Book Now</a>
@@ -379,7 +382,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
  </section>
 
  <section class="block wrap" id="reviews">
-  <h2 id="rv-title">What patients say about CB Physiotherapy, Delhi</h2>
+  <h2 id="rv-title">What patients say about CB Physiotherapy Clinics, Delhi</h2>
   <p>From patient reviews published for each clinic. Ratings and all reviews are on each clinic's Google profile below.</p>
   <div class="reviews" id="rv-list"></div>
  </section>

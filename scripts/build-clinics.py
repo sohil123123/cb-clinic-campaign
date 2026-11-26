@@ -269,8 +269,7 @@ def build_central(d):
     here_section = (f'<h2>Five clinics across Delhi</h2><p>All open {hours_label(d)}, every day, with the same fees, the same assessment and the same central monitoring. Not sure which is closest? Call <a href="tel:{CENTRAL_TEL}">{CENTRAL_DISPLAY}</a> and we will tell you.</p>'
                     f'<div class="cmap" id="clinic-map"><div class="ph">Map loads as you scroll</div></div><div class="legend" aria-label="Clinics on the map">{legend}</div>'
                     f'<div class="ccar" aria-label="Our clinics">{ccards}</div>')
-    strip = ('<div class="strip" aria-label="Find a clinic near you"><div class="wrap"><b>Find a clinic near you</b><div class="track"><ul>' +
-             ''.join(f'<li><a href="/physiotherapy-near-me-{c["slug"]}/">{e(c["short"])}</a></li>' for c in cs) * 2 + '</ul></div></div></div>')
+    pills = '<ul class="clinic-pills" aria-label="Our clinics">' + ''.join(f'<li><a href="/physiotherapy-near-me-{c["slug"]}/">{e(c["short"])}</a></li>' for c in cs) + '</ul>'
     clinic_field = ('<div class="field"><label>Which clinic?</label><div class="pick clinics" role="group" aria-label="Clinic">' +
                     ''.join(f'<button type="button" data-clinic="{c["id"]}" aria-pressed="false">{e(c["short"])}</button>' for c in cs) +
                     '<button type="button" data-clinic="help" aria-pressed="false">Nearest to me</button></div></div>\n  ')
@@ -287,10 +286,10 @@ def build_central(d):
     data['cond'] = {'rules': ROUTING['conditions'], 'priority': ROUTING.get('condition_priority', ['rehab', 'spine', 'joint', 'other'])}
     repl = common(d, hero, data, round(lat, 5), round(lng, 5))
     repl.update({
-        'HEAD_SCRIPT': routing_script(d), 'TOP_STRIP': strip, 'ROBOTS': 'noindex, follow', 'PLACENAME': 'New Delhi', 'AREA_META': 'delhi',
+        'HEAD_SCRIPT': routing_script(d), 'TOP_STRIP': '', 'ROBOTS': 'noindex, follow', 'PLACENAME': 'New Delhi', 'AREA_META': 'delhi',
         'TITLE': 'Best Physiotherapy Near You in Delhi | CB Physiotherapy', 'DESCRIPTION': 'Physiotherapy in Delhi for back, neck, knee and shoulder pain, injuries and post-surgery rehab at five CB Physiotherapy clinics: Saket, Greater Kailash, Safdarjung Enclave, Vasant Kunj and Dwarka. Same-day appointments, ₹499 first assessment.',
-        'CANONICAL': page, 'OG_IMAGE': SITE + hero['src'], 'FULL': 'CB Physiotherapy, Delhi', 'SHORT': 'Delhi', 'ID': 'delhi', 'TEL': CENTRAL_TEL, 'PHONE_DISPLAY': CENTRAL_DISPLAY,
-        'PLACE_LINE': f'<p class="where"><a href="#clinics">{PIN}<b>5 clinics in South &amp; West Delhi</b><span>Nearest</span></a></p>',
+        'CANONICAL': page, 'OG_IMAGE': SITE + hero['src'], 'FULL': 'CB Physiotherapy Clinics, Delhi', 'SHORT': 'Delhi', 'ID': 'delhi', 'TEL': CENTRAL_TEL, 'PHONE_DISPLAY': CENTRAL_DISPLAY,
+        'PLACE_LINE': pills,
         'RATING': str(rating), 'COUNT_FMT': fmt_count(total), 'RATING_SUFFIX': ', 5 clinics', 'GOOGLE_URL': '#clinics',
         'TEAM_SECTION': team_section, 'REVIEWS_SUB': 'From patient reviews published for each clinic. Ratings and all reviews are on each clinic\'s Google profile below.',
         'HERE_SECTION': here_section, 'OTHERS_BLOCK': '', 'CLINIC_FIELD': clinic_field, 'SOURCE': 'google-ads-delhi-landing',
