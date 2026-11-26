@@ -104,6 +104,19 @@ pre-selects the concern (`conditions`) and the home-visit option
 4. Commit and push `routing.json` / `geo-clinics.json`. The deploy syncs them
    into the page (`scripts/build-clinics.py`); nothing else changes.
 
+### Care area pre-selected from the keyword
+
+Every page (clinic and central) checks the ad keyword against the `conditions`
+lists in `routing.json`: `spine` (back, neck, disc, sciatica...), `joint`
+(knee, shoulder, arthritis...), `rehab` (surgery, fracture, ACL, sports
+injury...) and `other` (nerve, numbness, posture, balance...). A match opens
+the page with that care area already selected, so "back pain physiotherapy
+near me" lands on the back-or-neck panel and the booking popup is pre-filled.
+When several match, `condition_priority` decides (rehab, then spine, joint,
+other). A neutral keyword shows the standard page. The matched conditions are
+recorded with the visit, so the dashboard's Routing tab can compare lead rates
+by condition. To tag a new symptom word, add it to the right list and push.
+
 ## Clinic landing pages (one per clinic)
 
 The five clinic pages (`physiotherapy-near-me-saket`, `-greater-kailash`,

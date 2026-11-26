@@ -1,6 +1,6 @@
 {
  "_comment": "Routing rules for the central page and the dashboard's search-term analyser. Edit, commit, push: the deploy syncs it into app.js. Words are matched whole, case-insensitive, after punctuation is removed. Longest alias wins. Review weekly against the Routing tab. 'other_delhi' lists Delhi areas with no nearby clinic: they stay on the five-clinic page. Generic Delhi-wide keywords are treated like neutral searches: nearest clinic by loc/loci when mapped, else the central page.",
- "version": "2026-11-25",
+ "version": "2026-11-26",
  "generic_locations": [
   "delhi",
   "new delhi",
@@ -202,7 +202,21 @@
    "spondylosis",
    "spondylolisthesis",
    "scoliosis",
-   "herniated"
+   "herniated",
+   "slipped",
+   "upper back",
+   "mid back",
+   "stiff neck",
+   "neck stiffness",
+   "cervical pain",
+   "spondylo",
+   "l4",
+   "l5",
+   "disk",
+   "back spasm",
+   "back stiffness",
+   "lumbago",
+   "sciatic"
   ],
   "joint": [
    "knee",
@@ -221,7 +235,25 @@
    "plantar",
    "tennis elbow",
    "rheumatoid",
-   "gout"
+   "gout",
+   "knees",
+   "shoulders",
+   "joints",
+   "hips",
+   "frozen",
+   "rotator cuff",
+   "elbow pain",
+   "heel pain",
+   "foot pain",
+   "ankle pain",
+   "hip pain",
+   "shoulder pain",
+   "osteo",
+   "calf pain",
+   "hand pain",
+   "thumb",
+   "finger",
+   "feet"
   ],
   "rehab": [
    "sports",
@@ -243,7 +275,25 @@
    "cpm machine",
    "total knee replacement",
    "tkr",
-   "thr"
+   "thr",
+   "fractures",
+   "injuries",
+   "injured",
+   "ligament tear",
+   "tear",
+   "post op",
+   "postoperative",
+   "replacement",
+   "sport",
+   "athlete",
+   "hamstring",
+   "muscle pull",
+   "strain",
+   "sprain",
+   "ankle sprain",
+   "acl tear",
+   "plaster",
+   "cast"
   ],
   "other": [
    "pelvic",
@@ -288,7 +338,21 @@
    "nerve",
    "neuropathy",
    "facial palsy",
-   "face"
+   "face",
+   "numbness",
+   "tingling",
+   "nerve pain",
+   "pinched nerve",
+   "headache",
+   "migraine",
+   "fibromyalgia",
+   "dizziness",
+   "weakness",
+   "muscle weakness",
+   "bedridden",
+   "bed ridden",
+   "walking difficulty",
+   "difficulty walking"
   ]
  },
  "services": {
@@ -490,5 +554,11 @@
   "gokulpuri",
   "karawal nagar",
   "bhajanpura"
+ ],
+ "condition_priority": [
+  "rehab",
+  "spine",
+  "joint",
+  "other"
  ]
 }

@@ -532,7 +532,13 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
   document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.c===c)));current=c;
   if(fromClick){requestAnimationFrame(()=>{const y=$('#care-heading').getBoundingClientRect().bottom+scrollY-58+2;scrollTo({top:Math.max(0,y),behavior:'smooth'});});}}
  document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{chosen=true;render(b.dataset.c,true);push({event:'concern_selected',concern:b.dataset.concern,placement:'care_tabs'});ga('concern_selected',{concern:b.dataset.concern});}));
- render('all',false);
+ // Pre-select the care area when the ad keyword names a condition (rules from routing.json, embedded at build).
+ const kwText=(Q.get('utm_term')||Q.get('kw')||'');const kwWords=' '+kwText.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()+' ';
+ const hasPh=p=>kwWords.indexOf(' '+p.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()+' ')>=0;
+ const matched=kwText&&!/^\{.*\}$/.test(kwText)?Object.keys(D.cond.rules).filter(c=>D.cond.rules[c].some(hasPh)):[];
+ const pre=D.cond.priority.find(c=>matched.includes(c))||'';const preArea={spine:'spine',joint:'joint',rehab:'rehab',other:'ortho'}[pre]||'';
+ window.cbRoute.conditions=matched;window.cbRoute.preselect=preArea;
+ if(preArea){chosen=true;render(preArea,false);}else render('all',false);
  // booking
  const dlg=$('#book-dialog'),form=$('#form'),errBox=$('#form-error'),submitBtn=$('#submit-btn');
  const pickBtns=[...document.querySelectorAll('.pick:not(.clinics) button')];const clinicBtns=[...document.querySelectorAll('.pick.clinics button')];clinicBtns.forEach(b=>b.addEventListener('click',()=>clinicBtns.forEach(x=>x.setAttribute('aria-pressed',String(x===b)))));

@@ -186,6 +186,7 @@ def build_clinic(d, c):
     ld = {'@context': 'https://schema.org', '@graph': [clinic_ld(d, c), faq_ld(d, c['short'], c['phone_display']),
           {'@type': 'BreadcrumbList', 'itemListElement': [{'@type': 'ListItem', 'position': 1, 'name': 'CB Physiotherapy Delhi', 'item': SITE + '/physiotherapy-near-me-delhi/'},
                                                            {'@type': 'ListItem', 'position': 2, 'name': c['full'], 'item': page}]}]}
+    data['cond'] = {'rules': ROUTING['conditions'], 'priority': ROUTING.get('condition_priority', ['rehab', 'spine', 'joint', 'other'])}
     repl = common(d, c['hero'], data, lat, lng)
     repl.update({
         'HEAD_SCRIPT': '', 'TOP_STRIP': '', 'ROBOTS': 'index, follow, max-image-preview:large', 'PLACENAME': e(c['short'] + ', New Delhi'), 'AREA_META': c['id'],
@@ -284,6 +285,7 @@ def build_central(d):
            'aggregateRating': {'@type': 'AggregateRating', 'ratingValue': rating, 'reviewCount': total, 'bestRating': 5},
            'department': [{'@id': page_url(c) + '#clinic'} for c in cs], 'sameAs': ['https://cbphysiotherapy.in/']}
     ld = {'@context': 'https://schema.org', '@graph': [org] + [clinic_ld(d, c, with_staff=False) for c in cs] + [faq_ld(d, 'Delhi', CENTRAL_DISPLAY)]}
+    data['cond'] = {'rules': ROUTING['conditions'], 'priority': ROUTING.get('condition_priority', ['rehab', 'spine', 'joint', 'other'])}
     repl = common(d, hero, data, round(lat, 5), round(lng, 5))
     repl.update({
         'HEAD_SCRIPT': routing_script(d), 'TOP_STRIP': strip, 'ROBOTS': 'noindex, follow', 'PLACENAME': 'New Delhi', 'AREA_META': 'delhi',
