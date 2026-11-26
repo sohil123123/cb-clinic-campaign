@@ -67,9 +67,7 @@ p{margin:0}
 .btn.quiet{background:#fff;color:var(--green);border-color:#bccdb9}
 .btn.wa{background:var(--wa);border-color:var(--wa)}
 .btn[disabled]{opacity:.6;cursor:default}
-.top .btn{min-height:40px;padding:8px 14px;font-size:14px;border-radius:10px}
-.top .btn span{display:none}
-@media(min-width:420px){.top .btn span{display:inline}}
+.top .btn{min-height:40px;padding:8px 14px;font-size:14px;border-radius:10px;white-space:nowrap}
 
 /* hero */
 .cover{margin:0;position:relative;aspect-ratio:16/10;background:var(--mint);overflow:hidden}
@@ -297,7 +295,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
  <div class="wrap">
   <a class="brand" href="#top" aria-label="{{FULL}}"><img src="/physiotherapy-near-me-delhi/assets/cb-logo-240.webp" alt="CB Physiotherapy" width="240" height="91"></a>
   <span class="open" id="open-state"><i aria-hidden="true"></i>Open till 8pm</span>
-  <a class="btn call" href="tel:{{TEL}}" data-call="{{ID}}" aria-label="Call {{PHONE_DISPLAY}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 4 4c-2 6 10 18 16 16l1-3-5-3-2 2c-3-1-5-3-6-6l2-2z"/></svg><span>Call</span></a>
+  <button class="btn" type="button" data-book data-place="header">Book Now</button>
  </div>
 </header>
 {{TOP_STRIP}}
