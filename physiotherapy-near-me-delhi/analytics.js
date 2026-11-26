@@ -42,7 +42,7 @@
 
  // ---- events the page already announces (booking sent/failed, clinic selected, other clinics shown) ----
  const loadedAt=performance.now();
- const forward=e=>{if(!e||typeof e!=='object'||!e.event)return;if(['clinic_call_click','clinic_directions_click'].includes(e.event))return;if(e.event==='clinic_selected'&&performance.now()-loadedAt<1500)return;const {event,...rest}=e;track(event,rest);};
+ const forward=e=>{if(!e||typeof e!=='object'||typeof e.event!=='string'||/^gtm\./.test(e.event))return;if(['clinic_call_click','clinic_directions_click'].includes(e.event))return;if(e.event==='clinic_selected'&&performance.now()-loadedAt<1500)return;const {event,...rest}=e;track(event,rest);};
  const dl=window.dataLayer=window.dataLayer||[];dl.forEach(forward);const push=dl.push.bind(dl);dl.push=function(){for(const a of arguments)forward(a);return push.apply(null,arguments);};
 
  // ---- clicks ----

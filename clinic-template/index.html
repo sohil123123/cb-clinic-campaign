@@ -27,6 +27,8 @@
 <link rel="preload" as="image" href="{{HERO_SRC}}"{{HERO_PRELOAD}}>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Fraunces:ital,opsz,wght@1,9..144,300..500&display=swap" rel="stylesheet">
 <script type="application/ld+json">{{JSONLD}}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KWV386E8YB"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KWV386E8YB',{page_location:location.href,clinic:'{{ID}}'});</script>
 <style>
 :root{
  --paper:#fff;--ink:#16261f;--ink-2:#4b5a53;--ink-3:#5f6d66;--line:#dfe6df;
@@ -441,7 +443,8 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
  const A='/physiotherapy-near-me-delhi/assets/';
  const WA='https://wa.me/'+D.whatsapp+'?text=';
  const $=s=>document.querySelector(s);
- const dl=window.dataLayer=window.dataLayer||[];const push=o=>dl.push(o);
+ const dl=window.dataLayer=window.dataLayer||[];const push=o=>dl.push(o);const ga=(n,p)=>{try{if(typeof gtag==='function')gtag('event',n,Object.assign({clinic:D.id},p||{}));}catch(_){}};
+ document.addEventListener('click',e=>{const a=e.target.closest('a,button');if(!a)return;if(a.matches('a[href^="tel:"]'))ga('call_click',{placement:a.closest('.bar')?'floating':a.closest('header')?'header':a.closest('#panel')?'care_panel':a.closest('#hero-cta')?'hero':a.closest('#clinics')?'clinics':'page'});else if(a.matches('[data-wa]'))ga('whatsapp_click',{placement:a.dataset.intent||'page'});else if(a.closest('[data-book]'))ga('booking_opened',{placement:a.closest('[data-book]').dataset.place||'page'});},true);
  const Q=new URLSearchParams(location.search);const R=(Q.get('r')||'').replace(/[^a-z-]/g,'');
  const H=window.__cbr||{};
  window.cbRoute={decision:D.mode==='clinic'?(R||'page'):(H.decision||'none'),clinic:D.mode==='clinic'?D.id:'',kw_class:D.mode==='clinic'?(Q.get('rk')||'').replace(/[^a-z-]/g,''):(H.kw_class||''),conditions:[],services:[],irrelevant:false};
@@ -532,7 +535,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
   const wa=WA+encodeURIComponent(d.wa);document.querySelectorAll('[data-wa]').forEach(a=>a.href=wa);
   document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.c===c)));current=c;
   if(fromClick){requestAnimationFrame(()=>{const y=$('#care-heading').getBoundingClientRect().bottom+scrollY-58+2;scrollTo({top:Math.max(0,y),behavior:'smooth'});});}}
- document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{chosen=true;render(b.dataset.c,true);push({event:'concern_selected',concern:b.dataset.concern,placement:'care_tabs'});}));
+ document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{chosen=true;render(b.dataset.c,true);push({event:'concern_selected',concern:b.dataset.concern,placement:'care_tabs'});ga('concern_selected',{concern:b.dataset.concern});}));
  render('all',false);
  // booking
  const dlg=$('#book-dialog'),form=$('#form'),errBox=$('#form-error'),submitBtn=$('#submit-btn');
@@ -563,8 +566,8 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
    const waMsg=WA+encodeURIComponent(`Hi, I just requested a call back on your website. Name: ${name}. For: ${forWhat}. Preferred time: ${whenText}. ${D.mode==='central'?(clinicId==='help'?'Nearest CB clinic in Delhi':'CB Physiotherapy, '+(D.clinic_names[clinicId]||clinicId)):D.full}.`);
    const done=$('#done');done.innerHTML=`<div class="inner"><b>Thanks, ${esc(name.split(' ')[0])}.</b> We have your request${D.mode==='central'?'':' for '+D.short} and will call ${phone.replace(/(\d{5})(\d{5})$/,'$1 $2')} within 15 minutes during opening hours to fix a time ${whenText} for ${forWhat}.</div><p class="faster">Want a faster reply? Send the same request on WhatsApp and the team picks it up straight away.</p><a class="btn wa" href="${waMsg}" target="_blank" rel="noopener" data-intent="after_booking"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>Send on WhatsApp</a><button class="btn quiet" type="button" id="dlg-done">Done</button>`;
    done.style.display='block';form.hidden=true;$('#dlg-done').addEventListener('click',()=>dlg.close());
-   push({event:'booking_request_sent',clinic_id:clinicId,preferred:when});return;}
-  showErr(failMsg(res,data));push({event:'booking_request_failed',reason:res?String(res.status):'network'});});
+   push({event:'booking_request_sent',clinic_id:clinicId,preferred:when});ga('generate_lead',{clinic:clinicId,concern:payload.concern||'unsure',preferred:when,value:499,currency:'INR'});return;}
+  showErr(failMsg(res,data));push({event:'booking_request_failed',reason:res?String(res.status):'network'});ga('booking_failed',{reason:res?String(res.status):'network'});});
  // central page: clinic map, legend and carousel
  if(D.mode==='central'&&D.clinics){
   const C=D.clinics;let map=null,markers={},loading=null;
