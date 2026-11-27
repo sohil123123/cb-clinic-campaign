@@ -129,6 +129,8 @@ html{overflow-anchor:none}
 .phase li{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:14.5px;line-height:1.4;align-items:start}
 .phase li em{font-style:normal;font-size:12px;font-weight:600;color:var(--green);background:#fff;border:1px solid var(--mint-2);border-radius:6px;padding:2px 7px;margin-top:1px;white-space:nowrap}
 .usp{margin:10px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.fn{margin:12px 0 0;font-size:12.5px;line-height:1.45;color:var(--ink-3,#5b6b66)}
+.price .fn{margin-top:8px}
 .usp span{font-size:13px;font-weight:600;color:var(--green-ink);background:var(--lime);border-radius:999px;padding:5px 10px;line-height:1.2}
 .panel figure{margin:18px calc(-1*var(--gutter)) 0;position:relative;aspect-ratio:16/9;background:var(--mint-2)}
 @media(min-width:721px){.panel figure{margin-left:-22px;margin-right:-22px}}
@@ -363,7 +365,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
   <div class="prices">
    <div class="price first"><span class="k">Your first step <em>Offer, save ₹500</em></span><h3>AI assessment &amp; consultation</h3><div class="amt"><s>₹999</s>₹499<small>per assessment</small></div><p>An AI-guided assessment by your physiotherapist, ending in your Recovery Plan Report: diagnosis, observations and tests, treatment plan and expected timeline.</p><button class="btn" type="button" data-book data-place="pricing">Book the assessment</button></div>
    <div class="price"><span class="k">Ongoing care</span><h3>Standard physiotherapy</h3><div class="amt">₹999<small>per session</small></div><p>Hands-on manual therapy and electrotherapy, selected for your condition.</p></div>
-   <div class="price"><span class="k">Advanced modalities</span><h3>Advanced physiotherapy</h3><div class="amt">₹1,499<small>per session</small></div><p id="fee-adv">Class 4 laser, TECAR and other advanced modalities, when clinically appropriate.</p></div>
+   <div class="price"><span class="k">Advanced modalities</span><h3>Advanced physiotherapy</h3><div class="amt">₹1,499<small>per session</small></div><p id="fee-adv">Class 4 laser, TECAR and other advanced modalities, when clinically appropriate.</p><p class="fn" id="fee-fn" hidden>* Robotic spinal decompression is available at our Dwarka and Greater Kailash clinics.</p></div>
   </div>
   <p class="note">Save 10% on multi-session treatment packages. Bring any MRI, X-ray or surgery notes you already have.</p>
  </section>
@@ -455,17 +457,17 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
  window.cbRoute={decision:D.mode==='clinic'?(R||'page'):(H.decision||'none'),clinic:D.mode==='clinic'?D.id:'',kw_class:D.mode==='clinic'?(Q.get('rk')||'').replace(/[^a-z-]/g,''):(H.kw_class||''),conditions:[],services:[],irrelevant:false};
  if(D.mode==='central'){document.querySelectorAll('a[href^="/physiotherapy-near-me-"]').forEach(a=>{const u=new URL(a.getAttribute('href'),location.origin);if(u.pathname.indexOf('-delhi/')>=0)return;Q.forEach((v,k)=>{if(k!=='r'&&k!=='rk'&&k!=='area')u.searchParams.set(k,v);});u.searchParams.set('r','pick');if(H.kw_class)u.searchParams.set('rk',H.kw_class);a.href=u.pathname+u.search;const sl=u.pathname.replace(/^\/physiotherapy-near-me-|\/$/g,'');a.dataset.goto=(D.slug_ids||{})[sl]||sl;});}
  if(D.mode==='clinic'&&R){document.body.dataset.areaSource=R;if(R==='geo'||R==='interest'){const n=document.createElement('div');n.className='route-note';const back=new URL('/physiotherapy-near-me-delhi/',location.origin);Q.forEach((v,k)=>{if(k!=='r'&&k!=='rk')back.searchParams.set(k,v);});back.searchParams.set('r','all');n.innerHTML=`<div class="wrap"><span>Showing our <b>${D.short}</b> clinic, the nearest to you.</span><a href="${back}" id="geo-all">Not right? See all five</a></div>`;document.querySelector('main').insertAdjacentElement('afterbegin',n);n.querySelector('#geo-all').addEventListener('click',()=>{try{sessionStorage.setItem('cb_geo_off','1');}catch(_){}push({event:'geo_guess_dismissed',clinic_id:D.id,how:R});});}}
- const DEC=D.mode==='central'?'some':(D.decomp?'yes':'no');const decAt=' at our Dwarka and Greater Kailash clinics';
+ const DEC=D.mode==='central'?'some':(D.decomp?'yes':'no');const decAt='*';const DEC_NOTE='* Robotic spinal decompression is available at our Dwarka and Greater Kailash clinics.';
  const CONCERNS={
   all:{name:'Accurate Assessments, Advanced Modalities, Recovery Tracking.',short:'a first assessment',title:'Your first visit',api:'',
    intro:'<b>The CB Physiotherapy way</b>, behind '+D.rating+' stars from '+D.count_fmt+' Google reviews '+D.at+'. Pick your concern above to see how it applies to you.',
    assess:'Your physiotherapist works through an AI-guided assessment: history, movement, strength and the tests that fit your problem.',
    relief:'Hands-on treatment, with Class 4 laser or TECAR where it helps, so you leave the first visit already feeling the difference.',
-   recover:DEC==='yes'?'A programme built around the cause, not the symptom: robotic spinal decompression for disc and nerve pain, measured strengthening or staged rehab, matched to you.':DEC==='some'?'A programme built around the cause, not the symptom: robotic spinal decompression'+decAt+', measured strengthening or staged rehab, matched to you.':'A programme built around the cause, not the symptom: targeted manual therapy, measured strengthening or staged rehab, matched to you.',
-   usp:DEC==='yes'?['AI-assisted assessment','Robotic spinal decompression','Class 4 laser & TECAR']:['AI-assisted assessment','Advanced modalities','Precision exercise'],
+   recover:DEC==='yes'?'A programme built around the cause, not the symptom: robotic spinal decompression for disc and nerve pain, measured strengthening or staged rehab, matched to you.':DEC==='some'?'A programme built around the cause, not the symptom: robotic spinal decompression* for disc and nerve pain, measured strengthening or staged rehab, matched to you.':'A programme built around the cause, not the symptom: targeted manual therapy, measured strengthening or staged rehab, matched to you.',
+   usp:DEC==='yes'?['AI-assisted assessment','Robotic spinal decompression','Class 4 laser & TECAR']:DEC==='some'?['AI-assisted assessment','Robotic spinal decompression*','Class 4 laser & TECAR']:['AI-assisted assessment','Advanced modalities','Precision exercise'],
    track:'Goals in your words, milestones you can feel, and a plan that changes as you do.',
    img:'precision-strength-testing-800.webp',cap:'AI-guided assessment, so the diagnosis and plan rest on measurements, not guesswork.',
-   feeAdv:DEC==='no'?'Class 4 laser or TECAR, when clinically appropriate.':DEC==='some'?'Class 4 laser, TECAR or robotic spinal decompression (Dwarka and Greater Kailash), when clinically appropriate.':'Class 4 laser, TECAR or robotic spinal decompression, when clinically appropriate.',
+   feeAdv:DEC==='no'?'Class 4 laser or TECAR, when clinically appropriate.':DEC==='some'?'Class 4 laser, TECAR or robotic spinal decompression*, when clinically appropriate.':'Class 4 laser, TECAR or robotic spinal decompression, when clinically appropriate.',
    bookSub:'Usually 30 to 40 minutes. Tell us what it is for when you book, or let the physiotherapist work it out.',
    faq:'You will get an estimate at the end of the first visit. Most problems settle in six to ten sessions; post-surgery rehab follows the surgeon’s timeline.',
    rvTitle:'What patients say about '+(D.mode==='clinic'?D.full:'CB Physiotherapy in Delhi'),doc:'Leads the '+D.short+' team and reviews every treatment plan here.',
@@ -474,11 +476,11 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
    intro:'<b>Root cause analysis and expert care</b> for slip disc, sciatica, cervical pain, muscle spasm, stiff neck and lower back pain.',
    assess:'Whether it is the muscle, a joint, a disc or a nerve: history, posture, movement, nerve and strength tests, guided step by step.',
    relief:'Hands-on release and Class 4 laser or TECAR to settle the spasm and take the edge off, usually from the first visit.',
-   recover:DEC==='yes'?'Robotic spinal decompression for disc and nerve pain, and precision exercises that rebuild the support around your spine so it stays better.':DEC==='some'?'Robotic spinal decompression for disc and nerve pain'+decAt+', and precision exercises that rebuild the support around your spine so it stays better.':'Hands-on spinal mobilisation and nerve-gliding for disc and nerve pain, and precision exercises that rebuild the support around your spine so it stays better.',
-   usp:DEC==='no'?['Spinal mobilisation & nerve care','Class 4 laser & TECAR','Precision spine exercise']:['Robotic spinal decompression','Class 4 laser & TECAR','Precision spine exercise'],
+   recover:DEC==='yes'?'Robotic spinal decompression for disc and nerve pain, and precision exercises that rebuild the support around your spine so it stays better.':DEC==='some'?'Robotic spinal decompression* for disc and nerve pain, and precision exercises that rebuild the support around your spine so it stays better.':'Hands-on spinal mobilisation and nerve-gliding for disc and nerve pain, and precision exercises that rebuild the support around your spine so it stays better.',
+   usp:DEC==='no'?['Spinal mobilisation & nerve care','Class 4 laser & TECAR','Precision spine exercise']:DEC==='some'?['Robotic spinal decompression*','Class 4 laser & TECAR','Precision spine exercise']:['Robotic spinal decompression','Class 4 laser & TECAR','Precision spine exercise'],
    track:'Milestones you can feel: sitting through a meeting, sleeping through the night, bending without bracing. Goals set with you and the plan adjusted at every review.',
-   img:DEC==='no'?'slider/exercise-800.webp':'slider/spine-800.webp',cap:DEC==='no'?'Guided spine and posture work, with hands-on care, for disc and nerve-related back and neck pain.':DEC==='some'?'Robotic spinal decompression'+decAt+', for disc and nerve-related back and neck pain.':'Robotic spinal decompression, for disc and nerve-related back and neck pain.',
-   feeAdv:DEC==='no'?'Class 4 laser or TECAR for the spine, when your physio recommends it.':DEC==='some'?'Class 4 laser, TECAR or robotic spinal decompression (Dwarka and Greater Kailash), when your physio recommends it.':'Robotic spinal decompression, Class 4 laser or TECAR for the spine, when your physio recommends it.',
+   img:DEC==='no'?'slider/exercise-800.webp':'slider/spine-800.webp',cap:DEC==='no'?'Guided spine and posture work, with hands-on care, for disc and nerve-related back and neck pain.':DEC==='some'?'Robotic spinal decompression*, for disc and nerve-related back and neck pain.':'Robotic spinal decompression, for disc and nerve-related back and neck pain.',
+   feeAdv:DEC==='no'?'Class 4 laser or TECAR for the spine, when your physio recommends it.':DEC==='some'?'Class 4 laser, TECAR or robotic spinal decompression*, when your physio recommends it.':'Robotic spinal decompression, Class 4 laser or TECAR for the spine, when your physio recommends it.',
    bookSub:'Usually 30 to 40 minutes. Wear something you can bend and twist in.',
    faq:'You will get an estimate at the end of the first visit. Most back and neck problems settle in six to ten sessions; disc-related pain can take longer.',
    rvTitle:'What patients say about back and neck care at '+D.rv_at,doc:'Sees back and neck problems every day, including disc and nerve-related pain, and personally plans the '+(DEC==='yes'?'decompression and exercise programme.':'treatment and exercise programme.'),
@@ -529,12 +531,12 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
   panel.innerHTML=`<h3>${d.name}</h3><p class="who">${d.intro}</p>
    <ol class="steps">
     <li><i>1</i><div><b>AI-guided assessment<small>15 to 30 min</small></b><span>${d.assess}</span><span class="report">It ends in your <b>Recovery Plan Report</b>: the diagnosis, what was observed and tested, the treatment plan and the expected timeline.</span></div></li>
-    <li><i>2</i><div><b>Treatment, same day</b><ul class="phase"><li><em>First</em><span>${d.relief}</span></li><li><em>Then</em><span>${d.recover}</span></li></ul><div class="usp">${d.usp.map(u=>`<span>${u}</span>`).join('')}</div></div></li>
+    <li><i>2</i><div><b>Treatment, same day</b><ul class="phase"><li><em>First</em><span>${d.relief}</span></li><li><em>Then</em><span>${d.recover}</span></li></ul><div class="usp">${d.usp.map(u=>`<span>${u}</span>`).join('')}</div>${DEC==='some'&&/\*/.test(d.recover+d.usp.join()+d.cap)?`<p class="fn">${DEC_NOTE}</p>`:''}</div></li>
     <li><i>3</i><div><b>Tracking</b><span>${d.track} Every session is recorded against these milestones, and the central team keeps watch.</span></div></li>
    </ol>
    <figure><img src="${A}${d.img}" alt="" loading="lazy" decoding="async" width="800" height="450"><figcaption>${d.cap}</figcaption></figure>`;
   if(fromClick){panel.removeAttribute('data-swap');void panel.offsetWidth;panel.setAttribute('data-swap','');}
-  $('#book-title').textContent=d.title;$('#book-sub').textContent=d.bookSub;$('#fee-adv').textContent=d.feeAdv;$('#faq-sessions').textContent=d.faq;
+  $('#book-title').textContent=d.title;$('#book-sub').textContent=d.bookSub;$('#fee-adv').textContent=d.feeAdv;const fn=$('#fee-fn');if(fn)fn.hidden=!(DEC==='some'&&/\*/.test(d.feeAdv));$('#faq-sessions').textContent=d.faq;
   const rv=(D.reviews[c]&&D.reviews[c].length?D.reviews[c]:D.reviews.all)||[];
   $('#rv-title').textContent=d.rvTitle;$('#rv-list').innerHTML=rv.map(r=>`<div class="review"><span class="stars" aria-hidden="true">★★★★★</span><p>${esc(r.text)}</p><span class="by">${esc(r.author)}, patient review${r.date?', '+esc(r.date.replace(/^\d+ /,'')):''}</span></div>`).join('')||'<p class="muted small">Reviews are on the clinic’s Google profile.</p>';
   if($('#doc-note'))$('#doc-note').textContent=d.doc;
