@@ -79,7 +79,7 @@ def review_ld(rows):
     return out
 
 
-def faq_ld(d, place, phone_display):
+def faq_ld(d, place, phone_display, decomp=True):
     return {'@type': 'FAQPage', 'mainEntity': [
         {'@type': 'Question', 'name': f'Do I need a doctor\'s referral for physiotherapy at CB Physiotherapy {place}?',
          'acceptedAnswer': {'@type': 'Answer', 'text': 'No. You can book directly. If you already have a prescription, scans or surgery notes, bring them and your physiotherapist will work from them.'}},
@@ -88,7 +88,7 @@ def faq_ld(d, place, phone_display):
         {'@type': 'Question', 'name': 'How many physiotherapy sessions will I need?',
          'acceptedAnswer': {'@type': 'Answer', 'text': 'You get an estimate at the end of the first visit, in your Recovery Plan Report. Most back, neck and joint problems settle in six to ten sessions; post-surgery rehab follows the surgeon\'s timeline.'}},
         {'@type': 'Question', 'name': 'What does the first physiotherapy visit cost?',
-         'acceptedAnswer': {'@type': 'Answer', 'text': 'The first visit is an AI-guided assessment and consultation, currently ₹499 (usual price ₹999). Standard sessions are ₹999 and advanced sessions with laser, TECAR or spinal decompression are ₹1,499.'}},
+         'acceptedAnswer': {'@type': 'Answer', 'text': 'The first visit is an AI-guided assessment and consultation, currently ₹499 (usual price ₹999). Standard sessions are ₹999 and advanced sessions with ' + ('laser, TECAR or robotic spinal decompression' if decomp else 'laser or TECAR') + ' are ₹1,499.'}},
         {'@type': 'Question', 'name': f'Does CB Physiotherapy {place} offer home visits?',
          'acceptedAnswer': {'@type': 'Answer', 'text': 'Yes, for people who cannot travel after surgery or with severe pain. Home visits cost more and have fewer time slots, so mention it when you call.'}},
     ]}
@@ -125,7 +125,7 @@ def clinic_ld(d, c, with_staff=True):
         node['employee'] = [{'@type': 'Person', 'name': c['head']['name'], 'jobTitle': f'{c["head"]["role"]}, Physiotherapist', 'url': c['head']['url'],
                              'image': c['head']['img'], 'worksFor': {'@id': page + '#clinic'}}] + \
                            [{'@type': 'Person', 'name': m['name'], 'jobTitle': m['role'], 'url': m['url'], 'image': m['img'], 'worksFor': {'@id': page + '#clinic'}} for m in c['team']]
-        node['availableService'] = [{'@type': 'MedicalTherapy', 'name': n} for n in SERVICES]
+        node['availableService'] = [{'@type': 'MedicalTherapy', 'name': n} for n in SERVICES if n != 'Robotic spinal decompression' or c.get('decompression')]
         node['makesOffer'] = OFFERS
     return node
 
@@ -182,8 +182,8 @@ def build_clinic(d, c):
     others = ''.join(f'<a href="/physiotherapy-near-me-{o["slug"]}/">{e(o["short"])}</a>' for o in d['clinics'] if o['id'] != c['id']) + '<a href="/physiotherapy-near-me-delhi/?r=all">All five clinics</a>'
     data = {'mode': 'clinic', 'id': c['id'], 'short': c['short'], 'full': c['full'], 'wa_name': c['full'], 'at': 'at ' + c['short'], 'rv_at': c['short'],
             'tel': c['tel'], 'phone_display': c['phone_display'], 'whatsapp': d['whatsapp'], 'rating': c['rating'], 'count_fmt': fmt_count(c['count']),
-            'open_hour': d.get('open_hour', 9), 'close_hour': d.get('close_hour', 20), 'open_label': open_label(d), 'reviews': c['reviews'], 'clinic_names': {}}
-    ld = {'@context': 'https://schema.org', '@graph': [clinic_ld(d, c), faq_ld(d, c['short'], c['phone_display']),
+            'open_hour': d.get('open_hour', 9), 'close_hour': d.get('close_hour', 20), 'open_label': open_label(d), 'reviews': c['reviews'], 'clinic_names': {}, 'decomp': bool(c.get('decompression'))}
+    ld = {'@context': 'https://schema.org', '@graph': [clinic_ld(d, c), faq_ld(d, c['short'], c['phone_display'], bool(c.get('decompression'))),
           {'@type': 'BreadcrumbList', 'itemListElement': [{'@type': 'ListItem', 'position': 1, 'name': 'CB Physiotherapy Delhi', 'item': SITE + '/physiotherapy-near-me-delhi/'},
                                                            {'@type': 'ListItem', 'position': 2, 'name': c['full'], 'item': page}]}]}
     data['cond'] = {'rules': ROUTING['conditions'], 'priority': ROUTING.get('condition_priority', ['rehab', 'spine', 'joint', 'other'])}
