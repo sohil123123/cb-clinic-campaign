@@ -191,7 +191,7 @@ def build_clinic(d, c):
     repl.update({
         'HEAD_SCRIPT': '', 'TOP_STRIP': '', 'ROBOTS': 'index, follow, max-image-preview:large', 'PLACENAME': e(c['short'] + ', New Delhi'), 'AREA_META': c['id'],
         'TITLE': e(c['title']), 'DESCRIPTION': e(c['description']), 'CANONICAL': page, 'OG_IMAGE': SITE + c['hero']['src'],
-        'FULL': e(c['full']), 'COVER_TITLE': e(c['full']), 'COVER_TAG': '   <span class="tagline">Recovery with <em>Precision</em></span>\n', 'H1': '<h1>Advanced Physio Care near you</h1>', 'SHORT': e(c['short']), 'ID': c['id'], 'TEL': c['tel'], 'PHONE_DISPLAY': c['phone_display'],
+        'FULL': e(c['full']), 'COVER_TITLE': e(c['full']), 'COVER_TAG': '', 'H1': '<h1>Advanced Physio Care near you</h1>', 'SHORT': e(c['short']), 'ID': c['id'], 'TEL': c['tel'], 'PHONE_DISPLAY': c['phone_display'],
         'PLACE_LINE': f'<p class="where"><a href="{maps_url(c)}" target="_blank" rel="noopener" data-map="{c["id"]}">{PIN}<b>{e(c["where"])}</b><span>Directions</span></a></p>',
         'RATING': str(c['rating']), 'COUNT_FMT': fmt_count(c['count']), 'RATING_SUFFIX': '', 'GOOGLE_URL': google_url(c),
         'TEAM_SECTION': team_section, 'REVIEWS_SUB': f'From the clinic\'s patient reviews. <a href="{google_url(c)}" target="_blank" rel="noopener" data-reviews>Read all {fmt_count(c["count"])} on Google</a>.',
