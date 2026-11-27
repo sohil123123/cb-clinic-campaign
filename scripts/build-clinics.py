@@ -289,7 +289,7 @@ def build_central(d):
     repl.update({
         'HEAD_SCRIPT': routing_script(d), 'TOP_STRIP': '', 'ROBOTS': 'noindex, follow', 'PLACENAME': 'New Delhi', 'AREA_META': 'delhi',
         'TITLE': 'Best Physiotherapy Near You in Delhi | CB Physiotherapy', 'DESCRIPTION': 'Physiotherapy in Delhi for back, neck, knee and shoulder pain, injuries and post-surgery rehab at five CB Physiotherapy clinics: Saket, Greater Kailash, Safdarjung Enclave, Vasant Kunj and Dwarka. Same-day appointments, ₹499 first assessment.',
-        'CANONICAL': page, 'OG_IMAGE': SITE + hero['src'], 'FULL': 'CB Physiotherapy Clinics, Delhi', 'COVER_TITLE': 'Advanced Ortho, Spine &amp; Sports Rehab', 'COVER_TAG': '', 'H1': '<h1 class="serif-line">5 clinics across Delhi. <em>One standard of care</em></h1>', 'SHORT': 'Delhi', 'ID': 'delhi', 'TEL': CENTRAL_TEL, 'PHONE_DISPLAY': CENTRAL_DISPLAY,
+        'CANONICAL': page, 'OG_IMAGE': SITE + hero['src'], 'FULL': 'CB Physiotherapy Clinics, Delhi', 'COVER_TITLE': 'Advanced Ortho, Spine &amp; Sports Rehab', 'COVER_TAG': '', 'H1': '<h1 class="serif-line">5 Delhi Clinics, <em>One Standard of Care.</em></h1>', 'SHORT': 'Delhi', 'ID': 'delhi', 'TEL': CENTRAL_TEL, 'PHONE_DISPLAY': CENTRAL_DISPLAY,
         'PLACE_LINE': pills,
         'RATING': str(rating), 'COUNT_FMT': fmt_count(total), 'RATING_SUFFIX': ', 5 clinics', 'GOOGLE_URL': '#clinics',
         'TEAM_SECTION': team_section, 'REVIEWS_SUB': 'From patient reviews published for each clinic. Ratings and all reviews are on each clinic\'s Google profile below.',

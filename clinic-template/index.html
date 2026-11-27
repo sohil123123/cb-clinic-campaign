@@ -32,7 +32,7 @@
 <style>
 :root{
  --paper:#fff;--ink:#16261f;--ink-2:#4b5a53;--ink-3:#5f6d66;--line:#dfe6df;
- --green:#143e37;--green-ink:#0f2e29;--mint:#e9f1e6;--mint-2:#dbe9d6;--lime:#c9e98e;
+ --green:#143e37;--green-ink:#0f2e29;--mint:#e9f1e6;--mint-2:#dbe9d6;--lime:#c9e98e;--brand-green:#6aa52a;
  --call:#1f6fe0;--wa:#0f7a3d;--focus:#1f6fe0;--bad:#9b2323;
  --gutter:20px;--col:680px;--bar:58px;
 }
@@ -81,7 +81,9 @@ p{margin:0}
 .cover .title{display:block;font-size:25px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
 .cover .tagline{display:block;margin-top:2px;font-family:"Fraunces","Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;font-variation-settings:"opsz" 60;font-size:22px;line-height:1.15;letter-spacing:-.01em;color:#fff}
 .cover .tagline em{font-style:italic;color:var(--lime)}
-h1.serif-line em{font-family:"Fraunces","Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;font-variation-settings:"opsz" 60;font-size:1.12em;color:var(--green);letter-spacing:-.01em}
+.intro h1.serif-line{max-width:none;font-size:20px;white-space:nowrap;letter-spacing:-.015em}
+@media(max-width:374px){.intro h1.serif-line{font-size:18px}}
+h1.serif-line em{font-family:"Fraunces","Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;font-variation-settings:"opsz" 60;font-size:1.14em;color:var(--brand-green,#6aa52a);letter-spacing:-.01em}
 .intro{padding-top:20px}
 .intro h1{max-width:24ch;font-weight:600;letter-spacing:-.015em}
 .where{margin-top:10px;line-height:1.4}
