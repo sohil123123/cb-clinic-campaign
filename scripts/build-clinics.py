@@ -191,7 +191,7 @@ def build_clinic(d, c):
     repl.update({
         'HEAD_SCRIPT': '', 'TOP_STRIP': '', 'ROBOTS': 'index, follow, max-image-preview:large', 'PLACENAME': e(c['short'] + ', New Delhi'), 'AREA_META': c['id'],
         'TITLE': e(c['title']), 'DESCRIPTION': e(c['description']), 'CANONICAL': page, 'OG_IMAGE': SITE + c['hero']['src'],
-        'FULL': e(c['full']), 'SHORT': e(c['short']), 'ID': c['id'], 'TEL': c['tel'], 'PHONE_DISPLAY': c['phone_display'],
+        'FULL': e(c['full']), 'COVER_TITLE': e(c['full']), 'COVER_TAG': 'Recovery with <em>Precision</em>', 'SHORT': e(c['short']), 'ID': c['id'], 'TEL': c['tel'], 'PHONE_DISPLAY': c['phone_display'],
         'PLACE_LINE': f'<p class="where"><a href="{maps_url(c)}" target="_blank" rel="noopener" data-map="{c["id"]}">{PIN}<b>{e(c["where"])}</b><span>Directions</span></a></p>',
         'RATING': str(c['rating']), 'COUNT_FMT': fmt_count(c['count']), 'RATING_SUFFIX': '', 'GOOGLE_URL': google_url(c),
         'TEAM_SECTION': team_section, 'REVIEWS_SUB': f'From the clinic\'s patient reviews. <a href="{google_url(c)}" target="_blank" rel="noopener" data-reviews>Read all {fmt_count(c["count"])} on Google</a>.',
@@ -289,7 +289,7 @@ def build_central(d):
     repl.update({
         'HEAD_SCRIPT': routing_script(d), 'TOP_STRIP': '', 'ROBOTS': 'noindex, follow', 'PLACENAME': 'New Delhi', 'AREA_META': 'delhi',
         'TITLE': 'Best Physiotherapy Near You in Delhi | CB Physiotherapy', 'DESCRIPTION': 'Physiotherapy in Delhi for back, neck, knee and shoulder pain, injuries and post-surgery rehab at five CB Physiotherapy clinics: Saket, Greater Kailash, Safdarjung Enclave, Vasant Kunj and Dwarka. Same-day appointments, ₹499 first assessment.',
-        'CANONICAL': page, 'OG_IMAGE': SITE + hero['src'], 'FULL': 'CB Physiotherapy Clinics, Delhi', 'SHORT': 'Delhi', 'ID': 'delhi', 'TEL': CENTRAL_TEL, 'PHONE_DISPLAY': CENTRAL_DISPLAY,
+        'CANONICAL': page, 'OG_IMAGE': SITE + hero['src'], 'FULL': 'CB Physiotherapy Clinics, Delhi', 'COVER_TITLE': 'CB Physiotherapy, Delhi', 'COVER_TAG': '5 clinics. <em>Pick the one nearest to you</em>', 'SHORT': 'Delhi', 'ID': 'delhi', 'TEL': CENTRAL_TEL, 'PHONE_DISPLAY': CENTRAL_DISPLAY,
         'PLACE_LINE': pills,
         'RATING': str(rating), 'COUNT_FMT': fmt_count(total), 'RATING_SUFFIX': ', 5 clinics', 'GOOGLE_URL': '#clinics',
         'TEAM_SECTION': team_section, 'REVIEWS_SUB': 'From patient reviews published for each clinic. Ratings and all reviews are on each clinic\'s Google profile below.',
