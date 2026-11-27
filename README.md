@@ -84,6 +84,13 @@ The central Delhi page decides from the ad click, in this order:
    ("physiotherapy in delhi", `generic_locations`): the clinic nearest the
    person if Google's `loc` id is in `geo-clinics.json`; otherwise the central page. Google's location of interest (`loci`) is recorded but no longer used for routing (dropped 2026-11-26: 32 routed visits, no leads).
 
+**Switch:** `auto_handover` in `routing.json`. `false` (since 2026-11-27, a
+test) keeps everyone on the central page; the rules still run and the
+would-be clinic is recorded as `route.would` / `route.would_clinic`, which the
+dashboard shows under the central page as "hand-over off: would have gone to".
+Set it back to `true` and push to restore hand-overs. Keyword pre-selection of
+the care area is independent of this switch.
+
 A hand-over carries the ad parameters plus `r` (`geo`, `keyword`, `area`) so
 the clinic page knows how the visitor arrived. When someone on the central page
 picks a clinic themselves (clinic pills, clinic cards), the link carries the

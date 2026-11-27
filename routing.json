@@ -1,6 +1,8 @@
 {
  "_comment": "Routing rules for the central page and the dashboard's search-term analyser. Edit, commit, push: the deploy syncs it into app.js. Words are matched whole, case-insensitive, after punctuation is removed. Longest alias wins. Review weekly against the Routing tab. 'other_delhi' lists Delhi areas with no nearby clinic: they stay on the five-clinic page. Generic Delhi-wide keywords are treated like neutral searches: nearest clinic by loc/loci when mapped, else the central page.",
- "version": "2026-11-26",
+ "version": "2026-11-27",
+ "auto_handover": false,
+ "_auto_handover": "false = the central page never hands over automatically (test started 2026-11-27); keyword and location rules still run and the would-be clinic is recorded as route.would for the dashboard. Set true to restore hand-overs.",
  "generic_locations": [
   "delhi",
   "new delhi",

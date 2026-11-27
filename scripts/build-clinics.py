@@ -209,7 +209,7 @@ def routing_script(d):
         for gid in ids:
             geo[gid] = cid
     slugs = {c['id']: c['slug'] for c in d['clinics']}
-    rules = {'clinics': ROUTING['clinics'], 'far': ROUTING['far_locations'], 'generic': ROUTING['generic_locations'], 'other': ROUTING.get('other_delhi', []), 'geo': geo, 'slugs': slugs}
+    rules = {'clinics': ROUTING['clinics'], 'far': ROUTING['far_locations'], 'generic': ROUTING['generic_locations'], 'other': ROUTING.get('other_delhi', []), 'geo': geo, 'slugs': slugs, 'auto': ROUTING.get('auto_handover', True)}
     js = """<script>(function(){try{
 var R=%s;var q=new URLSearchParams(location.search);if(q.get('r')==='all')return;
 var off=false;try{off=sessionStorage.getItem('cb_geo_off')==='1';}catch(_){}
@@ -224,8 +224,8 @@ var dec='',slug='';
 if(clinic){slug=R.slugs[clinic];dec=area&&!kw?'area':'keyword';}
 else if(cls==='far'||cls==='other-delhi'){}
 else if(!off&&R.geo[q.get('loc')||'']){slug=R.slugs[R.geo[q.get('loc')]];dec='geo';}
-window.__cbr={kw_class:cls,decision:(cls==='generic'||cls==='far'||cls==='other-delhi')?cls:'none'};
-if(!slug)return;q.delete('area');q.set('r',dec);q.set('rk',cls);
+window.__cbr={kw_class:cls,decision:(cls==='generic'||cls==='far'||cls==='other-delhi')?cls:'none',would:dec,would_clinic:clinic||(dec==='geo'?R.geo[q.get('loc')]:'')};
+if(!slug||!R.auto)return;q.delete('area');q.set('r',dec);q.set('rk',cls);
 location.replace('/physiotherapy-near-me-'+slug+'/?'+q.toString()+location.hash);
 }catch(e){}})();</script>
 """
