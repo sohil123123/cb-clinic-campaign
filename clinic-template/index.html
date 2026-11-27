@@ -125,6 +125,15 @@ html{overflow-anchor:none}
 .panel .who b{color:var(--ink);font-weight:600}
 .panel .act{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 0}
 .panel .act .btn{min-height:46px;font-size:14.5px}
+.pts{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.pts li{display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:start;background:#fff;border-radius:14px;padding:12px 14px 12px 12px;border:1px solid var(--mint-2)}
+.pts li i{width:38px;height:38px;border-radius:12px;background:var(--lime);display:grid;place-items:center}
+.pts li i svg{width:20px;height:20px;fill:none;stroke:var(--green-ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pts li b{display:block;font-weight:600;font-size:16px;line-height:1.3}
+.pts li b small{font-weight:500;color:var(--ink-2);font-size:12.5px;margin-left:6px}
+.pts li>div>span{display:block;font-size:14.5px;color:var(--ink-2);margin-top:3px;line-height:1.4}
+.pts .tag{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:600;color:var(--green);background:var(--mint);border-radius:999px;padding:4px 9px;line-height:1.2}
+.pts .usp{margin-top:8px}
 .steps{margin:20px 0 0;padding:0;list-style:none;display:grid;gap:16px}
 .steps li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
 .steps li i{font-style:normal;width:28px;height:28px;border-radius:50%;background:#fff;border:1.5px solid var(--green);color:var(--green);display:grid;place-items:center;font-size:13px;font-weight:600}
@@ -532,15 +541,24 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
    rvTitle:'What patients say about nerve and posture care at '+D.rv_at,doc:'Combines orthopaedic physiotherapy with chiropractic assessment for nerve, posture and alignment problems.',
    wa:'Hi, I have a nerve-related or other orthopaedic problem and would like an appointment at '+D.wa_name+'.'}
  };
+ const SPINE_M=DEC==='no'?'Spasm settled on day one, then spinal mobilisation, nerve care and spine exercise.':DEC==='some'?'Spasm settled on day one, then robotic spinal decompression* and spine exercise.':'Spasm settled on day one, then robotic spinal decompression and spine exercise.';
+ const POINTS={
+  all:{a:'History, movement and strength tests, guided by AI, not guesswork.',m:'Hands-on care with Class 4 laser or TECAR, relief from the first visit.',t:'Goals and milestones set with you, checked at every session.'},
+  spine:{a:'Muscle, joint, disc or nerve: pinpointed with nerve and strength tests.',m:SPINE_M,t:'Sit through a meeting, sleep through the night, bend without bracing.'},
+  joint:{a:'Joint, tendon or muscle: range and strength measured, not estimated.',m:'Laser or TECAR to calm the joint, strength rebuilt and re-measured.',t:'Stairs, squatting, reaching overhead: each one a milestone.'},
+  rehab:{a:'Range, swelling, strength and gait, checked against your surgeon’s protocol.',m:'Swelling and pain controlled, then staged strengthening timed to your follow-ups.',t:'Full bend, walking unaided, first jog: week-by-week milestones.'},
+  ortho:{a:'Which nerve, joint or muscle: nerve, posture and balance tests.',m:'Nerve-gliding and hands-on care, laser or TECAR for the painful area.',t:'Typing without tingling, walking further, standing steadier.'}
+ };
+ const ICO={a:'<svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',m:'<svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',t:'<svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-7"/></svg>'};
  let current='all',chosen=false;
  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
- function render(c,fromClick){const d=CONCERNS[c];const panel=$('#panel');
+ function render(c,fromClick){const d=CONCERNS[c];const P=POINTS[c];const panel=$('#panel');
   panel.innerHTML=`<h3>${d.name}</h3><p class="who">${d.intro}</p>
-   <ol class="steps">
-    <li><i>1</i><div><b>AI-guided assessment<small>15 to 30 min</small></b><span>${d.assess}</span><span class="report">It ends in your <b>Recovery Plan Report</b>: the diagnosis, what was observed and tested, the treatment plan and the expected timeline.</span></div></li>
-    <li><i>2</i><div><b>Treatment, same day</b><ul class="phase"><li><em>First</em><span>${d.relief}</span></li><li><em>Then</em><span>${d.recover}</span></li></ul><div class="usp">${d.usp.map(u=>`<span>${u}</span>`).join('')}</div>${DEC==='some'&&/\*/.test(d.recover+d.usp.join()+d.cap)?`<p class="fn">${DEC_NOTE}</p>`:''}</div></li>
-    <li><i>3</i><div><b>Tracking</b><span>${d.track} Every session is recorded against these milestones, and the central team keeps watch.</span></div></li>
-   </ol>
+   <ul class="pts">
+    <li><i>${ICO.a}</i><div><b>Accurate Assessment<small>15 to 30 min</small></b><span>${P.a}</span><span class="tag">Recovery Plan Report in hand</span></div></li>
+    <li><i>${ICO.m}</i><div><b>Advanced Modalities<small>same day</small></b><span>${P.m}</span><div class="usp">${d.usp.map(u=>`<span>${u}</span>`).join('')}</div>${DEC==='some'&&/\*/.test(P.m+d.usp.join()+d.cap)?`<p class="fn">${DEC_NOTE}</p>`:''}</div></li>
+    <li><i>${ICO.t}</i><div><b>Recovery Tracking</b><span>${P.t}</span><span class="tag">Central team reviews every session</span></div></li>
+   </ul>
    <figure><img src="${A}${d.img}" alt="" loading="lazy" decoding="async" width="800" height="450"><figcaption>${d.cap}</figcaption></figure>`;
   if(fromClick){panel.removeAttribute('data-swap');void panel.offsetWidth;panel.setAttribute('data-swap','');}
   $('#book-title').textContent=d.title;$('#book-sub').textContent=d.bookSub;$('#fee-adv').textContent=d.feeAdv;const fn=$('#fee-fn');if(fn)fn.hidden=!(DEC==='some'&&/\*/.test(d.feeAdv));$('#faq-sessions').textContent=d.faq;
