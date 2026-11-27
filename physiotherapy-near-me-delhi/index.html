@@ -135,8 +135,6 @@ p{margin:0}
 .panel{margin:10px calc(-1*var(--gutter)) 0;padding:20px var(--gutter) 0;background:var(--mint);overflow:hidden}
 html{overflow-anchor:none}
 @media(min-width:721px){.panel{margin-left:0;margin-right:0;border-radius:18px;padding:22px 22px 0}}
-.panel .nudge{display:flex;align-items:center;gap:8px;margin:0 0 14px;padding:9px 12px;border-radius:10px;background:#fff;border:1px dashed var(--green);color:var(--green-ink);font-size:14px;font-weight:600;text-decoration:none;line-height:1.3}
-.panel .nudge svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--green);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .panel h3{font-size:21px;letter-spacing:-.015em}
 .panel .who{margin-top:6px;font-size:14.5px;color:var(--ink-2);line-height:1.45}
 .panel .who b{color:var(--ink);font-weight:600}
@@ -340,13 +338,13 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
   <img src="/physiotherapy-near-me-delhi/assets/reception-800.webp" srcset="/physiotherapy-near-me-delhi/assets/reception-560.webp 560w, /physiotherapy-near-me-delhi/assets/reception-800.webp 800w, /physiotherapy-near-me-delhi/assets/reception-1200.webp 1200w" sizes="(max-width:720px) 100vw, 680px" width="1200" height="675" alt="Inside CB Physiotherapy Clinics, Delhi" fetchpriority="high" decoding="async">
   <div class="fees-line"><span>Sessions <b>₹999 to ₹1,499</b></span></div>
   <figcaption>
-   <span class="title">CB Physiotherapy, Delhi</span>
-   <span class="tagline">5 clinics. <em>Pick the one nearest to you</em></span>
+   <span class="title">Advanced Ortho, Spine &amp; Sports Rehab</span>
+   <span class="tagline">Recovery with <em>Precision</em></span>
   </figcaption>
  </figure>
 
  <section class="intro wrap">
-  <h1>Advanced Physio Care near you</h1>
+  <h1>5 clinics near you in Delhi</h1>
   <ul class="clinic-pills" aria-label="Our clinics"><li><a href="/physiotherapy-near-me-saket/">Saket</a></li><li><a href="/physiotherapy-near-me-greater-kailash/">Greater Kailash</a></li><li><a href="/physiotherapy-near-me-safdarjung-enclave/">Safdarjung Enclave</a></li><li><a href="/physiotherapy-near-me-vasant-kunj/">Vasant Kunj</a></li><li><a href="/physiotherapy-near-me-dwarka/">Dwarka</a></li></ul>
   <p class="rating"><svg class="gmark" viewBox="0 0 48 48" aria-label="Google"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6C44.4 38.02 46.98 31.86 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.87 23.87 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="stars" aria-hidden="true">★★★★★</span><span><b>4.9</b> from <a href="#clinics" data-reviews>2,956 reviews</a>, 5 clinics</span></p>
   <div class="cta" id="hero-cta">
@@ -487,7 +485,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
  const DEC=D.mode==='central'?'some':(D.decomp?'yes':'no');const decAt='*';const DEC_NOTE='* Robotic spinal decompression is available at our Dwarka and Greater Kailash clinics.';
  const CONCERNS={
   all:{name:'Accurate Assessments, Advanced Modalities, Recovery Tracking.',short:'a first assessment',title:'Your first visit',api:'',
-   intro:'<b>The CB Physiotherapy way</b>, behind '+D.rating+' stars from '+D.count_fmt+' Google reviews '+D.at+'.',nudge:'Tap your concern above to see your treatment plan and what patients say.',
+   intro:'<b>The CB Physiotherapy way</b>, behind '+D.rating+' stars from '+D.count_fmt+' Google reviews '+D.at+'.',
    assess:'Your physiotherapist works through an AI-guided assessment: history, movement, strength and the tests that fit your problem.',
    relief:'Hands-on treatment, with Class 4 laser or TECAR where it helps, so you leave the first visit already feeling the difference.',
    recover:DEC==='yes'?'A programme built around the cause, not the symptom: robotic spinal decompression for disc and nerve pain, measured strengthening or staged rehab, matched to you.':DEC==='some'?'A programme built around the cause, not the symptom: robotic spinal decompression* for disc and nerve pain, measured strengthening or staged rehab, matched to you.':'A programme built around the cause, not the symptom: targeted manual therapy, measured strengthening or staged rehab, matched to you.',
@@ -555,7 +553,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
  let current='all',chosen=false;
  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
  function render(c,fromClick){const d=CONCERNS[c];const panel=$('#panel');
-  panel.innerHTML=`${d.nudge?`<a class="nudge" href="#care-heading"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>${d.nudge}</a>`:''}<h3>${d.name}</h3><p class="who">${d.intro}</p>
+  panel.innerHTML=`<h3>${d.name}</h3><p class="who">${d.intro}</p>
    <ol class="steps">
     <li><i>1</i><div><b>AI-guided assessment<small>15 to 30 min</small></b><span>${d.assess}</span><span class="report">It ends in your <b>Recovery Plan Report</b>: the diagnosis, what was observed and tested, the treatment plan and the expected timeline.</span></div></li>
     <li><i>2</i><div><b>Treatment, same day</b><ul class="phase"><li><em>First</em><span>${d.relief}</span></li><li><em>Then</em><span>${d.recover}</span></li></ul><div class="usp">${d.usp.map(u=>`<span>${u}</span>`).join('')}</div>${DEC==='some'&&/\*/.test(d.recover+d.usp.join()+d.cap)?`<p class="fn">${DEC_NOTE}</p>`:''}</div></li>
@@ -570,7 +568,6 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
   const wa=WA+encodeURIComponent(d.wa);document.querySelectorAll('[data-wa]').forEach(a=>a.href=wa);
   document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.c===c)));current=c;
   if(fromClick){requestAnimationFrame(()=>{const y=$('#care-heading').getBoundingClientRect().bottom+scrollY-58+2;scrollTo({top:Math.max(0,y),behavior:'smooth'});});}}
- document.addEventListener('click',e=>{const n=e.target.closest('.panel .nudge');if(!n)return;e.preventDefault();scrollTo({top:$('#care-heading').getBoundingClientRect().top+scrollY-66,behavior:'smooth'});});
  document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{chosen=true;render(b.dataset.c,true);push({event:'concern_selected',concern:b.dataset.concern,placement:'care_tabs'});ga('concern_selected',{concern:b.dataset.concern});}));
  // Pre-select the care area when the ad keyword names a condition (rules from routing.json, embedded at build).
  const kwText=(Q.get('utm_term')||Q.get('kw')||'');const kwWords=' '+kwText.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()+' ';
