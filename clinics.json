@@ -192,7 +192,8 @@
      }
     ]
    },
-   "decompression": false
+   "decompression": false,
+   "ads_call_label": "ZMmZCOCDnsEdEM-e1KEB"
   },
   {
    "id": "gk",
@@ -361,7 +362,8 @@
      }
     ]
    },
-   "decompression": true
+   "decompression": true,
+   "ads_call_label": ""
   },
   {
    "id": "safdarjung",
@@ -536,7 +538,8 @@
      }
     ]
    },
-   "decompression": false
+   "decompression": false,
+   "ads_call_label": ""
   },
   {
    "id": "vasant",
@@ -703,7 +706,8 @@
      }
     ]
    },
-   "decompression": false
+   "decompression": false,
+   "ads_call_label": ""
   },
   {
    "id": "dwarka",
@@ -849,7 +853,8 @@
      }
     ]
    },
-   "decompression": true
+   "decompression": true,
+   "ads_call_label": ""
   }
  ]
 }
