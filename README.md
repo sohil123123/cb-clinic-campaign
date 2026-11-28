@@ -232,7 +232,7 @@ Settings, API key) into "Windsor.ai API key" on the Decisions tab. The key is
 kept in that browser's local storage only, never in the page, the repository
 or the server. The dashboard then pulls campaigns, keywords with match type,
 search terms and searcher locations for the selected range plus the previous
-period, in rupees, and the Jaipur campaigns are filtered out. Google keeps
+period, in rupees. Rows are kept only when Windsor reports the CB account ID, and the Jaipur campaign is dropped, so only the Delhi campaigns reach the dashboard. Google keeps
 adjusting the last three days, so yesterday's numbers can move slightly.
 Order of preference when several sources exist: Windsor.ai key, then the
 nightly feed API below, then uploaded reports.
