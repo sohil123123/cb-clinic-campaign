@@ -223,6 +223,20 @@ value; return `401` otherwise. Dates are inclusive, Indian time. Respond with
 `{"events":[…rows…]}` using the column names above (`props` may be a JSON
 string). Cap at 90 days per request. Same CORS origin.
 
+### Spend feed from Windsor.ai (live, no server work)
+
+Google Ads is connected to Windsor.ai (account "CB Physiotherapy Ads",
+372-567-7417, under the simplimed Windsor login). The Decisions tab reads it
+directly from the browser: paste the Windsor.ai API key once (Windsor.ai,
+Settings, API key) into "Windsor.ai API key" on the Decisions tab. The key is
+kept in that browser's local storage only, never in the page, the repository
+or the server. The dashboard then pulls campaigns, keywords with match type,
+search terms and searcher locations for the selected range plus the previous
+period, in rupees, and the Jaipur campaigns are filtered out. Google keeps
+adjusting the last three days, so yesterday's numbers can move slightly.
+Order of preference when several sources exist: Windsor.ai key, then the
+nightly feed API below, then uploaded reports.
+
 ### Spend feed and change log (Laravel side, second step)
 
 The dashboard's **Decisions** tab joins Google Ads spend with the visits and
