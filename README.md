@@ -285,6 +285,20 @@ cap 500); `POST /api/landing/notes` with JSON `{"date","category","text"}` →
 `201 {"note":{"id",…}}`; `DELETE /api/landing/notes/{id}` → `204`. Add
 `DELETE` and `Content-Type` to the CORS allow lists for this route.
 
+## Google Ads conversions on the pages
+
+Every page loads the Google Ads tag `AW-339021647` next to GA4 and reports:
+
+- **Booking request** (`AW-339021647/nu_0CI6insEdEM-e1KEB`), value 499 INR, fired
+  once when the booking form is accepted by the API.
+- **Calls from website** (`AW-339021647/ZMmZCOCDnsEdEM-e1KEB`): the page
+  passes its own clinic number as `phone_conversion_number`, so for visitors
+  who arrived from an ad Google swaps the displayed number for a forwarding
+  number and counts calls of 60 seconds or more. Everyone else sees the real
+  number. The central page passes the central number.
+
+Both are Primary actions in Google Ads; the dashboard does not depend on them.
+
 ## Cloudflare cache
 
 The subdomain is proxied by Cloudflare, which caches pages and files at its

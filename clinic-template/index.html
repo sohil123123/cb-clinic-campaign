@@ -28,7 +28,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Fraunces:ital,opsz,wght@1,9..144,300..500&display=swap" rel="stylesheet">
 <script type="application/ld+json">{{JSONLD}}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KWV386E8YB"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KWV386E8YB',{page_location:location.href,clinic:'{{ID}}'});</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KWV386E8YB',{page_location:location.href,clinic:'{{ID}}'});gtag('config','AW-339021647');gtag('config','AW-339021647/ZMmZCOCDnsEdEM-e1KEB',{phone_conversion_number:'{{PHONE_DISPLAY}}'});</script>
 <style>
 :root{
  --paper:#fff;--ink:#16261f;--ink-2:#4b5a53;--ink-3:#5f6d66;--line:#dfe6df;
@@ -605,7 +605,7 @@ dialog#book-dialog .form,dialog#book-dialog .done{margin:0;padding:20px var(--gu
    const waMsg=WA+encodeURIComponent(`Hi, I just requested a call back on your website. Name: ${name}. For: ${forWhat}. Preferred time: ${whenText}. ${D.mode==='central'?(clinicId==='help'?'Nearest CB clinic in Delhi':'CB Physiotherapy, '+(D.clinic_names[clinicId]||clinicId)):D.full}.`);
    const done=$('#done');done.innerHTML=`<div class="inner"><b>Thanks, ${esc(name.split(' ')[0])}.</b> We have your request${D.mode==='central'?'':' for '+D.short} and will call ${phone.replace(/(\d{5})(\d{5})$/,'$1 $2')} within 15 minutes during opening hours to fix a time ${whenText} for ${forWhat}.</div><p class="faster">Want a faster reply? Send the same request on WhatsApp and the team picks it up straight away.</p><a class="btn wa" href="${waMsg}" target="_blank" rel="noopener" data-intent="after_booking"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4A8 8 0 1 1 20 11.5Z"/></svg>Send on WhatsApp</a><button class="btn quiet" type="button" id="dlg-done">Done</button>`;
    done.style.display='block';form.hidden=true;$('#dlg-done').addEventListener('click',()=>dlg.close());
-   push({event:'booking_request_sent',clinic_id:clinicId,preferred:when});ga('generate_lead',{clinic:clinicId,concern:payload.concern||'unsure',preferred:when,value:499,currency:'INR'});return;}
+   push({event:'booking_request_sent',clinic_id:clinicId,preferred:when});ga('generate_lead',{clinic:clinicId,concern:payload.concern||'unsure',preferred:when,value:499,currency:'INR'});try{if(typeof gtag==='function')gtag('event','conversion',{send_to:'AW-339021647/nu_0CI6insEdEM-e1KEB',value:499,currency:'INR',transaction_id:'bk-'+Date.now().toString(36)});}catch(_){}return;}
   showErr(failMsg(res,data));push({event:'booking_request_failed',reason:res?String(res.status):'network'});ga('booking_failed',{reason:res?String(res.status):'network'});});
  // central page: clinic map, legend and carousel
  if(D.mode==='central'&&D.clinics){
