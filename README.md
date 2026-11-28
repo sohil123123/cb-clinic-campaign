@@ -237,6 +237,12 @@ adjusting the last three days, so yesterday's numbers can move slightly.
 Order of preference when several sources exist: Windsor.ai key, then the
 nightly feed API below, then uploaded reports.
 
+The same feed fills "Maps card and calls" on the Decisions tab: clicks by
+click type per campaign (Call taps, message taps, Directions, place-sheet
+opens, clicks to our pages) and Google's forwarding-number call count. This
+is where most of the Maps-card activity lives, since those people never reach
+the website; read the website lead rate next to it, not instead of it.
+
 ### Spend feed and change log (Laravel side, second step)
 
 The dashboard's **Decisions** tab joins Google Ads spend with the visits and
